@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "WebEtu",
-  description: "made by OSCA",
+  description: "Made By OSCA",
   icons: {
     icon: "/logo-white.png",
   },
