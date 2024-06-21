@@ -12,6 +12,12 @@ export default function LoginPage() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setPassword(password.trim());
+    setUsername(username.trim());
+    if (username.trim() === "" || password.trim().length < 8) {
+      toast.error("Please enter a valid username and password");
+      return;
+    }
     setLoading(true);
     try {
       console.log("Logging in...");
@@ -83,7 +89,9 @@ export default function LoginPage() {
         </div>
         <button
           type="submit"
-          disabled={loading || username === "" || password === ""}
+          disabled={
+            loading || username.trim() === "" || password.trim().length < 8
+          }
           className="w-full p-2 sm:p-3 text-white bg-green-600 rounded-md hover:bg-green-700 transition-colors disabled:bg-gray-400"
         >
           {loading ? "Loading..." : "Login"}
