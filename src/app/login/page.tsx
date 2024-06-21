@@ -19,9 +19,8 @@ export default function LoginPage() {
       return;
     }
     setLoading(true);
+    const toastId = toast.loading("Logging in...");
     try {
-      console.log("Logging in...");
-
       const response = await axios.post(
         "https://progres.mesrs.dz/api/authentication/v1/",
         {
@@ -32,11 +31,14 @@ export default function LoginPage() {
 
       localStorage.setItem("userData", JSON.stringify(response.data));
 
-      toast.success("Logged in successfully");
+      toast.success("Logged in successfully", {
+        id: toastId,
+      });
     } catch (err) {
       console.error(err);
       toast.error("Something went wrong", {
         duration: 3000,
+        id: toastId,
       });
     } finally {
       setLoading(false);
