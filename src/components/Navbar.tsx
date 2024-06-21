@@ -1,8 +1,8 @@
-// components/Navbar.js
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { useState } from 'react';
+import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +17,7 @@ const Navbar = () => {
         <div className="flex items-center">
           <div className="flex-shrink-0">
             <Image
-              src="/nav.png"  // Replace with your actual logo path
+              src="/nav.png" // Replace with your actual logo path
               alt="Logo"
               width={80}
               height={60}
@@ -58,8 +58,11 @@ const Navbar = () => {
         {/* Desktop navigation */}
         <div className="hidden md:block">
           <div className="ml-4 flex items-center md:ml-6">
-            <Link href="/about" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                About
+            <Link
+              href="/about"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+            >
+              About
             </Link>
             {/* Add more links as needed */}
           </div>
@@ -68,8 +71,11 @@ const Navbar = () => {
         {isOpen && (
           <div className="md:hidden absolute top-0 left-0 w-full h-full bg-green-600 z-10">
             <div className="flex flex-col items-start py-4">
-              <Link href="/about" className="text-gray-200 hover:text-white px-4 py-2">
-                 About
+              <Link
+                href="/about"
+                className="text-gray-200 hover:text-white px-4 py-2"
+              >
+                About
               </Link>
               {/* Add more links as needed */}
             </div>

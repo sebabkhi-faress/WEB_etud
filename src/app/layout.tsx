@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "WebEtu",
@@ -17,8 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        {children}
+      <body className="flex flex-col bg-gray-100 min-h-screen">
+        <Navbar />
+        <main className="flex items-center justify-center flex-1 px-4">
+          {children}
+        </main>
         <Toaster />
       </body>
     </html>
