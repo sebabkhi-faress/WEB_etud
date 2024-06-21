@@ -43,15 +43,15 @@ export default function LoginPage() {
         <Image
           src="/logo.png"
           alt="Logo"
-          width={100}
-          height={100}
+          width={150}
+          height={150}
           className="mx-auto mb-4 sm:mb-6 md:mb-8"
         />
         <form className="flex flex-col" onSubmit={handleSubmit}>
           <div className="mb-4 sm:mb-6 text-left">
             <label
               htmlFor="username"
-              className="block mb-2 text-sm text-gray-600"
+              className="block mb-2 text-sm text-gray-600 font-bold"
             >
               <span className="text-red-500">* </span>
               Username
@@ -69,7 +69,7 @@ export default function LoginPage() {
           <div className="mb-4 sm:mb-6 md:mb-8 text-left">
             <label
               htmlFor="password"
-              className="block mb-2 text-sm text-gray-600"
+              className="block mb-2 text-sm text-gray-600 font-bold"
             >
               <span className="text-red-500">* </span>
               Password
