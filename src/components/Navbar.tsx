@@ -71,7 +71,7 @@ const Navbar = () => {
           <div className="ml-4 flex items-center md:ml-6">
             <Link
               href="/about"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white px-5 py-3 rounded-md text-lg font-medium"
+              className="text-white hover:bg-white hover:text-green-600 px-5 py-3 rounded-md text-lg font-medium transition-colors duration-300"
             >
               About
             </Link>
@@ -79,7 +79,7 @@ const Navbar = () => {
             {showProfileLink ? (
               <Link
                 href="/profile"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white px-5 py-3 rounded-md text-lg font-medium"
+                className="text-white hover:bg-white hover:text-green-600 px-5 py-3 rounded-md text-lg font-medium transition-colors duration-300"
                 onClick={closeMenu}
               >
                 Profile
@@ -87,7 +87,7 @@ const Navbar = () => {
             ) : (
               <Link
                 href="/login"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white px-5 py-3 rounded-md text-lg font-medium"
+                className="text-white hover:bg-white hover:text-green-600 px-5 py-3 rounded-md text-lg font-medium transition-colors duration-300"
                 onClick={closeMenu}
               >
                 Login
@@ -126,7 +126,7 @@ const Navbar = () => {
           </button>
           <Link
             href="/about"
-            className="text-gray-200 hover:text-white text-2xl font-medium"
+            className="text-white hover:bg-white hover:text-green-600 text-2xl font-medium transition-colors duration-300"
             onClick={closeMenu}
           >
             About
@@ -135,7 +135,7 @@ const Navbar = () => {
           {showProfileLink ? (
             <Link
               href="/profile"
-              className="text-gray-200 hover:text-white text-2xl font-medium"
+              className="text-white hover:bg-white hover:text-green-600 text-2xl font-medium transition-colors duration-300"
               onClick={closeMenu}
             >
               Profile
@@ -143,7 +143,7 @@ const Navbar = () => {
           ) : (
             <Link
               href="/login"
-              className="text-gray-200 hover:text-white text-2xl font-medium"
+              className="text-white hover:bg-white hover:text-green-600 text-2xl font-medium transition-colors duration-300"
               onClick={closeMenu}
             >
               Login
