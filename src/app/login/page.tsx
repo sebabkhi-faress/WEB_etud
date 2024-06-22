@@ -40,13 +40,21 @@ export default function LoginPage() {
       Cookies.set("uuid", response.data.uuid);
 
       toast.success("Logged In Successfully", { id: toastId });
-    } catch (err) {
-      console.error(err);
-      toast.error("Something Went Wrong", {
-        duration: 3000,
-        id: toastId,
-      });
-    } finally {
+    } 
+    catch (err) {
+      if (err.response && err.response.status === 403) {
+        toast.error("Invalid Credentials", {
+          duration: 3000,
+          id: toastId,
+        });
+      } else {
+        toast.error("Something Went Wrong", {
+          duration: 3000,
+          id: toastId,
+        });
+      }
+    }
+    finally {
       setLoading(false);
     }
   };
@@ -108,3 +116,4 @@ export default function LoginPage() {
     </div>
   );
 }
+
