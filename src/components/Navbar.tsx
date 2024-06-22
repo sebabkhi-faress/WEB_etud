@@ -2,13 +2,24 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showProfileLink, setShowProfileLink] = useState(false);
+
+  useEffect(() => {
+    // Check if cookie token exists
+    const cookieTokenExists = document.cookie.includes("token=");
+    setShowProfileLink(cookieTokenExists);
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const closeMenu = () => {
+    setIsOpen(false);
   };
 
   return (
@@ -64,6 +75,24 @@ const Navbar = () => {
             >
               About
             </Link>
+            {/* Conditional profile link */}
+            {showProfileLink ? (
+              <Link
+                href="/profile"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white px-5 py-3 rounded-md text-lg font-medium"
+                onClick={closeMenu}
+              >
+                Profile
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white px-5 py-3 rounded-md text-lg font-medium"
+                onClick={closeMenu}
+              >
+                Login
+              </Link>
+            )}
             {/* Add more links as needed */}
           </div>
         </div>
@@ -98,10 +127,28 @@ const Navbar = () => {
           <Link
             href="/about"
             className="text-gray-200 hover:text-white text-2xl font-medium"
-            onClick={toggleMenu}
+            onClick={closeMenu}
           >
             About
           </Link>
+          {/* Conditional profile link or Login */}
+          {showProfileLink ? (
+            <Link
+              href="/profile"
+              className="text-gray-200 hover:text-white text-2xl font-medium"
+              onClick={closeMenu}
+            >
+              Profile
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              className="text-gray-200 hover:text-white text-2xl font-medium"
+              onClick={closeMenu}
+            >
+              Login
+            </Link>
+          )}
           {/* Add more links as needed */}
         </div>
       </div>
