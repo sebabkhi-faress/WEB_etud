@@ -4,6 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -30,6 +31,8 @@ export default function LoginPage() {
       );
 
       localStorage.setItem("userData", JSON.stringify(response.data));
+      Cookies.set("token", response.data.token);
+      Cookies.set("uuid", response.data.uuid);
 
       toast.success("Logged in successfully", {
         id: toastId,
