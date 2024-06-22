@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import axios from "axios";
 import Image from "next/image";
@@ -12,14 +12,19 @@ export default function LoginPage() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     setPassword(password.trim());
     setUsername(username.trim());
+
     if (username.trim() === "" || password.trim().length < 8) {
       toast.error("Please enter a valid username and password");
       return;
     }
+
     setLoading(true);
-    const toastId = toast.loading("Logging in...");
+
+    const toastId = toast.loading("Logging In..");
+
     try {
       const response = await axios.post(
         "https://progres.mesrs.dz/api/authentication/v1/",
@@ -31,12 +36,10 @@ export default function LoginPage() {
 
       localStorage.setItem("userData", JSON.stringify(response.data));
 
-      toast.success("Logged in successfully", {
-        id: toastId,
-      });
+      toast.success("Logged In Successfully", { id: toastId });
     } catch (err) {
       console.error(err);
-      toast.error("Something went wrong", {
+      toast.error("Something Went Wrong", {
         duration: 3000,
         id: toastId,
       });
@@ -46,7 +49,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="bg-gray-100 p-4 sm:p-6 md:p-8 rounded-lg shadow-md w-full max-w-xs sm:max-w-sm md:max-w-md text-center">
+    <div className="bg-gray-50 p-4 sm:p-6 md:p-8 rounded-lg shadow-md border border-green-600 w-full max-w-xs sm:max-w-sm md:max-w-md text-center">
       <Image
         src="/logo.png"
         alt="Logo"
@@ -69,7 +72,7 @@ export default function LoginPage() {
             value={username}
             onChange={(event) => setUsername(event.target.value)}
             required
-            className="w-full p-2 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:border-green-500"
+            className="w-full p-2 sm:p-3 border border-green-600 rounded-md focus:outline-none focus:border-green-500"
           />
         </div>
         <div className="mb-4 sm:mb-6 md:mb-8 text-left">
@@ -86,7 +89,7 @@ export default function LoginPage() {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             required
-            className="w-full p-2 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:border-green-500"
+            className="w-full p-2 sm:p-3 border border-green-600 rounded-md focus:outline-none focus:border-green-500"
           />
         </div>
         <button
