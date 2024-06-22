@@ -68,7 +68,7 @@ const Navbar = () => {
         </div>
         {/* Desktop navigation */}
         <div className="hidden md:block">
-          <div className="ml-4 flex items-center md:ml-6">
+          <div className="ml-4 flex items-center md:ml-6 space-x-2">
             <Link
               href="/about"
               className="text-white hover:bg-white hover:text-green-600 px-5 py-3 rounded-md text-lg font-medium transition-colors duration-300"
@@ -126,7 +126,7 @@ const Navbar = () => {
           </button>
           <Link
             href="/about"
-            className="text-white hover:bg-white hover:text-green-600 text-2xl font-medium transition-colors duration-300"
+            className="text-white hover:bg-white hover:text-green-600 text-2xl font-medium transition-colors duration-300 px-4 py-2 rounded-md w-full"
             onClick={closeMenu}
           >
             About
@@ -135,7 +135,7 @@ const Navbar = () => {
           {showProfileLink ? (
             <Link
               href="/profile"
-              className="text-white hover:bg-white hover:text-green-600 text-2xl font-medium transition-colors duration-300"
+              className="text-white hover:bg-white hover:text-green-600 text-2xl font-medium transition-colors duration-300 px-4 py-2 rounded-md w-full"
               onClick={closeMenu}
             >
               Profile
@@ -143,7 +143,7 @@ const Navbar = () => {
           ) : (
             <Link
               href="/login"
-              className="text-white hover:bg-white hover:text-green-600 text-2xl font-medium transition-colors duration-300"
+              className="text-white hover:bg-white hover:text-green-600 text-2xl font-medium transition-colors duration-300 px-4 py-2 rounded-md w-full"
               onClick={closeMenu}
             >
               Login
