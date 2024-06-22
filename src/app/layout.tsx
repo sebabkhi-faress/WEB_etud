@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "WebEtu",
   description: "Made By OSCA",
   icons: {
-    icon: "/logo-white.png",
+    icon: "/favicon.ico",
   },
 };
 

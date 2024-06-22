@@ -60,27 +60,50 @@ const Navbar = () => {
           <div className="ml-4 flex items-center md:ml-6">
             <Link
               href="/about"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white px-5 py-3 rounded-md text-lg font-medium"
             >
               About
             </Link>
             {/* Add more links as needed */}
           </div>
         </div>
-        {/* Mobile navigation menu */}
-        {isOpen && (
-          <div className="md:hidden absolute top-0 left-0 w-full h-full bg-green-600 z-10">
-            <div className="flex flex-col items-start py-4">
-              <Link
-                href="/about"
-                className="text-gray-200 hover:text-white px-4 py-2"
-              >
-                About
-              </Link>
-              {/* Add more links as needed */}
-            </div>
-          </div>
-        )}
+      </div>
+      {/* Mobile navigation menu */}
+      <div
+        className={`md:hidden fixed inset-0 bg-green-600 bg-opacity-90 z-10 transform transition-transform duration-300 ease-in-out ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex flex-col items-start py-8 space-y-4 px-6 relative">
+          {/* Close button */}
+          <button
+            onClick={toggleMenu}
+            className="absolute top-4 right-4 text-gray-200 hover:text-white focus:outline-none"
+          >
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+          <Link
+            href="/about"
+            className="text-gray-200 hover:text-white text-2xl font-medium"
+            onClick={toggleMenu}
+          >
+            About
+          </Link>
+          {/* Add more links as needed */}
+        </div>
       </div>
     </nav>
   );
