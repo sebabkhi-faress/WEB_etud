@@ -52,7 +52,7 @@ const Profile = async () => {
   const logo = await getLogo();
 
   return (
-    <div className="bg-gray-200 border-2 border-green-700 w-11/12 max-w-3xl m-5 p-8 rounded-lg shadow-2xl box-border">
+    <div className="bg-gray-300 border-2 border-green-700 w-11/12 max-w-3xl m-5 p-8 rounded-lg shadow-2xl box-border">
       <div className="text-center mb-8">
         <Image
           src={`data:image/png;base64,${image}`}
