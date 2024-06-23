@@ -7,6 +7,12 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 
 export default function LoginPage() {
+  const token = Cookies.get("token");
+  
+  if(token){
+    window.location.href = "/profile";
+  }
+  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -40,8 +46,10 @@ export default function LoginPage() {
       Cookies.set("uuid", response.data.uuid);
 
       toast.success("Logged In Successfully", { id: toastId });
-    } 
-    catch (err) {
+
+      // Redirect to /profile
+      window.location.href = "/profile";
+    } catch (err) {
       if (err.response && err.response.status === 403) {
         toast.error("Invalid Credentials", {
           duration: 3000,
@@ -53,8 +61,7 @@ export default function LoginPage() {
           id: toastId,
         });
       }
-    }
-    finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -116,4 +123,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
