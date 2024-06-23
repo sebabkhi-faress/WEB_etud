@@ -6,12 +6,12 @@ import { useState, useEffect } from "react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showProfileLink, setShowProfileLink] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     // Check if cookie token exists
     const cookieTokenExists = document.cookie.includes("token=");
-    setShowProfileLink(cookieTokenExists);
+    setIsLoggedIn(cookieTokenExists);
   }, []);
 
   const toggleMenu = () => {
@@ -75,8 +75,8 @@ const Navbar = () => {
             >
               About
             </Link>
-            {/* Conditional profile link */}
-            {showProfileLink ? (
+            {/* Conditional profile link or Login */}
+            {isLoggedIn ? (
               <Link
                 href="/profile"
                 className="text-white hover:bg-white hover:text-green-600 px-5 py-3 rounded-md text-lg font-medium transition-colors duration-300"
@@ -132,7 +132,7 @@ const Navbar = () => {
             About
           </Link>
           {/* Conditional profile link or Login */}
-          {showProfileLink ? (
+          {isLoggedIn ? (
             <Link
               href="/profile"
               className="text-white hover:bg-white hover:text-green-600 text-2xl font-medium transition-colors duration-300 px-4 py-2 rounded-md w-full"
