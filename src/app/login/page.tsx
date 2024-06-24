@@ -1,23 +1,17 @@
-"use client"
+"use client";
 
-import axios from "axios";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import Cookies from "js-cookie";
+import { useAuth } from "@/components/AuthProvider";
 
 export default function LoginPage() {
-  const token = Cookies.get("token");
-  
-  if(token){
-    window.location.href = "/profile";
-  }
-  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const { signIn } = useAuth();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const Login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setPassword(password.trim());
@@ -29,41 +23,8 @@ export default function LoginPage() {
     }
 
     setLoading(true);
-
-    const toastId = toast.loading("Logging In..");
-
-    try {
-      const response = await axios.post(
-        "https://progres.mesrs.dz/api/authentication/v1/",
-        {
-          username,
-          password,
-        }
-      );
-
-      localStorage.setItem("userData", JSON.stringify(response.data));
-      Cookies.set("token", response.data.token);
-      Cookies.set("uuid", response.data.uuid);
-
-      toast.success("Logged In Successfully", { id: toastId });
-
-      // Redirect to /profile
-      window.location.href = "/profile";
-    } catch (err) {
-      if (err.response && err.response.status === 403) {
-        toast.error("Invalid Credentials", {
-          duration: 3000,
-          id: toastId,
-        });
-      } else {
-        toast.error("Something Went Wrong", {
-          duration: 3000,
-          id: toastId,
-        });
-      }
-    } finally {
-      setLoading(false);
-    }
+    signIn(username, password);
+    setLoading(false);
   };
 
   return (
@@ -75,7 +36,7 @@ export default function LoginPage() {
         height={150}
         className="mx-auto mb-4 sm:mb-6 md:mb-8"
       />
-      <form className="flex flex-col" onSubmit={handleSubmit}>
+      <form className="flex flex-col" onSubmit={Login}>
         <div className="mb-4 sm:mb-6 text-left">
           <label
             htmlFor="username"

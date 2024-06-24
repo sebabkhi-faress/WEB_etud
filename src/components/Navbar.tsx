@@ -2,17 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useAuth } from "./AuthProvider";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    // Check if cookie token exists
-    const cookieTokenExists = document.cookie.includes("token=");
-    setIsLoggedIn(cookieTokenExists);
-  }, []);
+  const { user, signOut } = useAuth();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -69,14 +64,8 @@ const Navbar = () => {
         {/* Desktop navigation */}
         <div className="hidden md:block">
           <div className="ml-4 flex items-center md:ml-6 space-x-2">
-            <Link
-              href="/about"
-              className="text-white hover:bg-white hover:text-green-600 px-5 py-3 rounded-md text-lg font-medium transition-colors duration-300"
-            >
-              About
-            </Link>
             {/* Conditional profile link or Login */}
-            {isLoggedIn ? (
+            {user ? (
               <Link
                 href="/profile"
                 className="text-white hover:bg-white hover:text-green-600 px-5 py-3 rounded-md text-lg font-medium transition-colors duration-300"
@@ -132,7 +121,7 @@ const Navbar = () => {
             About
           </Link>
           {/* Conditional profile link or Login */}
-          {isLoggedIn ? (
+          {user ? (
             <Link
               href="/profile"
               className="text-white hover:bg-white hover:text-green-600 text-2xl font-medium transition-colors duration-300 px-4 py-2 rounded-md w-full"
