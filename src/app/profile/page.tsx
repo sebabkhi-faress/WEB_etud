@@ -5,7 +5,7 @@ import axios from "axios";
 export const revalidate = 3600;
 
 export const metadata = {
-  title: "profile",
+  title: "WebEtu - profile",
 };
 
 const getProfileData = async () => {
@@ -123,7 +123,7 @@ const Profile = async () => {
           src={`data:image/png;base64,${image}`}
           alt="Profile Image"
           width={140}
-          height={200}
+          height={140}
           className="rounded-full aspect-square border-2 border-green-700 shadow-lg"
         />
 
@@ -131,8 +131,7 @@ const Profile = async () => {
           src={`data:image/png;base64,${logo}`}
           alt="University Logo"
           width={140}
-          height={200}
-          className="aspect-square"
+          height={140}
         />
       </div>
       <div className="text-left">
