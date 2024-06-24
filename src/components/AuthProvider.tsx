@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -10,6 +10,7 @@ import Cookies from "js-cookie";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
+  const params = useSearchParams();
 
   useEffect(() => {
     const data = localStorage.getItem("userData");
@@ -21,6 +22,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const signIn = async (username: string, password: string) => {
     const toastId = toast.loading("Logging In..");
 
+    const redirectTo = params.get("redirect");
     try {
       const response = await axios.post(
         "https://progres.mesrs.dz/api/authentication/v1/",
@@ -36,7 +38,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       Cookies.set("token", response.data.token);
       Cookies.set("uuid", response.data.uuid);
 
-      router.push("/profile");
+      if (redirectTo) {
+        router.push(redirectTo);
+      } else {
+        router.push("/profile");
+      }
 
       toast.success("Logged In Successfully", { id: toastId });
     } catch (err: any) {
@@ -59,6 +65,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUser(null);
     Cookies.remove("token");
     Cookies.remove("uuid");
+
+    router.push("/login");
   };
 
   return (

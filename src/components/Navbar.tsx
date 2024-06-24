@@ -2,144 +2,51 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
 import { useAuth } from "./AuthProvider";
+import {
+  ArrowLeftStartOnRectangleIcon,
+  ArrowRightEndOnRectangleIcon,
+} from "@heroicons/react/16/solid";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const { user, signOut } = useAuth();
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
+  const pathname = usePathname();
 
   return (
-    <nav className="bg-green-600 p-4">
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between">
-        <div className="flex items-center">
-          <div className="flex-shrink-0">
-            <Image
-              src="/nav.png" // Replace with your actual logo path
-              alt="Logo"
-              width={80}
-              height={60}
-            />
-          </div>
-        </div>
-        {/* Hamburger menu for mobile */}
-        <div className="md:hidden">
-          <button
-            onClick={toggleMenu}
-            className="text-gray-200 hover:text-white focus:outline-none focus:text-white"
-          >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              {isOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
-        {/* Desktop navigation */}
-        <div className="hidden md:block">
-          <div className="ml-4 flex items-center md:ml-6 space-x-2">
-            {/* Conditional profile link or Login */}
-            {user ? (
-              <Link
-                href="/profile"
-                className="text-white hover:bg-white hover:text-green-600 px-5 py-3 rounded-md text-lg font-medium transition-colors duration-300"
-                onClick={closeMenu}
-              >
-                Profile
-              </Link>
-            ) : (
-              <Link
-                href="/login"
-                className="text-white hover:bg-white hover:text-green-600 px-5 py-3 rounded-md text-lg font-medium transition-colors duration-300"
-                onClick={closeMenu}
-              >
-                Login
-              </Link>
-            )}
-            {/* Add more links as needed */}
-          </div>
-        </div>
+    <nav className="bg-green-600 py-4 px-12 flex items-center justify-between min-h-20">
+      <div className="flex items-center flex-shrink-0">
+        <Link href="/">
+          <Image
+            src="/nav.png" // Replace with your actual logo path
+            alt="Logo"
+            width={120}
+            height={80}
+          />
+        </Link>
       </div>
-      {/* Mobile navigation menu */}
-      <div
-        className={`md:hidden fixed inset-0 bg-green-600 bg-opacity-90 z-10 transform transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        <div className="flex flex-col items-start py-8 space-y-4 px-6 relative">
-          {/* Close button */}
+
+      <div className="ml-4 flex items-center md:ml-6 space-x-2">
+        {user ? (
           <button
-            onClick={toggleMenu}
-            className="absolute top-4 right-4 text-gray-200 hover:text-white focus:outline-none"
+            className="flex gap-2 text-white hover:bg-white hover:text-red-600 px-5 py-3 rounded-md text-lg font-medium transition-colors duration-300"
+            onClick={() => signOut()}
           >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
+            Sign Out
           </button>
+        ) : (
           <Link
-            href="/about"
-            className="text-white hover:bg-white hover:text-green-600 text-2xl font-medium transition-colors duration-300 px-4 py-2 rounded-md w-full"
-            onClick={closeMenu}
+            href="/login"
+            className={`flex gap-2 text-white hover:bg-white hover:text-green-600 px-5 py-3 rounded-md text-lg font-medium transition-colors duration-300 ${
+              pathname === "/login" ? "hidden" : ""
+            }`}
           >
-            About
+            <ArrowRightEndOnRectangleIcon className="h-6 w-6" />
+            Sign In
           </Link>
-          {/* Conditional profile link or Login */}
-          {user ? (
-            <Link
-              href="/profile"
-              className="text-white hover:bg-white hover:text-green-600 text-2xl font-medium transition-colors duration-300 px-4 py-2 rounded-md w-full"
-              onClick={closeMenu}
-            >
-              Profile
-            </Link>
-          ) : (
-            <Link
-              href="/login"
-              className="text-white hover:bg-white hover:text-green-600 text-2xl font-medium transition-colors duration-300 px-4 py-2 rounded-md w-full"
-              onClick={closeMenu}
-            >
-              Login
-            </Link>
-          )}
-          {/* Add more links as needed */}
-        </div>
+        )}
       </div>
     </nav>
   );

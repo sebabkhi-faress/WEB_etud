@@ -23,7 +23,46 @@ const getProfileData = async () => {
       }
     );
     console.log("Profile data fetched successfully");
-    return response.data;
+
+    const data = (({
+      individuId,
+      nin,
+      individuNomArabe,
+      individuNomLatin,
+      individuPrenomArabe,
+      individuPrenomLatin,
+      individuDateNaissance,
+      individuLieuNaissance,
+      individuLieuNaissanceArabe,
+      refEtablissementId,
+      refCodeEtablissement,
+      llEtablissementArabe,
+      llEtablissementLatin,
+      niveauLibelleLongLt,
+      ofLlDomaine,
+      ofLlSpecialite,
+    }) => ({
+      individuId,
+      nin,
+      individuNomArabe,
+      individuNomLatin,
+      individuPrenomArabe,
+      individuPrenomLatin,
+      individuDateNaissance,
+      individuLieuNaissance,
+      individuLieuNaissanceArabe,
+      refEtablissementId,
+      refCodeEtablissement,
+      llEtablissementArabe,
+      llEtablissementLatin,
+      niveauLibelleLongLt,
+      ofLlDomaine,
+      ofLlSpecialite,
+    }))(response.data[0]);
+
+    console.log(data);
+
+    return data;
   } catch (error) {
     console.error("Error fetching profile data");
     throw new Error("Error fetching profile data");
@@ -75,7 +114,7 @@ const getLogo = async (refEtablissementId: any) => {
 const Profile = async () => {
   const profileData = await getProfileData();
   const image = await getImage();
-  const logo = await getLogo(profileData[0]?.refEtablissementId);
+  const logo = await getLogo(profileData.refEtablissementId);
 
   return (
     <div className="bg-gray-300 border-2 border-green-700 w-full max-w-3xl m-5 p-8 flex flex-col gap-8 rounded-lg shadow-2xl box-border">
@@ -101,48 +140,48 @@ const Profile = async () => {
           <li className="text-lg w-full flex flex-col gap-2 justify-between">
             <span className="font-bold text-gray-600">First Name: </span>
             <span className=" text-gray-800 border-2 border-black bg-white px-4 py-2 rounded-lg capitalize">
-              {profileData[0].individuPrenomLatin}
+              {profileData.individuPrenomLatin}
             </span>
           </li>
           <li className="text-lg w-full flex flex-col gap-2 justify-between">
             <span className="font-bold text-gray-600">Last Name: </span>
             <span className="text-gray-800 border-2 border-black bg-white px-4 py-2 rounded-lg capitalize">
-              {profileData[0].individuNomLatin}
+              {profileData.individuNomLatin}
             </span>
           </li>
 
           <li className="text-lg w-full flex flex-col gap-2 justify-between">
             <span className="font-bold text-gray-600">University: </span>
             <span className="text-gray-800 border-2 border-black bg-white px-4 py-2 rounded-lg capitalize">
-              {profileData[0].llEtablissementLatin}
+              {profileData.llEtablissementLatin}
             </span>
           </li>
 
           <li className="text-lg w-full flex flex-col gap-2 justify-between">
             <span className="font-bold text-gray-600">Date Of Birth: </span>
             <span className="text-gray-800 border-2 border-black bg-white px-4 py-2 rounded-lg capitalize">
-              {profileData[0].individuDateNaissance}
+              {profileData.individuDateNaissance}
             </span>
           </li>
 
           <li className="text-lg w-full flex flex-col gap-2 justify-between">
             <span className="font-bold text-gray-600">Place Of Birth: </span>
             <span className="text-gray-800 border-2 border-black bg-white px-4 py-2 rounded-lg capitalize">
-              {profileData[0].individuLieuNaissance}
+              {profileData.individuLieuNaissance}
             </span>
           </li>
 
           <li className="text-lg w-full flex flex-col gap-2 justify-between">
             <span className="font-bold text-gray-600">Field: </span>
             <span className="text-gray-800 border-2 border-black bg-white px-4 py-2 rounded-lg">
-              {profileData[0].ofLlDomaine}
+              {profileData.ofLlDomaine}
             </span>
           </li>
 
           <li className="text-lg w-full flex flex-col gap-2 justify-between">
             <span className="font-bold text-gray-600">Level: </span>
             <span className="text-gray-800 border-2 border-black bg-white px-4 py-2 rounded-lg">
-              {profileData[0].niveauLibelleLongLt}
+              {profileData.niveauLibelleLongLt} - {profileData.ofLlSpecialite}
             </span>
           </li>
         </ul>

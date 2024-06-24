@@ -6,15 +6,19 @@ export function middleware(req: NextRequest) {
   const url = req.nextUrl;
 
   if (url.pathname === "/login" && token) {
-    // Redirect to /profile if the token cookie exists and the current route is /login
     return NextResponse.redirect(new URL("/profile", req.url));
   }
 
-  // Allow the request to proceed
+  if (!token && url.pathname !== "/login") {
+    return NextResponse.redirect(
+      new URL(`/login?redirect=${url.pathname}`, req.url)
+    );
+  }
+
   return NextResponse.next();
 }
 
 // Define the paths where the middleware will apply
 export const config = {
-  matcher: ["/login"],
+  matcher: ["/login", "/profile"],
 };

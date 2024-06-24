@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import toast from "react-hot-toast";
 import { useState } from "react";
 import { useAuth } from "@/components/AuthProvider";
 
@@ -9,21 +8,14 @@ export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
   const { signIn } = useAuth();
 
   const Login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    setPassword(password.trim());
-    setUsername(username.trim());
-
-    if (username.trim() === "" || password.trim().length < 8) {
-      toast.error("Please enter a valid username and password");
-      return;
-    }
-
     setLoading(true);
-    signIn(username, password);
+    signIn(username.trim(), password.trim());
     setLoading(false);
   };
 
