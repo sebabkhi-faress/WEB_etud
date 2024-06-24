@@ -88,13 +88,13 @@ const getImage = async () => {
   }
 };
 
-const getLogo = async (refEtablissementId: any) => {
+const getLogo = async () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
-  const uuid = cookieStore.get("uuid")?.value;
+  const EtabId = cookieStore.get("EtabId")?.value;
   try {
     const image = await axios.get(
-      `https://progres.mesrs.dz/api/infos/logoEtablissement/${refEtablissementId}`,
+      `https://progres.mesrs.dz/api/infos/logoEtablissement/${EtabId}`,
       {
         headers: {
           Authorization: token,
@@ -110,9 +110,11 @@ const getLogo = async (refEtablissementId: any) => {
 };
 
 const Profile = async () => {
-  const profileData = await getProfileData();
-  const image = await getImage();
-  const logo = await getLogo(profileData.refEtablissementId);
+  const [profileData, image, logo] = await Promise.all([
+    getProfileData(),
+    getImage(),
+    getLogo(),
+  ]);
 
   return (
     <div className="bg-gray-300 border-2 border-green-700 w-full h-max max-w-3xl m-5 p-8 flex flex-col gap-8 rounded-lg shadow-2xl box-border">

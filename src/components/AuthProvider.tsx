@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       Cookies.set("token", response.data.token);
       Cookies.set("uuid", response.data.uuid);
+      Cookies.set("EtabId", response.data.etablissementId);
 
       if (redirectTo) {
         router.push(redirectTo);
