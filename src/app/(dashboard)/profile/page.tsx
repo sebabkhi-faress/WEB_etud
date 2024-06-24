@@ -60,8 +60,6 @@ const getProfileData = async () => {
       ofLlSpecialite,
     }))(response.data[0]);
 
-    console.log(data);
-
     return data;
   } catch (error) {
     console.error("Error fetching profile data");
@@ -117,7 +115,7 @@ const Profile = async () => {
   const logo = await getLogo(profileData.refEtablissementId);
 
   return (
-    <div className="bg-gray-300 border-2 border-green-700 w-full max-w-3xl m-5 p-8 flex flex-col gap-8 rounded-lg shadow-2xl box-border">
+    <div className="bg-gray-300 border-2 border-green-700 w-full h-max max-w-3xl m-5 p-8 flex flex-col gap-8 rounded-lg shadow-2xl box-border">
       <div className="text-center flex justify-between">
         <Image
           src={`data:image/png;base64,${image}`}
@@ -185,8 +183,6 @@ const Profile = async () => {
           </li>
         </ul>
       </div>
-
-      <div className="text-center mt-8"></div>
     </div>
   );
 };

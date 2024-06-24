@@ -19,10 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex flex-col bg-gray-100 min-h-screen">
+      <body className="flex flex-col bg-gray-100 h-screen overflow-hidden">
         <AuthProvider>
           <Navbar />
-          <main className="flex items-center justify-center flex-1 px-4">
+          <main className="flex items-center justify-center flex-1 relative">
             {children}
           </main>
           <Toaster />
