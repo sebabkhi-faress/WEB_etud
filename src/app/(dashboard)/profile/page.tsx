@@ -20,6 +20,7 @@ const getProfileData = async () => {
         headers: {
           Authorization: token,
         },
+        timeout: 10000, // Timeout set to 10 seconds
       }
     );
     console.log("Profile data fetched successfully");
@@ -34,8 +35,6 @@ const getProfileData = async () => {
       individuDateNaissance,
       individuLieuNaissance,
       individuLieuNaissanceArabe,
-      refEtablissementId,
-      refCodeEtablissement,
       llEtablissementArabe,
       llEtablissementLatin,
       niveauLibelleLongLt,
@@ -51,8 +50,6 @@ const getProfileData = async () => {
       individuDateNaissance,
       individuLieuNaissance,
       individuLieuNaissanceArabe,
-      refEtablissementId,
-      refCodeEtablissement,
       llEtablissementArabe,
       llEtablissementLatin,
       niveauLibelleLongLt,
@@ -77,6 +74,7 @@ const getImage = async () => {
       {
         headers: {
           Authorization: token,
+          timeout: 10000, // Timeout set to 10 seconds
         },
       }
     );
@@ -98,6 +96,7 @@ const getLogo = async () => {
       {
         headers: {
           Authorization: token,
+          timeout: 10000, // Timeout set to 10 seconds
         },
       }
     );
