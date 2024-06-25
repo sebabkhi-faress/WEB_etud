@@ -8,19 +8,28 @@ export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
   const { signIn } = useAuth();
+  const [error, setError] = useState(null);
 
   const Login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    setLoading(true);
-    signIn(username.trim(), password.trim());
-    setLoading(false);
+    setLoading(true); // Start loading
+    setError(null); // Clear any previous errors
+
+    try {
+      await signIn(username.trim(), password.trim());
+      // Handle successful login, redirection, or any other action upon successful login
+    } catch (error) {
+      setError("Invalid username or password."); // Example error message
+      console.error("Login failed:", error);
+    } finally {
+      setLoading(false); // Stop loading regardless of success or failure
+    }
   };
 
   return (
-    <div className="bg-gray-50 p-4 sm:p-6 md:p-8 rounded-lg shadow-md border border-green-600 w-full max-w-xs sm:max-w-sm md:max-w-md text-center">
+    <div className="bg-gray-50 p-4 sm:p-6 md:p-8 rounded-lg shadow-md border border-green-600 w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto">
       <Image
         src="/logo.png"
         alt="Logo"
@@ -63,6 +72,9 @@ export default function LoginPage() {
             className="w-full p-2 sm:p-3 border border-green-600 rounded-md focus:outline-none focus:border-green-500"
           />
         </div>
+        {error && (
+          <p className="text-red-500 text-sm mb-4 sm:mb-6 md:mb-8">{error}</p>
+        )}
         <button
           type="submit"
           disabled={

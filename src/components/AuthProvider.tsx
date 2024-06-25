@@ -1,9 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-
 import { useRouter, useSearchParams } from "next/navigation";
-
 import toast from "react-hot-toast";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -14,21 +12,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const data = localStorage.getItem("userData");
-    setUser(data);
+    setUser(data ? JSON.parse(data) : null);
   }, []);
 
-  const [user, setUser] = useState<string | null>(null);
+  const [user, setUser] = useState<any>(null);
 
   const signIn = async (username: string, password: string) => {
     const toastId = toast.loading("Logging In..");
 
     const redirectTo = params.get("redirect");
+
     try {
       const response = await axios.post(
         "https://progres.mesrs.dz/api/authentication/v1/",
         {
           username,
           password,
+        },
+        {
+          timeout: 10000, // Timeout set to 10 seconds
         }
       );
 
@@ -47,16 +49,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       toast.success("Logged In Successfully", { id: toastId });
     } catch (err: any) {
-      if (err.response && err.response.status === 403) {
-        toast.error("Invalid Credentials", {
-          duration: 3000,
-          id: toastId,
-        });
+      if (axios.isCancel(err)) {
+        toast.error("Request timed out", { duration: 3000, id: toastId });
+      } else if (err.response && err.response.status === 403) {
+        toast.error("Invalid Credentials", { duration: 3000, id: toastId });
       } else {
-        toast.error("Something Went Wrong", {
-          duration: 3000,
-          id: toastId,
-        });
+        toast.error("Something Went Wrong", { duration: 3000, id: toastId });
       }
     }
   };
