@@ -11,9 +11,9 @@ const getGroup = async () => {
       `https://progres.mesrs.dz/api/infos/dia/${dia.id}/groups`,
       {
         headers: {
-          Authorization: token,
-          timeout: 10000, // Timeout set to 10 seconds
+          Authorization: token
         },
+        timeout: 10000,
       }
     );
     console.log("group fetched successfully");
