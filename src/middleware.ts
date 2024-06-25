@@ -33,7 +33,7 @@ export async function middleware(req: NextRequest) {
 
 // Define the paths where the middleware will apply
 export const config = {
-  matcher: ["/login", "/profile"],
+  matcher: ["/login", "/profile", "/group"],
 };
 
 const getDias = async () => {
