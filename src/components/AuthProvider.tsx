@@ -64,6 +64,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUser(null);
     Cookies.remove("token");
     Cookies.remove("uuid");
+    Cookies.remove("dias");
+    Cookies.remove("EtabId");
 
     router.push("/login");
   };

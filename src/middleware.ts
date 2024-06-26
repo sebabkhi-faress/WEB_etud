@@ -24,8 +24,10 @@ export async function middleware(req: NextRequest) {
 
   if (!dias) {
     const newDias = await getDias();
-    console.log("updated cookies");
-    res.cookies.set("dias", JSON.stringify(newDias));
+    if (newDias) {
+      console.log("updated cookies");
+      res.cookies.set("dias", JSON.stringify(newDias));
+    }
   }
 
   return res;
@@ -48,7 +50,7 @@ const getDias = async () => {
         headers: {
           Authorization: token,
         },
-        timeout: 10000, // Timeout set to 10 seconds
+        timeout: 100000, // Timeout set to 10 seconds
       }
     );
     console.log("dias fetched successfully");
@@ -62,5 +64,6 @@ const getDias = async () => {
     return dias;
   } catch (error) {
     console.error("Error updating cookies", error);
+    return null;
   }
 };
