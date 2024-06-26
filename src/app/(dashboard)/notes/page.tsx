@@ -10,6 +10,27 @@ const getTdTp = async () => {
   const token = cookieStore.get("token")?.value;
   const dias = cookieStore.get("dias")?.value as string;
   const dia = JSON.parse(dias)[0];
+
+  const parseData = (data: any) => {
+    const semesters = {} as any;
+    data.forEach((item: any) => {
+      const { llPeriode, ...rest } = item;
+
+      if (!semesters[llPeriode]) {
+        semesters[llPeriode] = [];
+      }
+
+      semesters[llPeriode].push(rest);
+    });
+
+    return Object.keys(semesters)
+      .sort()
+      .reduce((sortedObj: any, key) => {
+        sortedObj[key] = semesters[key];
+        return sortedObj;
+      }, {});
+  };
+
   try {
     const res = await axios.get(
       `https://progres.mesrs.dz/api/infos/controleContinue/dia/${dia.id}/notesCC`,
@@ -20,28 +41,10 @@ const getTdTp = async () => {
         timeout: 10000,
       }
     );
-    const semesters = {} as any;
-    res.data.forEach((item: any) => {
-      const { llPeriode, ...rest } = item;
 
-      if (!semesters[llPeriode]) {
-        semesters[llPeriode] = [];
-      }
-
-      semesters[llPeriode].push(rest);
-    });
-
-    const sortObjectKeysAlphabetically = (obj: any) => {
-      return Object.keys(obj)
-        .sort()
-        .reduce((sortedObj: any, key) => {
-          sortedObj[key] = obj[key];
-          return sortedObj;
-        }, {});
-    };
-    return sortObjectKeysAlphabetically(semesters);
-  } catch (error) {
-    console.error("Error fetching tp and td info\n", error);
+    return parseData(res.data);
+  } catch (error: any) {
+    throw Error("Error fetching TP and Td Notes");
   }
 };
 

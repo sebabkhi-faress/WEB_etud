@@ -1,14 +1,14 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import axios from "axios";
 import Cookies from "js-cookie";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
-  const params = useSearchParams();
+  // const params = useSearchParams();
 
   useEffect(() => {
     const data = localStorage.getItem("userData");
@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const signIn = async (username: string, password: string) => {
     const toastId = toast.loading("Logging In..");
 
-    const redirectTo = params.get("redirect");
+    // const redirectTo = params.get("redirect");
 
     try {
       const response = await axios.post(
@@ -41,11 +41,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       Cookies.set("uuid", response.data.uuid);
       Cookies.set("EtabId", response.data.etablissementId);
 
-      if (redirectTo) {
-        router.push(redirectTo);
-      } else {
-        router.push("/profile");
-      }
+      // if (redirectTo) {
+      //   router.push(redirectTo);
+      // } else {
+      router.push("/profile");
+      // }
 
       toast.success("Logged In Successfully", { id: toastId });
     } catch (err: any) {

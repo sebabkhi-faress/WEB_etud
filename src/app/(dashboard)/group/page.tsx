@@ -1,11 +1,11 @@
 import { cookies } from "next/headers";
-import axios, { AxiosHeaderValue } from "axios";
+import axios from "axios";
 
 const getGroup = async () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
   const dias = cookieStore.get("dias")?.value as string;
-  const dia = JSON.parse(dias)[3];
+  const dia = JSON.parse(dias)[0];
   try {
     const res = await axios.get(
       `https://progres.mesrs.dz/api/infos/dia/${dia.id}/groups`,
@@ -29,7 +29,6 @@ const getGroup = async () => {
         semesterInfo[semesterKey] = { group, section };
       });
 
-    console.log(semesterInfo);
     return semesterInfo;
   } catch (error) {
     console.error("Error fetching group and section info\n", error);
