@@ -43,18 +43,22 @@ export default async function Group() {
     { group: string; section: string }
   ];
   return (
-    <div className="bg-gray-300 border-2 border-green-700 w-full h-max max-w-3xl m-5 p-8 flex flex-col gap-8 rounded-lg shadow-2xl box-border">
-      {Object.entries(semesterInfo).map(([semester, info]) => (
-        <div className="flex flex-col gap-4" key={semester}>
-          <h2 className="w-full rounded-lg p-2 text-center bg-green-500 text-white">
+    <div className="bg-gray-300 border-2 border-green-700 w-full max-w-3xl m-5 p-8 rounded-lg shadow-2xl">
+      {Object.entries(semesterInfo).map(([semester, info], index) => (
+        <div className={`flex flex-col gap-6 ${index > 0 ? 'mt-6' : ''}`} key={semester}>
+          <h2 className="w-full rounded-lg p-3 text-center bg-green-500 text-white font-bold">
             {semester}
           </h2>
-          <div className="flex flex-col bg-white text-green-500 rounded-lg p-4">
-            <p>Section: {info.section}</p>
-            <p>Group: {info.group}</p>
+          <div className="flex flex-col bg-white rounded-lg p-4 shadow-md">
+            <p className="mb-2">
+              <span className="font-bold">Section:</span> {info.section}
+            </p>
+            <p className="mb-2">
+              <span className="font-bold">Group:</span> {info.group}
+            </p>
           </div>
         </div>
       ))}
     </div>
-  );
+  );  
 }
