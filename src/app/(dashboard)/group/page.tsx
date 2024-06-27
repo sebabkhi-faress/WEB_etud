@@ -13,7 +13,7 @@ const getGroup = async () => {
         headers: {
           Authorization: token,
         },
-        timeout: 100000,
+        timeout: 10000,
       }
     );
 
@@ -49,7 +49,7 @@ export default async function Group() {
           <h2 className="w-full rounded-lg p-3 text-center bg-green-500 text-white font-bold">
             {semester}
           </h2>
-          <div className="flex flex-col bg-white rounded-lg p-4 shadow-md">
+          <div className="flex flex-col bg-white rounded-lg p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-105">
             <p className="mb-2">
               <span className="font-bold">Section:</span> {info.section}
             </p>
