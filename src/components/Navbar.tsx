@@ -110,6 +110,18 @@ const Navbar = () => {
                   <PencilIcon className="h-6 w-6 absolute left-0 m-3" />
                   Notes
                 </Link>
+                <Link
+                  href="/exams"
+                  className={`flex relative items-center justify-center px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
+                    pathname === "/exams"
+                      ? "bg-white text-green-600"
+                      : "hover:bg-white hover:text-green-600"
+                  }`}
+                  onClick={closeMenu} // Close menu on link click
+                >
+                  <PencilIcon className="h-6 w-6 absolute left-0 m-3" />
+                  Exams
+                </Link>
 
                 <button
                   className="flex relative items-center justify-center hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
