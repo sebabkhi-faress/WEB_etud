@@ -42,6 +42,7 @@ const getTdTp = async () => {
       }
     );
 
+    console.log("[notes] Notes fetched successfully");
     return parseData(res.data);
   } catch (error: any) {
     throw Error("Error fetching TP and Td Notes");
@@ -67,9 +68,12 @@ export default async function Notes() {
               key={item.id}
             >
               <p className="font-semibold">{item.rattachementMcMcLibelleFr}</p>
-              <p className="font-bold text-lg">
-                {item.note !== null ? item.note : "Empty"}
-              </p>
+              <div className="flex gap-4">
+                <p className="font-bold text-lg">
+                  {item.note !== null ? item.note : "Empty"}
+                </p>
+                <p className="font-bold text-lg text-gray-700">{item.apCode}</p>
+              </div>
             </div>
           ))}
         </div>
