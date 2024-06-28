@@ -15,8 +15,11 @@ export default function LoginPage() {
     event.preventDefault();
 
     setLoading(true);
-    signIn(username.trim(), password.trim());
-    setLoading(false);
+    try {
+      await signIn(username.trim(), password.trim());
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -70,7 +73,7 @@ export default function LoginPage() {
           }
           className="w-full p-2 sm:p-3 text-white bg-green-600 rounded-md hover:bg-green-700 transition-colors disabled:bg-gray-400"
         >
-          {loading ? "Loading..." : "Login"}
+          {loading ? "Loading.." : "Login"}
         </button>
       </form>
     </div>
