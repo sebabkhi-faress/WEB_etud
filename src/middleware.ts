@@ -3,6 +3,8 @@ import type { NextRequest } from "next/server";
 
 import { cookies } from "next/headers";
 import axios from "axios";
+import logger from "./utils";
+import { log } from "util";
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("token");
@@ -33,13 +35,14 @@ export async function middleware(req: NextRequest) {
 
 // Define the paths where the middleware will apply
 export const config = {
-  matcher: ["/login", "/profile", "/group"],
+  matcher: ["/login", "/profile", "/group", "/exams", "/notes"],
 };
 
 const getDias = async () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
   const uuid = cookieStore.get("uuid")?.value;
+  const user = cookieStore.get("user")?.value;
 
   try {
     const response = await axios.get(
@@ -51,7 +54,7 @@ const getDias = async () => {
         timeout: 100000, // Timeout set to 10 seconds
       }
     );
-    console.log("dias fetched successfully");
+    logger.info("dias fetched successfully", user, "middleware");
 
     const dias = [];
 
@@ -61,7 +64,7 @@ const getDias = async () => {
     }
     return dias;
   } catch (error) {
-    console.error("Error updating cookies", error);
+    logger.error("Error updating cookies", user, "middleware");
     return null;
   }
 };

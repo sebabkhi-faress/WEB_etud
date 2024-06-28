@@ -1,10 +1,12 @@
 import { cookies } from "next/headers";
 import Image from "next/image";
 import axios from "axios";
+import logger from "@/utils";
 
 const getLogo = async () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
+  const user = cookieStore.get("user")?.value;
   const EtabId = cookieStore.get("EtabId")?.value;
   try {
     const image = await axios.get(
@@ -16,10 +18,10 @@ const getLogo = async () => {
         timeout: 10000, // Timeout set to 10 seconds
       }
     );
-    console.log("Logo fetched successfully");
+    logger.info("Logo fetched successfully", user, "/profile");
     return image.data;
   } catch (error) {
-    console.error("Error fetching logo");
+    logger.error("Error fetching logo", user, "/profile");
     throw Error("Error fetching profile data");
   }
 };

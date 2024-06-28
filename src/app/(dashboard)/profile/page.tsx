@@ -1,10 +1,31 @@
 import { cookies } from "next/headers";
 import axios from "axios";
+import logger from "@/utils";
 
 const getProfileData = async () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
+  const user = cookieStore.get("user")?.value;
   const uuid = cookieStore.get("uuid")?.value;
+
+  const parseData = (responseData: any) => {
+    return {
+      individuId: responseData.individuId,
+      nin: responseData.nin,
+      individuNomArabe: responseData.individuNomArabe,
+      individuNomLatin: responseData.individuNomLatin,
+      individuPrenomArabe: responseData.individuPrenomArabe,
+      individuPrenomLatin: responseData.individuPrenomLatin,
+      individuDateNaissance: responseData.individuDateNaissance,
+      individuLieuNaissance: responseData.individuLieuNaissance,
+      individuLieuNaissanceArabe: responseData.individuLieuNaissanceArabe,
+      llEtablissementArabe: responseData.llEtablissementArabe,
+      llEtablissementLatin: responseData.llEtablissementLatin,
+      niveauLibelleLongLt: responseData.niveauLibelleLongLt,
+      ofLlDomaine: responseData.ofLlDomaine,
+      ofLlSpecialite: responseData.ofLlSpecialite,
+    };
+  };
 
   try {
     const response = await axios.get(
@@ -17,43 +38,13 @@ const getProfileData = async () => {
       }
     );
 
-    console.log("Profile data fetched successfully");
+    logger.info("Profile data fetched successfully", user, "/profile");
 
-    const data = (({
-      individuId,
-      nin,
-      individuNomArabe,
-      individuNomLatin,
-      individuPrenomArabe,
-      individuPrenomLatin,
-      individuDateNaissance,
-      individuLieuNaissance,
-      individuLieuNaissanceArabe,
-      llEtablissementArabe,
-      llEtablissementLatin,
-      niveauLibelleLongLt,
-      ofLlDomaine,
-      ofLlSpecialite,
-    }) => ({
-      individuId,
-      nin,
-      individuNomArabe,
-      individuNomLatin,
-      individuPrenomArabe,
-      individuPrenomLatin,
-      individuDateNaissance,
-      individuLieuNaissance,
-      individuLieuNaissanceArabe,
-      llEtablissementArabe,
-      llEtablissementLatin,
-      niveauLibelleLongLt,
-      ofLlDomaine,
-      ofLlSpecialite,
-    }))(response.data[0]);
+    const data = parseData(response.data[0]);
 
     return data;
   } catch (error) {
-    console.error("Error fetching profile data");
+    logger.error("Error fetching profile data", user, "/profile");
     throw new Error("Error fetching profile data");
   }
 };
