@@ -20,7 +20,7 @@ export async function middleware(req: NextRequest) {
 
   let dias = req.cookies.get("dias");
 
-  if (!dias) {
+  if (!dias && url.pathname !== "/login") {
     const newDias = await getDias();
     if (newDias) {
       console.log("updated cookies");
