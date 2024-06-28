@@ -40,6 +40,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       Cookies.set("token", response.data.token);
       Cookies.set("uuid", response.data.uuid);
       Cookies.set("EtabId", response.data.etablissementId);
+      Cookies.set("user", response.data.userName);
 
       // if (redirectTo) {
       //   router.push(redirectTo);
@@ -66,6 +67,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     Cookies.remove("uuid");
     Cookies.remove("dias");
     Cookies.remove("EtabId");
+    Cookies.remove("user");
 
     router.push("/login");
   };

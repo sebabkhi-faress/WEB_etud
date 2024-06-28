@@ -10,6 +10,7 @@ import {
   ArrowRightEndOnRectangleIcon,
   PencilIcon,
   UserGroupIcon,
+  ExclamationTriangleIcon,
 } from "@heroicons/react/16/solid";
 import { usePathname } from "next/navigation";
 
@@ -31,7 +32,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-green-600 py-4 px-4 md:px-12 flex items-center justify-between relative z-50">
+    <nav className="bg-green-600 text-white py-4 px-4 md:px-12 flex items-center justify-between relative z-50">
       <div className="flex items-center flex-shrink-0">
         <Link href="/">
           <Image
@@ -46,7 +47,7 @@ const Navbar = () => {
       {/* Mobile Menu Button */}
       <div className="md:hidden">
         <button
-          className="text-white p-2 focus:outline-none"
+          className="p-2 focus:outline-none"
           onClick={toggleMenu} // Toggle menu visibility on click
         >
           <svg
@@ -74,8 +75,10 @@ const Navbar = () => {
               <>
                 <Link
                   href="/profile"
-                  className={`flex relative items-center justify-center text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
-                    pathname === "/profile" ? "bg-white text-green-600" : ""
+                  className={`flex relative items-center justify-center  px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
+                    pathname === "/profile"
+                      ? "bg-white text-green-600"
+                      : "hover:bg-white hover:text-green-600"
                   }`}
                   onClick={closeMenu} // Close menu on link click
                 >
@@ -85,8 +88,10 @@ const Navbar = () => {
 
                 <Link
                   href="/group" // Adjust the href for your Group page
-                  className={`flex relative items-center justify-center text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
-                    pathname === "/group" ? "bg-white text-green-600" : ""
+                  className={`flex relative items-center justify-center px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
+                    pathname === "/group"
+                      ? "bg-white text-green-600"
+                      : "hover:bg-white hover:text-green-600"
                   }`}
                   onClick={closeMenu} // Close menu on link click
                 >
@@ -95,8 +100,10 @@ const Navbar = () => {
                 </Link>
                 <Link
                   href="/notes"
-                  className={`flex relative items-center justify-center text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
-                    pathname === "/notes" ? "bg-white text-green-600" : ""
+                  className={`flex relative items-center justify-center px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
+                    pathname === "/notes"
+                      ? "bg-white text-green-600"
+                      : "hover:bg-white hover:text-green-600"
                   }`}
                   onClick={closeMenu} // Close menu on link click
                 >
@@ -105,7 +112,7 @@ const Navbar = () => {
                 </Link>
 
                 <button
-                  className="flex relative items-center justify-center text-white hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
+                  className="flex relative items-center justify-center hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
                   onClick={() => {
                     signOut();
                     closeMenu(); // Close menu after sign out
@@ -139,10 +146,10 @@ const Navbar = () => {
           <div className="md:flex gap-2 hidden">
             <Link
               href="/profile"
-              className={`flex gap-2 text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
+              className={`flex gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
                 pathname === "/profile"
-                  ? "bg-white text-green-600 scale-105"
-                  : ""
+                  ? "bg-white text-green-600"
+                  : "hover:bg-white hover:text-green-600"
               }`}
             >
               <UserIcon className="h-6 w-6" />
@@ -151,8 +158,10 @@ const Navbar = () => {
 
             <Link
               href="/group"
-              className={`flex gap-2 text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
-                pathname === "/group" ? "bg-white text-green-600 scale-105" : ""
+              className={`flex gap-2 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
+                pathname === "/group"
+                  ? "bg-white text-green-600 scale-105"
+                  : "hover:bg-white hover:text-green-600"
               }`}
             >
               <UserGroupIcon className="h-6 w-6" />
@@ -160,12 +169,25 @@ const Navbar = () => {
             </Link>
             <Link
               href="/notes"
-              className={`flex gap-2 items-center text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
-                pathname === "/notes" ? "bg-white text-green-600 scale-105" : ""
+              className={`flex gap-2 items-center px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
+                pathname === "/notes"
+                  ? "bg-white text-green-600 scale-105"
+                  : "hover:bg-white hover:text-green-600"
               }`}
             >
               <PencilIcon className="h-6 w-6" />
               Notes
+            </Link>
+            <Link
+              href="/exams"
+              className={`flex gap-2 items-center px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
+                pathname === "/exams"
+                  ? "bg-white text-green-600 scale-105"
+                  : "hover:bg-white hover:text-green-600"
+              }`}
+            >
+              <ExclamationTriangleIcon className="h-6 w-6" />
+              Exams
             </Link>
           </div>
 
