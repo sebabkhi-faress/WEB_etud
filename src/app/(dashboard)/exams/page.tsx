@@ -26,10 +26,13 @@ const getExamsNotes = async () => {
       },
     } as any;
 
+    const periods = data.map((course: any) => course.idPeriode);
+    const firstSemester = Math.min(...periods);
+
     data.forEach((course: any) => {
       const period = course.idPeriode;
       const session = course.planningSessionIntitule;
-      const semester = period % 2 == 0 ? "Semester 1" : "Semester 2";
+      const semester = period == firstSemester ? "Semester 1" : "Semester 2";
 
       if (session === "session_1") {
         semesters[semester].normal.push(course);
@@ -56,7 +59,6 @@ const getExamsNotes = async () => {
     return parseData(res.data);
   } catch (error: any) {
     logger.error("Error fetching exam notes", user, "/exams");
-
     throw Error("Error fetching Exam Notes");
   }
 };

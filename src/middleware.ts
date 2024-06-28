@@ -60,7 +60,7 @@ const getDias = async () => {
 
     for (let i = 0; i < response.data.length; i++) {
       let { id, anneeAcademiqueId } = response.data[i];
-      dias.push({ id, anneeAcademiqueId });
+      if (anneeAcademiqueId <= 19) dias.push({ id, anneeAcademiqueId });
     }
     return dias;
   } catch (error) {

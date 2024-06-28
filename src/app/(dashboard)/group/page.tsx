@@ -2,6 +2,10 @@ import { cookies } from "next/headers";
 import axios from "axios";
 import logger from "@/utils";
 
+export const metadata = {
+  title: "WebEtu - Group",
+};
+
 const getGroup = async () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
@@ -37,12 +41,10 @@ const getGroup = async () => {
     return semesterInfo;
   } catch (error) {
     logger.error("Error fetching group and section info", user, "/group");
+    throw Error("Error fetching group and section info");
   }
 };
 
-export const metadata = {
-  title: "WebEtu - Group",
-};
 export default async function Group() {
   const semesterInfo = (await getGroup()) as [
     { group: string; section: string }
