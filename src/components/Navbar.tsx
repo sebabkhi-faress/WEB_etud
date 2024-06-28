@@ -8,6 +8,8 @@ import {
   UserIcon,
   ArrowLeftStartOnRectangleIcon,
   ArrowRightEndOnRectangleIcon,
+  PencilIcon,
+  UserGroupIcon,
 } from "@heroicons/react/16/solid";
 import { usePathname } from "next/navigation";
 
@@ -70,46 +72,47 @@ const Navbar = () => {
           <div className="flex flex-col space-y-2 p-4">
             {user && (
               <>
-                {pathname !== "/notes" && (
-                  <Link
-                    href="/notes"
-                    className="text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
-                    onClick={closeMenu} // Close menu on link click
-                  >
-                    <UserIcon className="h-6 w-6" />
-                    Notes
-                  </Link>
-                )}
-                {pathname !== "/group" && (
-                  <Link
-                    href="/group" // Adjust the href for your Group page
-                    className="text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
-                    onClick={closeMenu} // Close menu on link click
-                  >
-                    <UserIcon className="h-6 w-6" />
-                    Group
-                  </Link>
-                )}
+                <Link
+                  href="/profile"
+                  className={`flex relative items-center justify-center text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
+                    pathname === "/profile" ? "bg-white text-green-600" : ""
+                  }`}
+                  onClick={closeMenu} // Close menu on link click
+                >
+                  <UserIcon className="h-6 w-6 absolute left-0 m-3" />
+                  Profile
+                </Link>
 
-                {pathname !== "/profile" && (
-                  <Link
-                    href="/profile"
-                    className="text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
-                    onClick={closeMenu} // Close menu on link click
-                  >
-                    <UserIcon className="h-6 w-6" />
-                    Profile
-                  </Link>
-                )}
+                <Link
+                  href="/group" // Adjust the href for your Group page
+                  className={`flex relative items-center justify-center text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
+                    pathname === "/group" ? "bg-white text-green-600" : ""
+                  }`}
+                  onClick={closeMenu} // Close menu on link click
+                >
+                  <UserGroupIcon className="h-6 w-6 absolute left-0 m-3" />
+                  Group
+                </Link>
+                <Link
+                  href="/notes"
+                  className={`flex relative items-center justify-center text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
+                    pathname === "/notes" ? "bg-white text-green-600" : ""
+                  }`}
+                  onClick={closeMenu} // Close menu on link click
+                >
+                  <PencilIcon className="h-6 w-6 absolute left-0 m-3" />
+                  Notes
+                </Link>
 
                 <button
-                  className="text-white hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
+                  className="flex relative items-center justify-center text-white hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
                   onClick={() => {
                     signOut();
                     closeMenu(); // Close menu after sign out
                   }}
                 >
-                  <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
+                  <ArrowLeftStartOnRectangleIcon className="h-6 w-6 absolute left-0 m-3" />
+                  Log Out
                 </button>
               </>
             )}
@@ -131,59 +134,60 @@ const Navbar = () => {
       )}
 
       {/* Desktop Menu */}
-      <div className="hidden md:flex items-center space-x-2">
-        {user && (
-          <>
-            {pathname !== "/notes" && (
-              <Link
-                href="/notes"
-                className="flex gap-2 text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
-              >
-                <UserIcon className="h-6 w-6" />
-                Notes
-              </Link>
-            )}
-            {pathname !== "/group" && (
-              <Link
-                href="/group" // Adjust the href for your Group page
-                className="flex gap-2 text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
-              >
-                <UserIcon className="h-6 w-6" />
-                Group
-              </Link>
-            )}
-
-            {pathname !== "/profile" && (
-              <Link
-                href="/profile"
-                className="flex gap-2 text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
-              >
-                <UserIcon className="h-6 w-6" />
-                Profile
-              </Link>
-            )}
-
-            <button
-              className="flex gap-2 text-white hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
-              onClick={() => signOut()}
+      {user ? (
+        <>
+          <div className="md:flex gap-2 hidden">
+            <Link
+              href="/profile"
+              className={`flex gap-2 text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
+                pathname === "/profile"
+                  ? "bg-white text-green-600 scale-105"
+                  : ""
+              }`}
             >
-              <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
-            </button>
-          </>
-        )}
+              <UserIcon className="h-6 w-6" />
+              Profile
+            </Link>
 
-        {!user && (
-          <Link
-            href="/login"
-            className={`flex gap-2 text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
-              pathname === "/login" ? "hidden" : ""
-            }`}
+            <Link
+              href="/group"
+              className={`flex gap-2 text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
+                pathname === "/group" ? "bg-white text-green-600 scale-105" : ""
+              }`}
+            >
+              <UserGroupIcon className="h-6 w-6" />
+              Group
+            </Link>
+            <Link
+              href="/notes"
+              className={`flex gap-2 items-center text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
+                pathname === "/notes" ? "bg-white text-green-600 scale-105" : ""
+              }`}
+            >
+              <PencilIcon className="h-6 w-6" />
+              Notes
+            </Link>
+          </div>
+
+          <button
+            className="hidden md:flex gap-2 items-center text-white hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
+            onClick={() => signOut()}
           >
-            <ArrowRightEndOnRectangleIcon className="h-6 w-6" />
-            Sign In
-          </Link>
-        )}
-      </div>
+            <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
+            Log out
+          </button>
+        </>
+      ) : (
+        <Link
+          href="/login"
+          className={`flex gap-2 text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
+            pathname === "/login" ? "hidden" : ""
+          }`}
+        >
+          <ArrowRightEndOnRectangleIcon className="h-6 w-6" />
+          Sign In
+        </Link>
+      )}
     </nav>
   );
 };
