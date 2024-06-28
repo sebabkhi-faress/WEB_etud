@@ -1,11 +1,13 @@
 import { cookies } from "next/headers";
 import Image from "next/image";
 import axios from "axios";
+import logger from "@/utils";
 
 const getImage = async () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
   const uuid = cookieStore.get("uuid")?.value;
+  const user = cookieStore.get("user")?.value;
   try {
     const image = await axios.get(
       `https://progres.mesrs.dz/api/infos/image/${uuid}`,
@@ -16,10 +18,10 @@ const getImage = async () => {
         timeout: 10000, // Timeout set to 10 seconds
       }
     );
-    console.log("Image fetched successfully");
+    logger.info("Image fetched successfully", user, "/profile");
     return image.data;
   } catch (error) {
-    console.error("Error fetching image");
+    logger.error("Error fetching image", user, "/profile");
     throw Error("Error fetching profile data");
   }
 };

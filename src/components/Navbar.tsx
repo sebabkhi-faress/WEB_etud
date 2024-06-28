@@ -212,6 +212,7 @@ const Navbar = () => {
           </button>
         </>
       ) : (
+<<<<<<< HEAD
         pathname !== "/login" && (
           <Link
             href="/login"
@@ -221,6 +222,17 @@ const Navbar = () => {
             Sign In
           </Link>
         )
+=======
+        <Link
+          href="/login"
+          className={`hidden md:flex gap-2 text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300 ${
+            pathname === "/login" ? "hidden" : ""
+          }`}
+        >
+          <ArrowRightEndOnRectangleIcon className="h-6 w-6" />
+          Sign In
+        </Link>
+>>>>>>> 4f281855442d05602008283e73808258ff1ffe5e
       )}
     </nav>
   );
