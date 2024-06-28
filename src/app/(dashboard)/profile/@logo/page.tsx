@@ -32,6 +32,7 @@ export default async function ProfileImage() {
       alt="University Logo"
       width={140}
       height={140}
+      className="w-28 h-28 md:w-32 md:h-32"
     />
   );
 }
