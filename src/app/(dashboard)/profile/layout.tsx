@@ -1,5 +1,3 @@
-export const revalidate = 3600;
-
 export const metadata = {
   title: "WebEtu - Profile",
 };
@@ -23,7 +21,9 @@ const Layout = async ({
           {logo}
         </div>
       </div>
-      <div className="text-left">{children}</div>
+      <div className="text-left min-h-20 flex justify-center items-center">
+        {children}
+      </div>
     </div>
   );
 };

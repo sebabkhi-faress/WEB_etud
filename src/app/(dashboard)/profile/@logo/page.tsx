@@ -2,14 +2,24 @@ import { cookies } from "next/headers";
 import Image from "next/image";
 import axios from "axios";
 import logger from "@/utils";
+import cache from "@/cache";
 
 const getLogo = async () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
   const user = cookieStore.get("user")?.value;
   const EtabId = cookieStore.get("EtabId")?.value;
+
+  const cacheKey = `logo-${EtabId}`;
+  const cachedData = cache.get(cacheKey);
+
+  if (cachedData) {
+    logger.info("logo cache hit", user, "/profile");
+    return cachedData;
+  }
+
   try {
-    const image = await axios.get(
+    const logo = await axios.get(
       `https://progres.mesrs.dz/api/infos/logoEtablissement/${EtabId}`,
       {
         headers: {
@@ -18,8 +28,10 @@ const getLogo = async () => {
         timeout: 10000, // Timeout set to 10 seconds
       }
     );
+
     logger.info("Logo fetched successfully", user, "/profile");
-    return image.data;
+    cache.set(cacheKey, logo.data);
+    return logo.data;
   } catch (error) {
     logger.error("Error fetching logo", user, "/profile");
     throw Error("Error fetching profile data");

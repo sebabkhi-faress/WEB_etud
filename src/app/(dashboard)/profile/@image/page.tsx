@@ -2,12 +2,22 @@ import { cookies } from "next/headers";
 import Image from "next/image";
 import axios from "axios";
 import logger from "@/utils";
+import cache from "@/cache";
 
 const getImage = async () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
   const uuid = cookieStore.get("uuid")?.value;
   const user = cookieStore.get("user")?.value;
+
+  const cacheKey = `image-${user}`;
+  const cachedData = cache.get(cacheKey);
+
+  if (cachedData) {
+    logger.info("Image cache hit", user, "/profile");
+    return cachedData;
+  }
+
   try {
     const image = await axios.get(
       `https://progres.mesrs.dz/api/infos/image/${uuid}`,
@@ -18,11 +28,13 @@ const getImage = async () => {
         timeout: 10000, // Timeout set to 10 seconds
       }
     );
+
     logger.info("Image fetched successfully", user, "/profile");
+    cache.set(cacheKey, image.data);
     return image.data;
   } catch (error) {
     logger.error("Error fetching image", user, "/profile");
-    throw Error("Error fetching profile data");
+    throw Error("Error fetching profile image data");
   }
 };
 
