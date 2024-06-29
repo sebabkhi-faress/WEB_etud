@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/Navbar";
@@ -27,6 +28,7 @@ export default function RootLayout({
           </main>
           <Toaster />
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import axios from "axios";
 import logger from "@/utils";
+import cache from "@/cache";
 
 export const metadata = {
   title: "WebEtu - Notes",
@@ -12,6 +13,14 @@ const getTdTp = async () => {
   const user = cookieStore.get("user")?.value;
   const dias = cookieStore.get("dias")?.value as string;
   const dia = JSON.parse(dias)[0];
+
+  const cacheKey = `notes-${user}`;
+  const cachedData = cache.get(cacheKey);
+
+  if (cachedData) {
+    logger.info("notes cache hit", user, "/notes");
+    return cachedData;
+  }
 
   const parseData = (data: any) => {
     const semesters = {} as any;
@@ -45,7 +54,10 @@ const getTdTp = async () => {
     );
 
     logger.info("Notes fetched successfully", user, "/notes");
-    return parseData(res.data);
+    const data = parseData(res.data);
+    cache.set(cacheKey, data);
+
+    return data;
   } catch (error: any) {
     logger.error("Error fetching TP and Td Notes", user, "/notes");
     throw Error("Error fetching TP and Td Notes");

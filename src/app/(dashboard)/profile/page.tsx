@@ -1,12 +1,21 @@
 import { cookies } from "next/headers";
 import axios from "axios";
 import logger from "@/utils";
+import cache from "@/cache";
 
 const getProfileData = async () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
   const user = cookieStore.get("user")?.value;
   const uuid = cookieStore.get("uuid")?.value;
+
+  const cacheKey = `profile-${user}`;
+  const cachedData = cache.get(cacheKey);
+
+  if (cachedData) {
+    logger.info("profile cache hit", user, "/profile");
+    return cachedData;
+  }
 
   const parseData = (responseData: any) => {
     return {
@@ -39,8 +48,8 @@ const getProfileData = async () => {
     );
 
     logger.info("Profile data fetched successfully", user, "/profile");
-
     const data = parseData(response.data[0]);
+    cache.set(cacheKey, data);
 
     return data;
   } catch (error) {
@@ -50,7 +59,7 @@ const getProfileData = async () => {
 };
 
 const Profile = async () => {
-  const profileData = await getProfileData();
+  const profileData = (await getProfileData()) as any;
 
   return (
     <ul className="list-none flex flex-col gap-4">

@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import axios from "axios";
 import ExamTabs from "@/components/ExamTabs";
 import logger from "@/utils";
+import cache from "@/cache";
 
 export const metadata = {
   title: "WebEtu - Exams",
@@ -13,6 +14,14 @@ const getExamsNotes = async () => {
   const user = cookieStore.get("user")?.value;
   const dias = cookieStore.get("dias")?.value as string;
   const dia = JSON.parse(dias)[0];
+
+  const cacheKey = `exams-${user}`;
+  const cachedData = cache.get(cacheKey);
+
+  if (cachedData) {
+    logger.info("exams cache hit", user, "/exams");
+    return cachedData;
+  }
 
   const parseData = (data: any) => {
     const semesters = {
@@ -56,7 +65,9 @@ const getExamsNotes = async () => {
     );
 
     logger.info("Exam Notes fetched successfully", user, "/exams");
-    return parseData(res.data);
+    const data = parseData(res.data);
+    cache.set(cacheKey, data);
+    return data;
   } catch (error: any) {
     logger.error("Error fetching exam notes", user, "/exams");
     throw Error("Error fetching Exam Notes");
