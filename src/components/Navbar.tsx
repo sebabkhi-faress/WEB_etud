@@ -55,7 +55,7 @@ const Navbar = () => {
   return (
     <nav className="bg-green-600 text-white py-4 px-4 md:px-12 flex items-center justify-between relative z-50">
       <div className="flex items-center flex-shrink-0">
-        <Link href="/">
+        <Link href="/" prefetch={true}>
           <Image
             src="/nav.png" // Replace with your actual logo path
             alt="Logo"
@@ -175,16 +175,6 @@ const Navbar = () => {
 
       {/* Desktop Menu */}
 
-      {/* {!user && pathname !== "/" && (
-        <Link
-          href="/"
-          className="hidden md:flex gap-2 text-white hover:bg-white hover:text-green-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
-        >
-          <ArrowRightEndOnRectangleIcon className="h-6 w-6" />
-          Sign In
-        </Link>
-      )} */}
-
       {user && (
         <>
           <div className="md:flex gap-2 hidden">
@@ -195,6 +185,7 @@ const Navbar = () => {
                   ? "bg-white text-green-600"
                   : "hover:bg-white hover:text-green-600"
               }`}
+              prefetch={true}
             >
               <UserIcon className="h-6 w-6" />
               Profile
@@ -207,6 +198,7 @@ const Navbar = () => {
                   ? "bg-white text-green-600 scale-105"
                   : "hover:bg-white hover:text-green-600"
               }`}
+              prefetch={true}
             >
               <UserGroupIcon className="h-6 w-6" />
               Group
@@ -218,6 +210,7 @@ const Navbar = () => {
                   ? "bg-white text-green-600 scale-105"
                   : "hover:bg-white hover:text-green-600"
               }`}
+              prefetch={true}
             >
               <PencilIcon className="h-6 w-6" />
               Notes
@@ -229,6 +222,7 @@ const Navbar = () => {
                   ? "bg-white text-green-600 scale-105"
                   : "hover:bg-white hover:text-green-600"
               }`}
+              prefetch={true}
             >
               <ExclamationTriangleIcon className="h-6 w-6" />
               Exams
