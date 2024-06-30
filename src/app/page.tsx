@@ -73,7 +73,7 @@ export default function LoginPage() {
             htmlFor="username"
             className="block mb-2 text-sm text-gray-600 font-bold"
           >
-            <span className="text-red-500">*</span> Username
+            <span className="text-red-500">*</span> Student Registration Number
           </label>
           <input
             type="text"
@@ -81,6 +81,7 @@ export default function LoginPage() {
             name="username"
             value={username}
             onChange={(event) => setUsername(event.target.value)}
+            placeholder="Example: 202336197619"
             required
             className="w-full p-2 sm:p-3 border border-green-600 rounded-md focus:outline-none focus:border-green-500"
           />
