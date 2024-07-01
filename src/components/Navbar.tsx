@@ -58,6 +58,7 @@ const Navbar = () => {
           : "hover:bg-white hover:text-green-600"
       }`}
       onClick={closeMenu}
+      style={{ padding: "0.5rem 1rem" }} // Add padding here
     >
       <Icon className="h-6 w-6" />
       {label}
@@ -95,7 +96,7 @@ const Navbar = () => {
 
       {isMenuOpen && user && (
         <div className="lg:hidden absolute top-full left-0 w-full bg-green-600 shadow-lg z-50">
-          <div className="flex flex-col space-y-2 p-4">
+          <div className="flex flex-col space-y-2 p-4" style={{ margin: "0 1rem" }}> {/* Add margin here */}
             {menuItems.map(renderLink)}
             <button
               className="flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
@@ -103,6 +104,7 @@ const Navbar = () => {
                 signOut();
                 closeMenu();
               }}
+              style={{ padding: "0.5rem 1rem" }} // Add padding here
             >
               <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
               Log Out
@@ -124,6 +126,7 @@ const Navbar = () => {
           <button
             className="flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
             onClick={signOut}
+            style={{ padding: "0.5rem 1rem" }} // Add padding here
           >
             <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
             Log Out
