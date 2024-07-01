@@ -25,7 +25,7 @@ export default function LoginPage() {
   const signIn = async (username: string, password: string) => {
     const toastId = toast.loading("Logging In..");
 
-    // const redirectTo = params.get("redirect");
+    // const redirectTo = params.get("redirect"); (Be careful from Open Redirect here)
 
     try {
       const response = await axios.post(
@@ -49,8 +49,8 @@ export default function LoginPage() {
       toast.success("Logged In Successfully", { id: toastId });
     } catch (err: any) {
       if (axios.isCancel(err)) {
-        toast.error("Request timed out", { duration: 3000, id: toastId });
-      } else if (err.response && err.response.status === 403) {
+        toast.error("Request Timed Out", { duration: 3000, id: toastId });
+      } else if (err.response && err.response.status == 403) {
         toast.error("Invalid Credentials", { duration: 3000, id: toastId });
       } else {
         toast.error("Something Went Wrong", { duration: 3000, id: toastId });
