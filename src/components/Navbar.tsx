@@ -73,40 +73,40 @@ const Navbar = () => {
       </div>
 
       <div className="lg:hidden">
-        <button className="p-2 focus:outline-none" onClick={toggleMenu}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"}
-            />
-          </svg>
-        </button>
+        {user && (
+          <button className="p-2 focus:outline-none" onClick={toggleMenu}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"}
+              />
+            </svg>
+          </button>
+        )}
       </div>
 
-      {isMenuOpen && (
+      {isMenuOpen && user && (
         <div className="lg:hidden absolute top-full left-0 w-full bg-green-600 shadow-lg z-50">
           <div className="flex flex-col space-y-2 p-4">
-            {user && menuItems.map(renderLink)}
-            {user && (
-              <button
-                className="flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
-                onClick={() => {
-                  signOut();
-                  closeMenu();
-                }}
-              >
-                <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
-                Log Out
-              </button>
-            )}
+            {menuItems.map(renderLink)}
+            <button
+              className="flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
+              onClick={() => {
+                signOut();
+                closeMenu();
+              }}
+            >
+              <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
+              Log Out
+            </button>
           </div>
         </div>
       )}
