@@ -42,7 +42,7 @@ export default function ExamTabs({ data }) {
               </div>
               {data[semester].rattrappage.length > 0 && (
                 <div>
-                  <h3 className="text-xl font-bold text-red-500">Rattrappage Session</h3>
+                  <h3 className="text-xl font-bold text-grey-700">Rattrappage Session</h3>
                   <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {data[semester].rattrappage.map((course) => (
                       <div
