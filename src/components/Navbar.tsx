@@ -9,7 +9,6 @@ import { useRouter, usePathname } from "next/navigation";
 import {
   UserIcon,
   ArrowLeftStartOnRectangleIcon,
-  ArrowRightEndOnRectangleIcon,
   PencilIcon,
   UserGroupIcon,
   ExclamationTriangleIcon,
@@ -42,14 +41,15 @@ const Navbar = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   const menuItems = [
-    { href: "/profile", label: "Profile", icon: UserIcon },
-    { href: "/group", label: "Group", icon: UserGroupIcon },
-    { href: "/notes", label: "Notes", icon: PencilIcon },
-    { href: "/exams", label: "Exams", icon: ExclamationTriangleIcon },
+    { href: "/profile", label: "Profile", Icon: UserIcon },
+    { href: "/group", label: "Group", Icon: UserGroupIcon },
+    { href: "/notes", label: "Notes", Icon: PencilIcon },
+    { href: "/exams", label: "Exams", Icon: ExclamationTriangleIcon },
   ];
 
-  const renderLink = ({ href, label, icon: Icon }) => (
+  const renderLink = ({ href, label, Icon }: any) => (
     <Link
+      prefetch
       key={href}
       href={href}
       className={`flex items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
@@ -87,7 +87,9 @@ const Navbar = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"}
+                d={
+                  isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"
+                }
               />
             </svg>
           </button>
@@ -96,7 +98,12 @@ const Navbar = () => {
 
       {isMenuOpen && user && (
         <div className="lg:hidden absolute top-full left-0 w-full bg-green-600 shadow-lg z-50">
-          <div className="flex flex-col space-y-2 p-4" style={{ margin: "0 1rem" }}> {/* Add margin here */}
+          <div
+            className="flex flex-col space-y-2 p-4"
+            style={{ margin: "0 1rem" }}
+          >
+            {" "}
+            {/* Add margin here */}
             {menuItems.map(renderLink)}
             <button
               className="flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
@@ -114,11 +121,7 @@ const Navbar = () => {
       )}
 
       <div className="hidden lg:flex gap-4 items-center flex-grow justify-center">
-        {user && (
-          <div className="flex gap-4">
-            {menuItems.map(renderLink)}
-          </div>
-        )}
+        {user && <div className="flex gap-4">{menuItems.map(renderLink)}</div>}
       </div>
 
       <div className="hidden lg:flex gap-4 items-center">
