@@ -52,8 +52,10 @@ export default function LoginPage() {
         toast.error("Request Timed Out", { duration: 3000, id: toastId });
       } else if (err.response && err.response.status == 403) {
         toast.error("Invalid Credentials", { duration: 3000, id: toastId });
+      } else if (err.message.includes("Network Error")) {
+        toast.error("Please Check Your Internet Connection", { duration: 3000, id: toastId });
       } else {
-        toast.error("Something Went Wrong", { duration: 3000, id: toastId });
+        toast.error("Error From Progres Server", { duration: 3000, id: toastId });
       }
     }
   };
