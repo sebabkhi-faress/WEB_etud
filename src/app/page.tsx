@@ -5,6 +5,12 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import axios from "axios";
+import axiosRetry from "axios-retry";
+
+axiosRetry(axios, {
+  retries: 3,
+  retryDelay: axiosRetry.exponentialDelay,
+});
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -24,8 +30,6 @@ export default function LoginPage() {
 
   const signIn = async (username: string, password: string) => {
     const toastId = toast.loading("Logging In..");
-
-    // const redirectTo = params.get("redirect"); (Be careful from Open Redirect here)
 
     try {
       const response = await axios.post(
@@ -53,9 +57,15 @@ export default function LoginPage() {
       } else if (err.response && err.response.status == 403) {
         toast.error("Invalid Credentials", { duration: 3000, id: toastId });
       } else if (err.message.includes("Network Error")) {
-        toast.error("Please Check Your Internet Connection", { duration: 3000, id: toastId });
+        toast.error("Please Check Your Internet Connection", {
+          duration: 3000,
+          id: toastId,
+        });
       } else {
-        toast.error("Error From Progres Server", { duration: 3000, id: toastId });
+        toast.error("Error From Progres Server", {
+          duration: 3000,
+          id: toastId,
+        });
       }
     }
   };
