@@ -138,6 +138,14 @@ const Layout = async () => {
     getLogo(),
   ]);
 
+  const formattedDate = new Date(
+    profileData.individuDateNaissance
+  ).toLocaleDateString("en-GB", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <div className="bg-gray-300 border-2 border-green-700 w-full h-max max-w-3xl m-5 p-8 flex flex-col gap-8 rounded-lg shadow-2xl box-border">
       <div className="text-center flex justify-between items-center">
@@ -182,7 +190,7 @@ const Layout = async () => {
         <li className="text-lg w-full flex flex-col gap-2">
           <span className="font-bold text-gray-600">Date Of Birth:</span>
           <span className="text-gray-800 border-2 border-black bg-white px-4 py-2 rounded-lg capitalize">
-            {profileData.individuDateNaissance}
+            {formattedDate}
           </span>
         </li>
         <li className="text-lg w-full flex flex-col gap-2">
