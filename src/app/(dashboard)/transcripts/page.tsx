@@ -4,7 +4,7 @@ import logger from "@/utils";
 import cache from "@/cache";
 
 export const metadata = {
-  title: "WebEtu - Acadimic Trascript",
+  title: "WebEtu - Year Academic Trascript",
 };
 
 const getCookieData = () => {
@@ -24,7 +24,7 @@ const getAcademicResults = async () => {
   const cachedData = cache.get(cacheKey);
 
   if (cachedData) {
-    logger.info("Transcripts Cache Hit", user, "/transcripts");
+    logger.info("Year Transcript Cache Hit", user, "/transcripts");
     return cachedData;
   }
 
@@ -38,13 +38,13 @@ const getAcademicResults = async () => {
     );
 
     const data = res.data;
-    logger.info("Fetched Academic Results Successfully", user, "/transcripts");
+    logger.info("Fetched Year Academic Results Successfully", user, "/transcripts");
     cache.set(cacheKey, data);
 
     return data;
   } catch (error) {
-    logger.error("Error Fetching Academic Results", token, dia);
-    throw new Error("Error Fetching Academic Results");
+    logger.error("Error Fetching Year Academic Results", token, dia);
+    throw new Error("Error Fetching Year Academic Results");
   }
 };
 
