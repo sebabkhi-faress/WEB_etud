@@ -4,7 +4,7 @@ import logger from "@/utils";
 import cache from "@/cache";
 
 export const metadata = {
-  title: "Academic Results",
+  title: "WebEtu - Acadimic Trascript",
 };
 
 const getCookieData = () => {
@@ -48,7 +48,7 @@ const getAcademicResults = async () => {
   }
 };
 
-const renderResultItem = (result, index) => {
+const renderResultItem = (result: any, index: any) => {
   const { moyenne, typeDecisionLibelleFr, creditAcquis } = result;
   const averageClass = moyenne >= 10.0 ? "text-green-700" : "text-red-700";
 
@@ -57,8 +57,12 @@ const renderResultItem = (result, index) => {
       className="bg-gray-300 border-2 border-green-700 w-full max-w-3xl mx-auto my-5 p-8 rounded-lg shadow-2xl"
       key={index}
     >
-      <p className="font-semibold text-lg mb-2">Average: <span className={averageClass}>{moyenne}</span></p>
-      <p className="font-semibold text-lg mb-2">Decision: <span className={averageClass}>{typeDecisionLibelleFr}</span></p>
+      <p className="font-semibold text-lg mb-2">
+        Average: <span className={averageClass}>{moyenne}</span>
+      </p>
+      <p className="font-semibold text-lg mb-2">
+        Decision: <span className={averageClass}>{typeDecisionLibelleFr}</span>
+      </p>
       <p className="font-semibold text-lg mb-2">Credits: {creditAcquis}</p>
     </div>
   );
@@ -70,7 +74,9 @@ export default async function AcademicResults() {
 
   return (
     <div className="px-4 md:px-0">
-      {results.map((result, index) => renderResultItem(result, index))}
+      {results.map((result: any, index: any) =>
+        renderResultItem(result, index)
+      )}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
 
-export default function ExamsError({ error }: { error: Error }) {
+export default function TranscriptsError({ error }: { error: Error }) {
   return <>{error.message}</>;
 }

@@ -45,6 +45,11 @@ const Navbar = () => {
     { href: "/group", label: "Group", Icon: UserGroupIcon },
     { href: "/notes", label: "Notes", Icon: PencilIcon },
     { href: "/exams", label: "Exams", Icon: ExclamationTriangleIcon },
+    {
+      href: "/transcripts",
+      label: "Transcripts",
+      Icon: ExclamationTriangleIcon,
+    },
   ];
 
   const renderLink = ({ href, label, Icon }: any) => (
@@ -52,7 +57,7 @@ const Navbar = () => {
       prefetch
       key={href}
       href={href}
-      className={`flex items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
+      className={`flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
         pathname === href
           ? "bg-white text-green-600 scale-105"
           : "hover:bg-white hover:text-green-600"
