@@ -51,7 +51,7 @@ const getYearAcademicResults = async () => {
   }
 };
 
-let selectedSemester;
+let selectedSemester : number;
 const getSemesterAcademicResults = async () => {
   const { token, user, dia } = getCookieData();
   const cacheKey = `semesters-transcripts-${user}`;
