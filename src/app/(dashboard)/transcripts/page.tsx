@@ -37,7 +37,11 @@ const getYearAcademicResults = async () => {
     );
 
     const data = res.data;
-    logger.info("Fetched Year Academic Results Successfully", user, "/transcripts");
+    logger.info(
+      "Fetched Year Academic Results Successfully",
+      user,
+      "/transcripts"
+    );
     cache.set(cacheKey, data);
 
     return data;
@@ -67,7 +71,11 @@ const getSemesterAcademicResults = async () => {
     );
 
     const data = res.data;
-    logger.info("Fetched Semesters Academic Results Successfully", user, "/transcripts");
+    logger.info(
+      "Fetched Semesters Academic Results Successfully",
+      user,
+      "/transcripts"
+    );
     cache.set(cacheKey, data);
 
     return data;
@@ -77,7 +85,7 @@ const getSemesterAcademicResults = async () => {
   }
 };
 
-const renderYearResultItem = (result, index) => {
+const renderYearResultItem = (result: any, index: any) => {
   const { moyenne, typeDecisionLibelleFr, creditAcquis } = result;
   const averageClass = moyenne >= 10.0 ? "text-green-700" : "text-red-700";
 
@@ -98,7 +106,7 @@ const renderYearResultItem = (result, index) => {
 };
 
 let selectedSemester = 2;
-const renderSemesterResultItem = (result, index) => {
+const renderSemesterResultItem = (result: any, index: any) => {
   const { moyenne, creditAcquis, bilanUes } = result;
   const moyenneClass = moyenne >= 10.0 ? "text-green-600" : "text-red-600";
   const semesterLabel = selectedSemester === 2 ? "Semester 2" : "Semester 1";
@@ -112,15 +120,17 @@ const renderSemesterResultItem = (result, index) => {
     >
       <div className="mb-4">
         <h2 className="text-2xl font-bold">
-          <span className="font-bold">Average {semesterLabel}: </span> <span className={moyenneClass}>{moyenne}</span>
+          <span className="font-bold">Average {semesterLabel}: </span>{" "}
+          <span className={moyenneClass}>{moyenne}</span>
         </h2>
         <h2 className="text-2xl font-bold">
           <span className="font-bold">Credits: {creditAcquis}</span>
         </h2>
       </div>
       <div>
-        {bilanUes.map((ue, ueIndex) => {
-          const ueAverageClass = ue.moyenne >= 10.0 ? "text-green-600" : "text-red-600";
+        {bilanUes.map((ue: any, ueIndex: any) => {
+          const ueAverageClass =
+            ue.moyenne >= 10.0 ? "text-green-600" : "text-red-600";
           return (
             <div key={ueIndex} className="mb-4">
               <h3 className="text-xl font-semibold">
@@ -128,19 +138,28 @@ const renderSemesterResultItem = (result, index) => {
               </h3>
               <p className="text-md">
                 <span className="font-bold">Average:</span>{" "}
-                <span className={`${ueAverageClass} font-bold`}>{ue.moyenne}</span>
+                <span className={`${ueAverageClass} font-bold`}>
+                  {ue.moyenne}
+                </span>
               </p>
               <div className="ml-6">
-                {ue.bilanMcs.map((mc, mcIndex) => {
-                  const mcAverageClass = mc.moyenneGenerale >= 10.0 ? "text-green-600" : "text-red-600";
+                {ue.bilanMcs.map((mc: any, mcIndex: any) => {
+                  const mcAverageClass =
+                    mc.moyenneGenerale >= 10.0
+                      ? "text-green-600"
+                      : "text-red-600";
                   return (
                     <div key={mcIndex} className="mb-2">
                       <h4 className="text-lg font-semibold">
-                        <span className="text-purple-600">Module: {mc.mcLibelleFr}</span>
+                        <span className="text-purple-600">
+                          Module: {mc.mcLibelleFr}
+                        </span>
                       </h4>
                       <p className="text-md">
                         <span className="font-bold">Average:</span>{" "}
-                        <span className={`${mcAverageClass} font-bold`}>{mc.moyenneGenerale}</span>
+                        <span className={`${mcAverageClass} font-bold`}>
+                          {mc.moyenneGenerale}
+                        </span>
                       </p>
                     </div>
                   );
@@ -161,10 +180,14 @@ export default async function AcademicResults() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="space-y-6">
-        {yearResults.map((result, index) => renderYearResultItem(result, index))}
+        {yearResults.map((result: any, index: any) =>
+          renderYearResultItem(result, index)
+        )}
       </div>
       <div className="space-y-6">
-        {semesterResults.map((result, index) => renderSemesterResultItem(result, index))}
+        {semesterResults.map((result: any, index: any) =>
+          renderSemesterResultItem(result, index)
+        )}
       </div>
     </div>
   );
