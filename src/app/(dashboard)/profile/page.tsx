@@ -3,7 +3,6 @@ import axios from "axios";
 import logger from "@/utils";
 import cache from "@/cache";
 import Image from "next/image";
-import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
 export const metadata = {
   title: "WebEtu - Profile",

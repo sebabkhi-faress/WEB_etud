@@ -70,7 +70,7 @@ const NoteItem = ({ item }: { item: any }) => (
   >
     <p className="font-semibold">{item.rattachementMcMcLibelleFr}</p>
     <div className="flex gap-4 mt-2 sm:mt-0">
-      <p className="font-bold text-lg">{item.note != null ? item.note : "Null"}</p>
+      <p className="font-bold text-lg">{item.note != null ? item.note : "Empty"}</p>
       <p className="font-bold text-lg text-gray-700">{item.apCode}</p>
     </div>
   </div>
