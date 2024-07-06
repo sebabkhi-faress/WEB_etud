@@ -51,10 +51,13 @@ const getYearAcademicResults = async () => {
   }
 };
 
+let selectedSemester;
 const getSemesterAcademicResults = async () => {
   const { token, user, dia } = getCookieData();
   const cacheKey = `semesters-transcripts-${user}`;
   const cachedData = cache.get(cacheKey);
+
+  selectedSemester = 2;
 
   if (cachedData) {
     logger.info("Semesters Transcripts Cache Hit", user, "/transcripts");
@@ -105,13 +108,16 @@ const renderYearResultItem = (result: any, index: any) => {
   );
 };
 
-let selectedSemester = 2;
 const renderSemesterResultItem = (result: any, index: any) => {
   const { moyenne, creditAcquis, bilanUes } = result;
   const moyenneClass = moyenne >= 10.0 ? "text-green-600" : "text-red-600";
   const semesterLabel = selectedSemester === 2 ? "Semester 2" : "Semester 1";
 
   if (selectedSemester === 2) selectedSemester--; // Not sure about this line, but I'm leaving it as per your code.
+  /* Answer for khalil:
+    I used this line to show "Semester 2" in first transcript container and "Semester 1" in the second container
+    Please check lines: 54 and 60 to understand more
+  */
 
   return (
     <div
