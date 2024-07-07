@@ -91,19 +91,28 @@ const getSemesterAcademicResults = async () => {
 const renderYearResultItem = (result: any, index: any) => {
   const { moyenne, typeDecisionLibelleFr, creditAcquis } = result;
   const averageClass = moyenne >= 10.0 ? "text-green-700" : "text-red-700";
+  const creditsClass = moyenne >= 10.0 ? "text-cyan-500" : averageClass;
 
   return (
     <div
-      className="bg-gray-300 border-2 border-green-700 w-full max-w-3xl mx-auto my-5 p-8 rounded-lg shadow-lg"
+      className="bg-white border border-gray-300 w-full max-w-3xl mx-auto my-6 p-6 rounded-lg shadow-lg"
       key={index}
     >
-      <p className="font-semibold text-lg mb-2">
-        Average Annual: <span className={averageClass}>{moyenne}</span>
+      <h2 className="text-2xl font-bold text-gray-800 mb-4">
+        Annual Result
+      </h2>
+      <p className="text-lg text-gray-700 mb-2">
+        <span className="font-semibold">Average Annual: </span>
+        <span className={averageClass}>{moyenne}</span>
       </p>
-      <p className="font-semibold text-lg mb-2">
-        Decision: <span className={averageClass}>{typeDecisionLibelleFr}</span>
+      <p className="text-lg text-gray-700 mb-2">
+        <span className="font-semibold">Decision: </span>
+        <span className={averageClass}>{typeDecisionLibelleFr}</span>
       </p>
-      <p className="font-semibold text-lg mb-2">Credits: {creditAcquis}</p>
+      <p className="text-lg text-gray-700 mb-2">
+        <span className="font-semibold">Credits: </span>
+        <span className={creditsClass}>{creditAcquis}</span>
+      </p>
     </div>
   );
 };
@@ -113,56 +122,58 @@ const renderSemesterResultItem = (result: any, index: any) => {
   const moyenneClass = moyenne >= 10.0 ? "text-green-600" : "text-red-600";
   const semesterLabel = selectedSemester === 2 ? "Semester 2" : "Semester 1";
 
-  if (selectedSemester === 2) selectedSemester--; // Not sure about this line, but I'm leaving it as per your code.
-  /* Answer for khalil:
-    I used this line to show "Semester 2" in first transcript container and "Semester 1" in the second container
-    Please check lines: 54 and 60 to understand more
-  */
+  if (selectedSemester === 2) selectedSemester--; // Keeping this as per your comment
 
   return (
     <div
-      className="bg-gray-300 border-2 border-green-700 w-full max-w-3xl mx-auto my-5 p-8 rounded-lg shadow-lg"
+      className="bg-white border border-gray-300 w-full max-w-3xl mx-auto my-6 p-6 rounded-lg shadow-lg"
       key={index}
     >
-      <div className="mb-4">
-        <h2 className="text-2xl font-bold">
-          <span className="font-bold">Average {semesterLabel}: </span>{" "}
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-gray-800">
+          {semesterLabel} Result
+        </h2>
+        <p className="text-lg text-gray-600">
+          <span className="font-semibold">Average: </span>
           <span className={moyenneClass}>{moyenne}</span>
-        </h2>
-        <h2 className="text-2xl font-bold">
-          <span className="font-bold">Credits: {creditAcquis}</span>
-        </h2>
+        </p>
+        <p className="text-lg text-gray-600">
+          <span className="font-semibold">Credits: </span>
+          <span className={moyenneClass}>{creditAcquis}</span>
+        </p>
       </div>
       <div>
         {bilanUes.map((ue: any, ueIndex: any) => {
           const ueAverageClass =
             ue.moyenne >= 10.0 ? "text-green-600" : "text-red-600";
           return (
-            <div key={ueIndex} className="mb-4">
-              <h3 className="text-xl font-semibold">
-                <span className="text-blue-600">UE: {ue.ueLibelleFr}</span>
+            <div
+              key={ueIndex}
+              className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg"
+            >
+              <h3 className="text-xl font-semibold text-blue-700 mb-2">
+                UE: {ue.ueLibelleFr}
               </h3>
-              <p className="text-md">
-                <span className="font-bold">Average:</span>{" "}
-                <span className={`${ueAverageClass} font-bold`}>
-                  {ue.moyenne}
-                </span>
+              <p className="text-lg text-gray-700 mb-2">
+                <span className="font-semibold">Average: </span>
+                <span className={`${ueAverageClass} font-bold`}>{ue.moyenne}</span>
               </p>
-              <div className="ml-6">
+              <div className="ml-4">
                 {ue.bilanMcs.map((mc: any, mcIndex: any) => {
                   const mcAverageClass =
                     mc.moyenneGenerale >= 10.0
                       ? "text-green-600"
                       : "text-red-600";
                   return (
-                    <div key={mcIndex} className="mb-2">
-                      <h4 className="text-lg font-semibold">
-                        <span className="text-purple-600">
-                          Module: {mc.mcLibelleFr}
-                        </span>
+                    <div
+                      key={mcIndex}
+                      className="mb-4 p-3 bg-purple-50 border border-purple-200 rounded-lg"
+                    >
+                      <h4 className="text-lg font-semibold text-purple-700 mb-1">
+                        Module: {mc.mcLibelleFr}
                       </h4>
-                      <p className="text-md">
-                        <span className="font-bold">Average:</span>{" "}
+                      <p className="text-gray-700">
+                        <span className="font-semibold">Module Average: </span>
                         <span className={`${mcAverageClass} font-bold`}>
                           {mc.moyenneGenerale}
                         </span>
