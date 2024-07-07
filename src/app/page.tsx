@@ -5,12 +5,6 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import axios from "axios";
-import axiosRetry from "axios-retry";
-
-axiosRetry(axios, {
-  retries: 3,
-  retryDelay: axiosRetry.exponentialDelay,
-});
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
