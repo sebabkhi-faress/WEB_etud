@@ -3,6 +3,10 @@ import axios from "axios";
 import logger from "@/utils";
 import cache from "@/cache";
 
+export const metadata = {
+  title: "WebEtu - Notes",
+};
+
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
 const getCookieData = () => {
@@ -230,12 +234,30 @@ const getYearAcademicResults = async (id: number) => {
 };
 
 const PeriodTab = async ({ id }: any) => {
-  const { Sem1TdTp, Sem2TdTp } = (await getTdTp(id)) as any;
-  const { Sem1Exams, Sem2Exams } = (await getExamsNotes(id)) as any;
-  const { Sem1Results, Sem2Results } = (await getSemesterAcademicResults(
-    id
-  )) as any;
-  const yearResults = (await getYearAcademicResults(id)) as any;
+  const [
+    tdTpPromise,
+    examsPromise,
+    semesterResultsPromise,
+    yearResultsPromise,
+  ] = [
+    getTdTp(id),
+    getExamsNotes(id),
+    getSemesterAcademicResults(id),
+    getYearAcademicResults(id),
+  ];
+
+  // Wait for all promises to resolve
+  const [tdTp, exams, semesterResults, yearResults] = await Promise.all([
+    tdTpPromise,
+    examsPromise,
+    semesterResultsPromise,
+    yearResultsPromise,
+  ]);
+
+  // Destructure the results from the resolved promises
+  const { Sem1TdTp, Sem2TdTp } = tdTp as any;
+  const { Sem1Exams, Sem2Exams } = exams as any;
+  const { Sem1Results, Sem2Results } = semesterResults as any;
 
   return (
     <TabGroup className="flex justify-start items-center gap-4 flex-col">

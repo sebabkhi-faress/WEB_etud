@@ -31,7 +31,6 @@ const Navbar = () => {
   const signOut = () => {
     Cookies.remove("token");
     Cookies.remove("uuid");
-    Cookies.remove("dias");
     Cookies.remove("EtabId");
     Cookies.remove("user");
     window.location.reload();
@@ -43,13 +42,7 @@ const Navbar = () => {
   const menuItems = [
     { href: "/profile", label: "Profile", Icon: UserIcon },
     { href: "/group", label: "Group", Icon: UserGroupIcon },
-    { href: "/notes", label: "Notes", Icon: PencilIcon },
-    { href: "/exams", label: "Exams", Icon: ExclamationTriangleIcon },
-    {
-      href: "/transcripts",
-      label: "Transcripts",
-      Icon: ExclamationTriangleIcon,
-    },
+    { href: "/year", label: "Notes", Icon: UserGroupIcon },
   ];
 
   const renderLink = ({ href, label, Icon }: any) => (
