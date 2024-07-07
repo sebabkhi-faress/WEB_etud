@@ -151,7 +151,7 @@ const renderSemesterResultItem = (result: any, index: any) => {
               className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg"
             >
               <h3 className="text-xl font-semibold text-blue-700 mb-2">
-                UE: {ue.ueLibelleFr}
+                {ue.ueNatureLcFr}: {ue.ueLibelleFr}
               </h3>
               <p className="text-lg text-gray-700 mb-2">
                 <span className="font-semibold">Average: </span>
