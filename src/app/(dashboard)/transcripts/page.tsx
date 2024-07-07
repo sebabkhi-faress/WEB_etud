@@ -19,7 +19,7 @@ const getCookieData = () => {
 
 const getYearAcademicResults = async () => {
   const { token, user, dia } = getCookieData();
-  const cacheKey = `transcripts-${user}`;
+  const cacheKey = `year-transcript-${user}`;
   const cachedData = cache.get(cacheKey);
 
   if (cachedData) {
@@ -91,7 +91,6 @@ const getSemesterAcademicResults = async () => {
 const renderYearResultItem = (result: any, index: any) => {
   const { moyenne, typeDecisionLibelleFr, creditAcquis } = result;
   const averageClass = moyenne >= 10.0 ? "text-green-700" : "text-red-700";
-  const creditsClass = moyenne >= 10.0 ? "text-cyan-500" : averageClass;
 
   return (
     <div
@@ -101,17 +100,17 @@ const renderYearResultItem = (result: any, index: any) => {
       <h2 className="text-2xl font-bold text-gray-800 mb-4">
         Annual Result
       </h2>
-      <p className="text-lg text-gray-700 mb-2">
-        <span className="font-semibold">Average Annual: </span>
+      <p className="text-lg text-gray-700 mb-2 font-semibold">
+        <span>Average Annual: </span>
         <span className={averageClass}>{moyenne}</span>
       </p>
-      <p className="text-lg text-gray-700 mb-2">
-        <span className="font-semibold">Decision: </span>
+      <p className="text-lg text-gray-700 mb-2 font-semibold">
+        <span>Decision: </span>
         <span className={averageClass}>{typeDecisionLibelleFr}</span>
       </p>
-      <p className="text-lg text-gray-700 mb-2">
-        <span className="font-semibold">Credits: </span>
-        <span className={creditsClass}>{creditAcquis}</span>
+      <p className="text-lg text-gray-700 mb-2 font-semibold">
+        <span>Credits: </span>
+        <span className={averageClass}>{creditAcquis}</span>
       </p>
     </div>
   );
@@ -131,14 +130,14 @@ const renderSemesterResultItem = (result: any, index: any) => {
     >
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-800">
-          {semesterLabel} Result
+          {semesterLabel} Results
         </h2>
-        <p className="text-lg text-gray-600">
-          <span className="font-semibold">Average: </span>
+        <p className="text-lg text-gray-600 font-semibold">
+          <span>Average: </span>
           <span className={moyenneClass}>{moyenne}</span>
         </p>
-        <p className="text-lg text-gray-600">
-          <span className="font-semibold">Credits: </span>
+        <p className="text-lg text-gray-600 font-semibold">
+          <span>Credits: </span>
           <span className={moyenneClass}>{creditAcquis}</span>
         </p>
       </div>
@@ -167,9 +166,9 @@ const renderSemesterResultItem = (result: any, index: any) => {
                   return (
                     <div
                       key={mcIndex}
-                      className="mb-4 p-3 bg-purple-50 border border-purple-200 rounded-lg"
+                      className="mb-4 p-3 border border-blue-200 rounded-lg"
                     >
-                      <h4 className="text-lg font-semibold text-purple-700 mb-1">
+                      <h4 className="text-lg font-semibold text-blue-700 mb-1">
                         Module: {mc.mcLibelleFr}
                       </h4>
                       <p className="text-gray-700">
