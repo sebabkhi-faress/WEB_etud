@@ -98,7 +98,7 @@ const renderYearResultItem = (result: any, index: any) => {
       key={index}
     >
       <p className="font-semibold text-lg mb-2">
-        Average: <span className={averageClass}>{moyenne}</span>
+        Average Annual: <span className={averageClass}>{moyenne}</span>
       </p>
       <p className="font-semibold text-lg mb-2">
         Decision: <span className={averageClass}>{typeDecisionLibelleFr}</span>
