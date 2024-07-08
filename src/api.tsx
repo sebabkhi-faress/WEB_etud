@@ -234,3 +234,49 @@ export const getYearAcademicResults = async (id: number) => {
     return null;
   }
 };
+
+export const getGroup = async (id: number) => {
+  const { user, token } = getCookieData();
+
+  const cacheKey = `group-${id}-${user}`;
+  const cachedData = cache.get(cacheKey);
+
+  if (cachedData) {
+    logger.info("group cache hit", user, "/group");
+    return cachedData;
+  }
+
+  const parseData = (data: any) =>
+    data
+      .sort((a: any, b: any) => a.periodeId - b.periodeId)
+      .reduce((semesterInfo: any, item: any) => {
+        if (!item.nomSection) return semesterInfo;
+        const semesterKey = item.periodeLibelleLongLt;
+        const group = item.nomGroupePedagogique;
+        const section =
+          item.nomSection === "Section" ? "Section 1" : item.nomSection;
+        semesterInfo[semesterKey] = { group, section };
+        return semesterInfo;
+      }, {});
+
+  try {
+    const res = await axios.get(
+      `https://progres.mesrs.dz/api/infos/dia/${id}/groups`,
+      {
+        headers: {
+          Authorization: token,
+        },
+        timeout: 10000,
+      }
+    );
+
+    const data = parseData(res.data);
+
+    logger.info("fetched group and section data successfully", user, "/group");
+    cache.set(cacheKey, data);
+    return data;
+  } catch (error) {
+    logger.error("Error fetching group and section info", user, "/group");
+    return null;
+  }
+};

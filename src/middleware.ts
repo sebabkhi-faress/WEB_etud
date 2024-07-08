@@ -26,5 +26,5 @@ export async function middleware(req: NextRequest) {
 
 // Define the paths where the middleware will apply
 export const config = {
-  matcher: ["/", "/profile", "/group", "/year"],
+  matcher: ["/", "/profile", "/year"],
 };

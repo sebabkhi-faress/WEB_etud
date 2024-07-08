@@ -4,6 +4,7 @@ import {
   getExamsNotes,
   getSemesterAcademicResults,
   getYearAcademicResults,
+  getGroup,
 } from "@/api";
 
 export const metadata = {
@@ -18,19 +19,22 @@ const PeriodTab = async ({ id }: any) => {
     examsPromise,
     semesterResultsPromise,
     yearResultsPromise,
+    groupPromise,
   ] = [
     getTdTp(id),
     getExamsNotes(id),
     getSemesterAcademicResults(id),
     getYearAcademicResults(id),
+    getGroup(id),
   ];
 
   // Wait for all promises to resolve
-  const [tdTp, exams, semesterResults, yearResults] = await Promise.all([
+  const [tdTp, exams, semesterResults, yearResults, group] = await Promise.all([
     tdTpPromise,
     examsPromise,
     semesterResultsPromise,
     yearResultsPromise,
+    groupPromise,
   ]);
 
   // Destructure the results from the resolved promises
@@ -50,6 +54,9 @@ const PeriodTab = async ({ id }: any) => {
         <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
           Annual
         </Tab>
+        <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
+          Group
+        </Tab>
       </TabList>
       <TabPanels>
         <TabPanel>
@@ -59,6 +66,30 @@ const PeriodTab = async ({ id }: any) => {
           <SemesterTab result={Sem2Results} td={Sem2TdTp} exam={Sem2Exams} />
         </TabPanel>
         <TabPanel>{renderYearResultItem(yearResults)}</TabPanel>
+        <TabPanel>
+          {group && (
+            <div className="bg-gray-300 border-2 border-green-700 w-full max-w-3xl m-5 p-8 rounded-lg shadow-2xl">
+              {Object.entries(group).map(([semester, info]: any, index) => (
+                <div
+                  className={`flex flex-col gap-6 ${index > 0 ? "mt-6" : ""}`}
+                  key={semester}
+                >
+                  <h2 className="w-full rounded-lg p-3 text-center bg-green-500 text-white font-bold">
+                    {semester}
+                  </h2>
+                  <div className="flex flex-col bg-white rounded-lg p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                    <p className="mb-2">
+                      <span className="font-bold">Section:</span> {info.section}
+                    </p>
+                    <p className="mb-2">
+                      <span className="font-bold">Group:</span> {info.group}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </TabPanel>
       </TabPanels>
     </TabGroup>
   );

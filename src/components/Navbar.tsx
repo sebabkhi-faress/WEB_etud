@@ -41,7 +41,6 @@ const Navbar = () => {
 
   const menuItems = [
     { href: "/profile", label: "Profile", Icon: UserIcon },
-    { href: "/group", label: "Group", Icon: UserGroupIcon },
     { href: "/year", label: "Results", Icon: UserGroupIcon },
   ];
 
