@@ -22,5 +22,14 @@ Next, start the development server:
 npm run dev
 ```
 
-- Your application will be available at http://localhost:3000. Open this URL in your browser to see your project in action.
+## Run a Local Production Server
 
+Next, start the production server:
+
+```bash
+npm run build && npm start
+```
+
+this is useful to verify that the server is running properly before pushing to main repository
+
+- Your application will be available at http://localhost:3000. Open this URL in your browser to see your project in action.
