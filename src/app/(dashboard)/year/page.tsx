@@ -269,7 +269,7 @@ const PeriodTab = async ({ id }: any) => {
           Semester 2
         </Tab>
         <Tab className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-400 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
-          Annual Result
+          Annual
         </Tab>
       </TabList>
       <TabPanels>
@@ -290,13 +290,13 @@ const SemesterTab = ({ td, exam, result }: any) => {
     <TabGroup className="flex justify-center items-center gap-4 flex-col">
       <TabList className="flex gap-2">
         <Tab className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-400 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
-          TD/TP
+          Notes
         </Tab>
         <Tab className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-400 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
-          EXAMS
+          Exams
         </Tab>
         <Tab className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-400 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
-          RESULT
+          Total
         </Tab>
       </TabList>
       <TabPanels>
@@ -491,8 +491,8 @@ export default async function YearsPage() {
 const YearsTabs = ({ dias }: any) => {
   "use client";
   return (
-    <TabGroup className="flex gap-3 p-4 w-full min-h-screen">
-      <TabList className="flex flex-col gap-2 justify-start mb-4">
+    <TabGroup className="flex flex-col md:flex-row gap-3 p-4 w-full min-h-screen">
+      <TabList className="flex flex-row md:flex-col gap-2 justify-start mb-4 md:mb-0 overflow-x-auto md:overflow-x-visible">
         {dias.map((dia: any, index: any) => (
           <Tab
             key={index}
@@ -508,7 +508,7 @@ const YearsTabs = ({ dias }: any) => {
             key={index}
             className="flex flex-col gap-2 flex-1 justify-center items-center"
           >
-            <p className="text-center text-3xl font-bold text-blue-700 border-b-2 border-blue-700 pb-2">
+            <p className="text-center text-2xl md:text-3xl font-bold text-blue-700 border-b-2 border-blue-700 pb-2">
               {dia.niveauLibelleLongLt} - {dia.ofLlFiliere}
               {dia.ofLlSpecialite && " - " + dia.ofLlSpecialite}
             </p>
