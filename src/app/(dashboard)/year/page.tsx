@@ -64,7 +64,7 @@ const PeriodTab = async ({ id }: any) => {
   );
 };
 
-const SemesterTab = ({ td, exam, result }) => {
+const SemesterTab = ({ td, exam, result }: any) => {
   return (
     <TabGroup className="flex flex-col justify-center items-center gap-4">
       <TabList className="flex gap-2 overflow-x-auto">
@@ -81,7 +81,7 @@ const SemesterTab = ({ td, exam, result }) => {
       <TabPanels>
         <TabPanel>
           <div className="flex flex-col gap-2">
-            {td.map((item) => (
+            {td.map((item: any) => (
               <TdNoteItem key={item.id} item={item} />
             ))}
           </div>
@@ -95,7 +95,7 @@ const SemesterTab = ({ td, exam, result }) => {
   );
 };
 
-const TdNoteItem = ({ item }) => (
+const TdNoteItem = ({ item }: any) => (
   <div
     className={`text-gray-800 rounded-lg p-4 flex flex-col sm:flex-row justify-between items-center shadow-md transition duration-300 ease-in-out transform hover:scale-105 capitalize ${
       item.note >= 10
@@ -116,7 +116,7 @@ const TdNoteItem = ({ item }) => (
   </div>
 );
 
-const ExamNotes = ({ item }) => {
+const ExamNotes = ({ item }: any) => {
   return (
     <>
       <div className="mb-4">
@@ -124,7 +124,7 @@ const ExamNotes = ({ item }) => {
           Normal Session:
         </h3>
         <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 capitalize">
-          {item.normal.map((course) => (
+          {item.normal.map((course: any) => (
             <div
               className={`text-gray-800 rounded-lg p-4 shadow-md transition transform hover:scale-105 ${
                 course.noteExamen >= 10
@@ -147,7 +147,7 @@ const ExamNotes = ({ item }) => {
             Rattrappage Session:
           </h3>
           <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 capitalize">
-            {item.rattrappage.map((course) => (
+            {item.rattrappage.map((course: any) => (
               <div
                 className={`rounded-lg p-4 shadow-md transition transform hover:scale-105 ${
                   course.noteExamen >= 10
@@ -169,7 +169,7 @@ const ExamNotes = ({ item }) => {
   );
 };
 
-const renderYearResultItem = (result) => {
+const renderYearResultItem = (result: any) => {
   const { moyenne, typeDecisionLibelleFr, creditAcquis } = result[0];
   const averageClass = moyenne >= 10.0 ? "text-green-700" : "text-red-700";
   const ueBgClass = moyenne > 10 ? "bg-green-100" : "bg-red-100";
@@ -194,7 +194,7 @@ const renderYearResultItem = (result) => {
   );
 };
 
-const renderSemesterResultItem = (result, index) => {
+const renderSemesterResultItem = (result: any, index: any) => {
   const { moyenne, creditAcquis, bilanUes } = result;
   const moyenneClass = moyenne >= 10.0 ? "text-green-600" : "text-red-600";
 
@@ -214,9 +214,10 @@ const renderSemesterResultItem = (result, index) => {
         </p>
       </div>
       <div>
-        {bilanUes.map((ue, ueIndex) => {
+        {bilanUes.map((ue: any, ueIndex: any) => {
           const ueBgClass = ue.moyenne > 10 ? "bg-green-100" : "bg-red-100";
-          const ueAverageClass = ue.moyenne >= 10.0 ? "text-green-600" : "text-red-600";
+          const ueAverageClass =
+            ue.moyenne >= 10.0 ? "text-green-600" : "text-red-600";
 
           return (
             <div
@@ -224,7 +225,7 @@ const renderSemesterResultItem = (result, index) => {
               className={`mb-6 p-4 ${ueBgClass} border border-gray-900 rounded-lg capitalize`}
             >
               <h3 className="text-xl font-semibold text-gray-700 mb-2">
-              {ue.ueNatureLcFr}: {ue.ueLibelleFr}
+                {ue.ueNatureLcFr}: {ue.ueLibelleFr}
               </h3>
               <p className="text-lg text-gray-700 mb-2">
                 <span className="font-semibold">Average: </span>
@@ -233,9 +234,11 @@ const renderSemesterResultItem = (result, index) => {
                 </span>
               </p>
               <div className="ml-4">
-                {ue.bilanMcs.map((mc, mcIndex) => {
+                {ue.bilanMcs.map((mc: any, mcIndex: any) => {
                   const mcAverageClass =
-                    mc.moyenneGenerale >= 10.0 ? "text-green-600" : "text-red-600";
+                    mc.moyenneGenerale >= 10.0
+                      ? "text-green-600"
+                      : "text-red-600";
 
                   return (
                     <div
@@ -243,7 +246,8 @@ const renderSemesterResultItem = (result, index) => {
                       className="mb-4 p-3 border border-gray-900 rounded-lg"
                     >
                       <h4 className="text-lg font-semibold text-gray-700 mb-1">
-                        Module: <span className={mcAverageClass}>{mc.mcLibelleFr}</span>
+                        Module:{" "}
+                        <span className={mcAverageClass}>{mc.mcLibelleFr}</span>
                       </h4>
                       <p className="text-gray-700">
                         <span className="font-semibold">Module Average: </span>
@@ -268,12 +272,12 @@ export default async function YearsPage() {
   return <>{dias ? <YearsTabs dias={dias} /> : "Test"}</>;
 }
 
-const YearsTabs = ({ dias }) => {
+const YearsTabs = ({ dias }: any) => {
   "use client";
   return (
     <TabGroup className="flex flex-col md:flex-row gap-3 p-4 w-full min-h-screen">
       <TabList className="flex flex-row md:flex-col gap-2 justify-start mb-4 md:mb-0 overflow-x-auto md:overflow-x-visible">
-        {dias.map((dia, index) => (
+        {dias.map((dia: any, index: any) => (
           <Tab
             key={index}
             className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700"
@@ -283,7 +287,7 @@ const YearsTabs = ({ dias }) => {
         ))}
       </TabList>
       <TabPanels className="flex flex-1 rounded-lg px-4 py-2 border border-green-600">
-        {dias.map((dia, index) => (
+        {dias.map((dia: any, index: any) => (
           <TabPanel
             key={index}
             className="flex flex-col gap-2 flex-1 justify-center items-center"
