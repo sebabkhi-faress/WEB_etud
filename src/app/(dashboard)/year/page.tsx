@@ -58,7 +58,7 @@ const PeriodTab = async ({ id }: any) => {
         <TabPanel>
           <SemesterTab result={Sem2Results} td={Sem2TdTp} exam={Sem2Exams} />
         </TabPanel>
-        <TabPanel>{yearResults && renderYearResultItem(yearResults)}</TabPanel>
+        <TabPanel>{renderYearResultItem(yearResults)}</TabPanel>
       </TabPanels>
     </TabGroup>
   );
@@ -81,12 +81,15 @@ const SemesterTab = ({ td, exam, result }: any) => {
       <TabPanels>
         <TabPanel>
           <div className="flex flex-col gap-2">
-            {td &&
-              td.map((item: any) => <TdNoteItem key={item.id} item={item} />)}
+            {td.map((item: any) => (
+              <TdNoteItem key={item.id} item={item} />
+            ))}
           </div>
         </TabPanel>
-        <TabPanel>{exam && <ExamNotes item={exam} />}</TabPanel>
-        <TabPanel>{result && renderSemesterResultItem(result, 1)}</TabPanel>
+        <TabPanel>
+          <ExamNotes item={exam} />
+        </TabPanel>
+        <TabPanel>{renderSemesterResultItem(result, 1)}</TabPanel>
       </TabPanels>
     </TabGroup>
   );
@@ -95,14 +98,14 @@ const SemesterTab = ({ td, exam, result }: any) => {
 const TdNoteItem = ({ item }: { item: any }) => (
   <div
     className={`text-gray-800 rounded-lg p-4 flex flex-col sm:flex-row justify-between items-center shadow-md transition duration-300 ease-in-out transform hover:scale-105 capitalize ${
-      item.note >= 10 ? "bg-green-200" : "bg-red-200"
+      item.note >= 10
+        ? "bg-green-200 text-green-900"
+        : "bg-red-200 text-red-900"
     }`}
     key={item.id}
-    style={{ marginBottom: "0.5rem" }} // Reduced bottom margin to 0.5rem
+    style={{ marginBottom: "0.5rem"}} // Reduced bottom margin to 0.5rem
   >
-    <p className="font-semibold" style={{ marginRight: "1rem" }}>
-      {item.rattachementMcMcLibelleFr}
-    </p>
+    <p className="font-semibold" style={{"marginRight": "1rem" }}>{item.rattachementMcMcLibelleFr}</p>
     <div className="flex gap-4 mt-2 sm:mt-0">
       <p className="font-bold text-lg">
         {item.note != null ? item.note : "Empty"}
@@ -116,12 +119,14 @@ const ExamNotes = ({ item }: any) => {
   return (
     <>
       <div className="mb-4">
-        <h3 className="text-xl font-bold text-gray-700">Normal Session</h3>
+        <h3 className="text-xl font-bold text-gray-700">Normal Session:</h3>
         <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 capitalize">
           {item.normal.map((course: any) => (
             <div
               className={`text-gray-800 rounded-lg p-4 shadow-md transition transform hover:scale-105 ${
-                course.noteExamen >= 10 ? "bg-green-200" : "bg-red-200"
+                course.noteExamen >= 10
+                  ? "bg-green-200 text-green-900"
+                  : "bg-red-200 text-red-900"
               }`}
               key={course.id}
             >
@@ -136,7 +141,7 @@ const ExamNotes = ({ item }: any) => {
       {item.rattrappage.length > 0 && (
         <div>
           <h3 className="text-xl font-bold text-gray-700">
-            Rattrappage Session
+            Rattrappage Session:
           </h3>
           <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 capitalize">
             {item.rattrappage.map((course: any) => (
@@ -164,9 +169,10 @@ const ExamNotes = ({ item }: any) => {
 const renderYearResultItem = (result: any) => {
   const { moyenne, typeDecisionLibelleFr, creditAcquis } = result[0];
   const averageClass = moyenne >= 10.0 ? "text-green-700" : "text-red-700";
+  const ueBgClass = moyenne > 10 ? "bg-green-100" : "bg-red-100";
 
   return (
-    <div className="bg-white border border-gray-300 w-full max-w-3xl mx-auto my-6 p-6 rounded-lg shadow-lg capitalize">
+    <div className={`${ueBgClass} border border-gray-300 w-full max-w-3xl mx-auto my-6 p-6 rounded-lg shadow-lg capitalize`}>
       <p className="text-lg text-gray-700 mb-2 font-semibold">
         <span>Average: </span>
         <span className={averageClass}>{moyenne}</span>
@@ -204,34 +210,31 @@ const renderSemesterResultItem = (result: any, index: any) => {
       </div>
       <div>
         {bilanUes.map((ue: any, ueIndex: any) => {
-          const ueAverageClass =
-            ue.moyenne >= 10.0 ? "text-green-600" : "text-red-600";
+          const ueBgClass = ue.moyenne > 10 ? "bg-green-100" : "bg-red-100";
+          const ueAverageClass = ue.moyenne >= 10.0 ? "text-green-600" : "text-red-600";
+
           return (
             <div
               key={ueIndex}
-              className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg capitalize"
+              className={`mb-6 p-4 ${ueBgClass} border border-blue-100 rounded-lg capitalize`}
             >
-              <h3 className="text-xl font-semibold text-blue-700 mb-2">
+              <h3 className="text-xl font-semibold text-gray-700 mb-2">
                 UE: {ue.ueLibelleFr}
               </h3>
               <p className="text-lg text-gray-700 mb-2">
                 <span className="font-semibold">Average: </span>
-                <span className={`${ueAverageClass} font-bold`}>
-                  {ue.moyenne}
-                </span>
+                <span className={`${ueAverageClass} font-bold`}>{ue.moyenne}</span>
               </p>
               <div className="ml-4">
                 {ue.bilanMcs.map((mc: any, mcIndex: any) => {
-                  const mcAverageClass =
-                    mc.moyenneGenerale >= 10.0
-                      ? "text-green-600"
-                      : "text-red-600";
+                  const mcAverageClass = mc.moyenneGenerale >= 10.0 ? "text-green-600" : "text-red-600";
+
                   return (
                     <div
                       key={mcIndex}
                       className="mb-4 p-3 border border-blue-200 rounded-lg"
                     >
-                      <h4 className="text-lg font-semibold text-blue-700 mb-1">
+                      <h4 className="text-lg font-semibold text-gray-700 mb-1">
                         Module: {mc.mcLibelleFr}
                       </h4>
                       <p className="text-gray-700">
@@ -254,7 +257,7 @@ const renderSemesterResultItem = (result: any, index: any) => {
 
 export default async function YearsPage() {
   const dias = await getDias();
-  return <>{dias ? <YearsTabs dias={dias} /> : "hello"}</>;
+  return <>{dias ? <YearsTabs dias={dias} /> : "Test"}</>;
 }
 
 const YearsTabs = ({ dias }: any) => {
@@ -264,9 +267,8 @@ const YearsTabs = ({ dias }: any) => {
       <TabList className="flex flex-row md:flex-col gap-2 justify-start mb-4 md:mb-0 overflow-x-auto md:overflow-x-visible">
         {dias.map((dia: any, index: any) => (
           <Tab
-            disabled={dia.anneeAcademiqueId > 19}
             key={index}
-            className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-400 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700 disabled:text-white disabled:bg-black"
+            className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700"
           >
             {dia.anneeAcademiqueCode}
           </Tab>
@@ -283,7 +285,7 @@ const YearsTabs = ({ dias }: any) => {
               {dia.ofLlSpecialite && " - " + dia.ofLlSpecialite}
             </p>
             <div className="flex flex-1">
-              {dia.anneeAcademiqueId <= 19 && <PeriodTab id={dia.id} />}
+              <PeriodTab id={dia.id} />
             </div>
           </TabPanel>
         ))}
