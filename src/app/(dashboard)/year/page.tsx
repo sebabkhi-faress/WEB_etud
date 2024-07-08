@@ -41,14 +41,14 @@ const PeriodTab = async ({ id }: any) => {
   return (
     <TabGroup className="flex justify-start items-center gap-4 flex-col">
       <TabList className="flex gap-2">
-        <Tab className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-400 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
+        <Tab className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
           Semester 1
         </Tab>
-        <Tab className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-400 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
+        <Tab className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
           Semester 2
         </Tab>
-        <Tab className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-400 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
-          Annual Result
+        <Tab className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
+          Annual
         </Tab>
       </TabList>
       <TabPanels>
@@ -68,14 +68,14 @@ const SemesterTab = ({ td, exam, result }: any) => {
   return (
     <TabGroup className="flex justify-center items-center gap-4 flex-col">
       <TabList className="flex gap-2">
-        <Tab className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-400 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
-          TD/TP
+        <Tab className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
+          Notes
         </Tab>
-        <Tab className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-400 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
-          EXAMS
+        <Tab className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
+          Exams
         </Tab>
-        <Tab className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-400 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
-          RESULT
+        <Tab className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
+          Total
         </Tab>
       </TabList>
       <TabPanels>
@@ -94,20 +94,20 @@ const SemesterTab = ({ td, exam, result }: any) => {
 
 const TdNoteItem = ({ item }: { item: any }) => (
   <div
-    className={`rounded-lg p-4 flex flex-col sm:flex-row justify-between items-center shadow-md transition duration-300 ease-in-out transform hover:scale-105 ${
-      item.note >= 10
-        ? "bg-green-200 text-green-700"
-        : "bg-red-200 text-red-700"
+    className={`text-gray-800 rounded-lg p-4 flex flex-col sm:flex-row justify-between items-center shadow-md transition duration-300 ease-in-out transform hover:scale-105 capitalize ${
+      item.note >= 10 ? "bg-green-200" : "bg-red-200"
     }`}
     key={item.id}
     style={{ marginBottom: "0.5rem" }} // Reduced bottom margin to 0.5rem
   >
-    <p className="font-semibold">{item.rattachementMcMcLibelleFr}</p>
+    <p className="font-semibold" style={{ marginRight: "1rem" }}>
+      {item.rattachementMcMcLibelleFr}
+    </p>
     <div className="flex gap-4 mt-2 sm:mt-0">
       <p className="font-bold text-lg">
         {item.note != null ? item.note : "Empty"}
       </p>
-      <p className="font-bold text-lg text-gray-700">{item.apCode}</p>
+      <p className="font-bold text-lg">{item.apCode}</p>
     </div>
   </div>
 );
@@ -117,13 +117,11 @@ const ExamNotes = ({ item }: any) => {
     <>
       <div className="mb-4">
         <h3 className="text-xl font-bold text-gray-700">Normal Session</h3>
-        <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 capitalize">
           {item.normal.map((course: any) => (
             <div
-              className={`rounded-lg p-4 shadow-md transition transform hover:scale-105 ${
-                course.noteExamen >= 10
-                  ? "bg-green-200 text-green-700"
-                  : "bg-red-200 text-red-700"
+              className={`text-gray-800 rounded-lg p-4 shadow-md transition transform hover:scale-105 ${
+                course.noteExamen >= 10 ? "bg-green-200" : "bg-red-200"
               }`}
               key={course.id}
             >
@@ -140,7 +138,7 @@ const ExamNotes = ({ item }: any) => {
           <h3 className="text-xl font-bold text-gray-700">
             Rattrappage Session
           </h3>
-          <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 capitalize">
             {item.rattrappage.map((course: any) => (
               <div
                 className={`rounded-lg p-4 shadow-md transition transform hover:scale-105 ${
@@ -152,7 +150,7 @@ const ExamNotes = ({ item }: any) => {
               >
                 <h4 className="font-semibold">{course.mcLibelleFr}</h4>
                 <p className="font-bold text-lg">
-                  {course.noteExamen != null ? course.noteExamen : "Null"}
+                  {course.noteExamen != null ? course.noteExamen : "Empty"}
                 </p>
               </div>
             ))}
@@ -168,10 +166,9 @@ const renderYearResultItem = (result: any) => {
   const averageClass = moyenne >= 10.0 ? "text-green-700" : "text-red-700";
 
   return (
-    <div className="bg-white border border-gray-300 w-full max-w-3xl mx-auto my-6 p-6 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">Annual Result</h2>
+    <div className="bg-white border border-gray-300 w-full max-w-3xl mx-auto my-6 p-6 rounded-lg shadow-lg capitalize">
       <p className="text-lg text-gray-700 mb-2 font-semibold">
-        <span>Average Annual: </span>
+        <span>Average: </span>
         <span className={averageClass}>{moyenne}</span>
       </p>
       <p className="text-lg text-gray-700 mb-2 font-semibold">
@@ -189,7 +186,6 @@ const renderYearResultItem = (result: any) => {
 const renderSemesterResultItem = (result: any, index: any) => {
   const { moyenne, creditAcquis, bilanUes } = result;
   const moyenneClass = moyenne >= 10.0 ? "text-green-600" : "text-red-600";
-  const semesterLabel = "Semester 1";
 
   return (
     <div
@@ -197,14 +193,11 @@ const renderSemesterResultItem = (result: any, index: any) => {
       key={index}
     >
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">
-          {semesterLabel} Results
-        </h2>
-        <p className="text-lg text-gray-600 font-semibold">
+        <p className="text-lg text-gray-600 font-bold">
           <span>Average: </span>
           <span className={moyenneClass}>{moyenne}</span>
         </p>
-        <p className="text-lg text-gray-600 font-semibold">
+        <p className="text-lg text-gray-600 font-bold">
           <span>Credits: </span>
           <span className={moyenneClass}>{creditAcquis}</span>
         </p>
@@ -216,7 +209,7 @@ const renderSemesterResultItem = (result: any, index: any) => {
           return (
             <div
               key={ueIndex}
-              className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg"
+              className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg capitalize"
             >
               <h3 className="text-xl font-semibold text-blue-700 mb-2">
                 UE: {ue.ueLibelleFr}
@@ -267,8 +260,8 @@ export default async function YearsPage() {
 const YearsTabs = ({ dias }: any) => {
   "use client";
   return (
-    <TabGroup className="flex gap-3 p-4 w-full min-h-screen">
-      <TabList className="flex flex-col gap-2 justify-start mb-4">
+    <TabGroup className="flex flex-col md:flex-row gap-3 p-4 w-full min-h-screen">
+      <TabList className="flex flex-row md:flex-col gap-2 justify-start mb-4 md:mb-0 overflow-x-auto md:overflow-x-visible">
         {dias.map((dia: any, index: any) => (
           <Tab
             disabled={dia.anneeAcademiqueId > 19}
@@ -279,13 +272,13 @@ const YearsTabs = ({ dias }: any) => {
           </Tab>
         ))}
       </TabList>
-      <TabPanels className="flex flex-1 rounded-lg px-4 py-2 border border-green-300">
+      <TabPanels className="flex flex-1 rounded-lg px-4 py-2 border border-green-600">
         {dias.map((dia: any, index: any) => (
           <TabPanel
             key={index}
             className="flex flex-col gap-2 flex-1 justify-center items-center"
           >
-            <p className="text-center text-3xl font-bold text-blue-700 border-b-2 border-blue-700 pb-2">
+            <p className="text-center text-2xl md:text-3xl font-bold text-gray-800 border-b-2 border-green-600 pb-2 capitalize">
               {dia.niveauLibelleLongLt} - {dia.ofLlFiliere}
               {dia.ofLlSpecialite && " - " + dia.ofLlSpecialite}
             </p>
