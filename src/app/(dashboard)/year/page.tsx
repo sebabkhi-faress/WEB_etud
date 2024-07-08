@@ -7,7 +7,7 @@ import {
 } from "@/api";
 
 export const metadata = {
-  title: "WebEtu - Notes",
+  title: "WebEtu - Results",
 };
 
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
@@ -279,8 +279,9 @@ const YearsTabs = ({ dias }: any) => {
       <TabList className="flex flex-row md:flex-col gap-2 justify-start mb-4 md:mb-0 overflow-x-auto md:overflow-x-visible">
         {dias.map((dia: any, index: any) => (
           <Tab
+            disabled={dia.anneeAcademiqueId > 19}
             key={index}
-            className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700"
+            className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700 disabled:bg-slate-400 disabled:text-white"
           >
             {dia.anneeAcademiqueCode}
           </Tab>
@@ -297,7 +298,7 @@ const YearsTabs = ({ dias }: any) => {
               {dia.ofLlSpecialite && " - " + dia.ofLlSpecialite}
             </p>
             <div className="flex flex-1">
-              <PeriodTab id={dia.id} />
+              {dia.anneeAcademiqueId <= 19 && <PeriodTab id={dia.id} />}
             </div>
           </TabPanel>
         ))}

@@ -15,6 +15,14 @@ const getCookieData = () => {
 export const getDias = async () => {
   const { token, user, uuid } = getCookieData();
 
+  const cacheKey = `dias-${user}`;
+  const cachedData = cache.get(cacheKey);
+
+  if (cachedData) {
+    logger.info("dias cache hit", user, "/notes");
+    return cachedData;
+  }
+
   try {
     const response = await axios.get(
       `https://progres.mesrs.dz/api/infos/bac/${uuid}/dias`,
@@ -26,6 +34,7 @@ export const getDias = async () => {
       }
     );
     logger.info("dias fetched successfully", user, "/years");
+    cache.set(cacheKey, response.data);
     return response.data;
   } catch (error: any) {
     logger.error(`Error - ${error}`, user, "/years");
