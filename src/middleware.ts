@@ -38,7 +38,7 @@ export async function middleware(req: NextRequest) {
 
 // Define the paths where the middleware will apply
 export const config = {
-  matcher: ["/", "/profile", "/group", "/exams", "/notes", "/transcripts", "/semesters-transcripts"],
+  matcher: ["/", "/profile", "/group", "/exams", "/notes", "/transcripts"],
 };
 
 const getDias = async () => {
