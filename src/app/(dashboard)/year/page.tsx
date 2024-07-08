@@ -32,7 +32,6 @@ const getDias = async () => {
       }
     );
     logger.info("dias fetched successfully", user, "/years");
-
     return response.data;
   } catch (error: any) {
     logger.error(`Error - ${error}`, user, "/years");
@@ -88,7 +87,7 @@ const getTdTp = async (id: number) => {
     return data;
   } catch (error: any) {
     logger.error("Error fetching TP and Td Notes", user, "/notes");
-    throw new Error("Error fetching TP and Td Notes");
+    return { Sem1TdTp: null, Sem2TdTp: null };
   }
 };
 
@@ -150,7 +149,7 @@ const getExamsNotes = async (id: number) => {
     return data;
   } catch (error: any) {
     logger.error("Error fetching exam notes", user, "/exams");
-    throw Error("Error fetching Exam Notes");
+    return { Sem1Exams: null, Sem2Exams: null };
   }
 };
 
@@ -199,7 +198,7 @@ const getSemesterAcademicResults = async (id: number) => {
     return data;
   } catch (error) {
     logger.error("Error Fetching Semesters Academic Results", user, "/years");
-    throw new Error("Error Fetching Semesters Academic Results");
+    return { Sem1Results: null, Sem2Results: null };
   }
 };
 
@@ -229,7 +228,7 @@ const getYearAcademicResults = async (id: number) => {
     return data;
   } catch (error) {
     logger.error("Error Fetching Year Academic Results", user, "/years");
-    throw new Error("Error Fetching Year Academic Results");
+    return null;
   }
 };
 
@@ -279,7 +278,7 @@ const PeriodTab = async ({ id }: any) => {
         <TabPanel>
           <SemesterTab result={Sem2Results} td={Sem2TdTp} exam={Sem2Exams} />
         </TabPanel>
-        <TabPanel>{renderYearResultItem(yearResults)}</TabPanel>
+        <TabPanel>{yearResults && renderYearResultItem(yearResults)}</TabPanel>
       </TabPanels>
     </TabGroup>
   );
@@ -302,15 +301,12 @@ const SemesterTab = ({ td, exam, result }: any) => {
       <TabPanels>
         <TabPanel>
           <div className="flex flex-col gap-2">
-            {td.map((item: any) => (
-              <TdNoteItem key={item.id} item={item} />
-            ))}
+            {td &&
+              td.map((item: any) => <TdNoteItem key={item.id} item={item} />)}
           </div>
         </TabPanel>
-        <TabPanel>
-          <ExamNotes item={exam} />
-        </TabPanel>
-        <TabPanel>{renderSemesterResultItem(result, 1)}</TabPanel>
+        <TabPanel>{exam && <ExamNotes item={exam} />}</TabPanel>
+        <TabPanel>{result && renderSemesterResultItem(result, 1)}</TabPanel>
       </TabPanels>
     </TabGroup>
   );
@@ -495,8 +491,9 @@ const YearsTabs = ({ dias }: any) => {
       <TabList className="flex flex-col gap-2 justify-start mb-4">
         {dias.map((dia: any, index: any) => (
           <Tab
+            disabled={dia.anneeAcademiqueId > 19}
             key={index}
-            className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-400 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700"
+            className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-400 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700 disabled:text-white disabled:bg-black"
           >
             {dia.anneeAcademiqueCode}
           </Tab>
@@ -513,7 +510,7 @@ const YearsTabs = ({ dias }: any) => {
               {dia.ofLlSpecialite && " - " + dia.ofLlSpecialite}
             </p>
             <div className="flex flex-1">
-              <PeriodTab id={dia.id} />
+              {dia.anneeAcademiqueId <= 19 && <PeriodTab id={dia.id} />}
             </div>
           </TabPanel>
         ))}
