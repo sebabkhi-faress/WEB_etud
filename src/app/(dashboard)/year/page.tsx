@@ -66,9 +66,9 @@ const PeriodTab = async ({ id }: any) => {
           <SemesterTab result={Sem2Results} td={Sem2TdTp} exam={Sem2Exams} />
         </TabPanel>
         <TabPanel>{renderYearResultItem(yearResults)}</TabPanel>
-        <TabPanel>
+        <TabPanel className="flex gap-2 overflow-x-auto">
           {group && (
-            <div className="bg-gray-300 border-2 border-green-700 w-full max-w-3xl m-5 p-8 rounded-lg shadow-2xl">
+            <div className="bg-gray-300 border border-green-700 w-full max-w-3xl m-5 p-8 rounded-lg shadow-lg text-center">
               {Object.entries(group).map(([semester, info]: any, index) => (
                 <div
                   className={`flex flex-col gap-6 ${index > 0 ? "mt-6" : ""}`}
@@ -151,8 +151,8 @@ const ExamNotes = ({ item }: any) => {
   return (
     <>
       <div className="mb-4">
-        <h3 className="text-lg md:text-xl font-bold text-gray-700">
-          Normal Session:
+        <h3 className="text-lg md:text-xl font-bold text-gray-700 text-center m-1 mb-4">
+          Normal Session
         </h3>
         <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 capitalize">
           {item.normal.map((course: any) => (
@@ -174,8 +174,8 @@ const ExamNotes = ({ item }: any) => {
       </div>
       {item.rattrappage.length > 0 && (
         <div>
-          <h3 className="text-lg md:text-xl font-bold text-gray-700">
-            Rattrappage Session:
+          <h3 className="text-lg md:text-xl font-bold text-gray-700 text-center m-1 mb-4">
+            Rattrappage Session
           </h3>
           <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 capitalize">
             {item.rattrappage.map((course: any) => (
@@ -231,7 +231,7 @@ const renderSemesterResultItem = (result: any, index: any) => {
 
   return (
     <div
-      className="bg-white border border-gray-300 w-full max-w-3xl mx-auto my-6 p-6 rounded-lg shadow-lg"
+      className="bg-white border border-gray-900 w-full max-w-3xl mx-auto my-6 p-6 rounded-lg shadow-lg"
       key={index}
     >
       <div className="mb-6">
@@ -304,31 +304,31 @@ export default async function YearsPage() {
 }
 
 const YearsTabs = ({ dias }: any) => {
-  "use client";
   return (
     <TabGroup className="flex flex-col md:flex-row gap-3 p-4 w-full min-h-screen">
       <TabList className="flex flex-row md:flex-col gap-2 justify-start mb-4 md:mb-0 overflow-x-auto md:overflow-x-visible">
         {dias.map((dia: any, index: any) => (
           <Tab
-            disabled={dia.anneeAcademiqueId > 19}
             key={index}
             className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700 disabled:bg-slate-400 disabled:text-white"
+            style={{ minWidth: 'fit-content' }} // Ensure each tab fits its content width
+            disabled={dia.anneeAcademiqueId > 19}
           >
             {dia.anneeAcademiqueCode}
           </Tab>
         ))}
       </TabList>
-      <TabPanels className="flex flex-1 rounded-lg px-4 py-2 border border-green-600">
+      <TabPanels className="flex flex-1 flex-col">
         {dias.map((dia: any, index: any) => (
           <TabPanel
             key={index}
-            className="flex flex-col gap-2 flex-1 justify-center items-center"
+            className="flex flex-col gap-2 justify-center items-center p-4"
           >
-            <p className="text-center text-2xl md:text-3xl font-bold text-gray-800 border-b-2 border-green-600 pb-2 capitalize">
+            <p className="text-center text-xl md:text-2xl font-bold text-gray-800 border-b-2 border-green-600 pb-2 capitalize">
               {dia.niveauLibelleLongLt} - {dia.ofLlFiliere}
               {dia.ofLlSpecialite && " - " + dia.ofLlSpecialite}
             </p>
-            <div className="flex flex-1">
+            <div className="flex flex-col items-center">
               {dia.anneeAcademiqueId <= 19 && <PeriodTab id={dia.id} />}
             </div>
           </TabPanel>

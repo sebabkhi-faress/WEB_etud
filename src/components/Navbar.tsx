@@ -41,7 +41,7 @@ const Navbar = () => {
 
   const menuItems = [
     { href: "/profile", label: "Profile", Icon: UserIcon },
-    { href: "/year", label: "Results", Icon: UserGroupIcon },
+    { href: "/year", label: "Panel", Icon: UserGroupIcon },
   ];
 
   const renderLink = ({ href, label, Icon }: any) => (
