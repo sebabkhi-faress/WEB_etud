@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import Cookies from "js-cookie";
-import { useRouter, usePathname } from "next/navigation";
+import { useEffect, useState } from "react"
+import Link from "next/link"
+import Image from "next/image"
+import Cookies from "js-cookie"
+import { useRouter, usePathname } from "next/navigation"
 
 import {
   UserIcon,
@@ -12,37 +12,37 @@ import {
   PencilIcon,
   UserGroupIcon,
   ExclamationTriangleIcon,
-} from "@heroicons/react/24/solid";
+} from "@heroicons/react/24/solid"
 
 const Navbar = () => {
-  const pathname = usePathname();
-  const [user, setUser] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname()
+  const [user, setUser] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
-    const token = Cookies.get("token");
+    const token = Cookies.get("token")
     if (token) {
-      setUser(true);
+      setUser(true)
     }
-  }, []);
+  }, [])
 
-  const router = useRouter();
+  const router = useRouter()
 
   const signOut = () => {
-    Cookies.remove("token");
-    Cookies.remove("uuid");
-    Cookies.remove("EtabId");
-    Cookies.remove("user");
-    window.location.reload();
-  };
+    Cookies.remove("token")
+    Cookies.remove("uuid")
+    Cookies.remove("EtabId")
+    Cookies.remove("user")
+    window.location.reload()
+  }
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const closeMenu = () => setIsMenuOpen(false);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
+  const closeMenu = () => setIsMenuOpen(false)
 
   const menuItems = [
     { href: "/profile", label: "Profile", Icon: UserIcon },
     { href: "/year", label: "Panel", Icon: UserGroupIcon },
-  ];
+  ]
 
   const renderLink = ({ href, label, Icon }: any) => (
     <Link
@@ -60,7 +60,7 @@ const Navbar = () => {
       <Icon className="h-6 w-6" />
       {label}
     </Link>
-  );
+  )
 
   return (
     <nav className="bg-green-600 text-white py-4 px-4 md:px-12 flex items-center justify-between relative z-50">
@@ -105,8 +105,8 @@ const Navbar = () => {
             <button
               className="flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
               onClick={() => {
-                signOut();
-                closeMenu();
+                signOut()
+                closeMenu()
               }}
               style={{ padding: "0.5rem 1rem" }} // Add padding here
             >
@@ -134,7 +134,7 @@ const Navbar = () => {
         )}
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

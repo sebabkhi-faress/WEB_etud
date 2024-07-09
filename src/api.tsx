@@ -1,26 +1,26 @@
-import { cookies } from "next/headers";
-import axios from "axios";
-import logger from "@/utils";
-import cache from "@/cache";
+import { cookies } from "next/headers"
+import axios from "axios"
+import logger from "@/utils"
+import cache from "@/cache"
 
 const getCookieData = () => {
-  const cookieStore = cookies();
-  const token = cookieStore.get("token")?.value;
-  const user = cookieStore.get("user")?.value;
-  const uuid = cookieStore.get("uuid")?.value;
+  const cookieStore = cookies()
+  const token = cookieStore.get("token")?.value
+  const user = cookieStore.get("user")?.value
+  const uuid = cookieStore.get("uuid")?.value
 
-  return { token, user, uuid };
-};
+  return { token, user, uuid }
+}
 
 export const getDias = async () => {
-  const { token, user, uuid } = getCookieData();
+  const { token, user, uuid } = getCookieData()
 
-  const cacheKey = `dias-${user}`;
-  const cachedData = cache.get(cacheKey);
+  const cacheKey = `dias-${user}`
+  const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Dias Cache Hit", user, "/notes");
-    return cachedData;
+    logger.info("Dias Cache Hit", user, "/notes")
+    return cachedData
   }
 
   try {
@@ -31,46 +31,46 @@ export const getDias = async () => {
           Authorization: token,
         },
         timeout: 10000,
-      }
-    );
-    logger.info("Dias Fetched Successfully", user, "/year");
-    cache.set(cacheKey, response.data);
-    return response.data;
+      },
+    )
+    logger.info("Dias Fetched Successfully", user, "/year")
+    cache.set(cacheKey, response.data)
+    return response.data
   } catch (error: any) {
-    logger.error(`Error - ${error}`, user, "/year");
-    return null;
+    logger.error(`Error - ${error}`, user, "/year")
+    return null
   }
-};
+}
 
 export const getTdTp = async (id: number) => {
-  const { token, user } = getCookieData();
+  const { token, user } = getCookieData()
 
-  const cacheKey = `notes-${id}-${user}`;
-  const cachedData = cache.get(cacheKey);
+  const cacheKey = `notes-${id}-${user}`
+  const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Notes Cache Hit", user, "/notes");
-    return cachedData;
+    logger.info("Notes Cache Hit", user, "/notes")
+    return cachedData
   }
 
   const parseData = (data: any) => {
-    const Sem1TdTp = [] as any[];
-    const Sem2TdTp = [] as any[];
+    const Sem1TdTp = [] as any[]
+    const Sem2TdTp = [] as any[]
 
-    let sem1 = data[0].llPeriode;
-    let sem2 = data.find((item: any) => item.llPeriode !== sem1).llPeriode;
+    let sem1 = data[0].llPeriode
+    let sem2 = data.find((item: any) => item.llPeriode !== sem1).llPeriode
     if (sem1 > sem2) {
-      sem1 = sem2;
+      sem1 = sem2
     }
     data.forEach((item: any) => {
       if (item.llPeriode === sem1) {
-        Sem1TdTp.push(item);
+        Sem1TdTp.push(item)
       } else {
-        Sem2TdTp.push(item);
+        Sem2TdTp.push(item)
       }
-    });
-    return { Sem1TdTp, Sem2TdTp };
-  };
+    })
+    return { Sem1TdTp, Sem2TdTp }
+  }
 
   try {
     const res = await axios.get(
@@ -80,60 +80,60 @@ export const getTdTp = async (id: number) => {
           Authorization: token,
         },
         timeout: 10000,
-      }
-    );
+      },
+    )
 
-    logger.info("Notes Fetched Successfully", user, "/notes");
-    const data = parseData(res.data);
-    cache.set(cacheKey, data);
+    logger.info("Notes Fetched Successfully", user, "/notes")
+    const data = parseData(res.data)
+    cache.set(cacheKey, data)
 
-    return data;
+    return data
   } catch (error: any) {
-    logger.error("Error Fetching Tp And Td Notes", user, "/notes");
-    return { Sem1TdTp: null, Sem2TdTp: null };
+    logger.error("Error Fetching Tp And Td Notes", user, "/notes")
+    return { Sem1TdTp: null, Sem2TdTp: null }
   }
-};
+}
 
 export const getExamsNotes = async (id: number) => {
-  const { token, user } = getCookieData();
+  const { token, user } = getCookieData()
 
-  const cacheKey = `exams-${id}-${user}`;
-  const cachedData = cache.get(cacheKey);
+  const cacheKey = `exams-${id}-${user}`
+  const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Exams Cache Hit", user, "/exams");
-    return cachedData;
+    logger.info("Exams Cache Hit", user, "/exams")
+    return cachedData
   }
 
   const parseData = (data: any) => {
     const Sem1Exams = {
       normal: [],
       rattrappage: [],
-    } as any;
+    } as any
     const Sem2Exams = {
       normal: [],
       rattrappage: [],
-    } as any;
+    } as any
 
-    const periods = data.map((course: any) => course.idPeriode);
-    const firstSemester = Math.min(...periods);
+    const periods = data.map((course: any) => course.idPeriode)
+    const firstSemester = Math.min(...periods)
 
     data.forEach((course: any) => {
-      const period = course.idPeriode;
-      const session = course.planningSessionIntitule;
-      const sem1 = period == firstSemester;
+      const period = course.idPeriode
+      const session = course.planningSessionIntitule
+      const sem1 = period == firstSemester
 
       if (session === "session_1") {
-        sem1 ? Sem1Exams.normal.push(course) : Sem2Exams.normal.push(course);
+        sem1 ? Sem1Exams.normal.push(course) : Sem2Exams.normal.push(course)
       } else {
         sem1
           ? Sem1Exams.rattrappage.push(course)
-          : Sem2Exams.rattrappage.push(course);
+          : Sem2Exams.rattrappage.push(course)
       }
-    });
+    })
 
-    return { Sem1Exams, Sem2Exams };
-  };
+    return { Sem1Exams, Sem2Exams }
+  }
 
   try {
     const res = await axios.get(
@@ -143,41 +143,41 @@ export const getExamsNotes = async (id: number) => {
           Authorization: token,
         },
         timeout: 10000,
-      }
-    );
+      },
+    )
 
-    logger.info("Exam Notes fetched successfully", user, "/exams");
-    const data = parseData(res.data);
-    cache.set(cacheKey, data);
-    return data;
+    logger.info("Exam Notes fetched successfully", user, "/exams")
+    const data = parseData(res.data)
+    cache.set(cacheKey, data)
+    return data
   } catch (error: any) {
-    logger.error("Error Fetching Exam Notes", user, "/exams");
-    return { Sem1Exams: null, Sem2Exams: null };
+    logger.error("Error Fetching Exam Notes", user, "/exams")
+    return { Sem1Exams: null, Sem2Exams: null }
   }
-};
+}
 
 export const getSemesterAcademicResults = async (id: number) => {
-  const { token, user } = getCookieData();
-  const cacheKey = `semesters-transcripts-${id}-${user}`;
-  const cachedData = cache.get(cacheKey);
+  const { token, user } = getCookieData()
+  const cacheKey = `semesters-transcripts-${id}-${user}`
+  const cachedData = cache.get(cacheKey)
 
   const parseData = (data: any) => {
-    let sem1 = data[0].periodeLibelleFr < data[1].periodeLibelleFr ? 0 : 1;
-    let Sem1Results;
-    let Sem2Results;
+    let sem1 = data[0].periodeLibelleFr < data[1].periodeLibelleFr ? 0 : 1
+    let Sem1Results
+    let Sem2Results
     if (sem1 === 0) {
-      Sem1Results = data[0];
-      Sem2Results = data[1];
+      Sem1Results = data[0]
+      Sem2Results = data[1]
     } else {
-      Sem1Results = data[1];
-      Sem2Results = data[0];
+      Sem1Results = data[1]
+      Sem2Results = data[0]
     }
-    return { Sem1Results, Sem2Results };
-  };
+    return { Sem1Results, Sem2Results }
+  }
 
   if (cachedData) {
-    logger.info("Semesters Transcripts Cache Hit", user, "/transcripts");
-    return cachedData;
+    logger.info("Semesters Transcripts Cache Hit", user, "/transcripts")
+    return cachedData
   }
 
   try {
@@ -186,33 +186,33 @@ export const getSemesterAcademicResults = async (id: number) => {
       {
         headers: { Authorization: token },
         timeout: 10000,
-      }
-    );
+      },
+    )
 
     logger.info(
       "Fetched Semesters Academic Results Successfully",
       user,
-      "/year"
-    );
-    const data = parseData(res.data);
+      "/year",
+    )
+    const data = parseData(res.data)
 
-    cache.set(cacheKey, data);
+    cache.set(cacheKey, data)
 
-    return data;
+    return data
   } catch (error) {
-    logger.error("Error Fetching Semesters Academic Results", user, "/year");
-    return { Sem1Results: null, Sem2Results: null };
+    logger.error("Error Fetching Semesters Academic Results", user, "/year")
+    return { Sem1Results: null, Sem2Results: null }
   }
-};
+}
 
 export const getYearAcademicResults = async (id: number) => {
-  const { token, user } = getCookieData();
-  const cacheKey = `year-transcript-${id}-${user}`;
-  const cachedData = cache.get(cacheKey);
+  const { token, user } = getCookieData()
+  const cacheKey = `year-transcript-${id}-${user}`
+  const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Year Transcript Cache Hit", user, "/transcripts");
-    return cachedData;
+    logger.info("Year Transcript Cache Hit", user, "/transcripts")
+    return cachedData
   }
 
   try {
@@ -221,43 +221,43 @@ export const getYearAcademicResults = async (id: number) => {
       {
         headers: { Authorization: token },
         timeout: 10000,
-      }
-    );
+      },
+    )
 
-    const data = res.data;
-    logger.info("Fetched Year Academic Results Successfully", user, "/year");
-    cache.set(cacheKey, data);
+    const data = res.data
+    logger.info("Fetched Year Academic Results Successfully", user, "/year")
+    cache.set(cacheKey, data)
 
-    return data;
+    return data
   } catch (error) {
-    logger.error("Error Fetching Year Academic Results", user, "/year");
-    return null;
+    logger.error("Error Fetching Year Academic Results", user, "/year")
+    return null
   }
-};
+}
 
 export const getGroup = async (id: number) => {
-  const { user, token } = getCookieData();
+  const { user, token } = getCookieData()
 
-  const cacheKey = `group-${id}-${user}`;
-  const cachedData = cache.get(cacheKey);
+  const cacheKey = `group-${id}-${user}`
+  const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Group Cache Hit", user, "/group");
-    return cachedData;
+    logger.info("Group Cache Hit", user, "/group")
+    return cachedData
   }
 
   const parseData = (data: any) =>
     data
       .sort((a: any, b: any) => a.periodeId - b.periodeId)
       .reduce((semesterInfo: any, item: any) => {
-        if (!item.nomSection) return semesterInfo;
-        const semesterKey = item.periodeLibelleLongLt;
-        const group = item.nomGroupePedagogique;
+        if (!item.nomSection) return semesterInfo
+        const semesterKey = item.periodeLibelleLongLt
+        const group = item.nomGroupePedagogique
         const section =
-          item.nomSection === "Section" ? "Section 1" : item.nomSection;
-        semesterInfo[semesterKey] = { group, section };
-        return semesterInfo;
-      }, {});
+          item.nomSection === "Section" ? "Section 1" : item.nomSection
+        semesterInfo[semesterKey] = { group, section }
+        return semesterInfo
+      }, {})
 
   try {
     const res = await axios.get(
@@ -267,16 +267,16 @@ export const getGroup = async (id: number) => {
           Authorization: token,
         },
         timeout: 10000,
-      }
-    );
+      },
+    )
 
-    const data = parseData(res.data);
+    const data = parseData(res.data)
 
-    logger.info("Fetched Group And Section Data Successfully", user, "/group");
-    cache.set(cacheKey, data);
-    return data;
+    logger.info("Fetched Group And Section Data Successfully", user, "/group")
+    cache.set(cacheKey, data)
+    return data
   } catch (error) {
-    logger.error("Error Fetching Group And Section Info", user, "/group");
-    return null;
+    logger.error("Error Fetching Group And Section Info", user, "/group")
+    return null
   }
-};
+}

@@ -5,13 +5,13 @@ import {
   getSemesterAcademicResults,
   getYearAcademicResults,
   getGroup,
-} from "@/api";
+} from "@/api"
 
 export const metadata = {
   title: "WebEtu - Results",
-};
+}
 
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react"
 
 const PeriodTab = async ({ id }: any) => {
   const [
@@ -26,7 +26,7 @@ const PeriodTab = async ({ id }: any) => {
     getSemesterAcademicResults(id),
     getYearAcademicResults(id),
     getGroup(id),
-  ];
+  ]
 
   // Wait for all promises to resolve
   const [tdTp, exams, semesterResults, yearResults, group] = await Promise.all([
@@ -35,12 +35,12 @@ const PeriodTab = async ({ id }: any) => {
     semesterResultsPromise,
     yearResultsPromise,
     groupPromise,
-  ]);
+  ])
 
   // Destructure the results from the resolved promises
-  const { Sem1TdTp, Sem2TdTp } = tdTp as any;
-  const { Sem1Exams, Sem2Exams } = exams as any;
-  const { Sem1Results, Sem2Results } = semesterResults as any;
+  const { Sem1TdTp, Sem2TdTp } = tdTp as any
+  const { Sem1Exams, Sem2Exams } = exams as any
+  const { Sem1Results, Sem2Results } = semesterResults as any
 
   return (
     <TabGroup className="flex flex-col justify-start items-center gap-4">
@@ -92,8 +92,8 @@ const PeriodTab = async ({ id }: any) => {
         </TabPanel>
       </TabPanels>
     </TabGroup>
-  );
-};
+  )
+}
 
 const SemesterTab = ({ td, exam, result }: any) => {
   return (
@@ -123,8 +123,8 @@ const SemesterTab = ({ td, exam, result }: any) => {
         <TabPanel>{renderSemesterResultItem(result, 1)}</TabPanel>
       </TabPanels>
     </TabGroup>
-  );
-};
+  )
+}
 
 const TdNoteItem = ({ item }: any) => (
   <div
@@ -145,7 +145,7 @@ const TdNoteItem = ({ item }: any) => (
       <p className="font-bold text-lg">{item.apCode}</p>
     </div>
   </div>
-);
+)
 
 const ExamNotes = ({ item }: any) => {
   return (
@@ -197,13 +197,13 @@ const ExamNotes = ({ item }: any) => {
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
 const renderYearResultItem = (result: any) => {
-  const { moyenne, typeDecisionLibelleFr, creditAcquis } = result[0];
-  const averageClass = moyenne >= 10.0 ? "text-green-700" : "text-red-700";
-  const ueBgClass = moyenne > 10 ? "bg-green-100" : "bg-red-100";
+  const { moyenne, typeDecisionLibelleFr, creditAcquis } = result[0]
+  const averageClass = moyenne >= 10.0 ? "text-green-700" : "text-red-700"
+  const ueBgClass = moyenne > 10 ? "bg-green-100" : "bg-red-100"
 
   return (
     <div
@@ -222,12 +222,12 @@ const renderYearResultItem = (result: any) => {
         <span className={averageClass}>{creditAcquis}</span>
       </p>
     </div>
-  );
-};
+  )
+}
 
 const renderSemesterResultItem = (result: any, index: any) => {
-  const { moyenne, creditAcquis, bilanUes } = result;
-  const moyenneClass = moyenne >= 10.0 ? "text-green-600" : "text-red-600";
+  const { moyenne, creditAcquis, bilanUes } = result
+  const moyenneClass = moyenne >= 10.0 ? "text-green-600" : "text-red-600"
 
   return (
     <div
@@ -246,9 +246,9 @@ const renderSemesterResultItem = (result: any, index: any) => {
       </div>
       <div>
         {bilanUes.map((ue: any, ueIndex: any) => {
-          const ueBgClass = ue.moyenne > 10 ? "bg-green-100" : "bg-red-100";
+          const ueBgClass = ue.moyenne > 10 ? "bg-green-100" : "bg-red-100"
           const ueAverageClass =
-            ue.moyenne >= 10.0 ? "text-green-600" : "text-red-600";
+            ue.moyenne >= 10.0 ? "text-green-600" : "text-red-600"
 
           return (
             <div
@@ -269,7 +269,7 @@ const renderSemesterResultItem = (result: any, index: any) => {
                   const mcAverageClass =
                     mc.moyenneGenerale >= 10.0
                       ? "text-green-600"
-                      : "text-red-600";
+                      : "text-red-600"
 
                   return (
                     <div
@@ -287,20 +287,20 @@ const renderSemesterResultItem = (result: any, index: any) => {
                         </span>
                       </p>
                     </div>
-                  );
+                  )
                 })}
               </div>
             </div>
-          );
+          )
         })}
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default async function YearsPage() {
-  const dias = await getDias();
-  return <>{dias ? <YearsTabs dias={dias} /> : "Test"}</>;
+  const dias = await getDias()
+  return <>{dias ? <YearsTabs dias={dias} /> : "Test"}</>
 }
 
 const YearsTabs = ({ dias }: any) => {
@@ -311,7 +311,7 @@ const YearsTabs = ({ dias }: any) => {
           <Tab
             key={index}
             className="rounded-lg px-4 py-2 text-lg md:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700 disabled:bg-slate-400 disabled:text-white"
-            style={{ minWidth: 'fit-content' }} // Ensure each tab fits its content width
+            style={{ minWidth: "fit-content" }} // Ensure each tab fits its content width
             disabled={dia.anneeAcademiqueId > 19}
           >
             {dia.anneeAcademiqueCode}
@@ -335,5 +335,5 @@ const YearsTabs = ({ dias }: any) => {
         ))}
       </TabPanels>
     </TabGroup>
-  );
-};
+  )
+}

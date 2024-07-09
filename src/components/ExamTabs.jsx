@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react"
 
 export default function ExamTabs({ data }) {
   return (
@@ -23,7 +23,9 @@ export default function ExamTabs({ data }) {
           {Object.keys(data).map((semester) => (
             <TabPanel key={semester} className="p-4 rounded-lg">
               <div className="mb-4">
-                <h3 className="text-xl font-bold text-gray-700">Normal Session</h3>
+                <h3 className="text-xl font-bold text-gray-700">
+                  Normal Session
+                </h3>
                 <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {data[semester].normal.map((course) => (
                     <div
@@ -35,14 +37,18 @@ export default function ExamTabs({ data }) {
                       key={course.id}
                     >
                       <h4 className="font-semibold">{course.mcLibelleFr}</h4>
-                      <p className="font-bold text-lg">{course.noteExamen != null ? course.noteExamen : "Null"}</p>
+                      <p className="font-bold text-lg">
+                        {course.noteExamen != null ? course.noteExamen : "Null"}
+                      </p>
                     </div>
                   ))}
                 </div>
               </div>
               {data[semester].rattrappage.length > 0 && (
                 <div>
-                  <h3 className="text-xl font-bold text-gray-700">Rattrappage Session</h3>
+                  <h3 className="text-xl font-bold text-gray-700">
+                    Rattrappage Session
+                  </h3>
                   <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {data[semester].rattrappage.map((course) => (
                       <div
@@ -54,7 +60,11 @@ export default function ExamTabs({ data }) {
                         key={course.id}
                       >
                         <h4 className="font-semibold">{course.mcLibelleFr}</h4>
-                        <p className="font-bold text-lg">{course.noteExamen != null ? course.noteExamen : "Null"}</p>
+                        <p className="font-bold text-lg">
+                          {course.noteExamen != null
+                            ? course.noteExamen
+                            : "Null"}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -65,5 +75,5 @@ export default function ExamTabs({ data }) {
         </TabPanels>
       </TabGroup>
     </div>
-  );
+  )
 }

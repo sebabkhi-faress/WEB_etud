@@ -1,25 +1,25 @@
-import { cookies } from "next/headers";
-import axios from "axios";
-import logger from "@/utils";
-import cache from "@/cache";
-import Image from "next/image";
+import { cookies } from "next/headers"
+import axios from "axios"
+import logger from "@/utils"
+import cache from "@/cache"
+import Image from "next/image"
 
 export const metadata = {
   title: "WebEtu - Profile",
-};
+}
 
 const getProfileData = async () => {
-  const cookieStore = cookies();
-  const token = cookieStore.get("token")?.value;
-  const user = cookieStore.get("user")?.value;
-  const uuid = cookieStore.get("uuid")?.value;
+  const cookieStore = cookies()
+  const token = cookieStore.get("token")?.value
+  const user = cookieStore.get("user")?.value
+  const uuid = cookieStore.get("uuid")?.value
 
-  const cacheKey = `profile-${user}`;
-  const cachedData = cache.get(cacheKey);
+  const cacheKey = `profile-${user}`
+  const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("profile cache hit", user, "/profile");
-    return cachedData;
+    logger.info("profile cache hit", user, "/profile")
+    return cachedData
   }
 
   const parseData = (responseData: any) => {
@@ -38,8 +38,8 @@ const getProfileData = async () => {
       niveauLibelleLongLt: responseData.niveauLibelleLongLt,
       ofLlDomaine: responseData.ofLlDomaine,
       ofLlSpecialite: responseData.ofLlSpecialite,
-    };
-  };
+    }
+  }
 
   try {
     const response = await axios.get(
@@ -49,31 +49,31 @@ const getProfileData = async () => {
           Authorization: token,
         },
         timeout: 10000, // Timeout set to 10 seconds
-      }
-    );
+      },
+    )
 
-    logger.info("Profile data fetched successfully", user, "/profile");
-    const data = parseData(response.data[0]);
-    cache.set(cacheKey, data);
+    logger.info("Profile data fetched successfully", user, "/profile")
+    const data = parseData(response.data[0])
+    cache.set(cacheKey, data)
 
-    return data;
+    return data
   } catch (error) {
-    logger.error("Error fetching profile data", user, "/profile");
-    throw new Error("Error fetching profile data");
+    logger.error("Error fetching profile data", user, "/profile")
+    throw new Error("Error fetching profile data")
   }
-};
+}
 const getImage = async () => {
-  const cookieStore = cookies();
-  const token = cookieStore.get("token")?.value;
-  const uuid = cookieStore.get("uuid")?.value;
-  const user = cookieStore.get("user")?.value;
+  const cookieStore = cookies()
+  const token = cookieStore.get("token")?.value
+  const uuid = cookieStore.get("uuid")?.value
+  const user = cookieStore.get("user")?.value
 
-  const cacheKey = `image-${user}`;
-  const cachedData = cache.get(cacheKey);
+  const cacheKey = `image-${user}`
+  const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Image cache hit", user, "/profile");
-    return cachedData;
+    logger.info("Image cache hit", user, "/profile")
+    return cachedData
   }
 
   try {
@@ -84,30 +84,30 @@ const getImage = async () => {
           Authorization: token,
         },
         timeout: 10000, // Timeout set to 10 seconds
-      }
-    );
+      },
+    )
 
-    logger.info("Image fetched successfully", user, "/profile");
-    cache.set(cacheKey, image.data);
-    return image.data;
+    logger.info("Image fetched successfully", user, "/profile")
+    cache.set(cacheKey, image.data)
+    return image.data
   } catch (error) {
-    logger.error("Error fetching image", user, "/profile");
-    return null;
+    logger.error("Error fetching image", user, "/profile")
+    return null
   }
-};
+}
 
 const getLogo = async () => {
-  const cookieStore = cookies();
-  const token = cookieStore.get("token")?.value;
-  const user = cookieStore.get("user")?.value;
-  const EtabId = cookieStore.get("EtabId")?.value;
+  const cookieStore = cookies()
+  const token = cookieStore.get("token")?.value
+  const user = cookieStore.get("user")?.value
+  const EtabId = cookieStore.get("EtabId")?.value
 
-  const cacheKey = `logo-${EtabId}`;
-  const cachedData = cache.get(cacheKey);
+  const cacheKey = `logo-${EtabId}`
+  const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("logo cache hit", user, "/profile");
-    return cachedData;
+    logger.info("logo cache hit", user, "/profile")
+    return cachedData
   }
 
   try {
@@ -118,32 +118,32 @@ const getLogo = async () => {
           Authorization: token,
         },
         timeout: 10000, // Timeout set to 10 seconds
-      }
-    );
+      },
+    )
 
-    logger.info("Logo fetched successfully", user, "/profile");
-    cache.set(cacheKey, logo.data);
-    return logo.data;
+    logger.info("Logo fetched successfully", user, "/profile")
+    cache.set(cacheKey, logo.data)
+    return logo.data
   } catch (error) {
-    logger.error("Error fetching logo", user, "/profile");
-    return null;
+    logger.error("Error fetching logo", user, "/profile")
+    return null
   }
-};
+}
 
 const Layout = async () => {
   let [profileData, image, logo] = await Promise.all([
     getProfileData() as any,
     getImage(),
     getLogo(),
-  ]);
+  ])
 
   const formattedDate = new Date(
-    profileData.individuDateNaissance
+    profileData.individuDateNaissance,
   ).toLocaleDateString("en-GB", {
     year: "numeric",
     month: "long",
     day: "numeric",
-  });
+  })
 
   return (
     <div className="bg-gray-300 border-2 border-green-700 w-full h-max max-w-3xl m-5 p-8 flex flex-col gap-8 rounded-lg shadow-2xl box-border">
@@ -212,7 +212,7 @@ const Layout = async () => {
         </li>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

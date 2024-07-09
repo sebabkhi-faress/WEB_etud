@@ -1,5 +1,5 @@
-"use client";
+"use client"
 
 export default function ProfileError({ error }: { error: string }) {
-  return <>an error occured</>;
+  return <>an error occured</>
 }

@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { Toaster } from "react-hot-toast";
-import Navbar from "@/components/Navbar";
+import type { Metadata } from "next"
+import "./globals.css"
+import { Toaster } from "react-hot-toast"
+import Navbar from "@/components/Navbar"
 
 export const metadata: Metadata = {
   title: "WebEtu",
@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   icons: {
     icon: "/logo-white.png",
   },
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
@@ -26,5 +26,5 @@ export default function RootLayout({
         <Toaster />
       </body>
     </html>
-  );
+  )
 }

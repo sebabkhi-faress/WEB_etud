@@ -1,29 +1,29 @@
-"use client";
+"use client"
 
-import Image from "next/image";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import Cookies from "js-cookie";
-import axios from "axios";
+import Image from "next/image"
+import { useState } from "react"
+import toast from "react-hot-toast"
+import Cookies from "js-cookie"
+import axios from "axios"
 
 export default function LoginPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const Login = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    setLoading(true);
+    setLoading(true)
     try {
-      await signIn(username.trim(), password.trim());
+      await signIn(username.trim(), password.trim())
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const signIn = async (username: string, password: string) => {
-    const toastId = toast.loading("Logging In..");
+    const toastId = toast.loading("Logging In..")
 
     try {
       const response = await axios.post(
@@ -34,35 +34,35 @@ export default function LoginPage() {
         },
         {
           timeout: 10000, // Timeout set to 10 seconds
-        }
-      );
+        },
+      )
 
-      Cookies.set("token", response.data.token);
-      Cookies.set("uuid", response.data.uuid);
-      Cookies.set("EtabId", response.data.etablissementId);
-      Cookies.set("user", response.data.userName);
+      Cookies.set("token", response.data.token)
+      Cookies.set("uuid", response.data.uuid)
+      Cookies.set("EtabId", response.data.etablissementId)
+      Cookies.set("user", response.data.userName)
 
-      window.location.reload();
+      window.location.reload()
 
-      toast.success("Logged In Successfully", { id: toastId });
+      toast.success("Logged In Successfully", { id: toastId })
     } catch (err: any) {
       if (axios.isCancel(err)) {
-        toast.error("Request Timed Out", { duration: 3000, id: toastId });
+        toast.error("Request Timed Out", { duration: 3000, id: toastId })
       } else if (err.response && err.response.status == 403) {
-        toast.error("Invalid Credentials", { duration: 3000, id: toastId });
+        toast.error("Invalid Credentials", { duration: 3000, id: toastId })
       } else if (err.message.includes("Network Error")) {
         toast.error("Please Check Your Internet Connection", {
           duration: 3000,
           id: toastId,
-        });
+        })
       } else {
         toast.error("Error From Progres Server", {
           duration: 3000,
           id: toastId,
-        });
+        })
       }
     }
-  };
+  }
 
   return (
     <div className="bg-gray-50 p-4 sm:p-6 md:p-8 rounded-lg shadow-md border border-green-600 w-full max-w-xs sm:max-w-lg md:max-w-xl text-center">
@@ -120,5 +120,5 @@ export default function LoginPage() {
         </button>
       </form>
     </div>
-  );
+  )
 }
