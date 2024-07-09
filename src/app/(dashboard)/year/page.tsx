@@ -305,8 +305,8 @@ export default async function YearsPage() {
 
 const YearsTabs = ({ dias }: any) => {
   return (
-    <TabGroup className="flex flex-col md:flex-row gap-3 p-4 w-full min-h-screen">
-      <TabList className="flex flex-row md:flex-col gap-2 justify-start mb-4 md:mb-0 overflow-x-auto md:overflow-x-visible">
+    <TabGroup className="flex flex-col md:flex-row p-4 w-full min-h-screen">
+      <TabList className="flex flex-row md:flex-col gap-2 justify-start md:mb-0 overflow-x-auto md:overflow-x-visible">
         {dias.map((dia: any, index: any) => (
           <Tab
             key={index}
@@ -322,7 +322,7 @@ const YearsTabs = ({ dias }: any) => {
         {dias.map((dia: any, index: any) => (
           <TabPanel
             key={index}
-            className="flex flex-col gap-2 justify-center items-center p-4"
+            className="flex flex-col gap-4 justify-center items-center p-4"
           >
             <p className="text-center text-xl md:text-2xl font-bold text-gray-800 border-b-2 border-green-600 pb-2 capitalize">
               {dia.niveauLibelleLongLt} - {dia.ofLlFiliere}
