@@ -19,7 +19,7 @@ export const getDias = async () => {
   const cachedData = cache.get(cacheKey);
 
   if (cachedData) {
-    logger.info("dias cache hit", user, "/notes");
+    logger.info("Dias Cache Hit", user, "/notes");
     return cachedData;
   }
 
@@ -30,14 +30,14 @@ export const getDias = async () => {
         headers: {
           Authorization: token,
         },
-        timeout: 100000,
+        timeout: 10000,
       }
     );
-    logger.info("dias fetched successfully", user, "/years");
+    logger.info("Dias Fetched Successfully", user, "/year");
     cache.set(cacheKey, response.data);
     return response.data;
   } catch (error: any) {
-    logger.error(`Error - ${error}`, user, "/years");
+    logger.error(`Error - ${error}`, user, "/year");
     return null;
   }
 };
@@ -49,7 +49,7 @@ export const getTdTp = async (id: number) => {
   const cachedData = cache.get(cacheKey);
 
   if (cachedData) {
-    logger.info("notes cache hit", user, "/notes");
+    logger.info("Notes Cache Hit", user, "/notes");
     return cachedData;
   }
 
@@ -83,13 +83,13 @@ export const getTdTp = async (id: number) => {
       }
     );
 
-    logger.info("Notes fetched successfully", user, "/notes");
+    logger.info("Notes Fetched Successfully", user, "/notes");
     const data = parseData(res.data);
     cache.set(cacheKey, data);
 
     return data;
   } catch (error: any) {
-    logger.error("Error fetching TP and Td Notes", user, "/notes");
+    logger.error("Error Fetching Tp And Td Notes", user, "/notes");
     return { Sem1TdTp: null, Sem2TdTp: null };
   }
 };
@@ -101,7 +101,7 @@ export const getExamsNotes = async (id: number) => {
   const cachedData = cache.get(cacheKey);
 
   if (cachedData) {
-    logger.info("exams cache hit", user, "/exams");
+    logger.info("Exams Cache Hit", user, "/exams");
     return cachedData;
   }
 
@@ -151,7 +151,7 @@ export const getExamsNotes = async (id: number) => {
     cache.set(cacheKey, data);
     return data;
   } catch (error: any) {
-    logger.error("Error fetching exam notes", user, "/exams");
+    logger.error("Error Fetching Exam Notes", user, "/exams");
     return { Sem1Exams: null, Sem2Exams: null };
   }
 };
@@ -192,7 +192,7 @@ export const getSemesterAcademicResults = async (id: number) => {
     logger.info(
       "Fetched Semesters Academic Results Successfully",
       user,
-      "/years"
+      "/year"
     );
     const data = parseData(res.data);
 
@@ -200,7 +200,7 @@ export const getSemesterAcademicResults = async (id: number) => {
 
     return data;
   } catch (error) {
-    logger.error("Error Fetching Semesters Academic Results", user, "/years");
+    logger.error("Error Fetching Semesters Academic Results", user, "/year");
     return { Sem1Results: null, Sem2Results: null };
   }
 };
@@ -225,12 +225,12 @@ export const getYearAcademicResults = async (id: number) => {
     );
 
     const data = res.data;
-    logger.info("Fetched Year Academic Results Successfully", user, "/years");
+    logger.info("Fetched Year Academic Results Successfully", user, "/year");
     cache.set(cacheKey, data);
 
     return data;
   } catch (error) {
-    logger.error("Error Fetching Year Academic Results", user, "/years");
+    logger.error("Error Fetching Year Academic Results", user, "/year");
     return null;
   }
 };
@@ -242,7 +242,7 @@ export const getGroup = async (id: number) => {
   const cachedData = cache.get(cacheKey);
 
   if (cachedData) {
-    logger.info("group cache hit", user, "/group");
+    logger.info("Group Cache Hit", user, "/group");
     return cachedData;
   }
 
@@ -272,11 +272,11 @@ export const getGroup = async (id: number) => {
 
     const data = parseData(res.data);
 
-    logger.info("fetched group and section data successfully", user, "/group");
+    logger.info("Fetched Group And Section Data Successfully", user, "/group");
     cache.set(cacheKey, data);
     return data;
   } catch (error) {
-    logger.error("Error fetching group and section info", user, "/group");
+    logger.error("Error Fetching Group And Section Info", user, "/group");
     return null;
   }
 };

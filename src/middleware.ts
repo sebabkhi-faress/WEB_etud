@@ -7,6 +7,7 @@ axiosRetry(axios, {
   retries: 3,
   retryDelay: axiosRetry.exponentialDelay,
 });
+
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("token");
   const url = req.nextUrl;
