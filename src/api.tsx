@@ -2,20 +2,22 @@ import { cookies } from "next/headers"
 import axios from "axios"
 import logger from "@/utils"
 import cache from "@/cache"
+import { createHash } from 'crypto';
 
 const getCookieData = () => {
   const cookieStore = cookies()
   const token = cookieStore.get("token")?.value
   const user = cookieStore.get("user")?.value
   const uuid = cookieStore.get("uuid")?.value
+  const tokenHash = createHash('md5').update(token).digest('hex')
 
-  return { token, user, uuid }
+  return { token, user, uuid, tokenHash }
 }
 
 export const getDias = async () => {
-  const { token, user, uuid } = getCookieData()
+  const { token, user, uuid, tokenHash } = getCookieData()
 
-  const cacheKey = `dias-${user}`
+  const cacheKey = `dias-${tokenHash}`
   const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
@@ -43,9 +45,9 @@ export const getDias = async () => {
 }
 
 export const getTdTp = async (id: number) => {
-  const { token, user } = getCookieData()
+  const { token, user, uuid, tokenHash } = getCookieData()
 
-  const cacheKey = `notes-${id}-${user}`
+  const cacheKey = `notes-${id}-${tokenHash}`
   const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
@@ -95,9 +97,9 @@ export const getTdTp = async (id: number) => {
 }
 
 export const getExamsNotes = async (id: number) => {
-  const { token, user } = getCookieData()
+  const { token, user, uuid, tokenHash } = getCookieData()
 
-  const cacheKey = `exams-${id}-${user}`
+  const cacheKey = `exams-${id}-${tokenHash}`
   const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
@@ -157,8 +159,9 @@ export const getExamsNotes = async (id: number) => {
 }
 
 export const getSemesterAcademicResults = async (id: number) => {
-  const { token, user } = getCookieData()
-  const cacheKey = `semesters-transcripts-${id}-${user}`
+  const { token, user, uuid, tokenHash } = getCookieData()
+
+  const cacheKey = `semesters-transcripts-${id}-${tokenHash}`
   const cachedData = cache.get(cacheKey)
 
   const parseData = (data: any) => {
@@ -206,8 +209,9 @@ export const getSemesterAcademicResults = async (id: number) => {
 }
 
 export const getYearAcademicResults = async (id: number) => {
-  const { token, user } = getCookieData()
-  const cacheKey = `year-transcript-${id}-${user}`
+  const { token, user, uuid, tokenHash } = getCookieData()
+
+  const cacheKey = `year-transcript-${id}-${tokenHash}`
   const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
@@ -236,9 +240,9 @@ export const getYearAcademicResults = async (id: number) => {
 }
 
 export const getGroup = async (id: number) => {
-  const { user, token } = getCookieData()
+  const { token, user, uuid, tokenHash } = getCookieData()
 
-  const cacheKey = `group-${id}-${user}`
+  const cacheKey = `group-${id}-${tokenHash}`
   const cachedData = cache.get(cacheKey)
 
   if (cachedData) {

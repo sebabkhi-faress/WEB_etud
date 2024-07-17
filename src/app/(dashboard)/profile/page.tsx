@@ -3,6 +3,7 @@ import axios from "axios"
 import logger from "@/utils"
 import cache from "@/cache"
 import Image from "next/image"
+import { createHash } from 'crypto';
 
 export const metadata = {
   title: "WebEtu - Profile",
@@ -13,8 +14,9 @@ const getProfileData = async () => {
   const token = cookieStore.get("token")?.value
   const user = cookieStore.get("user")?.value
   const uuid = cookieStore.get("uuid")?.value
+  const tokenHash = createHash('md5').update(token).digest('hex')
 
-  const cacheKey = `profile-${user}`
+  const cacheKey = `profile-${tokenHash}`
   const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
@@ -67,8 +69,9 @@ const getImage = async () => {
   const token = cookieStore.get("token")?.value
   const uuid = cookieStore.get("uuid")?.value
   const user = cookieStore.get("user")?.value
+  const tokenHash = createHash('md5').update(token).digest('hex')
 
-  const cacheKey = `image-${user}`
+  const cacheKey = `image-${tokenHash}`
   const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
