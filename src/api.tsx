@@ -2,16 +2,131 @@ import { cookies } from "next/headers"
 import axios from "axios"
 import logger from "@/utils"
 import cache from "@/cache"
-import { createHash } from 'crypto';
+import { createHash } from "crypto"
 
 const getCookieData = () => {
   const cookieStore = cookies()
-  const token = cookieStore.get("token")?.value
+  const token = cookieStore.get("token")?.value || ""
   const user = cookieStore.get("user")?.value
   const uuid = cookieStore.get("uuid")?.value
-  const tokenHash = createHash('md5').update(token).digest('hex')
+  const EtabId = cookieStore.get("EtabId")?.value
+  const tokenHash = createHash("md5").update(token).digest("hex")
 
-  return { token, user, uuid, tokenHash }
+  return { token, user, uuid, tokenHash, EtabId }
+}
+
+export const getProfileData = async () => {
+  const { token, user, uuid, tokenHash } = getCookieData()
+
+  const cacheKey = `profile-${tokenHash}`
+  const cachedData = cache.get(cacheKey)
+
+  if (cachedData) {
+    logger.info("profile cache hit", user, "/profile")
+    return cachedData
+  }
+
+  const parseData = (responseData: any) => {
+    return {
+      individuId: responseData.individuId,
+      nin: responseData.nin,
+      individuNomArabe: responseData.individuNomArabe,
+      individuNomLatin: responseData.individuNomLatin,
+      individuPrenomArabe: responseData.individuPrenomArabe,
+      individuPrenomLatin: responseData.individuPrenomLatin,
+      individuDateNaissance: responseData.individuDateNaissance,
+      individuLieuNaissance: responseData.individuLieuNaissance,
+      individuLieuNaissanceArabe: responseData.individuLieuNaissanceArabe,
+      llEtablissementArabe: responseData.llEtablissementArabe,
+      llEtablissementLatin: responseData.llEtablissementLatin,
+      niveauLibelleLongLt: responseData.niveauLibelleLongLt,
+      ofLlDomaine: responseData.ofLlDomaine,
+      ofLlSpecialite: responseData.ofLlSpecialite,
+    }
+  }
+
+  try {
+    const response = await axios.get(
+      `https://progres.mesrs.dz/api/infos/bac/${uuid}/dias`,
+      {
+        headers: {
+          Authorization: token,
+        },
+        timeout: 10000, // Timeout set to 10 seconds
+      },
+    )
+
+    logger.info("Profile data fetched successfully", user, "/profile")
+    const data = parseData(response.data[0])
+    cache.set(cacheKey, data)
+
+    return data
+  } catch (error) {
+    logger.error("Error fetching profile data", user, "/profile")
+    throw new Error("Error fetching profile data")
+  }
+}
+
+export const getImage = async () => {
+  const { token, user, uuid, tokenHash } = getCookieData()
+
+  const cacheKey = `image-${tokenHash}`
+  const cachedData = cache.get(cacheKey)
+
+  if (cachedData) {
+    logger.info("Image cache hit", user, "/profile")
+    return cachedData
+  }
+
+  try {
+    const image = await axios.get(
+      `https://progres.mesrs.dz/api/infos/image/${uuid}`,
+      {
+        headers: {
+          Authorization: token,
+        },
+        timeout: 10000, // Timeout set to 10 seconds
+      },
+    )
+
+    logger.info("Image fetched successfully", user, "/profile")
+    cache.set(cacheKey, image.data)
+    return image.data
+  } catch (error) {
+    logger.error("Error fetching image", user, "/profile")
+    return null
+  }
+}
+
+export const getLogo = async () => {
+  const { token, user, EtabId } = getCookieData()
+
+  const cacheKey = `logo-${EtabId}`
+  const cachedData = cache.get(cacheKey)
+
+  if (cachedData) {
+    logger.info("logo cache hit", user, "/profile")
+    return cachedData
+  }
+
+  try {
+    const logo = await axios.get(
+      `https://progres.mesrs.dz/api/infos/logoEtablissement/${EtabId}`,
+      {
+        headers: {
+          Authorization: token,
+        },
+        timeout: 10000, // Timeout set to 10 seconds
+      },
+    )
+
+    logger.info("Logo fetched successfully", user, "/profile")
+    cache.set(cacheKey, logo.data)
+    return logo.data
+  } catch (error) {
+    logger.error("Error fetching logo", user, "/profile")
+    return null
+  }
 }
 
 export const getDias = async () => {
