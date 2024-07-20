@@ -1,12 +1,5 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
-import axios from "axios"
-import axiosRetry from "axios-retry"
-
-axiosRetry(axios, {
-  retries: 3,
-  retryDelay: axiosRetry.exponentialDelay,
-})
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("token")
