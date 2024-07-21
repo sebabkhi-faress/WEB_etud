@@ -8,7 +8,7 @@ import {
 } from "@/api"
 
 export const metadata = {
-  title: "WebEtu - Results",
+  title: "WebEtu - Panel",
 }
 
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react"

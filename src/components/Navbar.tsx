@@ -10,8 +10,6 @@ import {
   UserIcon,
   ArrowLeftStartOnRectangleIcon,
   PencilIcon,
-  UserGroupIcon,
-  ExclamationTriangleIcon,
 } from "@heroicons/react/24/solid"
 
 const Navbar = () => {
@@ -41,7 +39,7 @@ const Navbar = () => {
 
   const menuItems = [
     { href: "/profile", label: "Profile", Icon: UserIcon },
-    { href: "/year", label: "Panel", Icon: UserGroupIcon },
+    { href: "/panel", label: "Panel", Icon: PencilIcon },
   ]
 
   const renderLink = ({ href, label, Icon }: any) => (
