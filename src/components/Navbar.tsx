@@ -42,23 +42,26 @@ const Navbar = () => {
     { href: "/panel", label: "Panel", Icon: PencilIcon },
   ]
 
-  const renderLink = ({ href, label, Icon }: any) => (
-    <Link
-      prefetch
-      key={href}
-      href={href}
-      className={`flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
-        pathname === href
-          ? "bg-white text-green-600 scale-105"
-          : "hover:bg-white hover:text-green-600"
-      }`}
-      onClick={closeMenu}
-      style={{ padding: "0.5rem 1rem" }} // Add padding here
-    >
-      <Icon className="h-6 w-6" />
-      {label}
-    </Link>
-  )
+  const renderLink = ({ href, label, Icon }: any) => {
+    const regex = new RegExp(`^${href}(/[a-zA-Z0-9]+)*$`)
+    return (
+      <Link
+        prefetch
+        key={href}
+        href={href}
+        className={`flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
+          regex.test(pathname)
+            ? "bg-white text-green-600 scale-105"
+            : "hover:bg-white hover:text-green-600"
+        }`}
+        onClick={closeMenu}
+        style={{ padding: "0.5rem 1rem" }} // Add padding here
+      >
+        <Icon className="h-6 w-6" />
+        {label}
+      </Link>
+    )
+  }
 
   return (
     <nav className="bg-green-600 text-white py-4 px-4 md:px-12 flex items-center justify-between relative z-50">
