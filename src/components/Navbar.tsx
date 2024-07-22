@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import Cookies from "js-cookie"
-import { useRouter, usePathname } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 import {
   UserIcon,
@@ -23,8 +23,6 @@ const Navbar = () => {
       setUser(true)
     }
   }, [])
-
-  const router = useRouter()
 
   const signOut = () => {
     Cookies.remove("token")
@@ -46,7 +44,7 @@ const Navbar = () => {
     const regex = new RegExp(`^${href}(/[a-zA-Z0-9]+)*$`)
     return (
       <Link
-        prefetch
+        prefetch={true}
         key={href}
         href={href}
         className={`flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
@@ -66,7 +64,7 @@ const Navbar = () => {
   return (
     <nav className="bg-green-600 text-white py-4 px-4 md:px-12 flex items-center justify-between relative z-50">
       <div className="flex items-center flex-shrink-0">
-        <Link href="/" prefetch={true}>
+        <Link href="/">
           <Image src="/nav.png" alt="Logo" width={120} height={80} />
         </Link>
       </div>
@@ -96,12 +94,7 @@ const Navbar = () => {
 
       {isMenuOpen && user && (
         <div className="lg:hidden absolute top-full left-0 w-full bg-green-600 shadow-lg z-50">
-          <div
-            className="flex flex-col space-y-2 p-4"
-            style={{ margin: "0 1rem" }}
-          >
-            {" "}
-            {/* Add margin here */}
+          <div className="flex flex-col space-y-2 p-4 m-4 ">
             {menuItems.map(renderLink)}
             <button
               className="flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
