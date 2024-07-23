@@ -146,7 +146,7 @@ const ExamNotes = ({ item }: any) => {
   return (
     <>
       <div className="mb-4">
-        <h3 className="text-lg md:text-xl font-bold text-gray-700 text-center   ">
+        <h3 className="text-lg md:text-xl font-bold text-gray-700 text-center">
           Normal Session
         </h3>
         <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 capitalize">
