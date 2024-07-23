@@ -66,7 +66,7 @@ export default async function PeriodTab({ params }: any) {
         <TabPanel>{yearResults && renderYearResultItem(yearResults)}</TabPanel>
         <TabPanel className="flex gap-2 overflow-x-auto">
           {group && (
-            <div className="bg-gray-300 border border-green-700 w-full max-w-3xl m-5 p-8 rounded-lg shadow-lg text-center">
+            <div className="bg-gray-200 border border-gray-900 w-full max-w-3xl p-8 rounded-lg shadow-lg text-center">
               {Object.entries(group).map(([semester, info]: any, index) => (
                 <div
                   className={`flex flex-col gap-6 ${index > 0 ? "mt-6" : ""}`}
@@ -75,7 +75,7 @@ export default async function PeriodTab({ params }: any) {
                   <h2 className="w-full rounded-lg p-3 text-center bg-green-500 text-white font-bold">
                     {semester}
                   </h2>
-                  <div className="flex flex-col bg-white rounded-lg p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                  <div className="border border-gray-900 flex flex-col bg-white rounded-lg p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-105">
                     <p className="mb-2">
                       <span className="font-bold">Section:</span> {info.section}
                     </p>
@@ -123,7 +123,7 @@ const SemesterTab = ({ td, exam, result }: any) => {
 
 const TdNoteItem = ({ item }: any) => (
   <div
-    className={`text-gray-800 rounded-lg p-4 flex flex-col sm:flex-row justify-between items-center shadow-md transition duration-300 ease-in-out transform hover:scale-105 capitalize ${
+    className={`border border-gray-900 text-gray-800 rounded-lg p-4 flex flex-col sm:flex-row justify-between items-center shadow-md transition duration-300 ease-in-out transform hover:scale-105 capitalize ${
       item.note >= 10
         ? "bg-green-200 text-green-900"
         : "bg-red-200 text-red-900"
@@ -146,13 +146,13 @@ const ExamNotes = ({ item }: any) => {
   return (
     <>
       <div className="mb-4">
-        <h3 className="text-lg md:text-xl font-bold text-gray-700 text-center m-1 mb-4">
+        <h3 className="text-lg md:text-xl font-bold text-gray-700 text-center   ">
           Normal Session
         </h3>
         <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 capitalize">
           {item.normal.map((course: any) => (
             <div
-              className={`text-gray-800 rounded-lg p-4 shadow-md transition transform hover:scale-105 ${
+              className={`text-gray-800 rounded-lg p-4 shadow-md transition transform hover:scale-105 border border-gray-900 ${
                 course.noteExamen >= 10
                   ? "bg-green-200 text-green-900"
                   : "bg-red-200 text-red-900"
@@ -175,7 +175,7 @@ const ExamNotes = ({ item }: any) => {
           <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 capitalize">
             {item.rattrappage.map((course: any) => (
               <div
-                className={`rounded-lg p-4 shadow-md transition transform hover:scale-105 ${
+                className={`rounded-lg p-4 shadow-md transition transform hover:scale-105 border border-gray-900 ${
                   course.noteExamen >= 10
                     ? "bg-green-200 text-green-700"
                     : "bg-red-200 text-red-700"
@@ -202,7 +202,7 @@ const renderYearResultItem = (result: any) => {
 
   return (
     <div
-      className={`${ueBgClass} border border-gray-300 w-full max-w-3xl mx-auto my-6 p-6 rounded-lg shadow-lg capitalize`}
+      className={`${ueBgClass} border border-gray-900 w-full max-w-3xl mx-auto p-6 rounded-lg shadow-lg capitalize`}
     >
       <p className="text-lg text-gray-700 mb-2 font-semibold">
         <span>Average: </span>
@@ -226,15 +226,15 @@ const renderSemesterResultItem = (result: any, index: any) => {
 
   return (
     <div
-      className="bg-white border border-gray-900 w-full max-w-3xl mx-auto my-6 p-6 rounded-lg shadow-lg"
+      className="bg-gray-200 border border-gray-900 w-full max-w-3xl mx-auto p-6 rounded-lg shadow-lg"
       key={index}
     >
       <div className="mb-6">
-        <p className="text-lg text-gray-600 font-bold">
+        <p className="text-lg text-gray-800 font-bold">
           <span>Average: </span>
           <span className={moyenneClass}>{moyenne}</span>
         </p>
-        <p className="text-lg text-gray-600 font-bold">
+        <p className="text-lg text-gray-800 font-bold">
           <span>Credits: </span>
           <span className={moyenneClass}>{creditAcquis}</span>
         </p>
@@ -250,10 +250,10 @@ const renderSemesterResultItem = (result: any, index: any) => {
               key={ueIndex}
               className={`mb-6 p-4 ${ueBgClass} border border-gray-900 rounded-lg capitalize`}
             >
-              <h3 className="text-xl font-semibold text-gray-700 mb-2">
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
                 {ue.ueNatureLcFr}: {ue.ueLibelleFr}
               </h3>
-              <p className="text-lg text-gray-700 mb-2">
+              <p className="text-lg text-gray-800 mb-2">
                 <span className="font-semibold">Average: </span>
                 <span className={`${ueAverageClass} font-bold`}>
                   {ue.moyenne}
@@ -271,11 +271,11 @@ const renderSemesterResultItem = (result: any, index: any) => {
                       key={mcIndex}
                       className="mb-4 p-3 border border-gray-900 rounded-lg"
                     >
-                      <h4 className="text-lg font-semibold text-gray-700 mb-1">
+                      <h4 className="text-lg font-semibold text-gray-800 mb-1">
                         Module:{" "}
                         <span className={mcAverageClass}>{mc.mcLibelleFr}</span>
                       </h4>
-                      <p className="text-gray-700">
+                      <p className="text-gray-800">
                         <span className="font-semibold">Module Average: </span>
                         <span className={`${mcAverageClass} font-bold`}>
                           {mc.moyenneGenerale}
