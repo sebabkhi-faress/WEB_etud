@@ -12,13 +12,9 @@ export async function middleware(req: NextRequest) {
   if (!token && url.pathname !== "/") {
     return NextResponse.redirect(new URL(`/`, req.url))
   }
-
-  const res = NextResponse.next()
-
-  return res
 }
 
 // Define the paths where the middleware will apply
 export const config = {
-  matcher: ["/", "/profile", "/panel"],
+  matcher: ["/", "/profile", "/panel/:path*"],
 }

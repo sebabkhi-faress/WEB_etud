@@ -155,7 +155,7 @@ export const getDias = async () => {
     return response.data
   } catch (error: any) {
     logger.error(`Error - ${error}`, user, "/year")
-    return null
+    throw new Error(error)
   }
 }
 
