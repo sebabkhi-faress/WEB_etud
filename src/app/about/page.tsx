@@ -23,9 +23,7 @@ const Layout = async () => {
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-4">
           مرحبًا بكم في WebEtu
         </h1>
-        <p className="text-lg text-gray-600 mt-2">
-          منصة لطلبة الإعلام الآلي من جامعة باجي مختار
-        </p>
+        <p className="text-lg text-gray-600 mt-2">جامعة باجي مختار</p>
       </header>
 
       <section className="mb-10">
@@ -33,7 +31,9 @@ const Layout = async () => {
           من نحن؟
         </h2>
         <p className="text-lg leading-relaxed text-gray-700">
-          نحن مجموعة من طلبة الإعلام الآلي من جامعة باجي مختار لولاية عنابة
+          نحن نادي علمي يتكون من مجموعة من طلاب الإعلام الآلي في جامعة باجي
+          مختار بولاية عنابة، يطلق على نادينا إسم مجتمع البرمجيات مفتوحة المصدر،
+          حيث نسعى لتعزيز التعاون وتبادل المعرفة في مجال البرمجيات الحرة
         </p>
       </section>
 
@@ -66,7 +66,7 @@ const Layout = async () => {
       </section>
 
       <footer className="text-center mt-12">
-        <p className="text-lg text-gray-600">
+        <p className="font-bold text-lg text-gray-600">
           Telegram:{" "}
           <a
             href="https://t.me/OSCommunityChat"
