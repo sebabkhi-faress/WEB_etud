@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation"
 import {
   UserIcon,
   ArrowLeftStartOnRectangleIcon,
+  ArrowRightEndOnRectangleIcon,
   PencilIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/solid"
@@ -41,7 +42,10 @@ const Navbar = () => {
     { href: "/panel", label: "Panel", Icon: PencilIcon },
     { href: "/about", label: "About", Icon: QuestionMarkCircleIcon },
   ]
-
+  const logoutMenuItems = [
+    { href: "/", label: "Login", Icon: ArrowRightEndOnRectangleIcon },
+    { href: "/about", label: "About", Icon: QuestionMarkCircleIcon },
+  ]
   const renderLink = ({ href, label, Icon }: any) => {
     const regex = new RegExp(`^${href}(/[a-zA-Z0-9]+)*$`)
     return (
@@ -111,11 +115,7 @@ const Navbar = () => {
                 </button>
               </>
             ) : (
-              renderLink({
-                href: "/about",
-                label: "About",
-                Icon: QuestionMarkCircleIcon,
-              })
+              logoutMenuItems.map(renderLink)
             )}
           </div>
         </div>
