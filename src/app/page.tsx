@@ -72,11 +72,11 @@ export default function LoginPage() {
   return (
     <div className="bg-gray-50 p-4 sm:p-6 md:p-8 rounded-lg shadow-md border border-green-600 w-full max-w-xs sm:max-w-lg md:max-w-xl text-center">
       <Image
-        src="/logo.png"
+        src="/logo-black-text.svg"
         alt="Logo"
         width={150}
         height={150}
-        className="mx-auto mb-4 sm:mb-6 md:mb-8"
+        className="mx-auto mb-2 sm:mb-4 md:mb-6"
       />
       <form className="flex flex-col" onSubmit={Login}>
         <div className="mb-4 sm:mb-6 text-left">

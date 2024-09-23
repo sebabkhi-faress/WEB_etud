@@ -10,6 +10,7 @@ import {
   UserIcon,
   ArrowLeftStartOnRectangleIcon,
   PencilIcon,
+  QuestionMarkCircleIcon,
 } from "@heroicons/react/24/solid"
 
 const Navbar = () => {
@@ -38,6 +39,7 @@ const Navbar = () => {
   const menuItems = [
     { href: "/profile", label: "Profile", Icon: UserIcon },
     { href: "/panel", label: "Panel", Icon: PencilIcon },
+    { href: "/about", label: "About", Icon: QuestionMarkCircleIcon },
   ]
 
   const renderLink = ({ href, label, Icon }: any) => {
@@ -61,15 +63,15 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="bg-green-600 text-white py-4 px-4 md:px-12 flex items-center justify-between relative z-50">
+    <nav className="bg-green-600 text-white py-3 px-3 md:px-8 flex items-center justify-between relative z-50">
       <div className="flex items-center flex-shrink-0">
         <Link href="/">
-          <Image src="/nav.png" alt="Logo" width={120} height={80} />
+          <Image src="/logo-white.png" alt="Logo" width={50} height={60} />
         </Link>
       </div>
 
       <div className="lg:hidden">
-        {user && (
+        {
           <button className="p-2 focus:outline-none" onClick={toggleMenu}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -88,24 +90,34 @@ const Navbar = () => {
               />
             </svg>
           </button>
-        )}
+        }
       </div>
 
-      {isMenuOpen && user && (
+      {isMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 w-full bg-green-600 shadow-lg z-50">
-          <div className="flex flex-col space-y-2 p-4 m-4 ">
-            {menuItems.map(renderLink)}
-            <button
-              className="flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
-              onClick={() => {
-                signOut()
-                closeMenu()
-              }}
-              style={{ padding: "0.5rem 1rem" }} // Add padding here
-            >
-              <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
-              Log Out
-            </button>
+          <div className="flex flex-col space-y-2 p-4 m-4 mt-2">
+            {user ? (
+              <>
+                {menuItems.map(renderLink)}
+                <button
+                  className="flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
+                  onClick={() => {
+                    signOut()
+                    closeMenu()
+                  }}
+                  style={{ padding: "0.5rem 1rem" }} // Add padding here
+                >
+                  <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
+                  Log Out
+                </button>
+              </>
+            ) : (
+              renderLink({
+                href: "/about",
+                label: "About",
+                Icon: QuestionMarkCircleIcon,
+              })
+            )}
           </div>
         </div>
       )}
@@ -115,7 +127,7 @@ const Navbar = () => {
       </div>
 
       <div className="hidden lg:flex gap-4 items-center">
-        {user && (
+        {user ? (
           <button
             className="flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
             onClick={signOut}
@@ -124,6 +136,14 @@ const Navbar = () => {
             <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
             Log Out
           </button>
+        ) : (
+          <div className="flex gap-4">
+            {renderLink({
+              href: "/about",
+              label: "About",
+              Icon: QuestionMarkCircleIcon,
+            })}
+          </div>
         )}
       </div>
     </nav>
