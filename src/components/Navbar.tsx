@@ -48,10 +48,8 @@ const Navbar = () => {
       <Link
         key={href}
         href={href}
-        className={`flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 ${
-          regex.test(pathname)
-            ? "bg-white text-green-600 scale-105"
-            : "hover:bg-white hover:text-green-600"
+        className={`hover:bg-white hover:text-green-600 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-green-800 scale-105 ${
+          regex.test(pathname) ? "bg-white" : "bg-white/50"
         }`}
         onClick={closeMenu}
         style={{ padding: "0.5rem 1rem" }} // Add padding here
@@ -95,12 +93,13 @@ const Navbar = () => {
 
       {isMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 w-full bg-green-600 shadow-lg z-50">
-          <div className="flex flex-col space-y-2 p-4 m-4 mt-2">
+          <div className="flex flex-col gap-2 px-6 py-4">
             {user ? (
               <>
                 {menuItems.map(renderLink)}
+                <hr className="" />
                 <button
-                  className="flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
+                  className="bg-red-200/70 text-red-800 scale-105 flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
                   onClick={() => {
                     signOut()
                     closeMenu()
@@ -129,7 +128,7 @@ const Navbar = () => {
       <div className="hidden lg:flex gap-4 items-center">
         {user ? (
           <button
-            className="flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
+            className="flex items-center gap-2 bg-red-200/70 text-red-800 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
             onClick={signOut}
             style={{ padding: "0.5rem 1rem" }} // Add padding here
           >

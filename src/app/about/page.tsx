@@ -1,73 +1,86 @@
+import Image from "next/image"
+
 export const metadata = {
   title: "WebEtu - Blog",
-};
+}
 
 const Layout = async () => {
   return (
-    <article className="rtl p-6 sm:p-10 max-w-4xl mx-auto font-sans text-gray-800" dir="rtl">
-      <header className="text-center mb-10">
-        <h1 className="text-4xl sm:text-5xl font-bold text-green-600">
-          OSCA Club
+    <article
+      className="rtl p-6 sm:p-10 max-w-4xl mx-auto font-sans text-gray-800"
+      dir="rtl"
+    >
+      <header className="text-center mb-12">
+        <div className="flex justify-center items-center mt-6 px-4">
+          <Image
+            src="/logo-black.svg"
+            alt="OSCA Club Logo"
+            width={150}
+            height={150}
+            className="rounded-full"
+          />
+        </div>
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-4">
+          مرحبًا بكم في WebEtu
         </h1>
+        <p className="text-lg text-gray-600 mt-2">
+          منصة لطلبة الإعلام الآلي من جامعة باجي مختار
+        </p>
       </header>
 
-      <section className="mb-8">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-green-600 mb-4">
+      <section className="mb-10">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-green-700 mb-4">
           من نحن؟
         </h2>
-        <p className="text-lg leading-relaxed">
+        <p className="text-lg leading-relaxed text-gray-700">
           نحن مجموعة من طلبة الإعلام الآلي من جامعة باجي مختار لولاية عنابة
         </p>
       </section>
 
-      <section className="mb-8">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-green-600 mb-4">
+      <section className="mb-10">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-green-700 mb-4">
           ما هو هذا الموقع؟
         </h2>
-        <p className="text-lg leading-relaxed">
+        <p className="text-lg leading-relaxed text-gray-700">
           هذا الموقع هو نسخة ويب بديلة غير رسمية من تطبيق WebEtu
         </p>
       </section>
 
-      <section className="mb-8">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-green-600 mb-4">
+      <section className="mb-10">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-green-700 mb-4">
           ما سبب تطوير هذا الموقع؟
         </h2>
-        <p className="text-lg leading-relaxed">
-          هناك سببين رئيسيان يتمثلان فيه:
+        <p className="text-lg leading-relaxed text-gray-700">
+          هناك سببان رئيسيان يتمثلان في:
         </p>
-        <ul className="list-disc list-inside text-lg leading-relaxed">
+        <ul className="list-disc list-inside text-gray-700 text-lg leading-relaxed space-y-2">
           <li className="pr-4">
-            دعم مختلف المنصات الإلكترونية سواء أجهزة حاسوب أو الهواتف أو أي جهاز رقمي
-            أخر به متصفح حديث نوعا ما
+            دعم مختلف المنصات الإلكترونية سواء أجهزة حاسوب أو الهواتف أو أي جهاز
+            رقمي أخر به متصفح حديث نوعا ما
           </li>
           <li className="pr-4">
-            بعض المشاكل التقنية الموجودة في التطبيق الرسمي الخاص بوزارة التعليم العالي
-            والبحث العلمي
+            بعض المشاكل التقنية الموجودة في التطبيق الرسمي الخاص بوزارة التعليم
+            العالي والبحث العلمي
           </li>
         </ul>
       </section>
 
-      <footer className="text-center mt-10">
-        <p className="text-lg">
+      <footer className="text-center mt-12">
+        <p className="text-lg text-gray-600">
           Telegram:{" "}
           <a
             href="https://t.me/OSCommunityChat"
-            className="text-green-600 hover:underline"
+            className="text-green-600 hover:text-green-700 hover:underline transition duration-200"
           >
             t.me/OSCommunityChat
           </a>
         </p>
-        <div className="flex justify-center items-center mt-6 px-4">
-          <img
-            src="/logo-black-text.svg"
-            alt="OSCA Club Logo"
-            className="h-16 sm:h-20 md:h-24 object-contain transition-transform duration-300 hover:scale-105"
-          />
-        </div>
+        <p className="text-gray-500 text-sm mt-4">
+          © 2024 OSCA - All Rights Reserved
+        </p>
       </footer>
     </article>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout
