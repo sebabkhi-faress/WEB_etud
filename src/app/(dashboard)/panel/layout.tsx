@@ -10,8 +10,8 @@ export default async function PanelPage({
 }: {
   children: React.ReactNode
 }) {
-  const dias = await getDias();
-  
+  const dias = await getDias()
+
   return (
     <div className="flex flex-col md:flex-row p-4 w-full min-h-screen">
       <div className="flex flex-row md:flex-col gap-2 justify-start md:mb-0 overflow-x-auto md:overflow-x-visible">
@@ -32,7 +32,6 @@ export default async function PanelPage({
           {children}
         </div>
       </div>
-
     </div>
   )
 }

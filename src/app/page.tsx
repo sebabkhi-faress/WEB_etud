@@ -5,11 +5,13 @@ import { useState } from "react"
 import toast from "react-hot-toast"
 import Cookies from "js-cookie"
 import axios from "axios"
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline"
 
 export default function LoginPage() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const Login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -46,8 +48,11 @@ export default function LoginPage() {
 
       toast.success("Logged In Successfully", { id: toastId })
     } catch (err: any) {
-      if (axios.isCancel(err)) {
-        toast.error("Request Timed Out", { duration: 3000, id: toastId })
+      if (err.message.includes("timeout")) {
+        toast.error("Request Timed Out, Please Try Again", {
+          duration: 3000,
+          id: toastId,
+        })
       } else if (err.response && err.response.status == 403) {
         toast.error("Invalid Credentials", { duration: 3000, id: toastId })
       } else if (err.message.includes("Network Error")) {
@@ -99,15 +104,28 @@ export default function LoginPage() {
           >
             <span className="text-red-500">*</span> Password
           </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            required
-            className="w-full p-2 sm:p-3 border border-green-600 rounded-md focus:outline-none focus:border-green-500"
-          />
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              name="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              required
+              className="w-full p-2 sm:p-3 border border-green-600 rounded-md focus:outline-none focus:border-green-500"
+            />
+            <button
+              type="button"
+              className="absolute right-2 top-1 bottom-1 text-green-600"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <EyeSlashIcon className="w-6" />
+              ) : (
+                <EyeIcon className="w-6" />
+              )}
+            </button>
+          </div>
         </div>
         <button
           type="submit"
