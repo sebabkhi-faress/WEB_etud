@@ -35,14 +35,12 @@ export default function LoginPage() {
           password,
         },
         {
-          timeout: 10000, // Timeout set to 10 seconds
+          timeout: 15000, // Timeout set to 10 seconds
         },
       )
 
       Cookies.set("token", response.data.token)
       Cookies.set("uuid", response.data.uuid)
-      Cookies.set("EtabId", response.data.etablissementId)
-      Cookies.set("user", response.data.userName)
 
       window.location.reload()
 

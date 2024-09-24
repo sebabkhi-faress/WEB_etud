@@ -3,13 +3,43 @@ import axios from "axios"
 import logger from "@/utils"
 import cache from "@/cache"
 import { createHash } from "crypto"
+import { decode } from "jsonwebtoken"
+
+function isValidUUID(uuid: string) {
+  const uuidRegex =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+  return uuidRegex.test(uuid)
+}
 
 const getCookieData = () => {
   const cookieStore = cookies()
   const token = cookieStore.get("token")?.value || ""
-  const user = cookieStore.get("user")?.value
-  const uuid = cookieStore.get("uuid")?.value
-  const EtabId = cookieStore.get("EtabId")?.value
+  const uuid = cookieStore.get("uuid")?.value as string
+
+  if (token.length > 500) {
+    throw new Error("Token is too large!")
+  }
+  if (!isValidUUID(uuid)) {
+    throw new Error("Invalid UUID!")
+  }
+
+  const tokenPayload = decode(token) as any
+
+  if (typeof tokenPayload !== "object" || tokenPayload == null)
+    throw new Error("Invalid JWT token!")
+
+  const user = tokenPayload.userName as string
+
+  if (
+    typeof user !== "string" ||
+    user.length > 20 ||
+    Number.isNaN(Number(user))
+  ) {
+    throw new Error("Invalid username!")
+  }
+
+  const EtabId = tokenPayload.idEtablissement as number
+
   const tokenHash = createHash("md5").update(token).digest("hex")
 
   return { token, user, uuid, tokenHash, EtabId }
@@ -52,7 +82,7 @@ export const getProfileData = async () => {
         headers: {
           Authorization: token,
         },
-        timeout: 10000, // Timeout set to 10 seconds
+        timeout: 15000, // Timeout set to 10 seconds
       },
     )
 
@@ -85,7 +115,7 @@ export const getImage = async () => {
         headers: {
           Authorization: token,
         },
-        timeout: 10000, // Timeout set to 10 seconds
+        timeout: 15000, // Timeout set to 10 seconds
       },
     )
 
@@ -116,7 +146,7 @@ export const getLogo = async () => {
         headers: {
           Authorization: token,
         },
-        timeout: 10000, // Timeout set to 10 seconds
+        timeout: 15000, // Timeout set to 10 seconds
       },
     )
 
@@ -147,7 +177,7 @@ export const getDias = async () => {
         headers: {
           Authorization: token,
         },
-        timeout: 10000,
+        timeout: 15000,
       },
     )
     logger.info("Dias Fetched Successfully", user, "/year")
@@ -196,7 +226,7 @@ export const getTdTp = async (id: number) => {
         headers: {
           Authorization: token,
         },
-        timeout: 10000,
+        timeout: 15000,
       },
     )
 
@@ -259,7 +289,7 @@ export const getExamsNotes = async (id: number) => {
         headers: {
           Authorization: token,
         },
-        timeout: 10000,
+        timeout: 15000,
       },
     )
 
@@ -303,7 +333,7 @@ export const getSemesterAcademicResults = async (id: number) => {
       `https://progres.mesrs.dz/api/infos/bac/${token}/dias/${id}/periode/bilans`,
       {
         headers: { Authorization: token },
-        timeout: 10000,
+        timeout: 15000,
       },
     )
 
@@ -339,7 +369,7 @@ export const getYearAcademicResults = async (id: number) => {
       `https://progres.mesrs.dz/api/infos/bac/${token}/dia/${id}/annuel/bilan`,
       {
         headers: { Authorization: token },
-        timeout: 10000,
+        timeout: 15000,
       },
     )
 
@@ -385,7 +415,7 @@ export const getGroup = async (id: number) => {
         headers: {
           Authorization: token,
         },
-        timeout: 10000,
+        timeout: 15000,
       },
     )
 
