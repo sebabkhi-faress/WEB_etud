@@ -226,7 +226,9 @@ const renderSemesterResultItem = (result: any, index: any) => {
 
   return (
     <div
-      className="bg-gray-200 border border-gray-900 w-full max-w-3xl mx-auto p-6 rounded-lg shadow-lg"
+      className={`${
+        moyenne < 10 ? "bg-red-200" : "bg-green-200"
+      } border border-gray-900 w-full max-w-3xl mx-auto p-6 rounded-lg shadow-lg`}
       key={index}
     >
       <div className="mb-6">
