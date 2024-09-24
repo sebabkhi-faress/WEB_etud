@@ -64,27 +64,38 @@ export default async function PeriodTab({ params }: any) {
           <SemesterTab result={Sem2Results} td={Sem2TdTp} exam={Sem2Exams} />
         </TabPanel>
         <TabPanel>{yearResults && renderYearResultItem(yearResults)}</TabPanel>
-        <TabPanel className="flex gap-2 overflow-x-auto">
+        <TabPanel className="flex overflow-x-auto p-4 justify-center">
           {group && (
-            <div className="bg-gray-200 border border-gray-900 w-full max-w-3xl p-8 rounded-lg shadow-lg text-center">
-              {Object.entries(group).map(([semester, info]: any, index) => (
-                <div
-                  className={`flex flex-col gap-6 ${index > 0 ? "mt-6" : ""}`}
-                  key={semester}
-                >
-                  <h2 className="w-full rounded-lg p-3 text-center bg-green-500 text-white font-bold">
-                    {semester}
-                  </h2>
-                  <div className="border border-gray-900 flex flex-col bg-white rounded-lg p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-105">
-                    <p className="mb-2">
-                      <span className="font-bold">Section:</span> {info.section}
-                    </p>
-                    <p className="mb-2">
-                      <span className="font-bold">Group:</span> {info.group}
-                    </p>
+            <div className="bg-gray-200 border border-gray-300 w-full max-w-7xl mx-auto p-8 rounded-lg shadow-md">
+              <div
+                className={`grid gap-8 ${
+                  Object.keys(group).length === 1
+                    ? "grid-cols-1"
+                    : "grid-cols-1 md:grid-cols-2"
+                }`}
+              >
+                {Object.entries(group).map(([semester, info]: any, index) => (
+                  <div key={index} className="p-4">
+                    <h2 className="w-full text-2xl rounded-lg py-4 px-6 text-center bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold shadow-md">
+                      {semester}
+                    </h2>
+                    <div className="border border-gray-200 bg-white rounded-lg p-6 mt-4 shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl">
+                      <p className="mb-4 text-lg text-gray-700">
+                        <span className="font-semibold text-gray-800">
+                          Section:
+                        </span>{" "}
+                        {info.section}
+                      </p>
+                      <p className="mb-4 text-lg text-gray-700">
+                        <span className="font-semibold text-gray-800">
+                          Group:
+                        </span>{" "}
+                        {info.group}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           )}
         </TabPanel>
@@ -222,7 +233,7 @@ const renderYearResultItem = (result: any) => {
 
 const renderSemesterResultItem = (result: any, index: any) => {
   const { moyenne, creditAcquis, bilanUes } = result
-  const moyenneClass = moyenne >= 10.0 ? "text-green-600" : "text-red-600"
+  const moyenneClass = moyenne >= 10.0 ? "text-green-800" : "text-red-800"
 
   return (
     <div
@@ -245,7 +256,7 @@ const renderSemesterResultItem = (result: any, index: any) => {
         {bilanUes.map((ue: any, ueIndex: any) => {
           const ueBgClass = ue.moyenne > 10 ? "bg-green-100" : "bg-red-100"
           const ueAverageClass =
-            ue.moyenne >= 10.0 ? "text-green-600" : "text-red-600"
+            ue.moyenne >= 10.0 ? "text-green-700" : "text-red-700"
 
           return (
             <div
@@ -265,8 +276,8 @@ const renderSemesterResultItem = (result: any, index: any) => {
                 {ue.bilanMcs.map((mc: any, mcIndex: any) => {
                   const mcAverageClass =
                     mc.moyenneGenerale >= 10.0
-                      ? "text-green-600"
-                      : "text-red-600"
+                      ? "text-green-700"
+                      : "text-red-700"
 
                   return (
                     <div
