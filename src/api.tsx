@@ -81,8 +81,9 @@ export const getProfileData = async () => {
       {
         headers: {
           Authorization: token,
+          Author: "<osca@univ-annaba.dz>",
         },
-        timeout: 15000, // Timeout set to 10 seconds
+        timeout: 15000, // Timeout set to 15 seconds
       },
     )
 
@@ -114,6 +115,7 @@ export const getImage = async () => {
       {
         headers: {
           Authorization: token,
+          Author: "<osca@univ-annaba.dz>",
         },
         timeout: 15000, // Timeout set to 10 seconds
       },
@@ -145,6 +147,7 @@ export const getLogo = async () => {
       {
         headers: {
           Authorization: token,
+          Author: "<osca@univ-annaba.dz>",
         },
         timeout: 15000, // Timeout set to 10 seconds
       },
@@ -176,6 +179,7 @@ export const getDias = async () => {
       {
         headers: {
           Authorization: token,
+          Author: "<osca@univ-annaba.dz>",
         },
         timeout: 15000,
       },
@@ -225,6 +229,7 @@ export const getTdTp = async (id: number) => {
       {
         headers: {
           Authorization: token,
+          Author: "<osca@univ-annaba.dz>",
         },
         timeout: 15000,
       },
@@ -288,6 +293,7 @@ export const getExamsNotes = async (id: number) => {
       {
         headers: {
           Authorization: token,
+          Author: "<osca@univ-annaba.dz>",
         },
         timeout: 15000,
       },
@@ -332,7 +338,10 @@ export const getSemesterAcademicResults = async (id: number) => {
     const res = await axios.get(
       `https://progres.mesrs.dz/api/infos/bac/${token}/dias/${id}/periode/bilans`,
       {
-        headers: { Authorization: token },
+        headers: {
+          Authorization: token,
+          Author: "<osca@univ-annaba.dz>",
+        },
         timeout: 15000,
       },
     )
@@ -368,7 +377,10 @@ export const getYearAcademicResults = async (id: number) => {
     const res = await axios.get(
       `https://progres.mesrs.dz/api/infos/bac/${token}/dia/${id}/annuel/bilan`,
       {
-        headers: { Authorization: token },
+        headers: {
+          Authorization: token,
+          Author: "<osca@univ-annaba.dz>",
+        },
         timeout: 15000,
       },
     )
@@ -414,6 +426,7 @@ export const getGroup = async (id: number) => {
       {
         headers: {
           Authorization: token,
+          Author: "<osca@univ-annaba.dz>",
         },
         timeout: 15000,
       },
