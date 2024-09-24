@@ -80,13 +80,13 @@ export default async function PeriodTab({ params }: any) {
                       {semester}
                     </h2>
                     <div className="border border-gray-200 bg-white rounded-lg p-6 mt-4 shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl">
-                      <p className="mb-4 text-lg text-gray-700">
+                      <p className="mb-4 text-lg text-gray-700 whitespace-nowrap">
                         <span className="font-semibold text-gray-800">
                           Section:
                         </span>{" "}
                         {info.section}
                       </p>
-                      <p className="mb-4 text-lg text-gray-700">
+                      <p className="mb-4 text-lg text-gray-700 whitespace-nowrap">
                         <span className="font-semibold text-gray-800">
                           Group:
                         </span>{" "}
