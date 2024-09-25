@@ -2,8 +2,10 @@ import { getCount } from "@/utils/counter"
 import Image from "next/image"
 
 export const metadata = {
-  title: "WebEtu - Blog",
+  title: "WebEtu - About",
 }
+
+export const dynamic = "force-dynamic"
 
 const Layout = async () => {
   return (
