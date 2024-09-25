@@ -1,169 +1,7 @@
-import { cookies } from "next/headers"
 import axios from "axios"
 import logger from "@/utils/logger"
 import cache from "@/utils/cache"
-import { createHash } from "crypto"
-import { decode } from "jsonwebtoken"
-import { updateCount } from "./counter"
-import { use } from "react"
-
-function isValidUUID(uuid: string) {
-  const uuidRegex =
-    /^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
-  return uuidRegex.test(uuid)
-}
-
-const getCookieData = () => {
-  const cookieStore = cookies()
-  const token = cookieStore.get("token")?.value || ""
-  const uuid = cookieStore.get("uuid")?.value as string
-
-  if (token.length > 500) {
-    throw new Error("Token is too large!")
-  }
-  if (!isValidUUID(uuid)) {
-    throw new Error("Invalid UUID!")
-  }
-
-  const tokenPayload = decode(token) as any
-
-  if (typeof tokenPayload !== "object" || tokenPayload == null)
-    throw new Error("Invalid JWT token!")
-
-  const user = tokenPayload.userName as string
-
-  if (
-    typeof user !== "string" ||
-    user.length > 20 ||
-    Number.isNaN(Number(user))
-  ) {
-    throw new Error("Invalid username!")
-  }
-
-  const EtabId = tokenPayload.idEtablissement as number
-
-  const tokenHash = createHash("md5").update(token).digest("hex")
-
-  return { token, user, uuid, tokenHash, EtabId }
-}
-
-export const getProfileData = async () => {
-  const { token, user, uuid, tokenHash } = getCookieData()
-
-  const cacheKey = `profile-${tokenHash}`
-  const cachedData = cache.get(cacheKey)
-
-  if (cachedData) {
-    logger.info("profile cache hit", user, "/profile")
-    return cachedData
-  }
-
-  const parseData = (responseData: any) => {
-    return {
-      individuId: responseData.individuId,
-      nin: responseData.nin,
-      individuNomArabe: responseData.individuNomArabe,
-      individuNomLatin: responseData.individuNomLatin,
-      individuPrenomArabe: responseData.individuPrenomArabe,
-      individuPrenomLatin: responseData.individuPrenomLatin,
-      individuDateNaissance: responseData.individuDateNaissance,
-      individuLieuNaissance: responseData.individuLieuNaissance,
-      individuLieuNaissanceArabe: responseData.individuLieuNaissanceArabe,
-      llEtablissementArabe: responseData.llEtablissementArabe,
-      llEtablissementLatin: responseData.llEtablissementLatin,
-      niveauLibelleLongLt: responseData.niveauLibelleLongLt,
-      ofLlDomaine: responseData.ofLlDomaine,
-      ofLlSpecialite: responseData.ofLlSpecialite,
-    }
-  }
-
-  try {
-    const response = await axios.get(
-      `https://progres.mesrs.dz/api/infos/bac/${uuid}/dias`,
-      {
-        headers: {
-          Authorization: token,
-          Author: "<osca@univ-annaba.dz>",
-        },
-        timeout: 15000, // Timeout set to 15 seconds
-      },
-    )
-
-    logger.info("Profile data fetched successfully", user, "/profile")
-    const data = parseData(response.data[0])
-    updateCount(user)
-    cache.set(cacheKey, data)
-
-    return data
-  } catch (error) {
-    logger.error("Error fetching profile data", user, "/profile")
-    throw new Error("Error fetching profile data")
-  }
-}
-
-export const getImage = async () => {
-  const { token, user, uuid, tokenHash } = getCookieData()
-
-  const cacheKey = `image-${tokenHash}`
-  const cachedData = cache.get(cacheKey)
-
-  if (cachedData) {
-    logger.info("Image cache hit", user, "/profile")
-    return cachedData
-  }
-
-  try {
-    const image = await axios.get(
-      `https://progres.mesrs.dz/api/infos/image/${uuid}`,
-      {
-        headers: {
-          Authorization: token,
-          Author: "<osca@univ-annaba.dz>",
-        },
-        timeout: 15000, // Timeout set to 10 seconds
-      },
-    )
-
-    logger.info("Image fetched successfully", user, "/profile")
-    cache.set(cacheKey, image.data)
-    return image.data
-  } catch (error) {
-    logger.error("Error fetching image", user, "/profile")
-    return null
-  }
-}
-
-export const getLogo = async () => {
-  const { token, user, EtabId } = getCookieData()
-
-  const cacheKey = `logo-${EtabId}`
-  const cachedData = cache.get(cacheKey)
-
-  if (cachedData) {
-    logger.info("logo cache hit", user, "/profile")
-    return cachedData
-  }
-
-  try {
-    const logo = await axios.get(
-      `https://progres.mesrs.dz/api/infos/logoEtablissement/${EtabId}`,
-      {
-        headers: {
-          Authorization: token,
-          Author: "<osca@univ-annaba.dz>",
-        },
-        timeout: 15000, // Timeout set to 10 seconds
-      },
-    )
-
-    logger.info("Logo fetched successfully", user, "/profile")
-    cache.set(cacheKey, logo.data)
-    return logo.data
-  } catch (error) {
-    logger.error("Error fetching logo", user, "/profile")
-    return null
-  }
-}
+import { fetchData, getCookieData } from "./helpers"
 
 export const getDias = async () => {
   const { token, user, uuid, tokenHash } = getCookieData()
@@ -177,15 +15,9 @@ export const getDias = async () => {
   }
 
   try {
-    const response = await axios.get(
+    const response = await fetchData(
       `https://progres.mesrs.dz/api/infos/bac/${uuid}/dias`,
-      {
-        headers: {
-          Authorization: token,
-          Author: "<osca@univ-annaba.dz>",
-        },
-        timeout: 15000,
-      },
+      token,
     )
     logger.info("Dias Fetched Successfully", user, "/year")
     cache.set(cacheKey, response.data)
@@ -227,15 +59,9 @@ export const getTdTp = async (id: number) => {
   }
 
   try {
-    const res = await axios.get(
+    const res = await fetchData(
       `https://progres.mesrs.dz/api/infos/controleContinue/dia/${id}/notesCC`,
-      {
-        headers: {
-          Authorization: token,
-          Author: "<osca@univ-annaba.dz>",
-        },
-        timeout: 15000,
-      },
+      token,
     )
 
     logger.info("Notes Fetched Successfully", user, "/notes")
@@ -291,15 +117,9 @@ export const getExamsNotes = async (id: number) => {
   }
 
   try {
-    const res = await axios.get(
+    const res = await fetchData(
       `https://progres.mesrs.dz/api/infos/planningSession/dia/${id}/noteExamens`,
-      {
-        headers: {
-          Authorization: token,
-          Author: "<osca@univ-annaba.dz>",
-        },
-        timeout: 15000,
-      },
+      token,
     )
 
     logger.info("Exam Notes fetched successfully", user, "/exams")
@@ -338,15 +158,9 @@ export const getSemesterAcademicResults = async (id: number) => {
   }
 
   try {
-    const res = await axios.get(
+    const res = await fetchData(
       `https://progres.mesrs.dz/api/infos/bac/${token}/dias/${id}/periode/bilans`,
-      {
-        headers: {
-          Authorization: token,
-          Author: "<osca@univ-annaba.dz>",
-        },
-        timeout: 15000,
-      },
+      token,
     )
 
     logger.info(
@@ -377,15 +191,9 @@ export const getYearAcademicResults = async (id: number) => {
   }
 
   try {
-    const res = await axios.get(
+    const res = await fetchData(
       `https://progres.mesrs.dz/api/infos/bac/${token}/dia/${id}/annuel/bilan`,
-      {
-        headers: {
-          Authorization: token,
-          Author: "<osca@univ-annaba.dz>",
-        },
-        timeout: 15000,
-      },
+      token,
     )
 
     const data = res.data
@@ -424,15 +232,9 @@ export const getGroup = async (id: number) => {
       }, {})
 
   try {
-    const res = await axios.get(
+    const res = await fetchData(
       `https://progres.mesrs.dz/api/infos/dia/${id}/groups`,
-      {
-        headers: {
-          Authorization: token,
-          Author: "<osca@univ-annaba.dz>",
-        },
-        timeout: 15000,
-      },
+      token,
     )
 
     const data = parseData(res.data)

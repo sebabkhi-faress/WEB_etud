@@ -4,7 +4,7 @@ import {
   getSemesterAcademicResults,
   getYearAcademicResults,
   getGroup,
-} from "@/utils/api"
+} from "@/utils/api/panel"
 
 export const metadata = {
   title: "WebEtu - Panel",
