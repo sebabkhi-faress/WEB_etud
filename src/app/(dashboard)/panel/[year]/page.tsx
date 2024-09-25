@@ -65,7 +65,7 @@ export default async function PeriodTab({ params }: any) {
         </TabPanel>
         <TabPanel>{yearResults && renderYearResultItem(yearResults)}</TabPanel>
         <TabPanel className="flex overflow-x-auto p-4 justify-center">
-          {group && (
+          {group && Object.keys(group).length > 0 && (
             <div className="bg-gray-200 border border-gray-300 w-full max-w-7xl mx-auto p-8 rounded-lg shadow-md">
               <div
                 className={`grid gap-8 ${
