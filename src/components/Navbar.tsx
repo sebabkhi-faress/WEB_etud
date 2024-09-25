@@ -13,7 +13,6 @@ import {
   PencilIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/solid"
-import { FaceSmileIcon } from "@heroicons/react/16/solid"
 
 const Navbar = () => {
   const pathname = usePathname()

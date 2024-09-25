@@ -1,4 +1,3 @@
-import axios from "axios"
 import logger from "@/utils/logger"
 import cache from "@/utils/cache"
 import { fetchData, getCookieData } from "./helpers"
@@ -36,6 +35,7 @@ export const getTdTp = async (id: number) => {
 
   if (cachedData) {
     logger.info("Notes Cache Hit", user, "/notes")
+
     return cachedData
   }
 

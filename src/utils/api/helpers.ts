@@ -38,6 +38,10 @@ export function getCookieData() {
 
   const EtabId = tokenPayload.idEtablissement as number
 
+  if (Number.isNaN(Number(EtabId)) || EtabId.toString().length > 20) {
+    throw new Error("Invalid EtabId!")
+  }
+
   const tokenHash = createHash("md5").update(token).digest("hex")
 
   return { token, user, uuid, tokenHash, EtabId }
