@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { getProfileData, getLogo, getImage } from "@/api"
+import { getProfileData, getLogo, getImage } from "@/utils/api"
 
 export const metadata = {
   title: "WebEtu - Profile",

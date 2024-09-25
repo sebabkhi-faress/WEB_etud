@@ -1,9 +1,11 @@
 import { cookies } from "next/headers"
 import axios from "axios"
-import logger from "@/utils"
-import cache from "@/cache"
+import logger from "@/utils/logger"
+import cache from "@/utils/cache"
 import { createHash } from "crypto"
 import { decode } from "jsonwebtoken"
+import { updateCount } from "./counter"
+import { use } from "react"
 
 function isValidUUID(uuid: string) {
   const uuidRegex =
@@ -89,6 +91,7 @@ export const getProfileData = async () => {
 
     logger.info("Profile data fetched successfully", user, "/profile")
     const data = parseData(response.data[0])
+    updateCount(user)
     cache.set(cacheKey, data)
 
     return data

@@ -1,3 +1,4 @@
+import { getCount } from "@/utils/counter"
 import Image from "next/image"
 
 export const metadata = {
@@ -63,6 +64,14 @@ const Layout = async () => {
             العالي والبحث العلمي
           </li>
         </ul>
+      </section>
+      <section className="mb-10">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-green-700 mb-4">
+          عدد المستخدمين منذ أخر تحديث
+        </h2>
+        <p className="text-lg leading-relaxed text-gray-600 font-bold">
+          {getCount()}
+        </p>
       </section>
 
       <footer className="text-center mt-12">
