@@ -64,9 +64,9 @@ export default async function PeriodTab({ params }: any) {
           <SemesterTab result={Sem2Results} td={Sem2TdTp} exam={Sem2Exams} />
         </TabPanel>
         <TabPanel>{yearResults && renderYearResultItem(yearResults)}</TabPanel>
-        <TabPanel className="flex overflow-x-auto p-4 justify-center">
+        <TabPanel className="flex overflow-x-auto p-1 justify-center">
           {group && Object.keys(group).length > 0 && (
-            <div className="bg-gray-200 border border-gray-300 w-full max-w-7xl mx-auto p-8 rounded-lg shadow-md">
+            <div className="bg-gray-200 border border-gray-400 w-full max-w-7xl mx-auto p-8 rounded-lg shadow-md">
               <div
                 className={`grid gap-8 ${
                   Object.keys(group).length === 1
@@ -134,10 +134,12 @@ const SemesterTab = ({ td, exam, result }: any) => {
 
 const TdNoteItem = ({ item }: any) => (
   <div
-    className={`border border-gray-900 text-gray-800 rounded-lg p-4 flex flex-col sm:flex-row justify-between items-center shadow-md transition duration-300 ease-in-out transform hover:scale-105 capitalize ${
-      item.note >= 10
-        ? "bg-green-200 text-green-900"
-        : "bg-red-200 text-red-900"
+    className={`border border-gray-400 text-gray-800 rounded-lg p-4 flex flex-col sm:flex-row justify-between items-center shadow-md transition duration-300 ease-in-out transform hover:scale-105 capitalize ${
+      item.note == null
+        ? "bg-gray-300/90"
+        : item.note >= 10
+          ? "bg-green-200 text-green-900"
+          : "bg-red-200 text-red-900"
     }`}
     style={{ marginBottom: "0.5rem" }} // Reduced bottom margin to 0.5rem
   >
@@ -146,7 +148,7 @@ const TdNoteItem = ({ item }: any) => (
     </p>
     <div className="flex gap-4 mt-2 sm:mt-0">
       <p className="font-bold text-lg">
-        {item.note != null ? item.note : "Empty"}
+        {item.note == null ? "Empty" : item.note}
       </p>
       <p className="font-bold text-lg">{item.apCode}</p>
     </div>
@@ -163,7 +165,7 @@ const ExamNotes = ({ item }: any) => {
         <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 capitalize">
           {item.normal.map((course: any) => (
             <div
-              className={`text-gray-800 rounded-lg p-4 shadow-md transition transform hover:scale-105 border border-gray-900 ${
+              className={`text-gray-800 rounded-lg p-4 shadow-md transition transform hover:scale-105 border border-gray-400 ${
                 course.noteExamen >= 10
                   ? "bg-green-200 text-green-900"
                   : "bg-red-200 text-red-900"
@@ -186,16 +188,18 @@ const ExamNotes = ({ item }: any) => {
           <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 capitalize">
             {item.rattrappage.map((course: any) => (
               <div
-                className={`rounded-lg p-4 shadow-md transition transform hover:scale-105 border border-gray-900 ${
-                  course.noteExamen >= 10
-                    ? "bg-green-200 text-green-700"
-                    : "bg-red-200 text-red-700"
+                className={`rounded-lg p-4 shadow-md transition transform hover:scale-105 border border-gray-400 ${
+                  course.noteExamen == null
+                    ? "bg-gray-300/90"
+                    : course.noteExamen >= 10
+                      ? "bg-green-200 text-green-700"
+                      : "bg-red-200 text-red-700"
                 }`}
                 key={course.id}
               >
                 <h4 className="font-semibold">{course.mcLibelleFr}</h4>
                 <p className="font-bold text-lg">
-                  {course.noteExamen != null ? course.noteExamen : "Empty"}
+                  {course.noteExamen == null ? "Empty" : course.noteExamen}
                 </p>
               </div>
             ))}
@@ -213,7 +217,7 @@ const renderYearResultItem = (result: any) => {
 
   return (
     <div
-      className={`${ueBgClass} border border-gray-900 w-full max-w-3xl mx-auto p-6 rounded-lg shadow-lg capitalize`}
+      className={`${ueBgClass} border border-gray-400 w-full max-w-3xl mx-auto p-6 rounded-lg shadow-lg capitalize`}
     >
       <p className="text-lg text-gray-700 mb-2 font-semibold">
         <span>Average: </span>
@@ -233,40 +237,40 @@ const renderYearResultItem = (result: any) => {
 
 const renderSemesterResultItem = (result: any, index: any) => {
   const { moyenne, creditAcquis, bilanUes } = result
-  const moyenneClass = moyenne >= 10.0 ? "text-green-800" : "text-red-800"
+  const moyenneClass = moyenne >= 10.0 ? "text-green-700" : "text-red-700" // Softer green and red
 
   return (
     <div
       className={`${
-        moyenne < 10 ? "bg-red-200" : "bg-green-200"
-      } border border-gray-900 w-full max-w-3xl mx-auto p-6 rounded-lg shadow-lg`}
+        moyenne < 10 ? "bg-red-200/65" : "bg-green-200/65"
+      } border border-gray-400 w-full max-w-3xl mx-auto p-6 rounded-lg shadow-lg`}
       key={index}
     >
       <div className="mb-6">
-        <p className="text-lg text-gray-800 font-bold">
+        <p className="text-lg text-gray-700 font-bold">
           <span>Average: </span>
           <span className={moyenneClass}>{moyenne}</span>
         </p>
-        <p className="text-lg text-gray-800 font-bold">
+        <p className="text-lg text-gray-700 font-bold">
           <span>Credits: </span>
           <span className={moyenneClass}>{creditAcquis}</span>
         </p>
       </div>
       <div>
         {bilanUes.map((ue: any, ueIndex: any) => {
-          const ueBgClass = ue.moyenne > 10 ? "bg-green-100" : "bg-red-100"
+          const ueBgClass = ue.moyenne > 10 ? "bg-green-50" : "bg-red-50" // Softer background colors
           const ueAverageClass =
             ue.moyenne >= 10.0 ? "text-green-700" : "text-red-700"
 
           return (
             <div
               key={ueIndex}
-              className={`mb-6 p-4 ${ueBgClass} border border-gray-900 rounded-lg capitalize`}
+              className={`mb-6 p-4 ${ueBgClass} border border-gray-400 rounded-lg capitalize`}
             >
               <h3 className="text-xl font-semibold text-gray-800 mb-2">
                 {ue.ueNatureLcFr}: {ue.ueLibelleFr}
               </h3>
-              <p className="text-lg text-gray-800 mb-2">
+              <p className="text-lg text-gray-700 mb-2">
                 <span className="font-semibold">Average: </span>
                 <span className={`${ueAverageClass} font-bold`}>
                   {ue.moyenne}
@@ -282,14 +286,14 @@ const renderSemesterResultItem = (result: any, index: any) => {
                   return (
                     <div
                       key={mcIndex}
-                      className="mb-4 p-3 border border-gray-900 rounded-lg"
+                      className="mb-4 p-3 border border-gray-400 rounded-lg"
                     >
                       <h4 className="text-lg font-semibold text-gray-800 mb-1">
                         Module:{" "}
                         <span className={mcAverageClass}>{mc.mcLibelleFr}</span>
                       </h4>
                       <p className="text-gray-800">
-                        <span className="font-semibold">Module Average: </span>
+                        <span className="font-semibold">Average: </span>
                         <span className={`${mcAverageClass} font-bold`}>
                           {mc.moyenneGenerale}
                         </span>
