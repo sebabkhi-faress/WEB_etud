@@ -44,7 +44,7 @@ const Navbar = () => {
     { href: "/about", label: "About", Icon: QuestionMarkCircleIcon },
     {
       href: "https://t.me/OSCommunityChat",
-      label: "Telegram",
+      label: "Contact",
       Icon: HomeIcon,
     },
   ]
@@ -53,7 +53,7 @@ const Navbar = () => {
     { href: "/about", label: "About", Icon: QuestionMarkCircleIcon },
     {
       href: "https://t.me/OSCommunityChat",
-      label: "Telegram",
+      label: "Contact",
       Icon: HomeIcon,
     },
   ]
