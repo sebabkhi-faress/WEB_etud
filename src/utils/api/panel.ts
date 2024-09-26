@@ -122,7 +122,7 @@ export const getExamsNotes = async (id: number) => {
       token,
     )
 
-    logger.info("Exam Notes fetched successfully", user, "getExamsNotes")
+    logger.info("Exam Notes Fetched Successfully", user, "getExamsNotes")
     const data = parseData(res.data)
     cache.set(cacheKey, data)
     return data
