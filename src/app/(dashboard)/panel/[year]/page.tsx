@@ -66,7 +66,7 @@ export default async function PeriodTab({ params }: any) {
         <TabPanel>{yearResults && renderYearResultItem(yearResults)}</TabPanel>
         <TabPanel className="flex overflow-x-auto p-1 justify-center">
           {group && Object.keys(group).length > 0 && (
-            <div className="bg-gray-200 border border-gray-400 w-full max-w-7xl mx-auto p-8 rounded-lg shadow-md">
+            <div className="bg-gradient-to-r from-gray-200 to-gray-300/90 border border-gray-400 w-full max-w-7xl mx-auto p-8 rounded-lg shadow-md">
               <div
                 className={`grid gap-8 ${
                   Object.keys(group).length === 1
@@ -166,9 +166,11 @@ const ExamNotes = ({ item }: any) => {
           {item.normal.map((course: any) => (
             <div
               className={`text-gray-800 rounded-lg p-4 shadow-md transition transform hover:scale-105 border border-gray-400 ${
-                course.noteExamen >= 10
-                  ? "bg-green-200 text-green-900"
-                  : "bg-red-200 text-red-900"
+                course.noteExamen == null
+                  ? "bg-gray-300/90"
+                  : course.noteExamen >= 10
+                    ? "bg-green-200 text-green-700"
+                    : "bg-red-200 text-red-700"
               }`}
               key={course.id}
             >
