@@ -10,7 +10,7 @@ export const getProfileData = async () => {
   const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("profile cache hit", user, "/profile")
+    logger.info("Profile Cache Hit", user, "getProfileData")
     return cachedData
   }
 
@@ -39,15 +39,15 @@ export const getProfileData = async () => {
       token,
     )
 
-    logger.info("Profile data fetched successfully", user, "/profile")
+    logger.info("Profile Data Fetched Successfully", user, "getProfileData")
     const data = parseData(response.data[0])
     updateCount(user)
     cache.set(cacheKey, data)
 
     return data
   } catch (error) {
-    logger.error("Error fetching profile data", user, "/profile")
-    throw new Error("Error fetching profile data")
+    logger.error("Error Fetching Profile Data", user, "getProfileData")
+    throw new Error("Error Fetching Profile Data")
   }
 }
 
@@ -58,7 +58,7 @@ export const getImage = async () => {
   const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Image cache hit", user, "/profile")
+    logger.info("Image Cache Hit", user, "getImage")
     return cachedData
   }
 
@@ -68,12 +68,12 @@ export const getImage = async () => {
       token,
     )
 
-    logger.info("Image fetched successfully", user, "/profile")
+    logger.info("Image Fetched Successfully", user, "getImage")
     cache.set(cacheKey, image.data)
     return image.data
   } catch (error) {
-    logger.error("Error fetching image", user, "/profile")
-    return null
+    logger.error("Error Fetching Image", user, "getImage")
+    throw new Error("Error Fetching Image")
   }
 }
 
@@ -84,7 +84,7 @@ export const getLogo = async () => {
   const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("logo cache hit", user, "/profile")
+    logger.info("Logo Cache Hit", user, "getLogo")
     return cachedData
   }
 
@@ -94,11 +94,11 @@ export const getLogo = async () => {
       token,
     )
 
-    logger.info("Logo fetched successfully", user, "/profile")
+    logger.info("Logo Fetched Successfully", user, "getLogo")
     cache.set(cacheKey, logo.data)
     return logo.data
   } catch (error) {
-    logger.error("Error fetching logo", user, "/profile")
-    return null
+    logger.error("Error Fetching Logo", user, "getLogo")
+    throw new Error("Error Fetching Logo")
   }
 }
