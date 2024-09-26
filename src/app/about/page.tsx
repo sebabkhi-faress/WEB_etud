@@ -27,7 +27,7 @@ const Layout = async () => {
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-4">
           مرحبًا بكم في WebEtu
         </h1>
-        <p className="text-lg text-gray-600 mt-2">جامعة باجي مختار</p>
+        <p className="text-lg text-gray-600 mt-2 font-bold">جامعة باجي مختار</p>
       </header>
 
       <section className="mb-10">
