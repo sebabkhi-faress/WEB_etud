@@ -213,7 +213,7 @@ const ExamNotes = ({ item }: any) => {
 const renderYearResultItem = (result: any) => {
   const { moyenne, typeDecisionLibelleFr, creditAcquis } = result[0]
   const averageClass = moyenne >= 10.0 ? "text-green-700" : "text-red-700"
-  const ueBgClass = moyenne > 10 ? "bg-green-100" : "bg-red-100"
+  const ueBgClass = moyenne >= 10 ? "bg-green-100" : "bg-red-100"
 
   return (
     <div
@@ -258,7 +258,7 @@ const renderSemesterResultItem = (result: any, index: any) => {
       </div>
       <div>
         {bilanUes.map((ue: any, ueIndex: any) => {
-          const ueBgClass = ue.moyenne > 10 ? "bg-green-50" : "bg-red-50" // Softer background colors
+          const ueBgClass = ue.moyenne >= 10 ? "bg-green-50" : "bg-red-50" // Softer background colors
           const ueAverageClass =
             ue.moyenne >= 10.0 ? "text-green-700" : "text-red-700"
 
