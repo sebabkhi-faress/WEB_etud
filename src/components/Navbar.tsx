@@ -123,7 +123,7 @@ const Navbar = () => {
                   style={{ padding: "0.5rem 1rem" }} // Add padding here
                 >
                   <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
-                  Log Out
+                  Exit
                 </button>
               </>
             ) : (
@@ -145,7 +145,7 @@ const Navbar = () => {
             style={{ padding: "0.5rem 1rem" }} // Add padding here
           >
             <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
-            Log Out
+            Exit
           </button>
         ) : (
           <div className="flex gap-4">{logoutMenuItems.map(renderLink)}</div>
