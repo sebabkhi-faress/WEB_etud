@@ -1,5 +1,6 @@
 import { getCount } from "@/utils/counter"
 import Image from "next/image"
+import "@fortawesome/fontawesome-free/css/all.min.css"
 
 export const metadata = {
   title: "WebEtu - About",
@@ -45,7 +46,13 @@ const Layout = async () => {
           ما هو هذا الموقع؟
         </h2>
         <p className="text-lg leading-relaxed text-gray-700">
-          هذا الموقع هو نسخة ويب بديلة غير رسمية من تطبيق WebEtu
+          هذا الموقع هو نسخة ويب بديلة غير رسمية من تطبيق{" "}
+          <a
+            href="https://play.google.com/store/apps/details?id=app.progres.webetu&hl=en"
+            className="font-bold underline"
+          >
+            WebEtu
+          </a>
         </p>
       </section>
 
@@ -88,15 +95,15 @@ const Layout = async () => {
       </section>
 
       <footer className="text-center mt-12">
-        <p className="font-bold text-lg text-gray-600">
-          Telegram:{" "}
-          <a
-            href="https://t.me/OSCommunityChat"
-            className="text-green-600 hover:text-green-700 hover:underline transition duration-200"
-          >
-            t.me/OSCommunityChat
-          </a>
-        </p>
+        <a
+          href="https://t.me/OSCommunityChat"
+          className="text-green-600 hover:text-green-700 transition duration-200"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="fab fa-telegram-plane text-4xl"></i>{" "}
+          {/* Increased size here */}
+        </a>
         <p className="text-gray-500 text-sm mt-4">
           © 2024 OSCA - All Rights Reserved
         </p>
