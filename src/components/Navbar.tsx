@@ -7,6 +7,7 @@ import Cookies from "js-cookie"
 import { usePathname } from "next/navigation"
 
 import {
+  HomeIcon,
   UserIcon,
   ArrowLeftStartOnRectangleIcon,
   ArrowRightEndOnRectangleIcon,
@@ -41,10 +42,20 @@ const Navbar = () => {
     { href: "/profile", label: "Profile", Icon: UserIcon },
     { href: "/panel", label: "Panel", Icon: PencilIcon },
     { href: "/about", label: "About", Icon: QuestionMarkCircleIcon },
+    {
+      href: "https://t.me/OSCommunityChat",
+      label: "Telegram",
+      Icon: HomeIcon,
+    },
   ]
   const logoutMenuItems = [
     { href: "/", label: "Login", Icon: ArrowRightEndOnRectangleIcon },
     { href: "/about", label: "About", Icon: QuestionMarkCircleIcon },
+    {
+      href: "https://t.me/OSCommunityChat",
+      label: "Telegram",
+      Icon: HomeIcon,
+    },
   ]
   const renderLink = ({ href, label, Icon }: any) => {
     const regex = new RegExp(`^${href}(/[a-zA-Z0-9]+)*$`)
@@ -137,13 +148,7 @@ const Navbar = () => {
             Log Out
           </button>
         ) : (
-          <div className="flex gap-4">
-            {renderLink({
-              href: "/about",
-              label: "About",
-              Icon: QuestionMarkCircleIcon,
-            })}
-          </div>
+          <div className="flex gap-4">{logoutMenuItems.map(renderLink)}</div>
         )}
       </div>
     </nav>
