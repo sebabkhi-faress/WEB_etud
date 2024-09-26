@@ -21,7 +21,7 @@ const Layout = async () => {
   })
 
   return (
-    <div className="bg-gray-200 border border-gray-900 w-full h-max max-w-3xl m-5 p-7 flex flex-col gap-8 rounded-lg shadow-5x5 box-border capitalize">
+    <div className="bg-gray-200 border border-gray-400 w-full h-max max-w-3xl m-5 p-7 flex flex-col gap-8 rounded-lg shadow-5x5 box-border capitalize">
       <div className="text-center flex justify-between items-center">
         <div className="transition duration-300 ease-in-out transform hover:scale-105">
           <Image
