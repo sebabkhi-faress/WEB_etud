@@ -7,6 +7,7 @@ import Cookies from "js-cookie"
 import { usePathname } from "next/navigation"
 
 import {
+  HomeIcon,
   UserIcon,
   ArrowLeftStartOnRectangleIcon,
   ArrowRightEndOnRectangleIcon,
@@ -41,10 +42,20 @@ const Navbar = () => {
     { href: "/profile", label: "Profile", Icon: UserIcon },
     { href: "/panel", label: "Panel", Icon: PencilIcon },
     { href: "/about", label: "About", Icon: QuestionMarkCircleIcon },
+    {
+      href: "https://t.me/OSCommunityChat",
+      label: "Contact",
+      Icon: HomeIcon,
+    },
   ]
   const logoutMenuItems = [
     { href: "/", label: "Login", Icon: ArrowRightEndOnRectangleIcon },
     { href: "/about", label: "About", Icon: QuestionMarkCircleIcon },
+    {
+      href: "https://t.me/OSCommunityChat",
+      label: "Contact",
+      Icon: HomeIcon,
+    },
   ]
   const renderLink = ({ href, label, Icon }: any) => {
     const regex = new RegExp(`^${href}(/[a-zA-Z0-9]+)*$`)
@@ -97,7 +108,7 @@ const Navbar = () => {
       </div>
 
       {isMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 w-full bg-green-600 shadow-lg z-50">
+        <div className="lg:hidden md:px-3 absolute top-full left-0 w-full bg-green-600 shadow-lg z-50">
           <div className="flex flex-col gap-2 px-6 py-4">
             {user ? (
               <>
@@ -112,7 +123,7 @@ const Navbar = () => {
                   style={{ padding: "0.5rem 1rem" }} // Add padding here
                 >
                   <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
-                  Log Out
+                  Exit
                 </button>
               </>
             ) : (
@@ -134,16 +145,10 @@ const Navbar = () => {
             style={{ padding: "0.5rem 1rem" }} // Add padding here
           >
             <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
-            Log Out
+            Exit
           </button>
         ) : (
-          <div className="flex gap-4">
-            {renderLink({
-              href: "/about",
-              label: "About",
-              Icon: QuestionMarkCircleIcon,
-            })}
-          </div>
+          <div className="flex gap-4">{logoutMenuItems.map(renderLink)}</div>
         )}
       </div>
     </nav>

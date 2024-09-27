@@ -1,5 +1,6 @@
 import { getCount } from "@/utils/counter"
 import Image from "next/image"
+import "@fortawesome/fontawesome-free/css/all.min.css"
 
 export const metadata = {
   title: "WebEtu - About",
@@ -26,7 +27,7 @@ const Layout = async () => {
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-4">
           مرحبًا بكم في WebEtu
         </h1>
-        <p className="text-lg text-gray-600 mt-2">جامعة باجي مختار</p>
+        <p className="text-lg text-gray-600 mt-2 font-bold">جامعة باجي مختار</p>
       </header>
 
       <section className="mb-10">
@@ -45,7 +46,13 @@ const Layout = async () => {
           ما هو هذا الموقع؟
         </h2>
         <p className="text-lg leading-relaxed text-gray-700">
-          هذا الموقع هو نسخة ويب بديلة غير رسمية من تطبيق WebEtu
+          هذا الموقع هو نسخة ويب بديلة غير رسمية من تطبيق{" "}
+          <a
+            href="https://play.google.com/store/apps/details?id=app.progres.webetu&hl=en"
+            className="font-bold underline"
+          >
+            WebEtu
+          </a>
         </p>
       </section>
 
@@ -67,6 +74,17 @@ const Layout = async () => {
           </li>
         </ul>
       </section>
+
+      <section className="mb-10">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-green-700 mb-4">
+          أسماء المطورين
+        </h2>
+        <ul className="list-disc list-inside text-gray-700 text-lg leading-relaxed space-y-2">
+          <li className="pr-4">قصاص أحمد عبد النور</li>
+          <li className="pr-4">شدادي خليل عبد الرحمان</li>
+        </ul>
+      </section>
+
       <section className="mb-10">
         <h2 className="text-2xl sm:text-3xl font-semibold text-green-700 mb-4">
           عدد المستخدمين منذ أخر تحديث
@@ -77,15 +95,15 @@ const Layout = async () => {
       </section>
 
       <footer className="text-center mt-12">
-        <p className="font-bold text-lg text-gray-600">
-          Telegram:{" "}
-          <a
-            href="https://t.me/OSCommunityChat"
-            className="text-green-600 hover:text-green-700 hover:underline transition duration-200"
-          >
-            t.me/OSCommunityChat
-          </a>
-        </p>
+        <a
+          href="https://t.me/OSCommunityChat"
+          className="text-green-600 hover:text-green-700 transition duration-200"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="fab fa-telegram-plane text-4xl"></i>{" "}
+          {/* Increased size here */}
+        </a>
         <p className="text-gray-500 text-sm mt-4">
           © 2024 OSCA - All Rights Reserved
         </p>

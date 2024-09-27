@@ -18,11 +18,11 @@ export const getDias = async () => {
       `${process.env.PROGRES_API}/bac/${uuid}/dias`,
       token,
     )
-    logger.info("Dias Fetched Successfully", user, "/year")
+    logger.info("Dias Fetched Successfully", user, "getDias")
     cache.set(cacheKey, response.data)
     return response.data
   } catch (error: any) {
-    logger.error(`Error - ${error}`, user, "/year")
+    logger.error(`Error - ${error}`, user, "getDias")
     throw new Error(error)
   }
 }
@@ -34,7 +34,7 @@ export const getTdTp = async (id: number) => {
   const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Notes Cache Hit", user, "/notes")
+    logger.info("Notes Cache Hit", user, "getTdTp")
 
     return cachedData
   }
@@ -64,13 +64,13 @@ export const getTdTp = async (id: number) => {
       token,
     )
 
-    logger.info("Notes Fetched Successfully", user, "/notes")
+    logger.info("Notes Fetched Successfully", user, "getTdTp")
     const data = parseData(res.data)
     cache.set(cacheKey, data)
 
     return data
   } catch (error: any) {
-    logger.error("Error Fetching Tp And Td Notes", user, "/notes")
+    logger.error("Error Fetching Tp And Td Notes", user, "getTdTp")
     return { Sem1TdTp: null, Sem2TdTp: null }
   }
 }
@@ -82,7 +82,7 @@ export const getExamsNotes = async (id: number) => {
   const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Exams Cache Hit", user, "/exams")
+    logger.info("Exams Cache Hit", user, "getExamsNotes")
     return cachedData
   }
 
@@ -122,12 +122,12 @@ export const getExamsNotes = async (id: number) => {
       token,
     )
 
-    logger.info("Exam Notes fetched successfully", user, "/exams")
+    logger.info("Exam Notes Fetched Successfully", user, "getExamsNotes")
     const data = parseData(res.data)
     cache.set(cacheKey, data)
     return data
   } catch (error: any) {
-    logger.error("Error Fetching Exam Notes", user, "/exams")
+    logger.error("Error Fetching Exam Notes", user, "getExamsNotes")
     return { Sem1Exams: null, Sem2Exams: null }
   }
 }
@@ -153,7 +153,11 @@ export const getSemesterAcademicResults = async (id: number) => {
   }
 
   if (cachedData) {
-    logger.info("Semesters Transcripts Cache Hit", user, "/transcripts")
+    logger.info(
+      "Semesters Transcripts Cache Hit",
+      user,
+      "getSemesterAcademicResults",
+    )
     return cachedData
   }
 
@@ -166,7 +170,7 @@ export const getSemesterAcademicResults = async (id: number) => {
     logger.info(
       "Fetched Semesters Academic Results Successfully",
       user,
-      "/year",
+      "getSemesterAcademicResults",
     )
     const data = parseData(res.data)
 
@@ -174,7 +178,11 @@ export const getSemesterAcademicResults = async (id: number) => {
 
     return data
   } catch (error) {
-    logger.error("Error Fetching Semesters Academic Results", user, "/year")
+    logger.error(
+      "Error Fetching Semesters Academic Results",
+      user,
+      "getSemesterAcademicResults",
+    )
     return { Sem1Results: null, Sem2Results: null }
   }
 }
@@ -186,7 +194,7 @@ export const getYearAcademicResults = async (id: number) => {
   const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Year Transcript Cache Hit", user, "/transcripts")
+    logger.info("Year Transcript Cache Hit", user, "getYearAcademicResults")
     return cachedData
   }
 
@@ -197,12 +205,21 @@ export const getYearAcademicResults = async (id: number) => {
     )
 
     const data = res.data
-    logger.info("Fetched Year Academic Results Successfully", user, "/year")
+    logger.info(
+      "Fetched Year Academic Results Successfully",
+      user,
+      "getYearAcademicResults",
+    )
     cache.set(cacheKey, data)
 
     return data
   } catch (error) {
-    logger.error("Error Fetching Year Academic Results", user, "/year")
+    console.log(error)
+    logger.error(
+      "Error Fetching Year Academic Results",
+      user,
+      "getYearAcademicResults",
+    )
     return null
   }
 }
@@ -214,7 +231,7 @@ export const getGroup = async (id: number) => {
   const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Group Cache Hit", user, "/group")
+    logger.info("Group Cache Hit", user, "getGroup")
     return cachedData
   }
 
@@ -239,11 +256,11 @@ export const getGroup = async (id: number) => {
 
     const data = parseData(res.data)
 
-    logger.info("Fetched Group And Section Data Successfully", user, "/group")
+    logger.info("Fetched Group And Section Data Successfully", user, "getGroup")
     cache.set(cacheKey, data)
     return data
   } catch (error) {
-    logger.error("Error Fetching Group And Section Info", user, "/group")
+    logger.error("Error Fetching Group And Section Info", user, "getGroup")
     return null
   }
 }
