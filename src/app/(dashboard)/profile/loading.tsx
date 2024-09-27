@@ -1,13 +1,5 @@
-"use client"
-
-import { ArrowPathIcon } from "@heroicons/react/24/outline"
-
-const Profile = () => {
+export default function ProfileLoading() {
   return (
-    <div className="bg-gray-200 border border-green-700 w-full h-screen max-w-3xl m-5 p-8 flex justify-center items-centen rounded-lg shadow-2xl box-border">
-      <ArrowPathIcon className="animate-spin h-16 w-16" />
-    </div>
+    <div className="animate-loading border border-green-700 lg:w-full max-w-3xl flex justify-center items-center rounded-lg shadow-2xl absolute top-5 bottom-5 right-5 left-5 lg:left-auto lg:right-auto"></div>
   )
 }
-
-export default Profile
