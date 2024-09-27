@@ -42,20 +42,10 @@ const Navbar = () => {
     { href: "/profile", label: "Profile", Icon: UserIcon },
     { href: "/panel", label: "Panel", Icon: PencilIcon },
     { href: "/about", label: "About", Icon: QuestionMarkCircleIcon },
-    {
-      href: "https://t.me/OSCommunityChat",
-      label: "Contact",
-      Icon: HomeIcon,
-    },
   ]
   const logoutMenuItems = [
     { href: "/", label: "Login", Icon: ArrowRightEndOnRectangleIcon },
     { href: "/about", label: "About", Icon: QuestionMarkCircleIcon },
-    {
-      href: "https://t.me/OSCommunityChat",
-      label: "Contact",
-      Icon: HomeIcon,
-    },
   ]
   const renderLink = ({ href, label, Icon }: any) => {
     const regex = new RegExp(`^${href}(/[a-zA-Z0-9]+)*$`)
@@ -68,7 +58,6 @@ const Navbar = () => {
           regex.test(pathname) ? "bg-white" : "bg-white/50"
         }`}
         onClick={closeMenu}
-        style={{ padding: "0.5rem 1rem" }} // Add padding here
       >
         <Icon className="h-6 w-6" />
         {label}
@@ -113,6 +102,16 @@ const Navbar = () => {
             {user ? (
               <>
                 {menuItems.map(renderLink)}
+                <Link
+                  prefetch={false}
+                  target="#"
+                  href={"https://t.me/OSCommunityChat"}
+                  className={`hover:bg-[#1c93e3] bg-[#1c93e3]/70 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
+                  onClick={closeMenu} // Add padding here
+                >
+                  <i className="fab fa-telegram-plane"></i>
+                  Join Telegram
+                </Link>
                 <hr className="" />
                 <button
                   className="bg-red-200/70 text-red-800 scale-105 flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
@@ -120,21 +119,46 @@ const Navbar = () => {
                     signOut()
                     closeMenu()
                   }}
-                  style={{ padding: "0.5rem 1rem" }} // Add padding here
                 >
                   <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
                   Exit
                 </button>
               </>
             ) : (
-              logoutMenuItems.map(renderLink)
+              <>
+                {logoutMenuItems.map(renderLink)}
+                <Link
+                  prefetch={false}
+                  target="#"
+                  href={"https://t.me/OSCommunityChat"}
+                  className={`hover:bg-[#1c93e3] bg-[#1c93e3]/70 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
+                  onClick={closeMenu} // Add padding here
+                >
+                  <i className="fab fa-telegram-plane"></i>
+                  Join Telegram
+                </Link>
+              </>
             )}
           </div>
         </div>
       )}
 
       <div className="hidden lg:flex gap-4 items-center flex-grow justify-center">
-        {user && <div className="flex gap-4">{menuItems.map(renderLink)}</div>}
+        {user && (
+          <div className="flex gap-4">
+            {menuItems.map(renderLink)}
+            <Link
+              prefetch={false}
+              target="#"
+              href={"https://t.me/OSCommunityChat"}
+              className={`hover:bg-[#1c93e3] bg-[#1c93e3]/70 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
+              onClick={closeMenu}
+            >
+              <i className="fab fa-telegram-plane"></i>
+              Join
+            </Link>
+          </div>
+        )}
       </div>
 
       <div className="hidden lg:flex gap-4 items-center">
@@ -142,13 +166,24 @@ const Navbar = () => {
           <button
             className="flex items-center gap-2 bg-red-200/70 text-red-800 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
             onClick={signOut}
-            style={{ padding: "0.5rem 1rem" }} // Add padding here
           >
             <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
             Exit
           </button>
         ) : (
-          <div className="flex gap-4">{logoutMenuItems.map(renderLink)}</div>
+          <div className="flex gap-4">
+            {logoutMenuItems.map(renderLink)}
+            <Link
+              prefetch={false}
+              target="#"
+              href={"https://t.me/OSCommunityChat"}
+              className={`hover:bg-[#1c93e3] bg-[#1c93e3]/70 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
+              onClick={closeMenu}
+            >
+              <i className="fab fa-telegram-plane"></i>
+              Join
+            </Link>
+          </div>
         )}
       </div>
     </nav>

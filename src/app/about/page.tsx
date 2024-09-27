@@ -1,6 +1,5 @@
 import { getCount } from "@/utils/counter"
 import Image from "next/image"
-import "@fortawesome/fontawesome-free/css/all.min.css"
 
 export const metadata = {
   title: "WebEtu - About",
