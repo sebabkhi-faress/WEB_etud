@@ -35,7 +35,7 @@ export const getProfileData = async () => {
 
   try {
     const response = await fetchData(
-      `https://progres.mesrs.dz/api/infos/bac/${uuid}/dias`,
+      `${process.env.PROGRES_API}/bac/${uuid}/dias`,
       token,
     )
 
@@ -64,7 +64,7 @@ export const getImage = async () => {
 
   try {
     const image = await fetchData(
-      `https://progres.mesrs.dz/api/infos/image/${uuid}`,
+      `${process.env.PROGRES_API}/image/${uuid}`,
       token,
     )
 
@@ -90,7 +90,7 @@ export const getLogo = async () => {
 
   try {
     const logo = await fetchData(
-      `https://progres.mesrs.dz/api/infos/logoEtablissement/${EtabId}`,
+      `${process.env.PROGRES_API}/logoEtablissement/${EtabId}`,
       token,
     )
 

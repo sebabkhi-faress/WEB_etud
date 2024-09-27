@@ -15,7 +15,7 @@ export const getDias = async () => {
 
   try {
     const response = await fetchData(
-      `https://progres.mesrs.dz/api/infos/bac/${uuid}/dias`,
+      `${process.env.PROGRES_API}/bac/${uuid}/dias`,
       token,
     )
     logger.info("Dias Fetched Successfully", user, "/year")
@@ -60,7 +60,7 @@ export const getTdTp = async (id: number) => {
 
   try {
     const res = await fetchData(
-      `https://progres.mesrs.dz/api/infos/controleContinue/dia/${id}/notesCC`,
+      `${process.env.PROGRES_API}/controleContinue/dia/${id}/notesCC`,
       token,
     )
 
@@ -118,7 +118,7 @@ export const getExamsNotes = async (id: number) => {
 
   try {
     const res = await fetchData(
-      `https://progres.mesrs.dz/api/infos/planningSession/dia/${id}/noteExamens`,
+      `${process.env.PROGRES_API}/planningSession/dia/${id}/noteExamens`,
       token,
     )
 
@@ -159,7 +159,7 @@ export const getSemesterAcademicResults = async (id: number) => {
 
   try {
     const res = await fetchData(
-      `https://progres.mesrs.dz/api/infos/bac/${token}/dias/${id}/periode/bilans`,
+      `${process.env.PROGRES_API}/bac/${token}/dias/${id}/periode/bilans`,
       token,
     )
 
@@ -192,7 +192,7 @@ export const getYearAcademicResults = async (id: number) => {
 
   try {
     const res = await fetchData(
-      `https://progres.mesrs.dz/api/infos/bac/${token}/dia/${id}/annuel/bilan`,
+      `${process.env.PROGRES_API}/bac/${token}/dia/${id}/annuel/bilan`,
       token,
     )
 
@@ -233,7 +233,7 @@ export const getGroup = async (id: number) => {
 
   try {
     const res = await fetchData(
-      `https://progres.mesrs.dz/api/infos/dia/${id}/groups`,
+      `${process.env.PROGRES_API}/dia/${id}/groups`,
       token,
     )
 
