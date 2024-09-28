@@ -25,7 +25,11 @@ const Layout = async () => {
       <div className="text-center flex justify-between items-center">
         <div className="transition duration-300 ease-in-out transform hover:scale-105">
           <Image
-            src={image ? `data:image/png;base64,${image}` : "/unavailable.png"}
+            src={
+              image
+                ? `data:image/png;base64,${image}`
+                : "/images/unavailable.png"
+            }
             alt="Profile Image"
             width={140}
             height={140}
@@ -34,7 +38,9 @@ const Layout = async () => {
         </div>
         <div className="transition duration-300 ease-in-out transform hover:scale-105 relative flex items-center justify-center">
           <Image
-            src={logo ? `data:image/png;base64,${logo}` : "/unavailable.png"}
+            src={
+              logo ? `data:image/png;base64,${logo}` : "/images/unavailable.png"
+            }
             alt="University Logo"
             width={140}
             height={140}

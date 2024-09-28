@@ -69,7 +69,12 @@ const Navbar = () => {
     <nav className="bg-green-600 text-white py-3 px-3 md:px-8 flex items-center justify-between relative z-50">
       <div className="flex items-center flex-shrink-0">
         <Link href="/">
-          <Image src="/logo-white.png" alt="Logo" width={50} height={60} />
+          <Image
+            src="/images/logo-white.png"
+            alt="Logo"
+            width={50}
+            height={60}
+          />
         </Link>
       </div>
 
@@ -109,7 +114,10 @@ const Navbar = () => {
                   className={`hover:bg-blue-600/80 bg-blue-700/40 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
                   onClick={closeMenu} // Add padding here
                 >
-                  <i className="fab fa-telegram-plane"></i>
+                  <i
+                    className="fab fa-telegram-plane fa-lg"
+                    style={{ fontSize: "1.3em" }}
+                  ></i>
                   Join
                 </Link>
                 <hr className="" />
@@ -134,7 +142,10 @@ const Navbar = () => {
                   className={`hover:bg-blue-600/80 bg-blue-700/40 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
                   onClick={closeMenu} // Add padding here
                 >
-                  <i className="fab fa-telegram-plane"></i>
+                  <i
+                    className="fab fa-telegram-plane fa-lg"
+                    style={{ fontSize: "1.3em" }}
+                  ></i>
                   Join
                 </Link>
               </>
@@ -154,7 +165,10 @@ const Navbar = () => {
               className={`hover:bg-blue-600/80 bg-blue-700/40 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
               onClick={closeMenu}
             >
-              <i className="fab fa-telegram-plane"></i>
+              <i
+                className="fab fa-telegram-plane fa-lg"
+                style={{ fontSize: "1.3em" }}
+              ></i>
               Join
             </Link>
           </div>
@@ -180,7 +194,10 @@ const Navbar = () => {
               className={`hover:bg-blue-600/80 bg-blue-700/40 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
               onClick={closeMenu}
             >
-              <i className="fab fa-telegram-plane"></i>
+              <i
+                className="fab fa-telegram-plane fa-lg"
+                style={{ fontSize: "1.3em" }}
+              ></i>
               Join
             </Link>
           </div>

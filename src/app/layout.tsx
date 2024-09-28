@@ -8,7 +8,18 @@ export const metadata: Metadata = {
   title: "WebEtu",
   description: "Made By OSCA",
   icons: {
-    icon: "/logo-white.png",
+    icon: [
+      {
+        media: "(prefers-color-scheme: light)",
+        url: "/images/logo-dark.png",
+        href: "/images/logo-dark.png",
+      },
+      {
+        media: "(prefers-color-scheme: dark)",
+        url: "/images/logo-white.png",
+        href: "/images/logo-white.png",
+      },
+    ],
   },
 }
 

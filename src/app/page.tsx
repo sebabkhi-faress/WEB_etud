@@ -70,7 +70,7 @@ export default function LoginPage() {
   return (
     <div className="bg-gray-100 p-7 rounded-lg shadow-md border border-green-600 w-full max-w-xs sm:max-w-lg md:max-w-xl text-center">
       <Image
-        src="/logo.png"
+        src="/images/logo.png"
         alt="Logo"
         width={150}
         height={150}
