@@ -43,16 +43,16 @@ export default async function PeriodTab({ params }: any) {
   return (
     <TabGroup className="flex flex-col justify-start items-center gap-4">
       <TabList className="flex gap-2 overflow-x-auto">
-        <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
+        <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800">
           Semester 1
         </Tab>
-        <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
+        <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800">
           Semester 2
         </Tab>
-        <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
+        <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800">
           Annual
         </Tab>
-        <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
+        <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800">
           Group
         </Tab>
       </TabList>
@@ -79,7 +79,7 @@ export default async function PeriodTab({ params }: any) {
                     <h2 className="w-full text-2xl rounded-lg py-4 px-6 text-center bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold shadow-md">
                       {semester}
                     </h2>
-                    <div className="border border-gray-200 bg-white rounded-lg p-6 mt-4 shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl">
+                    <div className="border border-gray-400 bg-white rounded-lg p-6 mt-4 shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl">
                       <p className="mb-4 text-lg text-gray-700 whitespace-nowrap">
                         <span className="font-semibold text-gray-800">
                           Section:
@@ -108,13 +108,13 @@ const SemesterTab = ({ td, exam, result }: any) => {
   return (
     <TabGroup className="flex flex-col justify-center items-center gap-4">
       <TabList className="flex gap-2 overflow-x-auto">
-        <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
+        <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800">
           Notes
         </Tab>
-        <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
+        <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800">
           Exams
         </Tab>
-        <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-700">
+        <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800">
           Total
         </Tab>
       </TabList>
@@ -138,7 +138,7 @@ const TdNoteItem = ({ item }: any) => (
       item.note == null
         ? "bg-gray-300/90"
         : item.note >= 10
-          ? "bg-green-200 text-green-900"
+          ? "bg-green-200 text-green-800"
           : "bg-red-200 text-red-900"
     }`}
     style={{ marginBottom: "0.5rem" }} // Reduced bottom margin to 0.5rem
@@ -169,8 +169,8 @@ const ExamNotes = ({ item }: any) => {
                 course.noteExamen == null
                   ? "bg-gray-300/90"
                   : course.noteExamen >= 10
-                    ? "bg-green-200 text-green-700"
-                    : "bg-red-200 text-red-700"
+                    ? "bg-green-200 text-green-800"
+                    : "bg-red-200 text-red-800"
               }`}
               key={course.id}
             >
@@ -194,8 +194,8 @@ const ExamNotes = ({ item }: any) => {
                   course.noteExamen == null
                     ? "bg-gray-300/90"
                     : course.noteExamen >= 10
-                      ? "bg-green-200 text-green-700"
-                      : "bg-red-200 text-red-700"
+                      ? "bg-green-200 text-green-800"
+                      : "bg-red-200 text-red-800"
                 }`}
                 key={course.id}
               >
@@ -214,7 +214,7 @@ const ExamNotes = ({ item }: any) => {
 
 const renderYearResultItem = (result: any) => {
   const { moyenne, typeDecisionLibelleFr, creditAcquis } = result[0]
-  const averageClass = moyenne >= 10.0 ? "text-green-700" : "text-red-700"
+  const averageClass = moyenne >= 10.0 ? "text-green-800" : "text-red-800"
   const ueBgClass = moyenne >= 10 ? "bg-green-100" : "bg-red-100"
 
   return (
@@ -239,7 +239,7 @@ const renderYearResultItem = (result: any) => {
 
 const renderSemesterResultItem = (result: any, index: any) => {
   const { moyenne, creditAcquis, bilanUes } = result
-  const moyenneClass = moyenne >= 10.0 ? "text-green-700" : "text-red-700" // Softer green and red
+  const moyenneClass = moyenne >= 10.0 ? "text-green-800" : "text-red-800" // Softer green and red
 
   return (
     <div
@@ -262,7 +262,7 @@ const renderSemesterResultItem = (result: any, index: any) => {
         {bilanUes.map((ue: any, ueIndex: any) => {
           const ueBgClass = ue.moyenne >= 10 ? "bg-green-50" : "bg-red-50" // Softer background colors
           const ueAverageClass =
-            ue.moyenne >= 10.0 ? "text-green-700" : "text-red-700"
+            ue.moyenne >= 10.0 ? "text-green-800" : "text-red-800"
 
           return (
             <div
@@ -282,8 +282,8 @@ const renderSemesterResultItem = (result: any, index: any) => {
                 {ue.bilanMcs.map((mc: any, mcIndex: any) => {
                   const mcAverageClass =
                     mc.moyenneGenerale >= 10.0
-                      ? "text-green-700"
-                      : "text-red-700"
+                      ? "text-green-800"
+                      : "text-red-800"
 
                   return (
                     <div

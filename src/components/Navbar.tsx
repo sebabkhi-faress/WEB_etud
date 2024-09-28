@@ -106,11 +106,11 @@ const Navbar = () => {
                   prefetch={false}
                   target="#"
                   href={"https://t.me/OSCommunityChat"}
-                  className={`hover:bg-[#1c93e3] bg-[#1c93e3]/70 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
+                  className={`hover:bg-blue-600/80 bg-blue-700/40 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
                   onClick={closeMenu} // Add padding here
                 >
                   <i className="fab fa-telegram-plane"></i>
-                  Join Telegram
+                  Join
                 </Link>
                 <hr className="" />
                 <button
@@ -131,11 +131,11 @@ const Navbar = () => {
                   prefetch={false}
                   target="#"
                   href={"https://t.me/OSCommunityChat"}
-                  className={`hover:bg-[#1c93e3] bg-[#1c93e3]/70 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
+                  className={`hover:bg-blue-600/80 bg-blue-700/40 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
                   onClick={closeMenu} // Add padding here
                 >
                   <i className="fab fa-telegram-plane"></i>
-                  Join Telegram
+                  Join
                 </Link>
               </>
             )}
@@ -151,7 +151,7 @@ const Navbar = () => {
               prefetch={false}
               target="#"
               href={"https://t.me/OSCommunityChat"}
-              className={`hover:bg-[#1c93e3] bg-[#1c93e3]/70 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
+              className={`hover:bg-blue-600/80 bg-blue-700/40 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
               onClick={closeMenu}
             >
               <i className="fab fa-telegram-plane"></i>
@@ -177,7 +177,7 @@ const Navbar = () => {
               prefetch={false}
               target="#"
               href={"https://t.me/OSCommunityChat"}
-              className={`hover:bg-[#1c93e3] bg-[#1c93e3]/70 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
+              className={`hover:bg-blue-600/80 bg-blue-700/40 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
               onClick={closeMenu}
             >
               <i className="fab fa-telegram-plane"></i>
