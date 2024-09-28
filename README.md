@@ -14,7 +14,10 @@ First, install the necessary packages:
 npm install
 ```
 
-### Step 2: Run the Development Server
+### Step 2: Env File
+Create a .env file in the project root folder and copy the content of .env.template into it
+
+### Step 3: Run The Development Server
 
 Next, start the development server:
 
