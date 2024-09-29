@@ -27,21 +27,21 @@ export const getDias = async () => {
   }
 }
 
-export const getTdTp = async (id: number) => {
+export const getNormalNotes = async (id: number) => {
   const { token, user, uuid, tokenHash } = getCookieData()
 
   const cacheKey = `notes-${id}-${tokenHash}`
   const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Notes Cache Hit", user, "getTdTp")
+    logger.info("Notes Cache Hit", user, "getNormalNotes")
 
     return cachedData
   }
 
   const parseData = (data: any) => {
-    const Sem1TdTp = [] as any[]
-    const Sem2TdTp = [] as any[]
+    const Sem1Normal = [] as any[]
+    const Sem2Normal = [] as any[]
 
     let sem1 = data[0].llPeriode
     let sem2 = data.find((item: any) => item.llPeriode !== sem1).llPeriode
@@ -50,12 +50,12 @@ export const getTdTp = async (id: number) => {
     }
     data.forEach((item: any) => {
       if (item.llPeriode === sem1) {
-        Sem1TdTp.push(item)
+        Sem1Normal.push(item)
       } else {
-        Sem2TdTp.push(item)
+        Sem2Normal.push(item)
       }
     })
-    return { Sem1TdTp, Sem2TdTp }
+    return { Sem1Normal, Sem2Normal }
   }
 
   try {
@@ -64,14 +64,14 @@ export const getTdTp = async (id: number) => {
       token,
     )
 
-    logger.info("Notes Fetched Successfully", user, "getTdTp")
+    logger.info("Notes Fetched Successfully", user, "getNormalNotes")
     const data = parseData(res.data)
     cache.set(cacheKey, data)
 
     return data
   } catch (error: any) {
-    logger.error("Error Fetching Tp And Td Notes", user, "getTdTp")
-    return { Sem1TdTp: null, Sem2TdTp: null }
+    logger.error("Error Fetching Tp And Td Notes", user, "getNormalNotes")
+    return { Sem1Normal: null, Sem2Normal: null }
   }
 }
 

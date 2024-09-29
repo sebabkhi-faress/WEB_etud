@@ -1,7 +1,7 @@
 "use client"
 
-// Regular Notes = Tp/Td Notes
-function RegularNote({ item }: { item: any }) {
+// NormalNotes: Tp/Td Notes
+function NormalNotes({ item }: { item: any }) {
   return (
     <div
       className={`border border-gray-400 text-gray-800 rounded-lg p-4 flex flex-col sm:flex-row justify-between items-center shadow-md transition duration-300 ease-in-out transform hover:scale-105 capitalize ${
@@ -26,4 +26,4 @@ function RegularNote({ item }: { item: any }) {
   )
 }
 
-export default RegularNote
+export default NormalNotes

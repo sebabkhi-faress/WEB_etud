@@ -1,5 +1,5 @@
 import {
-  getTdTp,
+  getNormalNotes,
   getExamsNotes,
   getSemesterAcademicResults,
   getYearAcademicResults,
@@ -11,18 +11,18 @@ export const metadata = {
 }
 
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react"
-import RegularNotes from "@/components/RegularNotes"
+import NormalNotes from "@/components/NormalNotes"
 import ExamNotes from "@/components/ExamNotes"
 
 export default async function PeriodTab({ params }: any) {
   const [
-    tdTpPromise,
+    normalPromise,
     examsPromise,
     semesterResultsPromise,
     yearResultsPromise,
     groupPromise,
   ] = [
-    getTdTp(params.year),
+    getNormalNotes(params.year),
     getExamsNotes(params.year),
     getSemesterAcademicResults(params.year),
     getYearAcademicResults(params.year),
@@ -30,16 +30,17 @@ export default async function PeriodTab({ params }: any) {
   ]
 
   // Wait for all promises to resolve
-  const [tdTp, exams, semesterResults, yearResults, group] = await Promise.all([
-    tdTpPromise,
-    examsPromise,
-    semesterResultsPromise,
-    yearResultsPromise,
-    groupPromise,
-  ])
+  const [normal, exams, semesterResults, yearResults, group] =
+    await Promise.all([
+      normalPromise,
+      examsPromise,
+      semesterResultsPromise,
+      yearResultsPromise,
+      groupPromise,
+    ])
 
   // Destructure the results from the resolved promises
-  const { Sem1TdTp, Sem2TdTp } = tdTp as any
+  const { Sem1Normal, Sem2Normal } = normal as any
   const { Sem1Exams, Sem2Exams } = exams as any
   const { Sem1Results, Sem2Results } = semesterResults as any
   return (
@@ -60,10 +61,10 @@ export default async function PeriodTab({ params }: any) {
       </TabList>
       <TabPanels>
         <TabPanel>
-          <SemesterTab result={Sem1Results} td={Sem1TdTp} exam={Sem1Exams} />
+          <SemesterTab result={Sem1Results} td={Sem1Normal} exam={Sem1Exams} />
         </TabPanel>
         <TabPanel>
-          <SemesterTab result={Sem2Results} td={Sem2TdTp} exam={Sem2Exams} />
+          <SemesterTab result={Sem2Results} td={Sem2Normal} exam={Sem2Exams} />
         </TabPanel>
         <TabPanel>{yearResults && renderYearResultItem(yearResults)}</TabPanel>
         <TabPanel className="flex overflow-x-auto p-1 justify-center">
@@ -124,7 +125,7 @@ const SemesterTab = ({ td, exam, result }: any) => {
         <TabPanel>
           <div className="flex flex-col gap-2">
             {td &&
-              td.map((item: any) => <RegularNotes key={item.id} item={item} />)}
+              td.map((item: any) => <NormalNotes key={item.id} item={item} />)}
           </div>
         </TabPanel>
         <TabPanel>{exam && <ExamNotes item={exam} />}</TabPanel>
