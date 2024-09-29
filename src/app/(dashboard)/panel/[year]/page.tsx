@@ -11,6 +11,8 @@ export const metadata = {
 }
 
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react"
+import RegularNotes from "@/components/RegularNotes"
+import ExamNotes from "@/components/ExamNotes"
 
 export default async function PeriodTab({ params }: any) {
   const [
@@ -122,93 +124,13 @@ const SemesterTab = ({ td, exam, result }: any) => {
         <TabPanel>
           <div className="flex flex-col gap-2">
             {td &&
-              td.map((item: any) => <TdNoteItem key={item.id} item={item} />)}
+              td.map((item: any) => <RegularNotes key={item.id} item={item} />)}
           </div>
         </TabPanel>
         <TabPanel>{exam && <ExamNotes item={exam} />}</TabPanel>
         <TabPanel>{result && renderSemesterResultItem(result, 1)}</TabPanel>
       </TabPanels>
     </TabGroup>
-  )
-}
-
-const TdNoteItem = ({ item }: any) => (
-  <div
-    className={`border border-gray-400 text-gray-800 rounded-lg p-4 flex flex-col sm:flex-row justify-between items-center shadow-md transition duration-300 ease-in-out transform hover:scale-105 capitalize ${
-      item.note == null
-        ? "bg-gray-300/90"
-        : item.note >= 10
-          ? "bg-green-200 text-green-800"
-          : "bg-red-200 text-red-900"
-    }`}
-    style={{ marginBottom: "0.5rem" }} // Reduced bottom margin to 0.5rem
-  >
-    <p className="font-semibold" style={{ marginRight: "1rem" }}>
-      {item.rattachementMcMcLibelleFr}
-    </p>
-    <div className="flex gap-4 mt-2 sm:mt-0">
-      <p className="font-bold text-lg">
-        {item.note == null ? "Empty" : item.note}
-      </p>
-      <p className="font-bold text-lg">{item.apCode}</p>
-    </div>
-  </div>
-)
-
-const ExamNotes = ({ item }: any) => {
-  return (
-    <>
-      <div className="mb-4">
-        <h3 className="text-lg md:text-xl font-bold text-gray-700 text-center">
-          Normal Session
-        </h3>
-        <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 capitalize">
-          {item.normal.map((course: any) => (
-            <div
-              className={`text-gray-800 rounded-lg p-4 shadow-md transition transform hover:scale-105 border border-gray-400 ${
-                course.noteExamen == null
-                  ? "bg-gray-300/90"
-                  : course.noteExamen >= 10
-                    ? "bg-green-200 text-green-800"
-                    : "bg-red-200 text-red-800"
-              }`}
-              key={course.id}
-            >
-              <h4 className="font-semibold">{course.mcLibelleFr}</h4>
-              <p className="font-bold text-lg">
-                {course.noteExamen != null ? course.noteExamen : "Null"}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-      {item.rattrappage.length > 0 && (
-        <div>
-          <h3 className="text-lg md:text-xl font-bold text-gray-700 text-center m-1 mb-4">
-            Rattrappage Session
-          </h3>
-          <div className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 capitalize">
-            {item.rattrappage.map((course: any) => (
-              <div
-                className={`rounded-lg p-4 shadow-md transition transform hover:scale-105 border border-gray-400 ${
-                  course.noteExamen == null
-                    ? "bg-gray-300/90"
-                    : course.noteExamen >= 10
-                      ? "bg-green-200 text-green-800"
-                      : "bg-red-200 text-red-800"
-                }`}
-                key={course.id}
-              >
-                <h4 className="font-semibold">{course.mcLibelleFr}</h4>
-                <p className="font-bold text-lg">
-                  {course.noteExamen == null ? "Empty" : course.noteExamen}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-    </>
   )
 }
 

@@ -7,7 +7,6 @@ import Cookies from "js-cookie"
 import { usePathname } from "next/navigation"
 
 import {
-  HomeIcon,
   UserIcon,
   ArrowLeftStartOnRectangleIcon,
   ArrowRightEndOnRectangleIcon,
