@@ -11,7 +11,7 @@ function OrdinaryNotes({ item }: { item: any }) {
             ? "bg-green-200 text-green-800"
             : "bg-red-200 text-red-900"
       }`}
-      style={{ marginBottom: "0.5rem" }} // Reduced bottom margin to 0.5rem
+      style={{ marginBottom: "0.5rem" }}
     >
       <p className="font-semibold" style={{ marginRight: "1rem" }}>
         {item.rattachementMcMcLibelleFr}

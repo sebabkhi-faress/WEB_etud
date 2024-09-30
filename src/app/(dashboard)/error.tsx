@@ -1,6 +1,6 @@
 "use client"
 
-export default function ProfileError({ error }: { error: string }) {
+export default function DashboardError({ error }: { error: string }) {
   return (
     <div className="flex items-center justify-center flex-1 bg-gray-100 px-4 sm:px-6">
       <div className="rounded-lg shadow-lg p-4 sm:p-6 max-w-md w-full text-center bg-gray-200 border border-red-700">

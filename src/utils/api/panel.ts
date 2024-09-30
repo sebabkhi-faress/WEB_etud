@@ -9,7 +9,7 @@ export const getDias = async () => {
   const cachedData = cache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Dias Cache Hit", user, "/notes")
+    logger.info("Dias Cache Hit", user, "getDias")
     return cachedData
   }
 
