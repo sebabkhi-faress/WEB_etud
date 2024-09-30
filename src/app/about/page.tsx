@@ -7,7 +7,7 @@ export const metadata = {
 
 export const dynamic = "force-dynamic"
 
-const Layout = async () => {
+const AboutPage = async () => {
   return (
     <article
       className="rtl p-6 sm:p-10 max-w-4xl mx-auto font-sans text-gray-800"
@@ -101,7 +101,6 @@ const Layout = async () => {
           rel="noopener noreferrer"
         >
           <i className="fab fa-telegram-plane text-4xl"></i>{" "}
-          {/* Increased size here */}
         </a>
         <p className="text-gray-500 text-sm mt-4">
           © 2024 OSCA - All Rights Reserved
@@ -111,4 +110,4 @@ const Layout = async () => {
   )
 }
 
-export default Layout
+export default AboutPage
