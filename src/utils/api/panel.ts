@@ -163,7 +163,7 @@ export const getSemesterAcademicResults = async (id: number) => {
 
   try {
     const res = await fetchData(
-      `${process.env.PROGRES_API}/bac/${token}/dias/${id}/periode/bilans`,
+      `${process.env.PROGRES_API}/bac/${uuid}/dias/${id}/periode/bilans`,
       token,
     )
 
@@ -200,7 +200,7 @@ export const getYearAcademicResults = async (id: number) => {
 
   try {
     const res = await fetchData(
-      `${process.env.PROGRES_API}/bac/${token}/dia/${id}/annuel/bilan`,
+      `${process.env.PROGRES_API}/bac/${uuid}/dia/${id}/annuel/bilan`,
       token,
     )
 
