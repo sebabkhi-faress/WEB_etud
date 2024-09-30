@@ -47,10 +47,10 @@ export default async function PeriodTab({ params }: any) {
     <TabGroup className="flex flex-col justify-start items-center gap-4">
       <TabList className="flex gap-2 overflow-x-auto">
         <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800">
-          Semester 1
+          Semester One
         </Tab>
         <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800">
-          Semester 2
+          Semester Two
         </Tab>
         <Tab className="rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800">
           Annual
@@ -172,7 +172,7 @@ const renderYearResultItem = (result: any) => {
 
 const renderSemesterResultItem = (result: any, index: any) => {
   const { moyenne, creditAcquis, bilanUes } = result
-  const moyenneClass = moyenne >= 10.0 ? "text-green-800" : "text-red-800" // Softer green and red
+  const moyenneClass = moyenne >= 10.0 ? "text-green-800" : "text-red-800"
 
   return (
     <div
