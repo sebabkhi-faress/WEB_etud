@@ -90,7 +90,7 @@ export default function LoginPage() {
             name="username"
             value={username}
             onChange={(event) => setUsername(event.target.value)}
-            placeholder="Example: 202336197619"
+            placeholder="Example: 202400000001"
             required
             className="w-full p-2 sm:p-3 border border-green-600 rounded-md focus:outline-none focus:border-green-500"
           />
