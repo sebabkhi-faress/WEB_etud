@@ -37,12 +37,12 @@ const Navbar = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const closeMenu = () => setIsMenuOpen(false)
 
-  const menuItems = [
+  const isAuthMenuItems = [
     { href: "/profile", label: "Profile", Icon: UserIcon },
     { href: "/panel", label: "Panel", Icon: PencilIcon },
     { href: "/about", label: "About", Icon: QuestionMarkCircleIcon },
   ]
-  const logoutMenuItems = [
+  const notAuthMenuItems = [
     { href: "/", label: "Login", Icon: ArrowRightEndOnRectangleIcon },
     { href: "/about", label: "About", Icon: QuestionMarkCircleIcon },
   ]
@@ -105,21 +105,8 @@ const Navbar = () => {
           <div className="flex flex-col gap-2 px-6 py-4">
             {user ? (
               <>
-                {menuItems.map(renderLink)}
-                <Link
-                  prefetch={false}
-                  target="#"
-                  href={"https://t.me/OSCommunityChat"}
-                  className={`hover:bg-blue-600/80 bg-blue-700/40 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
-                  onClick={closeMenu} // Add padding here
-                >
-                  <i
-                    className="fab fa-telegram-plane fa-lg"
-                    style={{ fontSize: "1.3em" }}
-                  ></i>
-                  Join
-                </Link>
-                <hr className="" />
+                {isAuthMenuItems.map(renderLink)}
+                <hr />
                 <button
                   className="bg-red-200/70 text-red-800 scale-105 flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded-md text-lg font-medium transition-colors duration-300"
                   onClick={() => {
@@ -132,22 +119,7 @@ const Navbar = () => {
                 </button>
               </>
             ) : (
-              <>
-                {logoutMenuItems.map(renderLink)}
-                <Link
-                  prefetch={false}
-                  target="#"
-                  href={"https://t.me/OSCommunityChat"}
-                  className={`hover:bg-blue-600/80 bg-blue-700/40 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
-                  onClick={closeMenu} // Add padding here
-                >
-                  <i
-                    className="fab fa-telegram-plane fa-lg"
-                    style={{ fontSize: "1.3em" }}
-                  ></i>
-                  Join
-                </Link>
-              </>
+              <>{notAuthMenuItems.map(renderLink)}</>
             )}
           </div>
         </div>
@@ -155,22 +127,7 @@ const Navbar = () => {
 
       <div className="hidden lg:flex gap-4 items-center flex-grow justify-center">
         {user && (
-          <div className="flex gap-4">
-            {menuItems.map(renderLink)}
-            <Link
-              prefetch={false}
-              target="#"
-              href={"https://t.me/OSCommunityChat"}
-              className={`hover:bg-blue-600/80 bg-blue-700/40 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
-              onClick={closeMenu}
-            >
-              <i
-                className="fab fa-telegram-plane fa-lg"
-                style={{ fontSize: "1.3em" }}
-              ></i>
-              Join
-            </Link>
-          </div>
+          <div className="flex gap-4">{isAuthMenuItems.map(renderLink)}</div>
         )}
       </div>
 
@@ -184,22 +141,7 @@ const Navbar = () => {
             Exit
           </button>
         ) : (
-          <div className="flex gap-4">
-            {logoutMenuItems.map(renderLink)}
-            <Link
-              prefetch={false}
-              target="#"
-              href={"https://t.me/OSCommunityChat"}
-              className={`hover:bg-blue-600/80 bg-blue-700/40 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-white scale-105`}
-              onClick={closeMenu}
-            >
-              <i
-                className="fab fa-telegram-plane fa-lg"
-                style={{ fontSize: "1.3em" }}
-              ></i>
-              Join
-            </Link>
-          </div>
+          <div className="flex gap-4">{notAuthMenuItems.map(renderLink)}</div>
         )}
       </div>
     </nav>
