@@ -63,14 +63,14 @@ export default async function PeriodTab({ params }: any) {
         <TabPanel>
           <SemesterTab
             result={Sem1Results}
-            td={Sem1Ordinary}
+            ordinary={Sem1Ordinary}
             exam={Sem1Exams}
           />
         </TabPanel>
         <TabPanel>
           <SemesterTab
             result={Sem2Results}
-            td={Sem2Ordinary}
+            ordinary={Sem2Ordinary}
             exam={Sem2Exams}
           />
         </TabPanel>
@@ -115,7 +115,7 @@ export default async function PeriodTab({ params }: any) {
   )
 }
 
-const SemesterTab = ({ td, exam, result }: any) => {
+const SemesterTab = ({ ordinary, exam, result }: any) => {
   return (
     <TabGroup className="flex flex-col justify-center items-center gap-4">
       <TabList className="flex gap-2 overflow-x-auto">
@@ -132,8 +132,8 @@ const SemesterTab = ({ td, exam, result }: any) => {
       <TabPanels>
         <TabPanel>
           <div className="flex flex-col gap-2">
-            {td &&
-              td.map((item: any) => (
+            {ordinary &&
+              ordinary.map((item: any) => (
                 <OrdinaryNotes key={item.id} item={item} />
               ))}
           </div>
