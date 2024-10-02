@@ -2,20 +2,29 @@ import logger from "@/utils/logger"
 import cache from "@/utils/cache"
 import { updateCount } from "../counter"
 import { fetchData, getCookieData } from "./helpers"
+import { ApiResponseType, ProfileDataType } from "@/utils/types"
 
-export const getProfileData = async () => {
+export async function getProfileData() {
   const { token, user, uuid, tokenHash } = getCookieData()
 
-  const cacheKey = `profile-${tokenHash}`
-  const cachedData = cache.get(cacheKey)
-
-  if (cachedData) {
-    logger.info("Profile Cache Hit", user, "getProfileData")
-    return cachedData
+  let response: ApiResponseType = {
+    success: false,
+    data: undefined,
+    error: undefined,
   }
 
-  const parseData = (responseData: any) => {
-    return {
+  const cacheKey = `profile-${tokenHash}`
+  const cachedData = cache.get(cacheKey) as ProfileDataType
+
+  if (cachedData) {
+    response.success = true
+    response.data = cachedData
+    logger.info("Profile Cache Hit", user, "getProfileData")
+    return response
+  }
+
+  const parseProfileData = (responseData: any) => {
+    const data: ProfileDataType = {
       individuId: responseData.individuId,
       nin: responseData.nin,
       individuNomArabe: responseData.individuNomArabe,
@@ -31,23 +40,28 @@ export const getProfileData = async () => {
       ofLlDomaine: responseData.ofLlDomaine,
       ofLlSpecialite: responseData.ofLlSpecialite,
     }
+    return data
   }
 
   try {
-    const response = await fetchData(
+    const res = await fetchData(
       `${process.env.PROGRES_API}/bac/${uuid}/dias`,
       token,
     )
 
     logger.info("Profile Data Fetched Successfully", user, "getProfileData")
-    const data = parseData(response.data[0])
+    const data = parseProfileData(res.data[0])
     updateCount(user)
     cache.set(cacheKey, data)
 
-    return data
+    response.success = true
+    response.data = data
   } catch (error) {
+    response.success = false
+    response.error = "Error Fetching Profile Data"
     logger.error("Error Fetching Profile Data", user, "getProfileData")
-    throw new Error("Error Fetching Profile Data")
+  } finally {
+    return response
   }
 }
 
