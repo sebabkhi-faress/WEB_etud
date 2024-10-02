@@ -22,7 +22,7 @@ export const getDias = async () => {
     cache.set(cacheKey, response.data)
     return response.data
   } catch (error: any) {
-    logger.error(`Error - ${error}`, user, "getDias")
+    logger.error(`Error fetching dias records`, user, "getDias")
     throw new Error(error)
   }
 }
@@ -214,7 +214,6 @@ export const getYearAcademicResults = async (id: number) => {
 
     return data
   } catch (error) {
-    console.log(error)
     logger.error(
       "Error Fetching Year Academic Results",
       user,

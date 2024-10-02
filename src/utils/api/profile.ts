@@ -73,7 +73,7 @@ export const getImage = async () => {
     return image.data
   } catch (error) {
     logger.error("Error Fetching Image", user, "getImage")
-    throw new Error("Error Fetching Image")
+    return null
   }
 }
 
@@ -99,6 +99,6 @@ export const getLogo = async () => {
     return logo.data
   } catch (error) {
     logger.error("Error Fetching Logo", user, "getLogo")
-    throw new Error("Error Fetching Logo")
+    return null
   }
 }
