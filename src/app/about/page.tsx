@@ -75,7 +75,18 @@ const AboutPage = async () => {
       </section>
 
       <section className="mb-10">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-green-700 mb-4">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-sky-700 mb-4">
+          الإبلاغ عن مشكلة
+        </h2>
+        <p className="text-lg leading-relaxed text-gray-700">
+          في حال أردت التبليغ عن مشكلة أو تقديم إقتراح لتحسين الموقع، يُرجى
+          الإنضمام إلى مجموعتنا في التيليجرام عبر الضغط على الأيقونة الموجودة
+          أسفل الصفحة
+        </p>
+      </section>
+
+      <section className="mb-10">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-sky-700 mb-4">
           أسماء أعضاء فريق العمل
         </h2>
         <ul className="list-disc list-inside text-gray-700 text-lg leading-relaxed space-y-2">
@@ -85,7 +96,7 @@ const AboutPage = async () => {
       </section>
 
       <section className="mb-10">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-green-700 mb-4">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-sky-700 mb-4">
           عدد المستخدمين منذ أخر تحديث
         </h2>
         <p className="text-lg leading-relaxed text-gray-600 font-bold">
