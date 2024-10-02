@@ -22,7 +22,7 @@ export const getDias = async () => {
     cache.set(cacheKey, response.data)
     return response.data
   } catch (error: any) {
-    logger.error(`Error fetching dias records`, user, "getDias")
+    logger.error(`Error Fetching Dias Records`, user, "getDias")
     throw new Error(error)
   }
 }
