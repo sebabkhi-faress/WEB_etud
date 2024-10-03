@@ -35,7 +35,7 @@ export default function LoginPage() {
           password,
         },
         {
-          timeout: 15000,
+          timeout: 10000,
         },
       )
 
