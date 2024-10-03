@@ -29,10 +29,8 @@ export default function PanelButtons({ dias }: any) {
           className={`rounded-lg px-4 py-2 text-lg md:text-2xl min-w-fit font-semibold transition ${
             pathname.split("/")[2] === dia.id.toString()
               ? "bg-green-600 text-white"
-              : `bg-gray-200 text-gray-800 ${
-                  loadingId ? "" : "hover:bg-green-200 hover:text-green-700"
-                }` // Apply hover styles only if not loading
-          } ${loadingId ? "opacity-50 cursor-not-allowed" : ""}`} // Add styles for disabled buttons
+              : "bg-gray-200 text-gray-800"
+          } ${loadingId ? "opacity-60 cursor-not-allowed" : ""} ${loadingId === dia.id.toString() ? "bg-green-300/60" : ""}`}
           href={"/panel/" + dia.id.toString()}
           id={dia.id.toString()}
           onClick={(e) => {
