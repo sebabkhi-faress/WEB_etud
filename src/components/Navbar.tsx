@@ -50,7 +50,6 @@ const Navbar = () => {
     const regex = new RegExp(`^${href}(/[a-zA-Z0-9]+)*$`)
     return (
       <Link
-        prefetch={false}
         key={href}
         href={href}
         className={`hover:bg-white hover:text-green-600 flex flex-1 items-center gap-2 px-4 py-2 rounded-md text-lg font-medium transition-all duration-300 text-green-800 scale-105 ${
