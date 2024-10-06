@@ -95,7 +95,7 @@ const AboutPage = async () => {
         </ul>
       </section>
 
-      /*
+      {/*
       <section className="mb-10">
         <h2 className="text-2xl sm:text-3xl font-semibold text-sky-700 mb-4">
           عدد المستخدمين منذ أخر تحديث
@@ -104,7 +104,7 @@ const AboutPage = async () => {
           {getCount()}
         </p>
       </section>
-      */
+      */}
       
       <footer className="text-center mt-12">
         <a
