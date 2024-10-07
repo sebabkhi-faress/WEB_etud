@@ -53,6 +53,6 @@ export async function fetchData(link: string, token: string) {
       Authorization: token,
       Author: "<osca@univ-annaba.dz>",
     },
-    timeout: 20000,
+    timeout: 5000,
   })
 }
