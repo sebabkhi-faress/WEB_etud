@@ -87,7 +87,7 @@ const AboutPage = async () => {
 
       <section className="mb-10">
         <h2 className="text-2xl sm:text-3xl font-semibold text-sky-700 mb-4">
-          أسماء أعضاء فريق العمل
+          فريق العمل
         </h2>
         <ul className="list-disc list-inside text-gray-700 text-lg leading-relaxed space-y-2">
           <li className="pr-4">قصاص أحمد عبد النور</li>
@@ -105,7 +105,7 @@ const AboutPage = async () => {
         </p>
       </section>
       */}
-      
+
       <footer className="text-center mt-12">
         <a
           href="https://t.me/OSCommunityChat"
