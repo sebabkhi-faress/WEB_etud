@@ -1,12 +1,12 @@
 import logger from "@/utils/logger"
-import cache from "@/utils/cache"
+import { shortCache } from "@/utils/cache"
 import { fetchData, getCookieData } from "./helpers"
 
 export const getDias = async () => {
   const { token, user, uuid, tokenHash } = getCookieData()
 
   const cacheKey = `dias-${tokenHash}`
-  const cachedData = cache.get(cacheKey)
+  const cachedData = shortCache.get(cacheKey)
 
   if (cachedData) {
     logger.info("Dias Cache Hit", user, "getDias")
@@ -19,7 +19,7 @@ export const getDias = async () => {
       token,
     )
     logger.info("Dias Fetched Successfully", user, "getDias")
-    cache.set(cacheKey, response.data)
+    shortCache.set(cacheKey, response.data)
     return response.data
   } catch (error: any) {
     logger.error(`Error Fetching Dias Records`, user, "getDias")
@@ -31,7 +31,7 @@ export const getOrdinaryNotes = async (id: number) => {
   const { token, user, uuid, tokenHash } = getCookieData()
 
   const cacheKey = `notes-${id}-${tokenHash}`
-  const cachedData = cache.get(cacheKey)
+  const cachedData = shortCache.get(cacheKey)
 
   if (cachedData) {
     logger.info("Notes Cache Hit", user, "getOrdinaryNotes")
@@ -66,7 +66,7 @@ export const getOrdinaryNotes = async (id: number) => {
 
     logger.info("Notes Fetched Successfully", user, "getOrdinaryNotes")
     const data = parseData(res.data)
-    cache.set(cacheKey, data)
+    shortCache.set(cacheKey, data)
 
     return data
   } catch (error: any) {
@@ -79,7 +79,7 @@ export const getExamsNotes = async (id: number) => {
   const { token, user, uuid, tokenHash } = getCookieData()
 
   const cacheKey = `exams-${id}-${tokenHash}`
-  const cachedData = cache.get(cacheKey)
+  const cachedData = shortCache.get(cacheKey)
 
   if (cachedData) {
     logger.info("Exams Cache Hit", user, "getExamsNotes")
@@ -124,7 +124,7 @@ export const getExamsNotes = async (id: number) => {
 
     logger.info("Exam Notes Fetched Successfully", user, "getExamsNotes")
     const data = parseData(res.data)
-    cache.set(cacheKey, data)
+    shortCache.set(cacheKey, data)
     return data
   } catch (error: any) {
     logger.error("Error Fetching Exam Notes", user, "getExamsNotes")
@@ -136,7 +136,7 @@ export const getSemesterAcademicResults = async (id: number) => {
   const { token, user, uuid, tokenHash } = getCookieData()
 
   const cacheKey = `semesters-transcripts-${id}-${tokenHash}`
-  const cachedData = cache.get(cacheKey)
+  const cachedData = shortCache.get(cacheKey)
 
   const parseData = (data: any) => {
     let sem1 = data[0].periodeLibelleFr < data[1].periodeLibelleFr ? 0 : 1
@@ -174,7 +174,7 @@ export const getSemesterAcademicResults = async (id: number) => {
     )
     const data = parseData(res.data)
 
-    cache.set(cacheKey, data)
+    shortCache.set(cacheKey, data)
 
     return data
   } catch (error) {
@@ -191,7 +191,7 @@ export const getYearAcademicResults = async (id: number) => {
   const { token, user, uuid, tokenHash } = getCookieData()
 
   const cacheKey = `year-transcript-${id}-${tokenHash}`
-  const cachedData = cache.get(cacheKey)
+  const cachedData = shortCache.get(cacheKey)
 
   if (cachedData) {
     logger.info("Year Transcript Cache Hit", user, "getYearAcademicResults")
@@ -210,7 +210,7 @@ export const getYearAcademicResults = async (id: number) => {
       user,
       "getYearAcademicResults",
     )
-    cache.set(cacheKey, data)
+    shortCache.set(cacheKey, data)
 
     return data
   } catch (error) {
@@ -227,7 +227,7 @@ export const getGroup = async (id: number) => {
   const { token, user, uuid, tokenHash } = getCookieData()
 
   const cacheKey = `group-${id}-${tokenHash}`
-  const cachedData = cache.get(cacheKey)
+  const cachedData = shortCache.get(cacheKey)
 
   if (cachedData) {
     logger.info("Group Cache Hit", user, "getGroup")
@@ -256,7 +256,7 @@ export const getGroup = async (id: number) => {
     const data = parseData(res.data)
 
     logger.info("Fetched Group And Section Data Successfully", user, "getGroup")
-    cache.set(cacheKey, data)
+    shortCache.set(cacheKey, data)
     return data
   } catch (error) {
     logger.error("Error Fetching Group And Section Info", user, "getGroup")

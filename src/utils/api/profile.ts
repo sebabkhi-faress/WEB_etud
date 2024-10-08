@@ -1,6 +1,6 @@
 import logger from "@/utils/logger"
-import cache from "@/utils/cache"
 import { updateCount } from "../counter"
+import { shortCache, longCache } from "@/utils/cache"
 import { fetchData, getCookieData } from "./helpers"
 import { ApiResponseType, ProfileDataType } from "@/utils/types"
 
@@ -14,7 +14,7 @@ export async function getProfileData() {
   }
 
   const cacheKey = `profile-${tokenHash}`
-  const cachedData = cache.get(cacheKey) as ProfileDataType
+  const cachedData = shortCache.get(cacheKey) as ProfileDataType
 
   if (cachedData) {
     response.success = true
@@ -52,7 +52,7 @@ export async function getProfileData() {
     logger.info("Profile Data Fetched Successfully", user, "getProfileData")
     const data = parseProfileData(res.data[0])
     // updateCount(user)
-    cache.set(cacheKey, data)
+    shortCache.set(cacheKey, data)
 
     response.success = true
     response.data = data
@@ -69,7 +69,7 @@ export const getImage = async () => {
   const { token, user, uuid, tokenHash } = getCookieData()
 
   const cacheKey = `image-${tokenHash}`
-  const cachedData = cache.get(cacheKey)
+  const cachedData = longCache.get(cacheKey)
 
   if (cachedData) {
     logger.info("Image Cache Hit", user, "getImage")
@@ -83,7 +83,8 @@ export const getImage = async () => {
     )
 
     logger.info("Image Fetched Successfully", user, "getImage")
-    cache.set(cacheKey, image.data)
+    longCache.set(cacheKey, image.data)
+
     return image.data
   } catch (error) {
     logger.error("Error Fetching Image", user, "getImage")
@@ -95,7 +96,7 @@ export const getLogo = async () => {
   const { token, user, EtabId } = getCookieData()
 
   const cacheKey = `logo-${EtabId}`
-  const cachedData = cache.get(cacheKey)
+  const cachedData = longCache.get(cacheKey)
 
   if (cachedData) {
     logger.info("Logo Cache Hit", user, "getLogo")
@@ -109,7 +110,8 @@ export const getLogo = async () => {
     )
 
     logger.info("Logo Fetched Successfully", user, "getLogo")
-    cache.set(cacheKey, logo.data)
+    longCache.set(cacheKey, logo.data)
+
     return logo.data
   } catch (error) {
     logger.error("Error Fetching Logo", user, "getLogo")
