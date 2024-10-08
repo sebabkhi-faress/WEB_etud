@@ -66,11 +66,19 @@ export const getOrdinaryNotes = async (id: number) => {
     const data = parseData(res.data)
     shortCache.set(cacheKey, data)
 
-    logger.info("Notes Fetched/Parsed Successfully", user, "getOrdinaryNotes")
+    logger.info(
+      "Ordinary Notes Fetched/Parsed Successfully",
+      user,
+      "getOrdinaryNotes",
+    )
 
     return data
   } catch (error: any) {
-    logger.error("Error Fetching Ordinary Notes", user, "getOrdinaryNotes")
+    logger.error(
+      "Error Fetching/Parsing Ordinary Notes",
+      user,
+      "getOrdinaryNotes",
+    )
     return { Sem1Ordinary: null, Sem2Ordinary: null }
   }
 }
