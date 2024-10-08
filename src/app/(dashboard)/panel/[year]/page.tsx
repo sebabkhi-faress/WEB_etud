@@ -45,7 +45,7 @@ export default async function PeriodTab({ params }: any) {
   const { Sem1Exams, Sem2Exams } = exams as any
   const { Sem1Results, Sem2Results } = semesterResults as any
   const TabStyle =
-    "rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800 border border-gray-300"
+    "rounded px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800 border border-gray-300"
 
   return (
     <TabGroup className="flex flex-col justify-start items-center gap-4">
@@ -83,7 +83,7 @@ export default async function PeriodTab({ params }: any) {
 
 const SemesterTab = ({ ordinary, exam, result }: any) => {
   const SemesterTabStyle =
-    "rounded-lg px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800 border border-gray-300"
+    "rounded px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800 border border-gray-300"
 
   return (
     <TabGroup className="flex flex-col justify-center items-center gap-4">
@@ -115,7 +115,7 @@ const renderYearResultItem = (result: any) => {
 
   return (
     <div
-      className={`${ueBgClass} border border-gray-300 w-full max-w-3xl mx-auto p-6 rounded-lg shadow-lg capitalize`}
+      className={`${ueBgClass} border border-gray-300 w-full max-w-3xl mx-auto p-6 rounded shadow-lg capitalize`}
     >
       <p className="text-lg text-gray-700 mb-2 font-semibold">
         <span>Average: </span>
@@ -141,7 +141,7 @@ const renderSemesterResultItem = (result: any, index: any) => {
     <div
       className={`${
         moyenne < 10 ? "bg-red-200/65" : "bg-green-200/65"
-      } border border-gray-300 w-full max-w-3xl mx-auto p-6 rounded-lg shadow-lg`}
+      } border border-gray-300 w-full max-w-3xl mx-auto p-6 rounded shadow-lg`}
       key={index}
     >
       <div className="mb-6">
@@ -163,7 +163,7 @@ const renderSemesterResultItem = (result: any, index: any) => {
           return (
             <div
               key={ueIndex}
-              className={`mb-6 p-4 ${ueBgClass} border border-gray-300 rounded-lg capitalize`}
+              className={`mb-6 p-4 ${ueBgClass} border border-gray-300 rounded capitalize`}
             >
               <h3 className="text-xl font-semibold text-gray-800 mb-2">
                 {ue.ueNatureLcFr}: {ue.ueLibelleFr}
@@ -184,7 +184,7 @@ const renderSemesterResultItem = (result: any, index: any) => {
                   return (
                     <div
                       key={mcIndex}
-                      className="mb-4 p-3 border border-gray-300 rounded-lg"
+                      className="mb-4 p-3 border border-gray-300 rounded"
                     >
                       <h4 className="text-lg font-semibold text-gray-800 mb-1">
                         Module:{" "}

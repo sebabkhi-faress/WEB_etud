@@ -68,7 +68,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="bg-gray-200/50 p-5 md:p-8 rounded-lg shadow-md border border-green-600 w-full max-w-xs sm:max-w-lg md:max-w-xl text-center">
+    <div className="bg-gray-200/50 p-5 md:p-8 rounded shadow-md border border-green-600 w-full max-w-xs sm:max-w-lg md:max-w-xl text-center">
       <Image
         src="/images/logo.png"
         alt="Logo"
@@ -92,7 +92,7 @@ export default function LoginPage() {
             onChange={(event) => setUsername(event.target.value)}
             placeholder="Example: 202400000001"
             required
-            className="w-full p-2 sm:p-3 border border-green-600 rounded-md focus:outline-none focus:border-green-500"
+            className="w-full p-2 sm:p-3 border border-green-600 rounded focus:outline-none focus:border-green-500"
           />
         </div>
         <div className="mb-4 sm:mb-6 md:mb-8 text-left">
@@ -110,7 +110,7 @@ export default function LoginPage() {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               required
-              className="w-full p-2 sm:p-3 border border-green-600 rounded-md focus:outline-none focus:border-green-500"
+              className="w-full p-2 sm:p-3 border border-green-600 rounded focus:outline-none focus:border-green-500"
             />
             <button
               type="button"
@@ -130,7 +130,7 @@ export default function LoginPage() {
           disabled={
             loading || username.trim() === "" || password.trim().length < 8
           }
-          className="w-full p-2 sm:p-3 text-white bg-green-600 rounded-md hover:bg-green-700 transition-colors disabled:bg-gray-400"
+          className="w-full p-2 sm:p-3 text-white bg-green-600 rounded hover:bg-green-700 transition-colors disabled:bg-gray-400"
         >
           {loading ? "Loading.." : "Login"}
         </button>
