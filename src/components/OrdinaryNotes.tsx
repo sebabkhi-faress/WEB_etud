@@ -1,6 +1,6 @@
 "use client"
 
-// OrdinaryNotes: Tp/Td Notes
+// OrdinaryNotes: Tp/Td/Cm... Notes
 function OrdinaryNotes({ item }: { item: any }) {
   return (
     <div
