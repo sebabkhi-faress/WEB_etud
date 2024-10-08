@@ -31,7 +31,7 @@ const Navbar = () => {
     Cookies.remove("uuid")
     Cookies.remove("EtabId")
     Cookies.remove("user")
-    window.location.reload()
+    window.location.href = "/"
   }
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
