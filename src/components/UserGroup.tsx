@@ -14,7 +14,7 @@ const UserGroup = ({ group }: { group: any }) => (
           <h2 className="w-full text-2xl rounded-lg py-4 px-6 text-center bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold shadow-md">
             {semester}
           </h2>
-          <div className="border border-gray-400 bg-white rounded-lg p-6 mt-4 shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl">
+          <div className="border border-gray-300 bg-white rounded-lg p-6 mt-4 shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl">
             <p className="mb-4 text-lg text-gray-700">
               <span className="font-semibold text-gray-800">Section:</span>{" "}
               {info.section}
