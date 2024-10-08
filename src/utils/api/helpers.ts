@@ -17,6 +17,7 @@ export function getCookieData() {
   if (token.length > 500) {
     throw new Error("Token is too large!")
   }
+
   if (!isValidUUID(uuid)) {
     throw new Error("Invalid UUID!")
   }

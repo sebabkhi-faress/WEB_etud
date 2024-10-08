@@ -49,10 +49,15 @@ export async function getProfileData() {
       token,
     )
 
-    logger.info("Profile Data Fetched Successfully", user, "getProfileData")
     const data = parseProfileData(res.data[0])
-    // updateCount(user)
+    updateCount(user)
     shortCache.set(cacheKey, data)
+
+    logger.info(
+      "Profile Data Fetched/Parsed Successfully",
+      user,
+      "getProfileData",
+    )
 
     response.success = true
     response.data = data

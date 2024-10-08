@@ -1,9 +1,9 @@
 import {
   getOrdinaryNotes,
   getExamsNotes,
-  getSemesterAcademicResults,
-  getYearAcademicResults,
+  getSemesterResults,
   getGroup,
+  getYearTranscript,
 } from "@/utils/api/panel"
 
 export const metadata = {
@@ -25,8 +25,8 @@ export default async function PeriodTab({ params }: any) {
   ] = [
     getOrdinaryNotes(params.year),
     getExamsNotes(params.year),
-    getSemesterAcademicResults(params.year),
-    getYearAcademicResults(params.year),
+    getSemesterResults(params.year),
+    getYearTranscript(params.year),
     getGroup(params.year),
   ]
 
