@@ -1,7 +1,7 @@
 "use client"
 
 const UserGroup = ({ group }: { group: any }) => (
-  <div className="bg-gradient-to-r from-gray-200 to-gray-300/90 border border-gray-400 w-full max-w-7xl mx-auto p-8 rounded-lg shadow-md overflow-x-auto">
+  <div className="bg-gradient-to-r from-gray-200 to-gray-300/90 border border-gray-300 w-full max-w-7xl mx-auto p-8 rounded-lg shadow-md overflow-x-auto">
     <div
       className={`grid gap-8 ${
         Object.keys(group).length === 1

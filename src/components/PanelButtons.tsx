@@ -26,7 +26,7 @@ export default function PanelButtons({ dias }: any) {
         <Link
           prefetch={false}
           key={index}
-          className={`rounded-lg px-4 py-2 text-lg md:text-2xl min-w-fit font-semibold transition ${
+          className={`rounded-lg px-4 py-2 text-lg md:text-2xl min-w-fit font-semibold transition border border-gray-300 ${
             pathname.split("/")[2] === dia.id.toString()
               ? "bg-green-600 text-white"
               : "bg-gray-200 text-gray-800"
