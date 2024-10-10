@@ -132,7 +132,7 @@ export const getExamsNotes = async (id: number) => {
     return data
   } catch (error: any) {
     logger.error("Error", user, "getExamsNotes")
-    return { Sem1Exams: null, Sem2Exams: null }
+    return { firstSemExams: null, secondSemExams: null }
   }
 }
 
