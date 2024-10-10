@@ -49,26 +49,45 @@ export default async function PeriodTab({ params }: any) {
   return (
     <TabGroup className="flex flex-col justify-start items-center gap-4">
       <TabList className="flex gap-2 overflow-x-auto">
-        <Tab className={TabStyle}>Semester One</Tab>
-        <Tab className={TabStyle}>Semester Two</Tab>
+        {secondSemNotes && secondSemNotes.length > 0 ? (
+          <>
+            <Tab className={TabStyle}>Semester One</Tab>
+            <Tab className={TabStyle}>Semester Two</Tab>
+          </>
+        ) : (
+          <Tab className={TabStyle}>Overall</Tab>
+        )}
+
         <Tab className={TabStyle}>Annual</Tab>
         <Tab className={TabStyle}>Group</Tab>
       </TabList>
       <TabPanels>
-        <TabPanel>
-          <SemesterTab
-            normal={firstSemNotes}
-            exam={Sem1Exams}
-            result={Sem1Results}
-          />
-        </TabPanel>
-        <TabPanel>
-          <SemesterTab
-            normal={secondSemNotes}
-            exam={Sem2Exams}
-            result={Sem2Results}
-          />
-        </TabPanel>
+        {secondSemNotes && secondSemNotes.length > 0 ? (
+          <>
+            <TabPanel>
+              <SemesterTab
+                normal={firstSemNotes}
+                exam={Sem1Exams}
+                result={Sem1Results}
+              />
+            </TabPanel>
+            <TabPanel>
+              <SemesterTab
+                normal={secondSemNotes}
+                exam={Sem2Exams}
+                result={Sem2Results}
+              />
+            </TabPanel>
+          </>
+        ) : (
+          <TabPanel>
+            <SemesterTab
+              normal={firstSemNotes}
+              exam={Sem1Exams}
+              result={Sem1Results}
+            />
+          </TabPanel>
+        )}
         <TabPanel>{yearResults && renderYearResultItem(yearResults)}</TabPanel>
         <TabPanel className="flex overflow-x-auto p-1 justify-center">
           {group && Object.keys(group).length > 0 && (
