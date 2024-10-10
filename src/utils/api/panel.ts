@@ -153,7 +153,7 @@ export const getSemesterResults = async (id: number) => {
 
   const parseData = (data: any) => {
     if (data[1] === undefined) {
-      secondSemResults = data[0]
+      firstSemResults = data[0]
       return { firstSemResults, secondSemResults }
     }
 

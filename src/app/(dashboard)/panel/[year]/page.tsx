@@ -84,7 +84,7 @@ export default async function PeriodTab({ params }: any) {
             <SemesterTab
               normal={firstSemNotes}
               exam={firstSemExams}
-              result={secondSemResults}
+              result={firstSemResults}
             />
           </TabPanel>
         )}
