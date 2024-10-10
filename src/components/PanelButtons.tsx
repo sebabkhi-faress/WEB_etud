@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 
-export default function PanelButtons({ dias }: any) {
+function PanelButtons({ dias }: any) {
   const pathname = usePathname()
   const [loadingId, setLoadingId] = useState<string | null>(null)
 
@@ -51,3 +51,5 @@ export default function PanelButtons({ dias }: any) {
     </>
   )
 }
+
+export default PanelButtons
