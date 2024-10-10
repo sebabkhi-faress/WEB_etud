@@ -43,10 +43,13 @@ export const getOrdinaryNotes = async (id: number) => {
     const Sem2Ordinary = [] as any[]
 
     let sem1 = data[0].llPeriode
-    let sem2 = data.find((item: any) => item.llPeriode !== sem1).llPeriode
+    let sem2 =
+      data.find((item: any) => item.llPeriode !== sem1)?.llPeriode || sem1
+
     if (sem1 > sem2) {
       sem1 = sem2
     }
+
     data.forEach((item: any) => {
       if (item.llPeriode === sem1) {
         Sem1Ordinary.push(item)
