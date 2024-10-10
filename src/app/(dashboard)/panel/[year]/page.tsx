@@ -49,7 +49,8 @@ export default async function PeriodTab({ params }: any) {
   return (
     <TabGroup className="flex flex-col justify-start items-center gap-4">
       <TabList className="flex gap-2 overflow-x-auto">
-        {secondSemNotes && secondSemNotes.length > 0 ? (
+        {(secondSemNotes && secondSemNotes.length > 0) ||
+        secondSemExams.normal.length > 0 ? (
           <>
             <Tab className={TabStyle}>Semester One</Tab>
             <Tab className={TabStyle}>Semester Two</Tab>
@@ -61,7 +62,8 @@ export default async function PeriodTab({ params }: any) {
         <Tab className={TabStyle}>Group</Tab>
       </TabList>
       <TabPanels>
-        {secondSemNotes && secondSemNotes.length > 0 ? (
+        {(secondSemNotes && secondSemNotes.length > 0) ||
+        secondSemExams.normal.length > 0 ? (
           <>
             <TabPanel>
               <SemesterTab
