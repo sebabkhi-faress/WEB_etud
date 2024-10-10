@@ -27,62 +27,51 @@ export const getDias = async () => {
   }
 }
 
-export const getOrdinaryNotes = async (id: number) => {
-  const { token, user, uuid, tokenHash } = getCookieData()
+export const getNormalNotes = async (id: number) => {
+  const { token, user, tokenHash } = getCookieData()
 
   const cacheKey = `notes-${id}-${tokenHash}`
   const cachedData = shortCache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Notes Cache Hit", user, "getOrdinaryNotes")
+    logger.info("Cache", user, "getNormalNotes")
     return cachedData
   }
 
   const parseData = (data: any) => {
-    const Sem1Ordinary = [] as any[]
-    const Sem2Ordinary = [] as any[]
+    const firstSemNotes = [] as any[]
+    const secondSemNotes = [] as any[]
 
-    let sem1 = data[0].llPeriode
-    let sem2 =
-      data.find((item: any) => item.llPeriode !== sem1)?.llPeriode || sem1
+    let firstSemKey = data[0].llPeriode
+    let secondSemKey =
+      data.find((item: any) => item.llPeriode !== firstSemKey)?.llPeriode ||
+      firstSemKey
 
-    if (sem1 > sem2) {
-      sem1 = sem2
-    }
+    if (firstSemKey > secondSemKey) firstSemKey = secondSemKey
 
     data.forEach((item: any) => {
-      if (item.llPeriode === sem1) {
-        Sem1Ordinary.push(item)
-      } else {
-        Sem2Ordinary.push(item)
-      }
+      if (item.llPeriode === firstSemKey) firstSemNotes.push(item)
+      else secondSemNotes.push(item)
     })
-    return { Sem1Ordinary, Sem2Ordinary }
+
+    return { firstSemNotes, secondSemNotes }
   }
 
   try {
-    const res = await fetchData(
+    const response = await fetchData(
       `${process.env.PROGRES_API}/controleContinue/dia/${id}/notesCC`,
       token,
     )
 
-    const data = parseData(res.data)
+    const data = parseData(response.data)
     shortCache.set(cacheKey, data)
 
-    logger.info(
-      "Ordinary Notes Fetched/Parsed Successfully",
-      user,
-      "getOrdinaryNotes",
-    )
+    logger.info("Success", user, "getNormalNotes")
 
     return data
   } catch (error: any) {
-    logger.error(
-      "Error Fetching/Parsing Ordinary Notes",
-      user,
-      "getOrdinaryNotes",
-    )
-    return { Sem1Ordinary: null, Sem2Ordinary: null }
+    logger.error("Error", user, "getNormalNotes")
+    return { firstSemNotes: null, secondSemNotes: null }
   }
 }
 

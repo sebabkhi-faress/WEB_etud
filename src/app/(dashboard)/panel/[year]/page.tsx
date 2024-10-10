@@ -1,5 +1,5 @@
 import {
-  getOrdinaryNotes,
+  getNormalNotes,
   getExamsNotes,
   getSemesterResults,
   getGroup,
@@ -11,29 +11,28 @@ export const metadata = {
 }
 
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react"
-import OrdinaryNotes from "@/components/OrdinaryNotes"
+import NormalNotes from "@/components/NormalNotes"
 import UserGroup from "@/components/UserGroup"
 import ExamNotes from "@/components/ExamNotes"
 
 export default async function PeriodTab({ params }: any) {
   const [
-    ordinaryPromise,
+    normalPromise,
     examsPromise,
     semesterResultsPromise,
     yearResultsPromise,
     groupPromise,
   ] = [
-    getOrdinaryNotes(params.year),
+    getNormalNotes(params.year),
     getExamsNotes(params.year),
     getSemesterResults(params.year),
     getYearTranscript(params.year),
     getGroup(params.year),
   ]
 
-  // Wait for all promises to resolve
-  const [ordinary, exams, semesterResults, yearResults, group] =
+  const [normal, exams, semesterResults, yearResults, group] =
     await Promise.all([
-      ordinaryPromise,
+      normalPromise,
       examsPromise,
       semesterResultsPromise,
       yearResultsPromise,
@@ -41,7 +40,7 @@ export default async function PeriodTab({ params }: any) {
     ])
 
   // Destructure the results from the resolved promises
-  const { Sem1Ordinary, Sem2Ordinary } = ordinary as any
+  const { firstSemNotes, secondSemNotes } = normal as any
   const { Sem1Exams, Sem2Exams } = exams as any
   const { Sem1Results, Sem2Results } = semesterResults as any
   const TabStyle =
@@ -58,16 +57,16 @@ export default async function PeriodTab({ params }: any) {
       <TabPanels>
         <TabPanel>
           <SemesterTab
-            result={Sem1Results}
-            ordinary={Sem1Ordinary}
+            normal={firstSemNotes}
             exam={Sem1Exams}
+            result={Sem1Results}
           />
         </TabPanel>
         <TabPanel>
           <SemesterTab
-            result={Sem2Results}
-            ordinary={Sem2Ordinary}
+            normal={secondSemNotes}
             exam={Sem2Exams}
+            result={Sem2Results}
           />
         </TabPanel>
         <TabPanel>{yearResults && renderYearResultItem(yearResults)}</TabPanel>
@@ -81,7 +80,7 @@ export default async function PeriodTab({ params }: any) {
   )
 }
 
-const SemesterTab = ({ ordinary, exam, result }: any) => {
+const SemesterTab = ({ normal, exam, result }: any) => {
   const SemesterTabStyle =
     "rounded px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800 border border-gray-300"
 
@@ -95,9 +94,9 @@ const SemesterTab = ({ ordinary, exam, result }: any) => {
       <TabPanels>
         <TabPanel>
           <div className="flex flex-col gap-2">
-            {ordinary &&
-              ordinary.map((item: any) => (
-                <OrdinaryNotes key={item.id} item={item} />
+            {normal &&
+              normal.map((item: any) => (
+                <NormalNotes key={item.id} item={item} />
               ))}
           </div>
         </TabPanel>

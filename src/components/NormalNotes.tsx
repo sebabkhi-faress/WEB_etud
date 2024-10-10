@@ -1,7 +1,6 @@
 "use client"
 
-// OrdinaryNotes: Tp/Td/Cm... Notes
-function OrdinaryNotes({ item }: { item: any }) {
+function NormalNotes({ item }: { item: any }) {
   return (
     <div
       className={`border border-gray-300 text-gray-800 rounded p-4 flex flex-col sm:flex-row justify-between items-center shadow-md transition duration-300 ease-in-out transform hover:scale-105 capitalize ${
@@ -26,4 +25,4 @@ function OrdinaryNotes({ item }: { item: any }) {
   )
 }
 
-export default OrdinaryNotes
+export default NormalNotes
