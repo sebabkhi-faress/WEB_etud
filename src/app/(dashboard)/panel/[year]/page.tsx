@@ -39,7 +39,6 @@ export default async function PeriodTab({ params }: any) {
       groupPromise,
     ])
 
-  // Destructure the results from the resolved promises
   const { firstSemNotes, secondSemNotes } = normal as any
   const { firstSemExams, secondSemExams } = exams as any
   const { firstSemResults, secondSemResults } = semesterResults as any
