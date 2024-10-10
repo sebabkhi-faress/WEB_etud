@@ -228,18 +228,22 @@ export const getGroup = async (id: number) => {
     return cachedData
   }
 
-  const parseData = (data: any) =>
-    data
-      .sort((a: any, b: any) => a.periodeId - b.periodeId)
-      .reduce((semesterInfo: any, item: any) => {
-        if (!item.nomSection) return semesterInfo
-        const semesterKey = item.periodeLibelleLongLt
-        const group = item.nomGroupePedagogique
-        const section =
-          item.nomSection === "Section" ? "Section 1" : item.nomSection
-        semesterInfo[semesterKey] = { group, section }
-        return semesterInfo
-      }, {})
+  function parseData(data: any) {
+    const sortedData = data.sort((a: any, b: any) => a.periodeId - b.periodeId)
+
+    return sortedData.reduce((semesterInfo: any, item: any) => {
+      if (!item.nomSection) return semesterInfo
+
+      const semester = item.periodeLibelleLongLt
+      const group = item.nomGroupePedagogique
+      const section =
+        item.nomSection === "Section" ? "Section 1" : item.nomSection
+
+      semesterInfo[semester] = { group, section }
+
+      return semesterInfo
+    }, {})
+  }
 
   try {
     const response = await fetchData(

@@ -101,7 +101,7 @@ export default async function PeriodTab({ params }: any) {
 
 const SemesterTab = ({ normal, exam, result }: any) => {
   const SemesterTabStyle =
-    "rounded px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800 border border-gray-300"
+    "rounded px-3 py-2 text-xs md:text-base lg:text-xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800 border border-gray-300"
 
   return (
     <TabGroup className="flex flex-col justify-center items-center gap-4">
