@@ -46,7 +46,7 @@ function ExamNotes({ item }: { item: any }) {
                 key={course.id}
               >
                 <h4 className="font-semibold">{course.mcLibelleFr}</h4>
-                <p className="font-bold text-lg">
+                <p className="font-bold text-gray-800 text-lg">
                   {course.noteExamen == null ? "Empty" : course.noteExamen}
                 </p>
               </div>

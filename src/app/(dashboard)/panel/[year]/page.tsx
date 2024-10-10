@@ -41,8 +41,9 @@ export default async function PeriodTab({ params }: any) {
 
   // Destructure the results from the resolved promises
   const { firstSemNotes, secondSemNotes } = normal as any
-  const { Sem1Exams, Sem2Exams } = exams as any
-  const { Sem1Results, Sem2Results } = semesterResults as any
+  const { firstSemExams, secondSemExams } = exams as any
+  const { firstSemResults, secondSemResults } = semesterResults as any
+
   const TabStyle =
     "rounded px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800 border border-gray-300"
 
@@ -57,7 +58,6 @@ export default async function PeriodTab({ params }: any) {
         ) : (
           <Tab className={TabStyle}>Overall</Tab>
         )}
-
         <Tab className={TabStyle}>Annual</Tab>
         <Tab className={TabStyle}>Group</Tab>
       </TabList>
@@ -67,15 +67,15 @@ export default async function PeriodTab({ params }: any) {
             <TabPanel>
               <SemesterTab
                 normal={firstSemNotes}
-                exam={Sem1Exams}
-                result={Sem1Results}
+                exam={firstSemExams}
+                result={firstSemResults}
               />
             </TabPanel>
             <TabPanel>
               <SemesterTab
                 normal={secondSemNotes}
-                exam={Sem2Exams}
-                result={Sem2Results}
+                exam={secondSemExams}
+                result={secondSemResults}
               />
             </TabPanel>
           </>
@@ -83,8 +83,8 @@ export default async function PeriodTab({ params }: any) {
           <TabPanel>
             <SemesterTab
               normal={firstSemNotes}
-              exam={Sem1Exams}
-              result={Sem1Results}
+              exam={firstSemExams}
+              result={secondSemResults}
             />
           </TabPanel>
         )}
@@ -173,54 +173,57 @@ const renderSemesterResultItem = (result: any, index: any) => {
         </p>
       </div>
       <div>
-        {bilanUes.map((ue: any, ueIndex: any) => {
-          const ueBgClass = ue.moyenne >= 10 ? "bg-green-50" : "bg-red-50" // Softer background colors
-          const ueAverageClass =
-            ue.moyenne >= 10.0 ? "text-green-800" : "text-red-800"
+        {bilanUes &&
+          bilanUes.map((ue: any, ueIndex: any) => {
+            const ueBgClass = ue.moyenne >= 10 ? "bg-green-50" : "bg-red-50"
+            const ueAverageClass =
+              ue.moyenne >= 10.0 ? "text-green-800" : "text-red-800"
 
-          return (
-            <div
-              key={ueIndex}
-              className={`mb-6 p-4 ${ueBgClass} border border-gray-300 rounded capitalize`}
-            >
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                {ue.ueNatureLcFr}: {ue.ueLibelleFr}
-              </h3>
-              <p className="text-lg text-gray-700 mb-2">
-                <span className="font-semibold">Average: </span>
-                <span className={`${ueAverageClass} font-bold`}>
-                  {ue.moyenne}
-                </span>
-              </p>
-              <div className="ml-4">
-                {ue.bilanMcs.map((mc: any, mcIndex: any) => {
-                  const mcAverageClass =
-                    mc.moyenneGenerale >= 10.0
-                      ? "text-green-800"
-                      : "text-red-800"
+            return (
+              <div
+                key={ueIndex}
+                className={`mb-6 p-4 ${ueBgClass} border border-gray-300 rounded capitalize`}
+              >
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                  {ue.ueNatureLcFr}: {ue.ueLibelleFr}
+                </h3>
+                <p className="text-lg text-gray-700 mb-2">
+                  <span className="font-semibold">Average: </span>
+                  <span className={`${ueAverageClass} font-bold`}>
+                    {ue.moyenne}
+                  </span>
+                </p>
+                <div className="ml-4">
+                  {ue.bilanMcs.map((mc: any, mcIndex: any) => {
+                    const mcAverageClass =
+                      mc.moyenneGenerale >= 10.0
+                        ? "text-green-800"
+                        : "text-red-800"
 
-                  return (
-                    <div
-                      key={mcIndex}
-                      className="mb-4 p-3 border border-gray-300 rounded"
-                    >
-                      <h4 className="text-lg font-semibold text-gray-800 mb-1">
-                        Module:{" "}
-                        <span className={mcAverageClass}>{mc.mcLibelleFr}</span>
-                      </h4>
-                      <p className="text-gray-800">
-                        <span className="font-semibold">Average: </span>
-                        <span className={`${mcAverageClass} font-bold`}>
-                          {mc.moyenneGenerale}
-                        </span>
-                      </p>
-                    </div>
-                  )
-                })}
+                    return (
+                      <div
+                        key={mcIndex}
+                        className="mb-4 p-3 border border-gray-300 rounded"
+                      >
+                        <h4 className="text-lg font-semibold text-gray-800 mb-1">
+                          Module:{" "}
+                          <span className={mcAverageClass}>
+                            {mc.mcLibelleFr}
+                          </span>
+                        </h4>
+                        <p className="text-gray-800">
+                          <span className="font-semibold">Average: </span>
+                          <span className={`${mcAverageClass} font-bold`}>
+                            {mc.moyenneGenerale}
+                          </span>
+                        </p>
+                      </div>
+                    )
+                  })}
+                </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
       </div>
     </div>
   )

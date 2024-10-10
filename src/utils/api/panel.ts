@@ -82,54 +82,55 @@ export const getExamsNotes = async (id: number) => {
   const cachedData = shortCache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Exams Cache Hit", user, "getExamsNotes")
+    logger.info("Cache", user, "getExamsNotes")
     return cachedData
   }
 
   const parseData = (data: any) => {
-    const Sem1Exams = {
+    const firstSemExams = {
       normal: [],
       rattrappage: [],
     } as any
-    const Sem2Exams = {
+    const secondSemExams = {
       normal: [],
       rattrappage: [],
     } as any
 
     const periods = data.map((course: any) => course.idPeriode)
-    const firstSemester = Math.min(...periods)
+    const firstSemId = Math.min(...periods)
 
     data.forEach((course: any) => {
       const period = course.idPeriode
       const session = course.planningSessionIntitule
-      const sem1 = period == firstSemester
 
       if (session === "session_1") {
-        sem1 ? Sem1Exams.normal.push(course) : Sem2Exams.normal.push(course)
+        period == firstSemId
+          ? firstSemExams.normal.push(course)
+          : secondSemExams.normal.push(course)
       } else {
-        sem1
-          ? Sem1Exams.rattrappage.push(course)
-          : Sem2Exams.rattrappage.push(course)
+        period == firstSemId
+          ? firstSemExams.rattrappage.push(course)
+          : secondSemExams.rattrappage.push(course)
       }
     })
 
-    return { Sem1Exams, Sem2Exams }
+    return { firstSemExams, secondSemExams }
   }
 
   try {
-    const res = await fetchData(
+    const response = await fetchData(
       `${process.env.PROGRES_API}/planningSession/dia/${id}/noteExamens`,
       token,
     )
 
-    const data = parseData(res.data)
+    const data = parseData(response.data)
     shortCache.set(cacheKey, data)
 
-    logger.info("Exam Notes Fetched/Parsed Successfully", user, "getExamsNotes")
+    logger.info("Success", user, "getExamsNotes")
 
     return data
   } catch (error: any) {
-    logger.error("Error Fetching/Parsing Exams Notes", user, "getExamsNotes")
+    logger.error("Error", user, "getExamsNotes")
     return { Sem1Exams: null, Sem2Exams: null }
   }
 }
@@ -140,48 +141,51 @@ export const getSemesterResults = async (id: number) => {
   const cacheKey = `semesters-transcripts-${id}-${tokenHash}`
   const cachedData = shortCache.get(cacheKey)
 
-  const parseData = (data: any) => {
-    let sem1 = data[0].periodeLibelleFr < data[1].periodeLibelleFr ? 0 : 1
-    let Sem1Results
-    let Sem2Results
-    if (sem1 === 0) {
-      Sem1Results = data[0]
-      Sem2Results = data[1]
-    } else {
-      Sem1Results = data[1]
-      Sem2Results = data[0]
-    }
-    return { Sem1Results, Sem2Results }
-  }
-
+  /*
   if (cachedData) {
-    logger.info("Semesters Transcripts Cache Hit", user, "getSemesterResults")
+    logger.info("Cache ", user, "getSemesterResults")
     return cachedData
+  }
+  */
+
+  let firstSemResults: any[] = []
+  let secondSemResults: any[] = []
+
+  const parseData = (data: any) => {
+    if (data[1] === undefined) {
+      secondSemResults = data[0]
+      return { firstSemResults, secondSemResults }
+    }
+
+    let firstSemBool =
+      data[0].periodeLibelleFr < data[1].periodeLibelleFr ? true : false
+
+    if (firstSemBool) {
+      firstSemResults = data[0]
+      secondSemResults = data[1]
+    } else {
+      firstSemResults = data[1]
+      secondSemResults = data[0]
+    }
+
+    return { firstSemResults, secondSemResults }
   }
 
   try {
-    const res = await fetchData(
+    const response = await fetchData(
       `${process.env.PROGRES_API}/bac/${uuid}/dias/${id}/periode/bilans`,
       token,
     )
 
-    const data = parseData(res.data)
+    const data = parseData(response.data)
     shortCache.set(cacheKey, data)
 
-    logger.info(
-      "Fetched/Parsed Semesters Results Successfully",
-      user,
-      "getSemesterResults",
-    )
+    logger.info("Success", user, "getSemesterResults")
 
     return data
   } catch (error) {
-    logger.error(
-      "Error Fetching/Parsing Semesters Results",
-      user,
-      "getSemesterResults",
-    )
-    return { Sem1Results: null, Sem2Results: null }
+    logger.error("Error", user, "getSemesterResults")
+    return { firstSemResults, secondSemResults }
   }
 }
 
@@ -197,12 +201,12 @@ export const getYearTranscript = async (id: number) => {
   }
 
   try {
-    const res = await fetchData(
+    const response = await fetchData(
       `${process.env.PROGRES_API}/bac/${uuid}/dia/${id}/annuel/bilan`,
       token,
     )
 
-    const data = res.data
+    const data = response.data
     shortCache.set(cacheKey, data)
 
     logger.info(
@@ -243,12 +247,12 @@ export const getGroup = async (id: number) => {
       }, {})
 
   try {
-    const res = await fetchData(
+    const response = await fetchData(
       `${process.env.PROGRES_API}/dia/${id}/groups`,
       token,
     )
 
-    const data = parseData(res.data)
+    const data = parseData(response.data)
     shortCache.set(cacheKey, data)
 
     logger.info(
