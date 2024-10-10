@@ -9,7 +9,7 @@ export const getDias = async () => {
   const cachedData = shortCache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Dias Cache Hit", user, "getDias")
+    logger.info("Cache", user, "getDias")
     return cachedData
   }
 
@@ -18,11 +18,12 @@ export const getDias = async () => {
       `${process.env.PROGRES_API}/bac/${uuid}/dias`,
       token,
     )
-    logger.info("Dias Fetched Successfully", user, "getDias")
+    logger.info("Success", user, "getDias")
     shortCache.set(cacheKey, response.data)
+
     return response.data
   } catch (error: any) {
-    logger.error(`Error Fetching Dias Records`, user, "getDias")
+    logger.error("Error", user, "getDias")
     throw new Error(error)
   }
 }
@@ -141,12 +142,10 @@ export const getSemesterResults = async (id: number) => {
   const cacheKey = `semesters-transcripts-${id}-${tokenHash}`
   const cachedData = shortCache.get(cacheKey)
 
-  /*
   if (cachedData) {
     logger.info("Cache ", user, "getSemesterResults")
     return cachedData
   }
-  */
 
   let firstSemResults: any[] = []
   let secondSemResults: any[] = []
@@ -196,7 +195,7 @@ export const getYearTranscript = async (id: number) => {
   const cachedData = shortCache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Year Transcript Cache Hit", user, "getYearTranscript")
+    logger.info("Cache", user, "getYearTranscript")
     return cachedData
   }
 
@@ -209,27 +208,23 @@ export const getYearTranscript = async (id: number) => {
     const data = response.data
     shortCache.set(cacheKey, data)
 
-    logger.info(
-      "Fetched Year Transcript Successfully",
-      user,
-      "getYearTranscript",
-    )
+    logger.info("Success", user, "getYearTranscript")
 
     return data
   } catch (error) {
-    logger.error("Error Fetching Year Transcript", user, "getYearTranscript")
+    logger.error("Error", user, "getYearTranscript")
     return null
   }
 }
 
 export const getGroup = async (id: number) => {
-  const { token, user, uuid, tokenHash } = getCookieData()
+  const { token, user, tokenHash } = getCookieData()
 
   const cacheKey = `group-${id}-${tokenHash}`
   const cachedData = shortCache.get(cacheKey)
 
   if (cachedData) {
-    logger.info("Group Cache Hit", user, "getGroup")
+    logger.info("Cache", user, "getGroup")
     return cachedData
   }
 
@@ -255,19 +250,11 @@ export const getGroup = async (id: number) => {
     const data = parseData(response.data)
     shortCache.set(cacheKey, data)
 
-    logger.info(
-      "Fetched/Parsed Group And Section Data Successfully",
-      user,
-      "getGroup",
-    )
+    logger.info("Success", user, "getGroup")
 
     return data
   } catch (error) {
-    logger.error(
-      "Error Fetching/Parsing Group And Section Info",
-      user,
-      "getGroup",
-    )
+    logger.error("Error", user, "getGroup")
     return null
   }
 }
