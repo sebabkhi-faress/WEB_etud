@@ -11,7 +11,10 @@ export const metadata: Metadata = {
   keywords:
     "student portal, view profiles, student notes, education, WebEtu, academic resources, progres, badji mokhtar, university",
   authors: [{ name: "OSCA", url: process.env.CURRENT_HOST }],
+<<<<<<< HEAD
   metadataBase: new URL(process.env.CURRENT_HOST as string),
+=======
+>>>>>>> 19985bc6707a08872c8a0548173b469710076a2a
   openGraph: {
     title: "WebEtu - Student Portal",
     description:
