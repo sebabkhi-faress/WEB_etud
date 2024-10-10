@@ -58,7 +58,7 @@ export default async function PeriodTab({ params }: any) {
         ) : (
           <Tab className={TabStyle}>Overall</Tab>
         )}
-        <Tab className={TabStyle}>Annual</Tab>
+        <Tab className={TabStyle}>Yearly</Tab>
         <Tab className={TabStyle}>Group</Tab>
       </TabList>
       <TabPanels>
