@@ -3,6 +3,9 @@ import "./globals.css"
 import "@fortawesome/fontawesome-free/css/all.min.css"
 import { Toaster } from "react-hot-toast"
 import Navbar from "@/components/Navbar"
+import { Reddit_Mono } from "next/font/google"
+
+const font = Reddit_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "WebEtu - Student Portal",
@@ -56,7 +59,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex flex-col bg-gray-100 min-h-screen">
+      <body
+        className={`flex flex-col bg-gray-100 min-h-screen ${font.className}`}
+      >
         <Navbar />
         <main className="flex items-center justify-center flex-1 relative">
           {children}

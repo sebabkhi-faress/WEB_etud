@@ -50,7 +50,7 @@ function PanelButtons({ dias, currentYear }: any) {
                 </span>
               </div>
               <div className="flex flex-col gap-2 text-left">
-                <label className="font-bold">Filiere:</label>
+                <label className="font-bold">Feild:</label>
                 <span className="bg-gray-200 p-4 rounded">
                   {dia.ofLlFiliere}
                 </span>
