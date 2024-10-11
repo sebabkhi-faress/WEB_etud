@@ -47,7 +47,7 @@ export default async function PeriodTab({ params }: any) {
     "rounded px-1 py-3 text-xs md:text-base lg:text-lg font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white data-[disabled]:text-gray-400 data-[disabled]:cursor-not-allowed bg-gray-200 text-gray-800 data-[enabled]:hover:bg-green-200 data-[enabled]:hover:text-green-800 border border-gray-300 outline-none flex-1"
 
   return (
-    <TabGroup className="flex flex-col justify-start items-center w-full min-h-screen py-4 px-2 md:p-4 gap-2 md:gap-4">
+    <TabGroup className="flex flex-col justify-start items-center w-full py-4 px-2 md:p-4 gap-2 md:gap-4">
       <TabList className="flex gap-1 md:gap-2 overflow-x-auto w-full max-w-4xl border border-gray-300 p-2 rounded">
         {(secondSemNotes && secondSemNotes.length > 0) ||
         (secondSemExams && secondSemExams.normal.length > 0) ? (

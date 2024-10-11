@@ -1,4 +1,4 @@
-import PanelButtons from "@/components/PanelButtons"
+import Enrollments from "@/components/Enrollments"
 import { getDias } from "@/utils/api/panel"
 import Link from "next/link"
 
@@ -13,7 +13,7 @@ export default async function PanelPage() {
   return (
     <div className="flex flex-1 flex-col gap-4 max-w-5xl md:mx-12 lg:mx-24 p-5">
       <h1 className="md:text-xl lg:text-3xl font-bold">Enrollments:</h1>
-      <PanelButtons dias={dias} currentYear={currentYear} />
+      <Enrollments dias={dias} currentYear={currentYear} />
     </div>
   )
 }

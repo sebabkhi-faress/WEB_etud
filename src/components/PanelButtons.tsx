@@ -1,107 +1,39 @@
 "use client"
 
-import { useState } from "react"
-import { BanknotesIcon, MapIcon, PencilIcon } from "@heroicons/react/24/outline"
+import { ArrowLeftIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 function PanelButtons({ dias, currentYear }: any) {
-  const [open, setOpen] = useState(currentYear)
-
+  const pathname = usePathname()
+  const path = pathname.split("/")
   return (
     <>
       {dias.map((dia: any, index: any) => (
-        <div
+        <Link
+          href={`/panel/${dia.id}`}
           key={index}
-          className={`rounded p-4 border hover:bg-gray-50/90 ${open == dia.anneeAcademiqueId ? "bg-gray-50/90" : ""} ${currentYear == dia.anneeAcademiqueId && "border-green-500"}`}
+          className={`rounded p-2 border hover:bg-gray-50/90  flex-col lg:flex-row text-xs md:text-sm hidden md:flex ${path[2] == dia.id && "bg-gray-50/90 border-green-500"}`}
         >
-          <div
-            onClick={() => setOpen(dia.anneeAcademiqueId)}
-            className="flex items-center gap-2 cursor-pointer"
+          <span
+            className={`text-center m-1 p-1 lg:m-2 lg:p-2 border ${currentYear == dia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded-full`}
           >
-            <div className="flex flex-col lg:flex-row text-xs md:text-sm">
-              <span
-                className={`text-center m-1 p-1 lg:m-2 lg:p-2 border ${currentYear == dia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded-full`}
-              >
-                {dia.anneeAcademiqueCode}
-              </span>
-              <span
-                className={`text-center m-1 p-1 lg:m-2 lg:p-2 border ${dia.cycleCode == "M" ? "text-purple-500 border-purple-500" : "text-blue-500 border-blue-500"} rounded-full`}
-              >
-                {dia.niveauCode}
-              </span>
-            </div>
-            <span className="flex-1 text-sm md:text-base lg:text-lg font-bold text-left">
-              {dia.ofLlSpecialite ? dia.ofLlSpecialite : dia.ofLlFiliere}
-            </span>
-          </div>
-
-          {open == dia.anneeAcademiqueId && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 text-xs md:text-sm">
-              <div className="flex flex-col gap-2 text-left">
-                <label className="font-bold">Instutution:</label>
-                <span className="bg-gray-200 p-4 rounded">
-                  {dia.llEtablissementLatin}
-                </span>
-              </div>
-              <div className="flex flex-col gap-2 text-left">
-                <label className="font-bold">Domain:</label>
-                <span className="bg-gray-200 p-4 rounded">
-                  {dia.ofLlDomaine}
-                </span>
-              </div>
-              <div className="flex flex-col gap-2 text-left">
-                <label className="font-bold">Feild:</label>
-                <span className="bg-gray-200 p-4 rounded">
-                  {dia.ofLlFiliere}
-                </span>
-              </div>
-              <div className="flex flex-col gap-2 text-left h-full">
-                <label className="font-bold">Level:</label>
-                <span className="bg-gray-200 p-4 rounded">
-                  {dia.niveauLibelleLongLt}
-                </span>
-              </div>
-              {dia.ofLlSpecialite && (
-                <div className="flex flex-col gap-2 text-left">
-                  <label className="font-bold">Speciality:</label>
-                  <span className="bg-gray-200 p-4 rounded">
-                    {dia.ofLlSpecialite}
-                  </span>
-                </div>
-              )}
-              <div className="flex justify-between items-center p-4 lg:col-span-2">
-                <div className="flex gap-2 text-left">
-                  <span className="group relative">
-                    <BanknotesIcon
-                      className={`w-6 h-6 lg:w-8 lg:h-8 ${dia.fraisInscriptionPaye ? "text-yellow-500" : "text-gray-400"}`}
-                    />
-                    <div className="hidden group-hover:block absolute min-w-fit p-2 bg-gray-200 rounded text-xs">
-                      inscription fees{" "}
-                      {dia.fraisInscriptionPaye ? "payed" : "not payed"}
-                    </div>
-                  </span>
-                  <span className="group relative">
-                    <MapIcon
-                      className={`w-6 h-6 lg:w-8 lg:h-8 ${dia.transportPaye ? "text-yellow-500" : "text-gray-400"}`}
-                    />
-                    <div className="hidden group-hover:block absolute min-w-fit p-2 bg-gray-200 rounded text-xs">
-                      transport fees{" "}
-                      {dia.fraisInscriptionPaye ? "payed" : "not payed"}
-                    </div>
-                  </span>
-                </div>
-                <Link
-                  href={`/panel/${dia.id}`}
-                  className="flex p-2 gap-2 bg-green-600 text-white rounded font-bold"
-                >
-                  <PencilIcon className="w-4 h-4 lg:w-6 lg:h-6" />
-                  check Grades
-                </Link>
-              </div>
-            </div>
-          )}
-        </div>
+            {dia.anneeAcademiqueCode}
+          </span>
+          <span
+            className={`text-center m-1 p-1 lg:m-2 lg:p-2 border ${dia.cycleCode == "M" ? "text-purple-500 border-purple-500" : "text-blue-500 border-blue-500"} rounded-full`}
+          >
+            {dia.niveauCode}
+          </span>
+        </Link>
       ))}
+      <Link
+        href={`/panel`}
+        className={`rounded px-4 py-4 border border-red-400 hover:border-red-400 md:border-gray-200 text-red-700 hover:bg-gray-50/90 flex items-center text-sm md:text-base gap-2`}
+      >
+        <ArrowLeftIcon className="h-5 w-5" />
+        Enrollments
+      </Link>
     </>
   )
 }
