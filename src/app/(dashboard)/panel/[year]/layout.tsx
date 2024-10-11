@@ -1,4 +1,5 @@
 import PanelButtons from "@/components/PanelButtons"
+import PanelYearTitle from "@/components/PanelYearTitle"
 import { getDias } from "@/utils/api/panel"
 import Link from "next/link"
 
@@ -20,7 +21,10 @@ export default async function PanelPage({
         <PanelButtons dias={dias} currentYear={currentYear} />
       </div>
 
-      <div className="flex flex-1 flex-col">{children}</div>
+      <div className="flex flex-1 items-center flex-col mt-4">
+        <PanelYearTitle dias={dias} />
+        {children}
+      </div>
     </div>
   )
 }
