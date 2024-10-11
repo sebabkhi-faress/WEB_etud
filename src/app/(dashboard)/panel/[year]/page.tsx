@@ -44,11 +44,11 @@ export default async function PeriodTab({ params }: any) {
   const { firstSemResults, secondSemResults } = semesterResults as any
 
   const TabStyle =
-    "rounded px-3 py-2 text-sm md:text-lg lg:text-2xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800 border border-gray-300"
+    "rounded px-1 py-3 text-xs md:text-base lg:text-lg font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white data-[disabled]:text-gray-400 data-[disabled]:cursor-not-allowed bg-gray-200 text-gray-800 data-[enabled]:hover:bg-green-200 data-[enabled]:hover:text-green-800 border border-gray-300 outline-none flex-1"
 
   return (
-    <TabGroup className="flex flex-col justify-start items-center gap-4">
-      <TabList className="flex gap-2 overflow-x-auto">
+    <TabGroup className="flex flex-col justify-start items-center w-full min-h-screen py-4 px-2 md:p-4 gap-2 md:gap-4">
+      <TabList className="flex gap-1 md:gap-2 overflow-x-auto w-full max-w-4xl border border-gray-300 p-2 rounded">
         {(secondSemNotes && secondSemNotes.length > 0) ||
         (secondSemExams && secondSemExams.normal.length > 0) ? (
           <>
@@ -62,10 +62,12 @@ export default async function PeriodTab({ params }: any) {
               : "All"}
           </Tab>
         )}
-        <Tab className={TabStyle}>Yearly</Tab>
+        <Tab disabled={!yearResults} className={TabStyle}>
+          Yearly
+        </Tab>
         <Tab className={TabStyle}>Group</Tab>
       </TabList>
-      <TabPanels>
+      <TabPanels className="w-full max-w-4xl border border-gray-300 p-2 rounded">
         {(secondSemNotes && secondSemNotes.length > 0) ||
         (secondSemExams && secondSemExams.normal.length > 0) ? (
           <>
@@ -106,26 +108,31 @@ export default async function PeriodTab({ params }: any) {
 
 const SemesterTab = ({ normal, exam, result }: any) => {
   const SemesterTabStyle =
-    "rounded px-3 py-2 text-xs md:text-base lg:text-xl font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800 border border-gray-300"
+    "rounded p-2 text-xs md:text-sm lg:text-lg font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800 border border-gray-300 outline-none data-[selected]:flex-1 transition-all duration-300 ease-in-out"
 
   return (
-    <TabGroup className="flex flex-col justify-center items-center gap-4">
-      <TabList className="flex gap-2 overflow-x-auto">
+    <TabGroup className="flex flex-col justify-center items-center gap-4 px-2">
+      <TabList className="flex w-full gap-2 overflow-x-auto">
         <Tab className={SemesterTabStyle}>Notes</Tab>
         <Tab className={SemesterTabStyle}>Exams</Tab>
         <Tab className={SemesterTabStyle}>Total</Tab>
       </TabList>
-      <TabPanels>
+      <TabPanels className="w-full">
         <TabPanel>
           <div className="flex flex-col gap-2">
-            {normal &&
-              normal.map((item: any) => (
-                <NormalNotes key={item.id} item={item} />
-              ))}
+            {normal
+              ? normal.map((item: any) => (
+                  <NormalNotes key={item.id} item={item} />
+                ))
+              : "data not availabe"}
           </div>
         </TabPanel>
-        <TabPanel>{exam && <ExamNotes item={exam} />}</TabPanel>
-        <TabPanel>{result && renderSemesterResultItem(result, 1)}</TabPanel>
+        <TabPanel>
+          {exam ? <ExamNotes item={exam} /> : "data not availabe"}
+        </TabPanel>
+        <TabPanel>
+          {result ? renderSemesterResultItem(result, 1) : "data not availabe"}
+        </TabPanel>
       </TabPanels>
     </TabGroup>
   )
