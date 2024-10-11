@@ -1,6 +1,5 @@
 import Enrollments from "@/components/Enrollments"
 import { getDias } from "@/utils/api/panel"
-import Link from "next/link"
 
 export const metadata = {
   title: "WebEtu - Panel",
