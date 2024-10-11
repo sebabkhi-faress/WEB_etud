@@ -57,31 +57,31 @@ const Layout = async () => {
         <ul className="list-none flex flex-col gap-4">
           <li className="text-lg w-full flex flex-col gap-2">
             <span className="font-bold text-gray-600">First Name:</span>
-            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded capitalize">
+            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded">
               {profileData.individuPrenomLatin}
             </span>
           </li>
           <li className="text-lg w-full flex flex-col gap-2">
             <span className="font-bold text-gray-600">Last Name:</span>
-            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded capitalize">
+            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded">
               {profileData.individuNomLatin}
             </span>
           </li>
           <li className="text-lg w-full flex flex-col gap-2">
             <span className="font-bold text-gray-600">University:</span>
-            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded capitalize">
+            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded">
               {profileData.llEtablissementLatin}
             </span>
           </li>
           <li className="text-lg w-full flex flex-col gap-2">
             <span className="font-bold text-gray-600">Date Of Birth:</span>
-            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded capitalize">
+            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded">
               {formattedDate}
             </span>
           </li>
           <li className="text-lg w-full flex flex-col gap-2">
             <span className="font-bold text-gray-600">Place Of Birth:</span>
-            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded capitalize">
+            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded">
               {profileData.individuLieuNaissance}
             </span>
           </li>

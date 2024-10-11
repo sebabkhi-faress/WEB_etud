@@ -12,7 +12,7 @@ function Enrollments({ dias, currentYear }: any) {
       {dias.map((dia: any, index: any) => (
         <div
           key={index}
-          className={`rounded p-4 border hover:bg-gray-50/90 ${open == dia.anneeAcademiqueId ? "bg-gray-50/90 border-green-500" : ""}`}
+          className={`rounded p-4 border hover:bg-gray-50/90 capitalize ${open == dia.anneeAcademiqueId ? "bg-gray-50/90 border-green-500" : ""}`}
         >
           <div
             onClick={() => setOpen(dia.anneeAcademiqueId)}
@@ -50,7 +50,7 @@ function Enrollments({ dias, currentYear }: any) {
                 </span>
               </div>
               <div className="flex flex-col gap-2 text-left">
-                <label className="font-bold">Feild:</label>
+                <label className="font-bold">Field:</label>
                 <span className="bg-gray-200 p-4 rounded">
                   {dia.ofLlFiliere}
                 </span>
@@ -76,8 +76,8 @@ function Enrollments({ dias, currentYear }: any) {
                       className={`w-6 h-6 lg:w-8 lg:h-8 ${dia.fraisInscriptionPaye ? "text-yellow-500" : "text-gray-400"}`}
                     />
                     <div className="hidden group-hover:block absolute min-w-fit p-2 bg-gray-200 rounded text-xs">
-                      inscription fees{" "}
-                      {dia.fraisInscriptionPaye ? "payed" : "not payed"}
+                      Inscription Fees{" "}
+                      {dia.fraisInscriptionPaye ? "Payed" : "Not Payed"}
                     </div>
                   </span>
                   <span className="group relative">
@@ -85,8 +85,8 @@ function Enrollments({ dias, currentYear }: any) {
                       className={`w-6 h-6 lg:w-8 lg:h-8 ${dia.transportPaye ? "text-yellow-500" : "text-gray-400"}`}
                     />
                     <div className="hidden group-hover:block absolute min-w-fit p-2 bg-gray-200 rounded text-xs">
-                      transport fees{" "}
-                      {dia.fraisInscriptionPaye ? "payed" : "not payed"}
+                      Transport Fees{" "}
+                      {dia.fraisInscriptionPaye ? "Payed" : "Not Payed"}
                     </div>
                   </span>
                 </div>
@@ -95,7 +95,7 @@ function Enrollments({ dias, currentYear }: any) {
                   className="flex p-2 gap-2 bg-green-600 text-white rounded font-bold"
                 >
                   <PencilIcon className="w-4 h-4 lg:w-6 lg:h-6" />
-                  check Grades
+                  Check Grades
                 </Link>
               </div>
             </div>
