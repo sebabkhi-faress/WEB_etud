@@ -69,7 +69,7 @@ function PanelButtons({ dias, currentYear }: any) {
                   </span>
                 </div>
               )}
-              <div className="flex justify-between items-center p-4 col-span-2">
+              <div className="flex justify-between items-center p-4 lg:col-span-2">
                 <div className="flex gap-2 text-left">
                   <span className="group relative">
                     <BanknotesIcon
