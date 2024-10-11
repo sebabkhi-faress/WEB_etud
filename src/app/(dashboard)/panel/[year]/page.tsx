@@ -120,18 +120,28 @@ const SemesterTab = ({ normal, exam, result }: any) => {
       <TabPanels className="w-full">
         <TabPanel>
           <div className="flex flex-col gap-2">
-            {normal
-              ? normal.map((item: any) => (
-                  <NormalNotes key={item.id} item={item} />
-                ))
-              : "data not availabe"}
+            {normal ? (
+              normal.map((item: any) => (
+                <NormalNotes key={item.id} item={item} />
+              ))
+            ) : (
+              <p className="text-center">Data Not Available!</p>
+            )}
           </div>
         </TabPanel>
         <TabPanel>
-          {exam ? <ExamNotes item={exam} /> : "data not availabe"}
+          {exam ? (
+            <ExamNotes item={exam} />
+          ) : (
+            <p className="text-center">Data Not Available!</p>
+          )}
         </TabPanel>
         <TabPanel>
-          {result ? renderSemesterResultItem(result, 1) : "data not availabe"}
+          {result ? (
+            renderSemesterResultItem(result, 1)
+          ) : (
+            <p className="text-center">Data Not Available!</p>
+          )}
         </TabPanel>
       </TabPanels>
     </TabGroup>
