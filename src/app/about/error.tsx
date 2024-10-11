@@ -13,6 +13,7 @@ export default function AboutError({ error }: { error: string }) {
         <button
           onClick={() => window.location.reload()}
           className="px-3 py-2 sm:px-4 sm:py-2 bg-red-600 text-white rounded hover:bg-red-700 transition duration-300"
+          aria-label="Refresh page"
         >
           Refresh Page
         </button>

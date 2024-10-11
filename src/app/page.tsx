@@ -114,6 +114,7 @@ export default function LoginPage() {
             />
             <button
               type="button"
+              aria-label="Toggle Password Visibility"
               className="absolute right-2 top-1 bottom-1 text-green-600"
               onClick={() => setShowPassword(!showPassword)}
             >
@@ -127,6 +128,7 @@ export default function LoginPage() {
         </div>
         <button
           type="submit"
+          aria-label="Login"
           disabled={
             loading || username.trim() === "" || password.trim().length < 8
           }

@@ -57,6 +57,7 @@ const Navbar = () => {
           regex.test(pathname) ? "bg-white" : "bg-white/50"
         }`}
         onClick={closeMenu}
+        aria-label={label}
       >
         <Icon className="h-6 w-6" />
         {label}
@@ -79,7 +80,11 @@ const Navbar = () => {
 
       <div className="lg:hidden">
         {
-          <button className="p-2 focus:outline-none" onClick={toggleMenu}>
+          <button
+            className="p-2 focus:outline-none"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -113,6 +118,7 @@ const Navbar = () => {
                     signOut()
                     closeMenu()
                   }}
+                  aria-label="Exit"
                 >
                   <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
                   Exit
@@ -136,6 +142,7 @@ const Navbar = () => {
           <button
             className="flex items-center gap-2 bg-red-200/70 text-red-800 hover:bg-white hover:text-red-600 px-4 py-2 rounded text-lg font-medium transition-colors duration-300"
             onClick={signOut}
+            aria-label="Exit"
           >
             <ArrowLeftStartOnRectangleIcon className="h-6 w-6" />
             Exit
