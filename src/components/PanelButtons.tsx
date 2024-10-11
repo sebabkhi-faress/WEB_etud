@@ -1,53 +1,77 @@
 "use client"
 
+import { ArrowLeftIcon, ChevronDownIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState, useEffect } from "react"
+useState
 
-function PanelButtons({ dias }: any) {
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react"
+import { useState } from "react"
+
+function PanelButtons({ dias, currentYear }: any) {
   const pathname = usePathname()
-  const [loadingId, setLoadingId] = useState<string | null>(null)
-
-  const handleClick = (id: string) => {
-    setLoadingId(id) // Set the loading ID on click
-  }
-
-  // Effect to stop loading if the pathname matches loadingId
-  useEffect(() => {
-    const currentId = pathname.split("/")[2]
-    if (loadingId && currentId === loadingId) {
-      setLoadingId(null) // Reset loadingId if pathname matches
-    }
-  }, [pathname, loadingId]) // Effect runs on pathname or loadingId change
+  const path = pathname.split("/")
+  const selectedDia = dias.find((dia: any) => dia.id == path[2])
 
   return (
     <>
-      {dias.map((dia: any, index: any) => (
-        <Link
-          prefetch={false}
-          key={index}
-          className={`rounded px-4 py-2 text-lg md:text-2xl min-w-fit font-semibold transition border border-gray-300 ${
-            pathname.split("/")[2] === dia.id.toString()
-              ? "bg-green-600 text-white"
-              : "bg-gray-200 text-gray-800"
-          } ${loadingId ? "opacity-60 cursor-not-allowed" : ""} ${loadingId === dia.id.toString() ? "bg-green-300/60" : ""}`}
-          href={"/panel/" + dia.id.toString()}
-          id={dia.id.toString()}
-          onClick={(e) => {
-            if (loadingId) {
-              e.preventDefault() // Prevent navigation if loading
-            } else {
-              handleClick(dia.id.toString()) // Set loading state on click
-            }
-          }}
+      <Menu>
+        <MenuButton
+          className={`rounded px-1 py-2 border hover:bg-gray-50/90 flex items-center text-xs md:text-sm bg-gray-50/90 border-green-500`}
         >
-          {loadingId === dia.id.toString() ? (
-            <>Loading..</>
-          ) : (
-            dia.anneeAcademiqueCode
+          <span
+            className={`text-center m-1 p-1 lg:m-2 lg:p-2 border ${currentYear == selectedDia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded-full`}
+          >
+            {selectedDia.anneeAcademiqueCode}
+          </span>
+          <span
+            className={`text-center m-1 p-1 lg:m-2 lg:p-2 border ${selectedDia.cycleCode == "M" ? "text-purple-500 border-purple-500" : "text-blue-500 border-blue-500"} rounded-full`}
+          >
+            {selectedDia.niveauCode}
+          </span>
+          <ChevronDownIcon className={`m-4 h-4 w-4`} />
+        </MenuButton>
+        <MenuItems
+          anchor="bottom"
+          className="w-[var(--button-width)] bg-gray-50 p-2 rounded border [--anchor-gap:4px] sm:[--anchor-gap:8px]"
+        >
+          {dias.map(
+            (dia: any, index: any) =>
+              dia.id !== selectedDia.id && (
+                <>
+                  <MenuItem key={index}>
+                    <Link
+                      prefetch={false}
+                      href={`/panel/${dia.id}`}
+                      key={index}
+                      className={`rounded p-2 border hover:border-green-400 bg-gray-200 hover:bg-gray-50 flex text-xs md:text-sm ${path[2] == dia.id && "bg-gray-50/90 border-green-500"} mt-3`}
+                    >
+                      <span
+                        className={`text-center m-1 p-1 lg:m-2 lg:p-2 border ${currentYear == dia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded-full`}
+                      >
+                        {dia.anneeAcademiqueCode}
+                      </span>
+                      <span
+                        className={`text-center m-1 p-1 lg:m-2 lg:p-2 border ${dia.cycleCode == "M" ? "text-purple-500 border-purple-500" : "text-blue-500 border-blue-500"} rounded-full`}
+                      >
+                        {dia.niveauCode}
+                      </span>
+                    </Link>
+                  </MenuItem>
+                </>
+              ),
           )}
-        </Link>
-      ))}
+        </MenuItems>
+      </Menu>
+
+      <Link
+        prefetch={false}
+        href={`/panel`}
+        className={`rounded px-4 py-4 border border-red-400 hover:border-red-400 md:border-gray-200 text-red-700 hover:bg-gray-50/90 flex items-center text-sm md:text-base gap-2`}
+      >
+        <ArrowLeftIcon className="h-5 w-5" />
+        Enrollments
+      </Link>
     </>
   )
 }

@@ -10,8 +10,8 @@ import {
   UserIcon,
   ArrowLeftStartOnRectangleIcon,
   ArrowRightEndOnRectangleIcon,
-  PencilIcon,
   QuestionMarkCircleIcon,
+  AcademicCapIcon,
 } from "@heroicons/react/24/solid"
 
 const Navbar = () => {
@@ -39,7 +39,7 @@ const Navbar = () => {
 
   const isAuthMenuItems = [
     { href: "/profile", label: "Profile", Icon: UserIcon },
-    { href: "/panel", label: "Panel", Icon: PencilIcon },
+    { href: "/panel", label: "Panel", Icon: AcademicCapIcon },
     { href: "/about", label: "About", Icon: QuestionMarkCircleIcon },
   ]
   const notAuthMenuItems = [
