@@ -52,11 +52,15 @@ export default async function PeriodTab({ params }: any) {
         {(secondSemNotes && secondSemNotes.length > 0) ||
         (secondSemExams && secondSemExams.normal.length > 0) ? (
           <>
-            <Tab className={TabStyle}>Semester One</Tab>
-            <Tab className={TabStyle}>Semester Two</Tab>
+            <Tab className={TabStyle}>{Object.keys(group)[0]}</Tab>
+            <Tab className={TabStyle}>{Object.keys(group)[1]}</Tab>
           </>
         ) : (
-          <Tab className={TabStyle}>Overall</Tab>
+          <Tab className={TabStyle}>
+            {group && Object.keys(group)[0].includes("Semestre")
+              ? Object.keys(group)[0]
+              : "All"}
+          </Tab>
         )}
         <Tab className={TabStyle}>Yearly</Tab>
         <Tab className={TabStyle}>Group</Tab>
