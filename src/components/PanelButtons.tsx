@@ -11,28 +11,32 @@ function PanelButtons({ dias, currentYear }: any) {
     <>
       {dias.map((dia: any, index: any) => (
         <div
-          onClick={() => setOpen(dia.anneeAcademiqueId)}
           key={index}
-          className={`rounded p-4 border hover:bg-gray-50/90 cursor-pointer ${open == dia.anneeAcademiqueId ? "bg-gray-50/90" : ""} ${currentYear == dia.anneeAcademiqueId && "border-green-500"}`}
+          className={`rounded p-4 border hover:bg-gray-50/90 ${open == dia.anneeAcademiqueId ? "bg-gray-50/90" : ""} ${currentYear == dia.anneeAcademiqueId && "border-green-500"}`}
         >
-          <div className="flex items-center gap-2">
-            <span
-              className={`text-center m-1 p-1 lg:m-2 lg:p-2 text-xs lg:text-sm border ${currentYear == dia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded-full`}
-            >
-              {dia.anneeAcademiqueCode}
-            </span>
-            <span
-              className={`text-center m-1 p-1 lg:m-2 lg:p-2 text-xs lg:text-sm border ${dia.cycleCode == "M" ? "text-purple-500 border-purple-500" : "text-blue-500 border-blue-500"} rounded-full`}
-            >
-              {dia.niveauCode}
-            </span>
-            <span className="flex-1 text-sm lg:text-lg font-bold text-left">
+          <div
+            onClick={() => setOpen(dia.anneeAcademiqueId)}
+            className="flex items-center gap-2 cursor-pointer"
+          >
+            <div className="flex flex-col lg:flex-row text-xs md:text-sm">
+              <span
+                className={`text-center m-1 p-1 lg:m-2 lg:p-2 border ${currentYear == dia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded-full`}
+              >
+                {dia.anneeAcademiqueCode}
+              </span>
+              <span
+                className={`text-center m-1 p-1 lg:m-2 lg:p-2 border ${dia.cycleCode == "M" ? "text-purple-500 border-purple-500" : "text-blue-500 border-blue-500"} rounded-full`}
+              >
+                {dia.niveauCode}
+              </span>
+            </div>
+            <span className="flex-1 text-sm md:text-base lg:text-lg font-bold text-left">
               {dia.ofLlSpecialite ? dia.ofLlSpecialite : dia.ofLlFiliere}
             </span>
           </div>
 
           {open == dia.anneeAcademiqueId && (
-            <div className="flex-1 flex flex-col gap-4 p-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 text-xs md:text-sm">
               <div className="flex flex-col gap-2 text-left">
                 <label className="font-bold">Instutution:</label>
                 <span className="bg-gray-200 p-4 rounded">
@@ -51,7 +55,7 @@ function PanelButtons({ dias, currentYear }: any) {
                   {dia.ofLlFiliere}
                 </span>
               </div>
-              <div className="flex flex-col gap-2 text-left">
+              <div className="flex flex-col gap-2 text-left h-full">
                 <label className="font-bold">Level:</label>
                 <span className="bg-gray-200 p-4 rounded">
                   {dia.niveauLibelleLongLt}
@@ -65,11 +69,11 @@ function PanelButtons({ dias, currentYear }: any) {
                   </span>
                 </div>
               )}
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center p-4">
                 <div className="flex gap-2 text-left">
                   <span className="group relative">
                     <BanknotesIcon
-                      className={`w-8 h-8 ${dia.fraisInscriptionPaye && "text-yellow-500"}`}
+                      className={`w-6 h-6 lg:w-8 lg:h-8 ${dia.fraisInscriptionPaye ? "text-yellow-500" : "text-gray-400"}`}
                     />
                     <div className="hidden group-hover:block absolute min-w-fit p-2 bg-gray-200 rounded text-xs">
                       inscription fees{" "}
@@ -78,7 +82,7 @@ function PanelButtons({ dias, currentYear }: any) {
                   </span>
                   <span className="group relative">
                     <MapIcon
-                      className={`w-8 h-8 ${dia.transportPaye && "text-yellow-500"}`}
+                      className={`w-6 h-6 lg:w-8 lg:h-8 ${dia.transportPaye ? "text-yellow-500" : "text-gray-400"}`}
                     />
                     <div className="hidden group-hover:block absolute min-w-fit p-2 bg-gray-200 rounded text-xs">
                       transport fees{" "}
@@ -88,9 +92,9 @@ function PanelButtons({ dias, currentYear }: any) {
                 </div>
                 <Link
                   href={`/panel/${dia.id}`}
-                  className="flex p-2 bg-green-600 text-white rounded"
+                  className="flex p-2 gap-2 bg-green-600 text-white rounded font-bold"
                 >
-                  <PencilIcon className="w-6 h-6" />
+                  <PencilIcon className="w-4 h-4 lg:w-6 lg:h-6" />
                   check Grades
                 </Link>
               </div>
