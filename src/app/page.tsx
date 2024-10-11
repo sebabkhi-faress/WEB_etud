@@ -75,6 +75,7 @@ export default function LoginPage() {
         width={150}
         height={150}
         className="mx-auto mb-6"
+        priority={true} // Disable lazy loading for the LCP image
       />
       <form className="flex flex-col" onSubmit={Login}>
         <div className="mb-4 sm:mb-6 text-left">
