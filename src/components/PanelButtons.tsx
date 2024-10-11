@@ -41,6 +41,7 @@ function PanelButtons({ dias, currentYear }: any) {
                 <>
                   <MenuItem key={index}>
                     <Link
+                      prefetch={false}
                       href={`/panel/${dia.id}`}
                       key={index}
                       className={`rounded p-2 border hover:border-green-400 bg-gray-200 hover:bg-gray-50 flex text-xs md:text-sm ${path[2] == dia.id && "bg-gray-50/90 border-green-500"} mt-3`}
@@ -64,6 +65,7 @@ function PanelButtons({ dias, currentYear }: any) {
       </Menu>
 
       <Link
+        prefetch={false}
         href={`/panel`}
         className={`rounded px-4 py-4 border border-red-400 hover:border-red-400 md:border-gray-200 text-red-700 hover:bg-gray-50/90 flex items-center text-sm md:text-base gap-2`}
       >
