@@ -6,12 +6,17 @@ export const metadata = {
   title: "WebEtu - Profile",
 }
 
-const Layout = async () => {
+const ProfilePage = async () => {
   let [getProfileResponse, image, logo] = await Promise.all([
     getProfileData() as any,
     getImage(),
     getLogo(),
   ])
+
+  const liStyle = "text-lg w-full flex flex-col gap-2"
+  const keySpanStyle = "font-bold text-gray-600"
+  const dataSpanStyle =
+    "text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded"
 
   if (getProfileResponse.success) {
     const profileData = getProfileResponse.data
@@ -55,45 +60,41 @@ const Layout = async () => {
           </div>
         </div>
         <ul className="list-none flex flex-col gap-4">
-          <li className="text-lg w-full flex flex-col gap-2">
-            <span className="font-bold text-gray-600">First Name:</span>
-            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded">
+          <li className={liStyle}>
+            <span className={keySpanStyle}>First Name:</span>
+            <span className={dataSpanStyle}>
               {profileData.individuPrenomLatin}
             </span>
           </li>
-          <li className="text-lg w-full flex flex-col gap-2">
-            <span className="font-bold text-gray-600">Last Name:</span>
-            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded">
+          <li className={liStyle}>
+            <span className={keySpanStyle}>Last Name:</span>
+            <span className={dataSpanStyle}>
               {profileData.individuNomLatin}
             </span>
           </li>
-          <li className="text-lg w-full flex flex-col gap-2">
-            <span className="font-bold text-gray-600">University:</span>
-            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded">
+          <li className={liStyle}>
+            <span className={keySpanStyle}>University:</span>
+            <span className={dataSpanStyle}>
               {profileData.llEtablissementLatin}
             </span>
           </li>
-          <li className="text-lg w-full flex flex-col gap-2">
-            <span className="font-bold text-gray-600">Date Of Birth:</span>
-            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded">
-              {formattedDate}
-            </span>
+          <li className={liStyle}>
+            <span className={keySpanStyle}>Date Of Birth:</span>
+            <span className={dataSpanStyle}>{formattedDate}</span>
           </li>
-          <li className="text-lg w-full flex flex-col gap-2">
-            <span className="font-bold text-gray-600">Place Of Birth:</span>
-            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded">
+          <li className={liStyle}>
+            <span className={keySpanStyle}>Place Of Birth:</span>
+            <span className={dataSpanStyle}>
               {profileData.individuLieuNaissance}
             </span>
           </li>
-          <li className="text-lg w-full flex flex-col gap-2">
-            <span className="font-bold text-gray-600">Field:</span>
-            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded">
-              {profileData.ofLlDomaine}
-            </span>
+          <li className={liStyle}>
+            <span className={keySpanStyle}>Field:</span>
+            <span className={dataSpanStyle}>{profileData.ofLlDomaine}</span>
           </li>
-          <li className="text-lg w-full flex flex-col gap-2">
-            <span className="font-bold text-gray-600">Level:</span>
-            <span className="text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded">
+          <li className={liStyle}>
+            <span className={keySpanStyle}>Level:</span>
+            <span className={dataSpanStyle}>
               {profileData.niveauLibelleLongLt} - {profileData.ofLlSpecialite}
             </span>
           </li>
@@ -109,4 +110,4 @@ const Layout = async () => {
   }
 }
 
-export default Layout
+export default ProfilePage
