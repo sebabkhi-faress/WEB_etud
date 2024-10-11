@@ -10,7 +10,6 @@ import {
   UserIcon,
   ArrowLeftStartOnRectangleIcon,
   ArrowRightEndOnRectangleIcon,
-  PencilIcon,
   QuestionMarkCircleIcon,
   AcademicCapIcon,
 } from "@heroicons/react/24/solid"
