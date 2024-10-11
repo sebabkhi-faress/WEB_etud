@@ -75,6 +75,7 @@ export default function LoginPage() {
         width={150}
         height={150}
         className="mx-auto mb-6"
+        priority={true} // Disable lazy loading for the LCP image
       />
       <form className="flex flex-col" onSubmit={Login}>
         <div className="mb-4 sm:mb-6 text-left">
@@ -114,6 +115,7 @@ export default function LoginPage() {
             />
             <button
               type="button"
+              aria-label="Toggle Password Visibility"
               className="absolute right-2 top-1 bottom-1 text-green-600"
               onClick={() => setShowPassword(!showPassword)}
             >
@@ -127,6 +129,7 @@ export default function LoginPage() {
         </div>
         <button
           type="submit"
+          aria-label="Login"
           disabled={
             loading || username.trim() === "" || password.trim().length < 8
           }
