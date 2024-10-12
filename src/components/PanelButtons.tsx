@@ -36,29 +36,27 @@ function PanelButtons({ dias, currentYear }: any) {
             className="w-[var(--button-width)] bg-gray-50 p-2 rounded border [--anchor-gap:4px] sm:[--anchor-gap:8px] space-y-2"
           >
             {dias.map(
-              (dia: any, index: any) =>
+              (dia: any, index: number) =>
                 dia.id !== selectedDia.id && (
-                  <>
-                    <MenuItem key={index}>
-                      <Link
-                        prefetch={false}
-                        href={`/panel/${dia.id}`}
-                        key={index}
-                        className={`rounded p-1 border hover:border-green-400 bg-gray-200 hover:bg-gray-50 flex justify-between text-xs md:text-sm ${path[2] == dia.id && "bg-gray-50/90 border-green-500"}`}
+                  <MenuItem key={index}>
+                    <Link
+                      prefetch={false}
+                      href={`/panel/${dia.id}`}
+                      key={index}
+                      className={`rounded p-1 border hover:border-green-400 bg-gray-200 hover:bg-gray-50 flex justify-between text-xs md:text-sm ${path[2] == dia.id && "bg-gray-50/90 border-green-500"}`}
+                    >
+                      <span
+                        className={`text-center m-1 p-1 border ${currentYear == dia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded-full`}
                       >
-                        <span
-                          className={`text-center m-1 p-1 border ${currentYear == dia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded-full`}
-                        >
-                          {dia.anneeAcademiqueCode}
-                        </span>
-                        <span
-                          className={`text-center m-1 p-1 border ${dia.cycleCode == "M" ? "text-purple-500 border-purple-500" : "text-blue-500 border-blue-500"} rounded-full`}
-                        >
-                          {dia.niveauCode}
-                        </span>
-                      </Link>
-                    </MenuItem>
-                  </>
+                        {dia.anneeAcademiqueCode}
+                      </span>
+                      <span
+                        className={`text-center m-1 p-1 border ${dia.cycleCode == "M" ? "text-purple-500 border-purple-500" : "text-blue-500 border-blue-500"} rounded-full`}
+                      >
+                        {dia.niveauCode}
+                      </span>
+                    </Link>
+                  </MenuItem>
                 ),
             )}
           </MenuItems>

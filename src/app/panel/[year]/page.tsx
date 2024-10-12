@@ -201,7 +201,7 @@ const renderSemesterResultItem = (result: any) => {
       </div>
       <div className="space-y-4">
         {bilanUes &&
-          bilanUes.map((ue: any, index: any) => {
+          bilanUes.map((ue: any, index: number) => {
             const ueBgClass = ue.moyenne >= 10 ? "bg-green-50" : "bg-red-50"
             const ueAverageClass =
               ue.moyenne >= 10.0 ? "text-green-800" : "text-red-800"
@@ -221,7 +221,7 @@ const renderSemesterResultItem = (result: any) => {
                   </span>
                 </p>
                 <div className="space-y-4">
-                  {ue.bilanMcs.map((mc: any, mcIndex: any) => {
+                  {ue.bilanMcs.map((mc: any, mcIndex: number) => {
                     const mcAverageClass =
                       mc.moyenneGenerale >= 10.0
                         ? "text-green-800"

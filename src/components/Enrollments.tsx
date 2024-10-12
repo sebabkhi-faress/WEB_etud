@@ -9,7 +9,7 @@ function Enrollments({ dias, currentYear }: any) {
 
   return (
     <>
-      {dias.map((dia: any, index: any) => (
+      {dias.map((dia: any, index: number) => (
         <div
           key={index}
           className={`rounded p-4 border hover:bg-gray-50/90 capitalize ${open == dia.anneeAcademiqueId ? "bg-gray-50/90 border-green-500" : ""}`}
