@@ -144,7 +144,7 @@ const SemesterTab = ({ normal, exam, result }: any) => {
         </TabPanel>
         <TabPanel>
           {result ? (
-            renderSemesterResultItem(result, 1)
+            renderSemesterResultItem(result)
           ) : (
             <p className="text-center">Data Not Available!</p>
           )}
@@ -179,7 +179,7 @@ const renderYearResultItem = (result: any) => {
   )
 }
 
-const renderSemesterResultItem = (result: any, index: any) => {
+const renderSemesterResultItem = (result: any) => {
   const { moyenne, creditAcquis, bilanUes } = result
   const moyenneClass = moyenne >= 10.0 ? "text-green-800" : "text-red-800"
 
@@ -187,41 +187,40 @@ const renderSemesterResultItem = (result: any, index: any) => {
     <div
       className={`${
         moyenne < 10 ? "bg-red-200/65" : "bg-green-200/65"
-      } border border-gray-300 w-full max-w-3xl mx-auto p-6 rounded shadow-lg`}
-      key={index}
+      } border border-gray-300 w-full p-2 md:p-3 lg:p-4 space-y-4 rounded shadow-lg`}
     >
-      <div className="mb-6">
-        <p className="text-lg text-gray-700 font-bold">
+      <div className="md:text-lg lg:text-xl text-gray-700 font-bold">
+        <p>
           <span>Average: </span>
           <span className={moyenneClass}>{moyenne}</span>
         </p>
-        <p className="text-lg text-gray-700 font-bold">
+        <p>
           <span>Credits: </span>
           <span className={moyenneClass}>{creditAcquis}</span>
         </p>
       </div>
-      <div>
+      <div className="space-y-4">
         {bilanUes &&
-          bilanUes.map((ue: any, ueIndex: any) => {
+          bilanUes.map((ue: any, index: any) => {
             const ueBgClass = ue.moyenne >= 10 ? "bg-green-50" : "bg-red-50"
             const ueAverageClass =
               ue.moyenne >= 10.0 ? "text-green-800" : "text-red-800"
 
             return (
               <div
-                key={ueIndex}
-                className={`mb-6 p-4 ${ueBgClass} border border-gray-300 rounded capitalize`}
+                key={index}
+                className={`p-2 ${ueBgClass} space-y-2 border border-gray-300 rounded capitalize text-sm md:text-base lg:text-lg font-semibold text-gray-800`}
               >
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                <h3>
                   {ue.ueNatureLcFr}: {ue.ueLibelleFr}
                 </h3>
-                <p className="text-lg text-gray-700 mb-2">
-                  <span className="font-semibold">Average: </span>
+                <p>
+                  <span>Average: </span>
                   <span className={`${ueAverageClass} font-bold`}>
                     {ue.moyenne}
                   </span>
                 </p>
-                <div className="ml-4">
+                <div className="space-y-4">
                   {ue.bilanMcs.map((mc: any, mcIndex: any) => {
                     const mcAverageClass =
                       mc.moyenneGenerale >= 10.0
@@ -231,9 +230,9 @@ const renderSemesterResultItem = (result: any, index: any) => {
                     return (
                       <div
                         key={mcIndex}
-                        className="mb-4 p-3 border border-gray-300 rounded"
+                        className="p-3 border border-gray-300 rounded"
                       >
-                        <h4 className="text-lg font-semibold text-gray-800 mb-1">
+                        <h4 className="font-semibold text-gray-800">
                           Module:{" "}
                           <span className={mcAverageClass}>
                             {mc.mcLibelleFr}
