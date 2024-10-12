@@ -13,10 +13,10 @@ const ProfilePage = async () => {
     getLogo(),
   ])
 
-  const liStyle = "text-lg w-full flex flex-col gap-2"
-  const keySpanStyle = "font-bold text-gray-600"
+  const liStyle = "flex justify-between items-center text-sm gap-2"
+  const keySpanStyle = "font-medium text-gray-600"
   const dataSpanStyle =
-    "text-gray-800 border border-gray-900 bg-white px-4 py-2 rounded"
+    "text-gray-800 bg-white px-2 py-1 rounded-sm border border-gray-200"
 
   if (getProfileResponse.success) {
     const profileData = getProfileResponse.data
@@ -30,9 +30,11 @@ const ProfilePage = async () => {
     })
 
     return (
-      <div className="bg-gray-200 border border-gray-400 w-full h-max max-w-3xl m-5 p-7 flex flex-col gap-8 rounded shadow-5x5 box-border capitalize">
-        <div className="text-center flex justify-between items-center">
-          <div className="transition duration-300 ease-in-out transform hover:scale-105">
+      <div className="bg-white mx-4 md:mx-auto mt-6 p-6 md:p-8 rounded-lg shadow-lg border border-gray-200 capitalize mb-8">
+        {/* Profile and logo container */}
+        <div className="flex flex-row items-center justify-center gap-4 mb-6">
+          {/* Profile Image */}
+          <div className="transition-transform transform hover:scale-105">
             <Image
               src={
                 image
@@ -40,12 +42,13 @@ const ProfilePage = async () => {
                   : "/images/unavailable.png"
               }
               alt="Profile Image"
-              width={140}
-              height={140}
-              className="w-28 h-28 md:w-32 md:h-32 rounded-full aspect-square shadow-lg mb-4 sm:mb-0"
+              width={120}
+              height={120}
+              className="w-24 h-24 md:w-32 md:h-32 rounded-full"
             />
           </div>
-          <div className="transition duration-300 ease-in-out transform hover:scale-105 relative flex items-center justify-center">
+          {/* University Logo */}
+          <div className="transition-transform transform hover:scale-105">
             <Image
               src={
                 logo
@@ -53,13 +56,15 @@ const ProfilePage = async () => {
                   : "/images/unavailable.png"
               }
               alt="University Logo"
-              width={140}
-              height={140}
-              className="w-28 h-28 md:w-32 md:h-32 rounded-full"
+              width={120}
+              height={120}
+              className="w-24 h-24 md:w-32 md:h-32 rounded-full"
             />
           </div>
         </div>
-        <ul className="list-none flex flex-col gap-4">
+
+        {/* Profile Data */}
+        <ul className="space-y-4">
           <li className={liStyle}>
             <span className={keySpanStyle}>First Name:</span>
             <span className={dataSpanStyle}>
@@ -79,11 +84,11 @@ const ProfilePage = async () => {
             </span>
           </li>
           <li className={liStyle}>
-            <span className={keySpanStyle}>Date Of Birth:</span>
+            <span className={keySpanStyle}>Date of Birth:</span>
             <span className={dataSpanStyle}>{formattedDate}</span>
           </li>
           <li className={liStyle}>
-            <span className={keySpanStyle}>Place Of Birth:</span>
+            <span className={keySpanStyle}>Place of Birth:</span>
             <span className={dataSpanStyle}>
               {profileData.individuLieuNaissance}
             </span>
