@@ -54,6 +54,6 @@ export async function fetchData(link: string, token: string) {
       Authorization: token,
       Author: "<osca@univ-annaba.dz>",
     },
-    timeout: Number(process.env.SERVER_TIMEOUT_REQUEST),
+    timeout: Number(process.env.SERVER_TIMEOUT),
   })
 }

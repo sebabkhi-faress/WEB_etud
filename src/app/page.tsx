@@ -35,7 +35,7 @@ export default function LoginPage() {
           password,
         },
         {
-          timeout: Number(process.env.CLIENT_TIMEOUT_REQUEST),
+          timeout: Number(process.env.NEXT_PUBLIC_TIMEOUT),
         },
       )
 
