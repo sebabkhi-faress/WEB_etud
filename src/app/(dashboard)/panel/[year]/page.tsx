@@ -4,6 +4,7 @@ import {
   getSemesterResults,
   getGroup,
   getYearTranscript,
+  getDias,
 } from "@/utils/api/panel"
 
 export const metadata = {
@@ -14,8 +15,17 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react"
 import NormalNotes from "@/components/NormalNotes"
 import UserGroup from "@/components/UserGroup"
 import ExamNotes from "@/components/ExamNotes"
+import logger from "@/utils/logger"
+import { getCookieData } from "@/utils/api/helpers"
 
 export default async function PeriodTab({ params }: any) {
+  const dias = await getDias()
+
+  if (!dias.find((dia: any) => dia.id == params.year)) {
+    const { user } = getCookieData()
+    logger.warn("Attempted Unauthorized Access", user, "Security")
+    return "Not Allowed!"
+  }
   const [
     normalPromise,
     examsPromise,
