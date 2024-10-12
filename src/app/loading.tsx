@@ -1,5 +1,11 @@
-"use client"
+import { ArrowPathIcon } from "@heroicons/react/24/outline"
 
-export default function Error({ error }: { error: Error }) {
-  return <></>
+const DiasLoading = () => {
+  return (
+    <div className="flex-1 flex items-center justify-center">
+      <ArrowPathIcon className="animate-spin h-16 w-16 m-5" />
+    </div>
+  )
 }
+
+export default DiasLoading
