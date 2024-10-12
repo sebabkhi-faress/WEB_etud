@@ -119,6 +119,7 @@ export default async function PeriodTab({ params }: any) {
 const SemesterTab = ({ normal, exam, result }: any) => {
   const SemesterTabStyle =
     "rounded p-2 text-xs md:text-sm lg:text-lg font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800 border border-gray-300 outline-none data-[selected]:flex-1 transition-all duration-300 ease-in-out"
+  const pStyle = "text-center mb-3 text-red-700"
 
   return (
     <TabGroup className="flex flex-col justify-center items-center gap-4 px-2">
@@ -132,21 +133,21 @@ const SemesterTab = ({ normal, exam, result }: any) => {
           {normal ? (
             <NormalNotes normal={normal} />
           ) : (
-            <p className="text-center">Data Not Available!</p>
+            <p className={pStyle}>Data Not Available!</p>
           )}
         </TabPanel>
         <TabPanel>
           {exam ? (
             <ExamNotes item={exam} />
           ) : (
-            <p className="text-center">Data Not Available!</p>
+            <p className={pStyle}>Data Not Available!</p>
           )}
         </TabPanel>
         <TabPanel>
           {result ? (
             renderSemesterResultItem(result)
           ) : (
-            <p className="text-center">Data Not Available!</p>
+            <p className={pStyle}>Data Not Available!</p>
           )}
         </TabPanel>
       </TabPanels>
