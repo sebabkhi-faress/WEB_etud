@@ -106,7 +106,7 @@ export default async function PeriodTab({ params }: any) {
           </TabPanel>
         )}
         <TabPanel>{yearResults && renderYearResultItem(yearResults)}</TabPanel>
-        <TabPanel className="flex overflow-x-auto p-1 justify-center">
+        <TabPanel>
           {group && Object.keys(group).length > 0 && (
             <UserGroup group={group} />
           )}
