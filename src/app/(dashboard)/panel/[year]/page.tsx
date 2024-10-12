@@ -161,17 +161,17 @@ const renderYearResultItem = (result: any) => {
 
   return (
     <div
-      className={`${ueBgClass} border border-gray-300 w-full max-w-3xl mx-auto p-6 rounded shadow-lg capitalize`}
+      className={`${ueBgClass} border border-gray-300 w-full p-4 text-sm md:text-base lg:text-lg text-gray-700 mb-2 space-y-4 font-semibold rounded shadow-lg capitalize`}
     >
-      <p className="text-lg text-gray-700 mb-2 font-semibold">
+      <p>
         <span>Average: </span>
         <span className={averageClass}>{moyenne}</span>
       </p>
-      <p className="text-lg text-gray-700 mb-2 font-semibold">
+      <p>
         <span>Decision: </span>
         <span className={averageClass}>{typeDecisionLibelleFr}</span>
       </p>
-      <p className="text-lg text-gray-700 mb-2 font-semibold">
+      <p>
         <span>Credits: </span>
         <span className={averageClass}>{creditAcquis}</span>
       </p>
