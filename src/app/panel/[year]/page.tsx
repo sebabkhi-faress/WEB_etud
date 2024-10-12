@@ -161,7 +161,7 @@ const renderYearResultItem = (result: any) => {
 
   return (
     <div
-      className={`${ueBgClass} border border-gray-300 w-full p-4 text-sm md:text-base lg:text-lg text-gray-700 mb-2 space-y-4 font-semibold rounded shadow-lg capitalize`}
+      className={`${ueBgClass} border border-gray-300 w-full p-4 text-sm md:text-base lg:text-lg text-gray-700 space-y-4 font-semibold rounded shadow-lg capitalize text-center`}
     >
       <p>
         <span>Average: </span>
@@ -187,7 +187,7 @@ const renderSemesterResultItem = (result: any) => {
     <div
       className={`${
         moyenne < 10 ? "bg-red-200/65" : "bg-green-200/65"
-      } border border-gray-300 w-full p-2 md:p-3 lg:p-4 space-y-4 rounded shadow-lg`}
+      } border border-gray-300 w-full p-5 space-y-4 rounded shadow-lg`}
     >
       <div className="md:text-lg lg:text-xl text-gray-700 font-bold">
         <p>
@@ -209,7 +209,7 @@ const renderSemesterResultItem = (result: any) => {
             return (
               <div
                 key={index}
-                className={`p-2 ${ueBgClass} space-y-2 border border-gray-300 rounded capitalize text-sm md:text-base lg:text-lg font-semibold text-gray-800`}
+                className={`p-5 ${ueBgClass} space-y-2 border border-gray-300 rounded capitalize text-sm md:text-base lg:text-lg font-semibold text-gray-800`}
               >
                 <h3>
                   {ue.ueNatureLcFr}: {ue.ueLibelleFr}
