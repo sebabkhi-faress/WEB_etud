@@ -31,9 +31,7 @@ const ProfilePage = async () => {
 
     return (
       <div className="bg-white mx-4 md:mx-auto mt-6 p-6 md:p-8 rounded-lg shadow-lg border border-gray-200 capitalize mb-8">
-        {/* Profile and logo container */}
         <div className="flex flex-row items-center justify-center gap-4 mb-6">
-          {/* Profile Image */}
           <div className="transition-transform transform hover:scale-105">
             <Image
               src={
@@ -63,7 +61,6 @@ const ProfilePage = async () => {
           </div>
         </div>
 
-        {/* Profile Data */}
         <ul className="space-y-4">
           <li className={liStyle}>
             <span className={keySpanStyle}>First Name:</span>
