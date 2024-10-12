@@ -4,7 +4,7 @@ function ExamNotes({ item }: { item: any }) {
   return (
     <>
       <div className="mb-4">
-        <h3 className="text-lg md:text-xl font-bold text-gray-700 text-center">
+        <h3 className="text-lg md:text-xl font-bold text-gray-700 text-center mb-2">
           Normal Session
         </h3>
         {/* mt-2  */}
@@ -31,7 +31,7 @@ function ExamNotes({ item }: { item: any }) {
 
       {item.rattrappage.length > 0 && (
         <div>
-          <h3 className="text-lg md:text-xl font-bold text-gray-700 text-center">
+          <h3 className="text-lg md:text-xl font-bold text-gray-700 text-center mb-2">
             Rattrappage Session
           </h3>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-4 capitalize text-xs md:text-sm lg:text-lg">
