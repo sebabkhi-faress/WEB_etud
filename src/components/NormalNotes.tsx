@@ -18,8 +18,8 @@ function NormalNotes({ normal }: { normal: any }) {
           <p className="font-semibold" style={{ marginRight: "1rem" }}>
             {note.rattachementMcMcLibelleFr}
           </p>
-          <div className="flex gap-4 ml-1">
-            <p className="font-bold text-gray-500">
+          <div className="flex gap-4 ml-2">
+            <p className="font-bold text-gray-700">
               {note.note == null ? "Empty" : note.note}
             </p>
             <p className="font-bold">{note.apCode}</p>

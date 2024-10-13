@@ -1,5 +1,4 @@
 import logger from "@/utils/logger"
-import { updateCount } from "../counter"
 import { shortCache, longCache } from "@/utils/cache"
 import { fetchData, getCookieData } from "./helpers"
 import { ApiResponseType, ProfileDataType } from "@/utils/types"
@@ -50,7 +49,6 @@ export async function getProfileData() {
     )
 
     const data = parseProfileData(res.data[0])
-    updateCount(user)
     shortCache.set(cacheKey, data)
 
     logger.info("Success", user, "getProfileData")

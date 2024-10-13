@@ -1,16 +1,17 @@
-import { getCount } from "@/utils/counter"
 import Image from "next/image"
 
 export const metadata = {
   title: "WebEtu - About",
 }
 
-export const dynamic = "force-dynamic"
+const titleStyle = "text-2xl sm:text-3xl font-semibold sm:m-2"
+const contentStyle =
+  "text-lg sm:text-2xl leading-loose sm:leading-relaxed text-gray-700 sm:mr-4"
 
 const AboutPage = async () => {
   return (
     <article
-      className="rtl p-6 sm:p-10 max-w-4xl mx-auto font-sans text-gray-800"
+      className="rtl p-6 sm:p-10 max-w-6xl mx-auto font-sans text-gray-800"
       dir="rtl"
     >
       <header className="text-center mb-12">
@@ -26,14 +27,14 @@ const AboutPage = async () => {
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-4">
           مرحبًا بكم في WebEtu
         </h1>
-        <p className="text-lg text-gray-600 mt-2 font-bold">جامعة باجي مختار</p>
+        <p className="text-lg sm:text-2xl text-gray-600 mt-2 font-semibold">
+          جامعة باجي مختار
+        </p>
       </header>
 
       <section className="mb-10">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-green-700 mb-4">
-          من نحن؟
-        </h2>
-        <p className="text-lg leading-relaxed text-gray-700">
+        <h2 className={`${titleStyle} text-green-700`}>من نحن؟</h2>
+        <p className={contentStyle}>
           نحن نادي علمي يتكون من مجموعة من طلاب الإعلام الآلي في جامعة باجي
           مختار بولاية عنابة، يطلق على نادينا إسم مجتمع البرمجيات مفتوحة المصدر،
           حيث نسعى لتعزيز التعاون وتبادل المعرفة في مجال البرمجيات الحرة
@@ -41,10 +42,8 @@ const AboutPage = async () => {
       </section>
 
       <section className="mb-10">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-green-700 mb-4">
-          ما هو هذا الموقع؟
-        </h2>
-        <p className="text-lg leading-relaxed text-gray-700">
+        <h2 className={`${titleStyle} text-green-700`}>ما هو هذا الموقع؟</h2>
+        <p className={contentStyle}>
           هذا الموقع هو نسخة ويب بديلة غير رسمية من تطبيق{" "}
           <a
             href="https://play.google.com/store/apps/details?id=app.progres.webetu&hl=en"
@@ -56,13 +55,13 @@ const AboutPage = async () => {
       </section>
 
       <section className="mb-10">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-green-700 mb-4">
+        <h2 className={`${titleStyle} text-green-700`}>
           ما سبب تطوير هذا الموقع؟
         </h2>
-        <p className="text-lg leading-relaxed text-gray-700">
+        <p className="text-lg sm:text-2xl leading-loose sm:leading-relaxed text-gray-700 m-2">
           هناك سببان رئيسيان يتمثلان في:
         </p>
-        <ul className="list-disc list-inside text-gray-700 text-lg leading-relaxed space-y-2">
+        <ul className="list-disc list-inside text-gray-700 text-lg sm:text-2xl leading-loose sm:leading-relaxed space-y-2">
           <li className="pr-4">
             دعم مختلف المنصات الإلكترونية سواء أجهزة حاسوب أو الهواتف أو أي جهاز
             رقمي أخر به متصفح حديث نوعا ما
@@ -75,10 +74,8 @@ const AboutPage = async () => {
       </section>
 
       <section className="mb-10">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-sky-700 mb-4">
-          الإبلاغ عن مشكلة
-        </h2>
-        <p className="text-lg leading-relaxed text-gray-700">
+        <h2 className={`${titleStyle} text-sky-700`}>الإبلاغ عن مشكلة</h2>
+        <p className={contentStyle}>
           في حال أردت التبليغ عن مشكلة أو تقديم إقتراح لتحسين الموقع، يُرجى
           الإنضمام إلى مجموعتنا في التيليجرام عبر الضغط على الأيقونة الموجودة
           أسفل الصفحة
@@ -86,25 +83,12 @@ const AboutPage = async () => {
       </section>
 
       <section className="mb-10">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-sky-700 mb-4">
-          فريق العمل
-        </h2>
-        <ul className="list-disc list-inside text-gray-700 text-lg leading-relaxed space-y-2">
+        <h2 className={`${titleStyle} text-sky-700`}>فريق العمل</h2>
+        <ul className="list-disc list-inside text-gray-700 text-lg sm:text-2xl leading-loose sm:leading-relaxed space-y-2">
           <li className="pr-4">قصاص أحمد عبد النور</li>
           <li className="pr-4">شدادي خليل عبد الرحمان</li>
         </ul>
       </section>
-
-      {/*
-      <section className="mb-10">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-sky-700 mb-4">
-          عدد المستخدمين منذ أخر تحديث
-        </h2>
-        <p className="text-lg leading-relaxed text-gray-600 font-bold">
-          {getCount()}
-        </p>
-      </section>
-      */}
 
       <footer className="text-center mt-12">
         <a
@@ -113,7 +97,7 @@ const AboutPage = async () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fab fa-telegram-plane text-4xl"></i>{" "}
+          <i className="fab fa-telegram-plane text-5xl"></i>{" "}
         </a>
         <p className="text-gray-500 text-sm mt-4">
           © 2024 OSCA - All Rights Reserved
