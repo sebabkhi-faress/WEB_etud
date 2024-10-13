@@ -19,7 +19,7 @@ function NormalNotes({ normal }: { normal: any }) {
             {note.rattachementMcMcLibelleFr}
           </p>
           <div className="flex gap-4 ml-1">
-            <p className="font-bold">
+            <p className="font-bold text-gray-500">
               {note.note == null ? "Empty" : note.note}
             </p>
             <p className="font-bold">{note.apCode}</p>

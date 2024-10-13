@@ -3,10 +3,7 @@
 import { ArrowLeftIcon, ChevronDownIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-useState
-
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react"
-import { useState } from "react"
 
 function PanelButtons({ dias, currentYear }: any) {
   const pathname = usePathname()
@@ -43,7 +40,7 @@ function PanelButtons({ dias, currentYear }: any) {
                       prefetch={false}
                       href={`/panel/${dia.id}`}
                       key={index}
-                      className={`rounded p-1 border hover:border-green-400 bg-gray-200 hover:bg-gray-50 flex justify-between text-xs md:text-sm ${path[2] == dia.id && "bg-gray-50/90 border-green-500"}`}
+                      className={`rounded p-1 border hover:border-green-400 bg-blue-50/80 hover:bg-gray-50 flex justify-between text-xs md:text-sm ${path[2] == dia.id && "bg-gray-50/90 border-green-500"}`}
                     >
                       <span
                         className={`text-center m-1 p-1 border ${currentYear == dia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded-full`}

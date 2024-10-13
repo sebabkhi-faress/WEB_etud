@@ -25,8 +25,8 @@ function ExamNotes({ item }: { item: any }) {
               key={course.id}
             >
               <h4 className="font-semibold flex-1">{course.mcLibelleFr}</h4>
-              <p className="font-bold ml-1">
-                {course.noteExamen != null ? course.noteExamen : "Null"}
+              <p className="font-bold ml-1 text-gray-500">
+                {course.noteExamen != null ? course.noteExamen : "Empty"}
               </p>
             </div>
           ))}
@@ -49,7 +49,7 @@ function ExamNotes({ item }: { item: any }) {
                 key={course.id}
               >
                 <h4 className="font-semibold flex-1">{course.mcLibelleFr}</h4>
-                <p className="font-bold ml-1">
+                <p className="font-bold ml-1 text-gray-500">
                   {course.noteExamen == null ? "Empty" : course.noteExamen}
                 </p>
               </div>

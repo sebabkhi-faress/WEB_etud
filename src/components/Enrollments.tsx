@@ -24,7 +24,7 @@ function Enrollments({ dias, currentYear }: any) {
           >
             <div className="flex flex-col sm:flex-row text-xs sm:text-sm">
               <span
-                className={`text-center m-1 p-1 sm:m-2 sm:p-2 border ${
+                className={`text-center m-2 p-2 border ${
                   currentYear == dia.anneeAcademiqueId
                     ? "text-green-500 border-green-500"
                     : "text-gray-500 border-gray-500"
@@ -33,7 +33,7 @@ function Enrollments({ dias, currentYear }: any) {
                 {dia.anneeAcademiqueCode}
               </span>
               <span
-                className={`text-center m-1 p-1 sm:m-2 sm:p-2 border ${
+                className={`text-center m-2 p-2 border ${
                   dia.cycleCode == "M"
                     ? "text-purple-500 border-purple-500"
                     : "text-blue-500 border-blue-500"

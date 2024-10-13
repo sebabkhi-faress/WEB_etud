@@ -189,7 +189,7 @@ const renderSemesterResultItem = (result: any) => {
     <div
       className={`${
         moyenne < 10 ? "bg-red-200/65" : "bg-green-200/65"
-      } border border-gray-300 w-full p-5 space-y-4 rounded`}
+      } border border-gray-300 w-full p-5 space-y-4 rounded mb-2`}
     >
       <div className="md:text-lg lg:text-xl text-gray-700 font-bold">
         <p>
