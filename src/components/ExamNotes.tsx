@@ -3,15 +3,19 @@
 function ExamNotes({ item }: { item: any }) {
   const headerStyle =
     "text-l md:text-2xl font-extrabold text-center text-gray-600 mb-4 "
+  const itemDivStyle =
+    "grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-4 capitalize text-xs md:text-sm lg:text-lg"
+  const moduleDivStyle =
+    "rounded p-4 lg:p-6 transition transform flex border border-gray-300 hover:scale-105"
 
   return (
     <>
-      <div>
+      <div className="mb-2">
         <h3 className={`${headerStyle}`}>Normal Session</h3>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 capitalize text-xs md:text-sm lg:text-lg">
+        <div className={itemDivStyle}>
           {item.normal.map((course: any) => (
             <div
-              className={`rounded p-4 lg:p-6 transition transform flex border border-gray-300 hover:scale-105 ${
+              className={`${moduleDivStyle} ${
                 course.noteExamen == null
                   ? "bg-gray-300/90 text-gray-800"
                   : course.noteExamen >= 10
@@ -30,12 +34,12 @@ function ExamNotes({ item }: { item: any }) {
       </div>
 
       {item.rattrappage.length > 0 && (
-        <div>
+        <div className="mb-2">
           <h3 className={`${headerStyle} mt-4`}>Rattrapage Session</h3>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 capitalize text-xs md:text-sm lg:text-lg">
+          <div className={itemDivStyle}>
             {item.rattrappage.map((course: any) => (
               <div
-                className={`rounded p-4 lg:p-6 transition transform flex border border-gray-300 hover:scale-105 ${
+                className={`${moduleDivStyle} ${
                   course.noteExamen == null
                     ? "bg-gray-300/90 text-gray-800"
                     : course.noteExamen >= 10

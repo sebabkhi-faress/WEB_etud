@@ -2,7 +2,7 @@
 
 function NormalNotes({ normal }: { normal: any }) {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-4">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 md:gap-4">
       {normal.map((note: any, index: number) => (
         <div
           key={index}
@@ -18,7 +18,7 @@ function NormalNotes({ normal }: { normal: any }) {
           <p className="font-semibold" style={{ marginRight: "1rem" }}>
             {note.rattachementMcMcLibelleFr}
           </p>
-          <div className="flex gap-4">
+          <div className="flex gap-4 ml-1">
             <p className="font-bold">
               {note.note == null ? "Empty" : note.note}
             </p>
