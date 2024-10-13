@@ -68,7 +68,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="bg-gray-200/50 p-5 md:p-8 rounded shadow-md border border-green-600 w-full max-w-xs sm:max-w-lg md:max-w-xl text-center">
+    <div className="bg-gray-200/50 p-5 md:p-8 rounded border border-green-600 w-full max-w-xs sm:max-w-lg md:max-w-xl text-center">
       <Image
         src="/images/logo.png"
         alt="Logo"

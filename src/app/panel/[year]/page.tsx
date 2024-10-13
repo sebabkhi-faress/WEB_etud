@@ -26,6 +26,7 @@ export default async function PeriodTab({ params }: any) {
     logger.warn("Attempted Unauthorized Access", user, "Security")
     return "Not Allowed!"
   }
+
   const [
     normalPromise,
     examsPromise,
@@ -162,7 +163,7 @@ const renderYearResultItem = (result: any) => {
 
   return (
     <div
-      className={`${ueBgClass} border border-gray-300 w-full p-4 text-sm md:text-base lg:text-lg text-gray-700 space-y-4 font-semibold rounded shadow-lg capitalize text-center`}
+      className={`${ueBgClass} border border-gray-300 w-full p-4 text-sm md:text-base lg:text-lg text-gray-700 space-y-4 font-semibold rounded capitalize text-center`}
     >
       <p>
         <span>Average: </span>
@@ -188,7 +189,7 @@ const renderSemesterResultItem = (result: any) => {
     <div
       className={`${
         moyenne < 10 ? "bg-red-200/65" : "bg-green-200/65"
-      } border border-gray-300 w-full p-5 space-y-4 rounded shadow-lg`}
+      } border border-gray-300 w-full p-5 space-y-4 rounded`}
     >
       <div className="md:text-lg lg:text-xl text-gray-700 font-bold">
         <p>

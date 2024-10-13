@@ -31,7 +31,7 @@ const ProfilePage = async () => {
     })
 
     return (
-      <div className="bg-gradient-to-r from-green-100 to-white-100 mx-4 md:mx-auto mt-6 p-6 md:p-8 rounded-lg shadow-lg border border-gray-300 capitalize mb-5">
+      <div className="bg-gradient-to-r from-green-100 to-white-100 mx-4 md:mx-auto mt-6 p-6 md:p-8 rounded-lg border border-gray-300 capitalize mb-5">
         <div className="flex flex-row items-center justify-center gap-12 mb-6">
           <div className="mr-8 md:mr-96">
             <Image

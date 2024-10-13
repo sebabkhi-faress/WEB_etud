@@ -106,7 +106,7 @@ const Navbar = () => {
       </div>
 
       {isMenuOpen && (
-        <div className="lg:hidden md:px-3 absolute top-full left-0 w-full bg-green-600 shadow-lg z-50">
+        <div className="lg:hidden md:px-3 absolute top-full left-0 w-full bg-green-600 z-50">
           <div className="flex flex-col gap-2 px-6 py-4">
             {user ? (
               <>

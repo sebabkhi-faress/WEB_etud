@@ -6,7 +6,7 @@ function NormalNotes({ normal }: { normal: any }) {
       {normal.map((note: any, index: number) => (
         <div
           key={index}
-          className={`border border-gray-300 text-gray-800 rounded p-4 lg:p-6 text-xs md:text-sm lg:text-lg flex justify-between items-center shadow-md w-full transition duration-300 ease-in-out transform hover:scale-105 capitalize ${
+          className={`border border-gray-300 text-gray-800 rounded p-4 lg:p-6 text-xs md:text-sm lg:text-lg flex justify-between items-center w-full transition duration-300 ease-in-out transform hover:scale-105 capitalize ${
             note.note == null
               ? "bg-gray-300/90"
               : note.note >= 10

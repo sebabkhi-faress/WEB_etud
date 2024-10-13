@@ -21,7 +21,7 @@ export default async function PanelPage({
         <PanelButtons dias={dias} currentYear={currentYear} />
       </div>
 
-      <div className="flex flex-1 items-center flex-col mt-4">
+      <div className="flex flex-1 items-center flex-col mt-4 md:mt-0">
         <PanelYearTitle dias={dias} />
         {children}
       </div>
