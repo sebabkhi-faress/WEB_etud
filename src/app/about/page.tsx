@@ -23,7 +23,6 @@ const AboutPage = async () => {
             alt="OSCA Club Logo"
             width={150}
             height={150}
-            className="rounded-full"
           />
         </div>
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-4">
