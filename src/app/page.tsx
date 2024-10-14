@@ -68,7 +68,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="bg-gray-200/50 p-5 md:p-8 rounded border border-green-600 w-full max-w-xs sm:max-w-lg md:max-w-xl text-center">
+    <div className="bg-gray-200/50 p-5 md:p-8 rounded border border-green-600 w-full max-w-xs sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl text-center">
       <Image
         src="/images/logo.png"
         alt="Logo"
@@ -81,7 +81,7 @@ export default function LoginPage() {
         <div className="mb-4 sm:mb-6 text-left">
           <label
             htmlFor="username"
-            className="block mb-2 text-sm text-gray-600 font-bold"
+            className="block mb-2 text-sm sm:text-md text-gray-600 font-bold"
           >
             <span className="text-red-500">*</span> Student Registration Number
           </label>
@@ -99,7 +99,7 @@ export default function LoginPage() {
         <div className="mb-4 sm:mb-6 md:mb-8 text-left">
           <label
             htmlFor="password"
-            className="block mb-2 text-sm text-gray-600 font-bold"
+            className="block mb-2 text-sm sm:text-md text-gray-600 font-bold"
           >
             <span className="text-red-500">*</span> Password
           </label>
