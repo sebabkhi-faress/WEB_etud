@@ -4,9 +4,11 @@ export const metadata = {
   title: "WebEtu - About",
 }
 
+const sectionStyle = "mb-10"
 const titleStyle = "text-2xl sm:text-3xl font-semibold sm:m-2"
 const contentStyle =
   "text-lg sm:text-2xl leading-loose sm:leading-relaxed text-gray-700 sm:mr-4"
+const liStyle = "pr-4"
 
 const AboutPage = async () => {
   return (
@@ -32,7 +34,7 @@ const AboutPage = async () => {
         </p>
       </header>
 
-      <section className="mb-10">
+      <section className={sectionStyle}>
         <h2 className={`${titleStyle} text-green-700`}>من نحن؟</h2>
         <p className={contentStyle}>
           نحن نادي علمي يتكون من مجموعة من طلاب الإعلام الآلي في جامعة باجي
@@ -41,7 +43,7 @@ const AboutPage = async () => {
         </p>
       </section>
 
-      <section className="mb-10">
+      <section className={sectionStyle}>
         <h2 className={`${titleStyle} text-green-700`}>ما هو هذا الموقع؟</h2>
         <p className={contentStyle}>
           هذا الموقع هو نسخة ويب بديلة غير رسمية من تطبيق{" "}
@@ -54,26 +56,24 @@ const AboutPage = async () => {
         </p>
       </section>
 
-      <section className="mb-10">
+      <section className={sectionStyle}>
         <h2 className={`${titleStyle} text-green-700`}>
           ما سبب تطوير هذا الموقع؟
         </h2>
-        <p className="text-lg sm:text-2xl leading-loose sm:leading-relaxed text-gray-700 m-2">
-          هناك سببان رئيسيان يتمثلان في:
-        </p>
-        <ul className="list-disc list-inside text-gray-700 text-lg sm:text-2xl leading-loose sm:leading-relaxed space-y-2">
-          <li className="pr-4">
+        <p className={contentStyle}>هناك سببان رئيسيان يتمثلان في:</p>
+        <ul className={`${contentStyle} list-disc list-inside space-y-2`}>
+          <li className={liStyle}>
             دعم مختلف المنصات الإلكترونية سواء أجهزة حاسوب أو الهواتف أو أي جهاز
-            رقمي أخر به متصفح حديث نوعا ما
+            رقمي أخر به متصفح
           </li>
-          <li className="pr-4">
+          <li className={liStyle}>
             بعض المشاكل التقنية الموجودة في التطبيق الرسمي الخاص بوزارة التعليم
             العالي والبحث العلمي
           </li>
         </ul>
       </section>
 
-      <section className="mb-10">
+      <section className={sectionStyle}>
         <h2 className={`${titleStyle} text-sky-700`}>الإبلاغ عن مشكلة</h2>
         <p className={contentStyle}>
           في حال أردت التبليغ عن مشكلة أو تقديم إقتراح لتحسين الموقع، يُرجى
@@ -82,11 +82,11 @@ const AboutPage = async () => {
         </p>
       </section>
 
-      <section className="mb-10">
+      <section className={sectionStyle}>
         <h2 className={`${titleStyle} text-sky-700`}>فريق العمل</h2>
-        <ul className="list-disc list-inside text-gray-700 text-lg sm:text-2xl leading-loose sm:leading-relaxed space-y-2">
-          <li className="pr-4">قصاص أحمد عبد النور</li>
-          <li className="pr-4">شدادي خليل عبد الرحمان</li>
+        <ul className={`${contentStyle} list-disc list-inside space-y-2`}>
+          <li className={liStyle}>قصاص أحمد عبد النور</li>
+          <li className={liStyle}>شدادي خليل عبد الرحمان</li>
         </ul>
       </section>
 
@@ -99,7 +99,7 @@ const AboutPage = async () => {
         >
           <i className="fab fa-telegram-plane text-5xl"></i>{" "}
         </a>
-        <p className="text-gray-500 text-sm mt-4">
+        <p className="text-gray-500 text-sm sm:text-md mt-4">
           © 2024 OSCA - All Rights Reserved
         </p>
       </footer>
