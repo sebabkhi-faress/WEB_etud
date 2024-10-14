@@ -32,7 +32,7 @@ const ProfilePage = async () => {
     })
 
     return (
-      <div className="bg-gradient-to-br from-green-300 to-blue-100 mx-4 md:mx-auto mt-6 p-6 md:p-8 rounded-lg border border-gray-400 capitalize mb-5">
+      <div className="bg-gradient-to-r from-blue-200/70 to-green-100 mx-4 md:mx-auto mt-6 p-6 md:p-8 rounded-lg border border-gray-400 capitalize mb-5">
         <div className="flex flex-row items-center justify-center gap-12 mb-6">
           <div className="mr-8 md:mr-96">
             <Image
