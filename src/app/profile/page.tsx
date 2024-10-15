@@ -32,7 +32,7 @@ const ProfilePage = async () => {
     })
 
     return (
-      <div className="bg-gray-50 mx-4 md:mx-auto mt-6 p-6 md:p-8 rounded-lg border border-green-500 capitalize mb-5">
+      <div className="bg-gray-50/90 mx-4 md:mx-auto mt-6 p-6 md:p-8 rounded-lg border border-green-700 capitalize mb-5">
         <div className="flex flex-row items-center justify-center gap-12 mb-6">
           <div className="mr-8 md:mr-96">
             <Image
@@ -44,7 +44,7 @@ const ProfilePage = async () => {
               alt="Profile Image"
               width={120}
               height={120}
-              className={imageStyle + "p-1 sm:p-2 border border-green-500"}
+              className={`${imageStyle} border border-green-700`}
             />
           </div>
           <div>

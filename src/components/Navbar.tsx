@@ -107,13 +107,13 @@ const Navbar = () => {
 
       {isMenuOpen && (
         <div className="lg:hidden md:px-3 absolute top-full left-0 w-full bg-green-700 z-50">
-          <div className="flex flex-col gap-2 px-6 py-4">
+          <div className="flex flex-col gap-2 px-6 pb-4 pt-2">
             {user ? (
               <>
                 {isAuthMenuItems.map(renderLink)}
                 <hr />
                 <button
-                  className="bg-red-200/70 text-red-800 scale-105 flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded text-lg font-medium transition-colors duration-300"
+                  className="bg-red-200/60 text-red-800 scale-105 flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded text-lg font-medium transition-colors duration-300"
                   onClick={() => {
                     signOut()
                     closeMenu()

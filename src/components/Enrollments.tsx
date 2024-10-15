@@ -12,7 +12,7 @@ function Enrollments({ dias, currentYear }: any) {
       {dias.map((dia: any, index: number) => (
         <div
           key={index}
-          className={`rounded p-4 border hover:bg-gray-50/90 capitalize transition-colors duration-300 ${
+          className={`rounded p-4 border border-gray-300 hover:bg-gray-50/90 capitalize transition-colors duration-300 ${
             open == dia.anneeAcademiqueId
               ? "bg-gray-50/90 border-green-500"
               : ""
@@ -109,10 +109,14 @@ function Enrollments({ dias, currentYear }: any) {
                 </div>
                 <Link
                   href={`/panel/${dia.id}`}
-                  className="flex p-2 gap-2 bg-green-600 text-white rounded font-bold"
+                  className="flex items-center p-2 gap-2 bg-green-600 text-white rounded font-bold transition duration-300 ease-in-out transform hover:bg-green-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
+                  aria-label="Check Grades"
                 >
-                  <PencilIcon className="w-4 h-4 lg:w-6 lg:h-6" />
-                  Check Grades
+                  <PencilIcon
+                    className="w-4 h-4 lg:w-6 lg:h-6"
+                    aria-hidden="true"
+                  />
+                  <span>Check Grades</span>
                 </Link>
               </div>
             </div>
