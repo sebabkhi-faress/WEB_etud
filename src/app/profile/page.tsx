@@ -44,7 +44,7 @@ const ProfilePage = async () => {
               alt="Profile Image"
               width={120}
               height={120}
-              className={imageStyle + " p-2 border border-green-500"}
+              className={imageStyle + "p-1 sm:p-2 border border-green-500"}
             />
           </div>
           <div>
