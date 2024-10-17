@@ -92,7 +92,7 @@ const AboutPage = async () => {
       <footer className="text-center mt-12">
         <a
           href="https://t.me/OSCommunityChat"
-          className="text-green-600 hover:text-green-700 transition duration-200"
+          className="text-green-700 hover:text-green-700 transition duration-200"
           target="_blank"
           rel="noopener noreferrer"
         >

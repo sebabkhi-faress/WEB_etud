@@ -18,7 +18,8 @@ const ProfilePage = async () => {
   const imageStyle =
     "w-24 h-24 md:w-32 md:h-32 rounded-full hover:scale-105 transition duration-300 ease-in-out"
   const keySpanStyle = "font-bold text-gray-600"
-  const dataSpanStyle = "text-gray-800 p-4 bg-gray-200 rounded w-full"
+  const dataSpanStyle =
+    "text-gray-800 p-3 sm:p-4 bg-white rounded w-full border border-green-700"
 
   if (getProfileResponse.success) {
     const profileData = getProfileResponse.data
@@ -32,7 +33,7 @@ const ProfilePage = async () => {
     })
 
     return (
-      <div className="bg-gray-50/90 mx-4 md:mx-auto mt-6 p-6 md:p-8 rounded-lg border border-green-700 capitalize mb-5">
+      <div className="bg-gray-200/60 mx-4 md:mx-auto mt-6 p-6 md:p-8 rounded-lg border border-green-700 capitalize mb-5">
         <div className="flex flex-row items-center justify-center gap-12 mb-6">
           <div className="mr-8 md:mr-96">
             <Image

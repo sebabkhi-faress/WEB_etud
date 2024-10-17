@@ -68,7 +68,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="bg-gray-200/50 p-5 md:p-8 rounded border border-green-600 w-full max-w-xs sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl text-center">
+    <div className="bg-gray-200/60 p-5 md:p-8 rounded border border-green-700 w-full max-w-xs sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl text-center">
       <Image
         src="/images/logo.png"
         alt="Logo"
@@ -93,7 +93,7 @@ export default function LoginPage() {
             onChange={(event) => setUsername(event.target.value)}
             placeholder="Example: 202400000001"
             required
-            className="w-full p-2 sm:p-3 border border-green-600 rounded focus:outline-none focus:border-green-500"
+            className="w-full p-2 sm:p-3 border border-green-700 rounded focus:outline-none focus:border-green-500"
           />
         </div>
         <div className="mb-4 sm:mb-6 md:mb-8 text-left">
@@ -111,12 +111,12 @@ export default function LoginPage() {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               required
-              className="w-full p-2 sm:p-3 border border-green-600 rounded focus:outline-none focus:border-green-500"
+              className="w-full p-2 sm:p-3 border border-green-700 rounded focus:outline-none focus:border-green-500"
             />
             <button
               type="button"
               aria-label="Toggle Password Visibility"
-              className="absolute right-2 top-1 bottom-1 text-green-600"
+              className="absolute right-2 top-1 bottom-1 text-green-700"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
@@ -133,7 +133,7 @@ export default function LoginPage() {
           disabled={
             loading || username.trim() === "" || password.trim().length < 8
           }
-          className="w-full p-2 sm:p-3 text-white bg-green-600 rounded hover:bg-green-700 transition-colors disabled:bg-gray-400"
+          className="w-full p-2 sm:p-3 text-white bg-green-700 rounded hover:bg-green-700 transition-colors disabled:bg-gray-400"
         >
           {loading ? "Loading.." : "Login"}
         </button>
