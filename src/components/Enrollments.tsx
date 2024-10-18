@@ -84,9 +84,10 @@ function Enrollments({ dias, currentYear }: any) {
               <div className="flex justify-between items-center p-4 md:col-span-2">
                 <div className="flex gap-2 text-left">
                   <span
-                    className={`group relative ${!dia.fraisInscriptionPaye && "cursor-pointer"}`}
+                    className={`group relative ${!dia.fraisInscriptionPaye && dia.anneeAcademiqueId == currentYear && "cursor-pointer"}`}
                     onClick={() =>
                       !dia.fraisInscriptionPaye &&
+                      dia.anneeAcademiqueId == currentYear &&
                       window.open(
                         "https://progres.mesrs.dz/epaiement/epaiementI.xhtml",
                         "_blank",
@@ -97,8 +98,8 @@ function Enrollments({ dias, currentYear }: any) {
                       className={`w-6 h-6 lg:w-8 lg:h-8 ${
                         dia.fraisInscriptionPaye
                           ? "text-yellow-500"
-                          : "text-gray-400 hover:text-green-500"
-                      }`}
+                          : "text-gray-400"
+                      } ${dia.anneeAcademiqueId == currentYear && "hover:text-green-500"}`}
                     />
                     <div className="hidden group-hover:block absolute min-w-fit p-2 bg-gray-200 rounded text-xs">
                       Inscription Fees{" "}
@@ -106,9 +107,10 @@ function Enrollments({ dias, currentYear }: any) {
                     </div>
                   </span>
                   <span
-                    className={`group relative ${!dia.transportPaye && "cursor-pointer"}`}
+                    className={`group relative ${!dia.transportPaye && dia.anneeAcademiqueId == currentYear && "cursor-pointer"}`}
                     onClick={() =>
                       !dia.transportPaye &&
+                      dia.anneeAcademiqueId == currentYear &&
                       window.open(
                         "https://progres.mesrs.dz/epaiement/epaiementT.xhtml",
                         "_blank",
@@ -117,10 +119,8 @@ function Enrollments({ dias, currentYear }: any) {
                   >
                     <MapIcon
                       className={`w-6 h-6 lg:w-8 lg:h-8 ${
-                        dia.transportPaye
-                          ? "text-yellow-500"
-                          : "text-gray-400 hover:text-green-500"
-                      }`}
+                        dia.transportPaye ? "text-yellow-500" : "text-gray-400"
+                      } ${dia.anneeAcademiqueId == currentYear && "hover:text-green-500"}`}
                     />
                     <div className="hidden group-hover:block absolute min-w-fit p-2 bg-gray-200 rounded text-xs">
                       Transport Fees {dia.transportPaye ? "Paid" : "Not Paid"}
