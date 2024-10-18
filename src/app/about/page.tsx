@@ -49,6 +49,8 @@ const AboutPage = async () => {
           <a
             href="https://play.google.com/store/apps/details?id=app.progres.webetu&hl=en"
             className="font-bold underline"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             WebEtu
           </a>
