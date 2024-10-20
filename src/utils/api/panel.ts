@@ -1,12 +1,12 @@
 import logger from "@/utils/logger"
-import { shortCache } from "@/utils/cache"
+import { longCache, shortCache } from "@/utils/cache"
 import { fetchData, getCookieData } from "./helpers"
 
 export const getDias = async () => {
   const { token, user, uuid, tokenHash } = getCookieData()
 
   const cacheKey = `dias-${tokenHash}`
-  const cachedData = shortCache.get(cacheKey)
+  const cachedData = longCache.get(cacheKey)
 
   if (cachedData) {
     logger.info("Cache", user, "getDias")
@@ -19,7 +19,7 @@ export const getDias = async () => {
       token,
     )
     logger.info("Success", user, "getDias")
-    shortCache.set(cacheKey, response.data)
+    longCache.set(cacheKey, response.data)
 
     return response.data
   } catch (error: any) {
