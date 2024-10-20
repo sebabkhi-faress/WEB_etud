@@ -21,7 +21,10 @@ import { getCookieData } from "@/utils/api/helpers"
 export default async function PeriodTab({ params }: any) {
   const dias = await getDias()
 
-  if (!dias.find((dia: any) => dia.id == params.year)) {
+  if (
+    process.env.BLOCK_UNAUTHED_ACCESS == "true" &&
+    !dias.find((dia: any) => dia.id == params.year)
+  ) {
     const { user } = getCookieData()
     logger.warn("Attempted Unauthorized Access", user, "Security")
     return "Not Allowed!"
