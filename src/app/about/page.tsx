@@ -10,7 +10,7 @@ const contentStyle =
   "text-lg sm:text-2xl leading-loose sm:leading-relaxed text-gray-700 sm:mr-4"
 const liStyle = "pr-4"
 
-const AboutPage = async () => {
+const AboutPage = () => {
   return (
     <article
       className="rtl p-6 sm:p-10 max-w-6xl mx-auto font-sans text-gray-800"
@@ -94,7 +94,7 @@ const AboutPage = async () => {
       <footer className="text-center mt-12">
         <a
           href="https://t.me/OSCommunityChat"
-          className="text-green-700 hover:text-green-700 transition duration-200"
+          className="text-sky-600/80 hover:text-sky-500 transition duration-200"
           target="_blank"
           rel="noopener noreferrer"
         >
