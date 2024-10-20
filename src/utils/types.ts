@@ -1,6 +1,5 @@
 export type ProfileDataType = {
-  individuId: number
-  nin: string
+  individuId: string
   individuNomArabe: string
   individuNomLatin: string
   individuPrenomArabe: string
@@ -8,11 +7,7 @@ export type ProfileDataType = {
   individuDateNaissance: string
   individuLieuNaissance: string
   individuLieuNaissanceArabe: string
-  llEtablissementArabe: string
-  llEtablissementLatin: string
-  niveauLibelleLongLt: string
-  ofLlDomaine: string
-  ofLlSpecialite: string
+  individuEmail: string
 }
 
 export type ApiResponseType = {

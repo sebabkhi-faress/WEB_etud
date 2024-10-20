@@ -65,6 +65,10 @@ const ProfilePage = async () => {
 
         <ul className="space-y-4">
           <li className={liStyle}>
+            <span className={keySpanStyle}>Identifier:</span>
+            <span className={dataSpanStyle}>{profileData.individuId}</span>
+          </li>
+          <li className={liStyle}>
             <span className={keySpanStyle}>First Name:</span>
             <span className={dataSpanStyle}>
               {profileData.individuPrenomLatin}
@@ -77,9 +81,9 @@ const ProfilePage = async () => {
             </span>
           </li>
           <li className={liStyle}>
-            <span className={keySpanStyle}>University:</span>
-            <span className={dataSpanStyle}>
-              {profileData.llEtablissementLatin}
+            <span className={keySpanStyle}>Email:</span>
+            <span className={`${dataSpanStyle} uppercase`}>
+              {profileData.individuEmail}
             </span>
           </li>
           <li className={liStyle}>
@@ -90,16 +94,6 @@ const ProfilePage = async () => {
             <span className={keySpanStyle}>Place of Birth:</span>
             <span className={dataSpanStyle}>
               {profileData.individuLieuNaissance}
-            </span>
-          </li>
-          <li className={liStyle}>
-            <span className={keySpanStyle}>Field:</span>
-            <span className={dataSpanStyle}>{profileData.ofLlDomaine}</span>
-          </li>
-          <li className={liStyle}>
-            <span className={keySpanStyle}>Level:</span>
-            <span className={dataSpanStyle}>
-              {profileData.niveauLibelleLongLt} - {profileData.ofLlSpecialite}
             </span>
           </li>
         </ul>

@@ -13,7 +13,7 @@ export async function getProfileData() {
   }
 
   const cacheKey = `profile-${tokenHash}`
-  const cachedData = shortCache.get(cacheKey) as ProfileDataType
+  const cachedData = longCache.get(cacheKey) as ProfileDataType
 
   if (cachedData) {
     response.success = true
@@ -24,32 +24,27 @@ export async function getProfileData() {
 
   const parseProfileData = (responseData: any) => {
     const data: ProfileDataType = {
-      individuId: responseData.individuId,
-      nin: responseData.nin,
-      individuNomArabe: responseData.individuNomArabe,
-      individuNomLatin: responseData.individuNomLatin,
-      individuPrenomArabe: responseData.individuPrenomArabe,
-      individuPrenomLatin: responseData.individuPrenomLatin,
-      individuDateNaissance: responseData.individuDateNaissance,
-      individuLieuNaissance: responseData.individuLieuNaissance,
-      individuLieuNaissanceArabe: responseData.individuLieuNaissanceArabe,
-      llEtablissementArabe: responseData.llEtablissementArabe,
-      llEtablissementLatin: responseData.llEtablissementLatin,
-      niveauLibelleLongLt: responseData.niveauLibelleLongLt,
-      ofLlDomaine: responseData.ofLlDomaine,
-      ofLlSpecialite: responseData.ofLlSpecialite,
+      individuId: responseData.identifiant,
+      individuNomArabe: responseData.nomArabe,
+      individuNomLatin: responseData.nomLatin,
+      individuPrenomArabe: responseData.prenomArabe,
+      individuPrenomLatin: responseData.prenomLatin,
+      individuDateNaissance: responseData.dateNaissance,
+      individuLieuNaissance: responseData.lieuNaissance,
+      individuLieuNaissanceArabe: responseData.lieuNaissanceArabe,
+      individuEmail: responseData.email,
     }
     return data
   }
 
   try {
     const res = await fetchData(
-      `${process.env.PROGRES_API}/bac/${uuid}/dias`,
+      `${process.env.PROGRES_API}/bac/${uuid}/individu`,
       token,
     )
 
-    const data = parseProfileData(res.data[0])
-    shortCache.set(cacheKey, data)
+    const data = parseProfileData(res.data)
+    longCache.set(cacheKey, data)
 
     logger.info("Success", user, "getProfileData")
 
