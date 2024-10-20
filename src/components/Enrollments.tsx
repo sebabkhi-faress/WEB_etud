@@ -89,7 +89,7 @@ function Enrollments({ dias, currentYear }: any) {
                       !dia.fraisInscriptionPaye &&
                       dia.anneeAcademiqueId == currentYear &&
                       window.open(
-                        "https://progres.mesrs.dz/epaiement/epaiementI.xhtml",
+                        process.env.NEXT_PUBLIC_EPAIEMENT_INSCRIPTION,
                         "_blank",
                       )
                     }
@@ -112,7 +112,7 @@ function Enrollments({ dias, currentYear }: any) {
                       !dia.transportPaye &&
                       dia.anneeAcademiqueId == currentYear &&
                       window.open(
-                        "https://progres.mesrs.dz/epaiement/epaiementT.xhtml",
+                        process.env.NEXT_PUBLIC_EPAIEMENT_TRANSPORT,
                         "_blank",
                       )
                     }
