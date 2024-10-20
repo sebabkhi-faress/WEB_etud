@@ -16,7 +16,7 @@ const ProfilePage = async () => {
   const liStyle =
     "flex flex-col justify-start items-start text-sm md:text-lg gap-2"
   const imageStyle =
-    "w-24 h-24 md:w-32 md:h-32 rounded-full hover:scale-105 transition duration-300 ease-in-out"
+    "w-24 h-24 md:w-32 md:h-32 rounded-full hover:scale-103 transition duration-300 ease-in-out"
   const keySpanStyle = "font-bold text-gray-600"
   const dataSpanStyle =
     "text-gray-800 p-3 sm:p-4 bg-white rounded w-full border border-green-700"

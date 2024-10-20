@@ -53,7 +53,7 @@ const Navbar = () => {
         prefetch={false}
         key={href}
         href={href}
-        className={`hover:bg-white flex flex-1 items-center gap-2 px-4 py-2 rounded text-lg font-medium transition-all duration-300 text-green-800 scale-105 ${
+        className={`hover:bg-white flex flex-1 items-center gap-2 px-4 py-2 rounded text-lg font-medium transition-all duration-300 text-green-800 scale-103 ${
           regex.test(pathname) ? "bg-white" : "bg-white/50"
         }`}
         onClick={closeMenu}
@@ -113,7 +113,7 @@ const Navbar = () => {
                 {isAuthMenuItems.map(renderLink)}
                 <hr />
                 <button
-                  className="bg-red-200/60 text-red-800 scale-105 flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded text-lg font-medium transition-colors duration-300"
+                  className="bg-red-200/60 text-red-800 scale-103 flex items-center gap-2 hover:bg-white hover:text-red-600 px-4 py-2 rounded text-lg font-medium transition-colors duration-300"
                   onClick={() => {
                     signOut()
                     closeMenu()

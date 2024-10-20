@@ -6,7 +6,7 @@ function ExamNotes({ item }: { item: any }) {
   const itemDivStyle =
     "grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-4 capitalize text-xs md:text-sm lg:text-lg"
   const moduleDivStyle =
-    "rounded p-4 lg:p-6 transition transform flex border border-gray-300 hover:scale-105"
+    "rounded p-4 lg:p-6 transition transform flex border border-gray-300 hover:scale-103"
 
   return (
     <>

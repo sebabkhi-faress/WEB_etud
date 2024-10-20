@@ -22,6 +22,9 @@ const config: Config = {
       animation: {
         loading: "backgroundColorCycle 2s ease-in-out infinite",
       },
+      scale: {
+        "103": "1.03",
+      },
     },
   },
   plugins: [],

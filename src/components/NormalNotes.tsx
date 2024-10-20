@@ -2,11 +2,11 @@
 
 function NormalNotes({ normal }: { normal: any }) {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 md:gap-4">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 lg:gap-4">
       {normal.map((note: any, index: number) => (
         <div
           key={index}
-          className={`border border-gray-300 text-gray-800 rounded p-4 lg:p-6 text-xs md:text-sm lg:text-lg flex justify-between items-center w-full transition duration-300 ease-in-out transform hover:scale-105 capitalize ${
+          className={`border border-gray-300 text-gray-800 rounded p-4 lg:p-6 text-xs md:text-sm lg:text-lg flex justify-between items-center w-full transition duration-300 ease-in-out transform hover:scale-103 capitalize ${
             note.note == null
               ? "bg-gray-300/90"
               : note.note >= 10
