@@ -75,7 +75,9 @@ export default async function PeriodTab({ params }: any) {
         <Tab disabled={!yearResults} className={TabStyle}>
           Yearly
         </Tab>
-        <Tab className={TabStyle}>Group</Tab>
+        <Tab disabled={!group} className={TabStyle}>
+          Group
+        </Tab>
       </TabList>
       <TabPanels className="w-full max-w-4xl border border-gray-300 p-2 rounded">
         {secondSemNotes?.length > 0 || secondSemExams?.normal?.length > 0 ? (
