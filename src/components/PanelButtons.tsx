@@ -18,7 +18,7 @@ function PanelButtons({ dias, currentYear }: any) {
             className={`rounded px-1 py-2 border hover:bg-gray-50/90 flex-1 md:flex-none max-h-fit flex items-center justify-between text-xs md:text-sm bg-gray-50/90 border-green-500`}
           >
             <span
-              className={`text-center m-1 p-1 lg:m-2 lg:p-2 border ${currentYear == selectedDia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded-md`}
+              className={`text-center m-2 p-1 lg:p-2 border ${currentYear == selectedDia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded-md`}
             >
               {selectedDia.anneeAcademiqueCode}
             </span>
@@ -63,10 +63,10 @@ function PanelButtons({ dias, currentYear }: any) {
       <Link
         prefetch={false}
         href={`/panel`}
-        className={`rounded px-4 py-4 border border-red-400 hover:border-red-400 md:border-gray-300 text-red-700 hover:bg-gray-50/90 flex items-center text-sm md:text-base gap-2`}
+        className={`rounded px-4 py-4 border border-green-400 hover:border-green-400 md:border-gray-400/80 text-green-700 hover:bg-gray-50/90 flex items-center text-sm md:text-base gap-2`}
       >
         <ArrowLeftIcon className="h-5 w-5" />
-        Enrollments
+        <p className="hidden sm:block">Enrollments</p>
       </Link>
     </>
   )
