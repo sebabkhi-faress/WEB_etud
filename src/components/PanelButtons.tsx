@@ -63,7 +63,7 @@ function PanelButtons({ dias, currentYear }: any) {
       <Link
         prefetch={false}
         href={`/panel`}
-        className={`rounded px-4 py-4 border border-green-400 hover:border-green-400 md:border-gray-400/80 text-green-700 hover:bg-gray-50/90 flex items-center text-sm md:text-base gap-2`}
+        className={`rounded px-4 py-4 border border-green-500 text-green-700 hover:bg-gray-50/90 flex items-center text-sm md:text-base gap-2`}
       >
         <ArrowLeftIcon className="h-5 w-5" />
         <p className="hidden sm:block">Enrollments</p>
