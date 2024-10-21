@@ -70,6 +70,7 @@ const Navbar = () => {
       <div className="flex items-center flex-shrink-0">
         <Link href="/">
           <Image
+            priority={true}
             src="/images/logo-white.png"
             alt="Logo"
             width={50}
