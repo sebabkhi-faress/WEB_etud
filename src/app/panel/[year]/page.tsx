@@ -60,8 +60,7 @@ export default async function PeriodTab({ params }: any) {
   return (
     <TabGroup className="flex flex-col justify-start items-center w-full py-4 px-2 md:p-4 gap-2 md:gap-4">
       <TabList className="flex gap-1 md:gap-2 overflow-x-auto w-full max-w-4xl border border-gray-300 p-2 rounded">
-        {(secondSemNotes && secondSemNotes.length > 0) ||
-        (secondSemExams && secondSemExams.normal.length > 0) ? (
+        {secondSemNotes?.length > 0 || secondSemExams?.normal?.length > 0 ? (
           <>
             <Tab className={TabStyle}>{Object.keys(group)[0]}</Tab>
             <Tab className={TabStyle}>{Object.keys(group)[1]}</Tab>
@@ -79,8 +78,7 @@ export default async function PeriodTab({ params }: any) {
         <Tab className={TabStyle}>Group</Tab>
       </TabList>
       <TabPanels className="w-full max-w-4xl border border-gray-300 p-2 rounded">
-        {(secondSemNotes && secondSemNotes.length > 0) ||
-        (secondSemExams && secondSemExams.normal.length > 0) ? (
+        {secondSemNotes?.length > 0 || secondSemExams?.normal?.length > 0 ? (
           <>
             <TabPanel>
               <SemesterTab
@@ -131,21 +129,21 @@ const SemesterTab = ({ normal, exam, result }: any) => {
       </TabList>
       <TabPanels className="w-full">
         <TabPanel>
-          {normal && normal.length > 0 ? (
+          {normal?.length > 0 ? (
             <NormalNotes normal={normal} />
           ) : (
             <p className={pStyle}>Data Not Available!</p>
           )}
         </TabPanel>
         <TabPanel>
-          {exam && exam.length > 0 ? (
+          {exam?.normal?.length > 0 ? (
             <ExamNotes item={exam} />
           ) : (
             <p className={pStyle}>Data Not Available!</p>
           )}
         </TabPanel>
         <TabPanel>
-          {result && result.length > 0 ? (
+          {result?.bilanUes?.length > 0 ? (
             renderSemesterResultItem(result)
           ) : (
             <p className={pStyle}>Data Not Available!</p>
@@ -202,57 +200,54 @@ const renderSemesterResultItem = (result: any) => {
         </p>
       </div>
       <div className="space-y-4">
-        {bilanUes &&
-          bilanUes.map((ue: any, index: number) => {
-            const ueBgClass = ue.moyenne >= 10 ? "bg-green-50" : "bg-red-50"
-            const ueAverageClass =
-              ue.moyenne >= 10.0 ? "text-green-800" : "text-red-800"
+        {bilanUes?.map((ue: any, index: number) => {
+          const ueBgClass = ue.moyenne >= 10 ? "bg-green-50" : "bg-red-50"
+          const ueAverageClass =
+            ue.moyenne >= 10.0 ? "text-green-800" : "text-red-800"
 
-            return (
-              <div
-                key={index}
-                className={`p-5 ${ueBgClass} space-y-2 border border-gray-300 rounded capitalize text-sm md:text-base lg:text-lg font-semibold text-gray-800`}
-              >
-                <h3>
-                  {ue.ueNatureLcFr}: {ue.ueLibelleFr}
-                </h3>
-                <p>
-                  <span>Average: </span>
-                  <span className={`${ueAverageClass} font-bold`}>
-                    {ue.moyenne}
-                  </span>
-                </p>
-                <div className="space-y-4">
-                  {ue.bilanMcs.map((mc: any, mcIndex: number) => {
-                    const mcAverageClass =
-                      mc.moyenneGenerale >= 10.0
-                        ? "text-green-800"
-                        : "text-red-800"
+          return (
+            <div
+              key={index}
+              className={`p-5 ${ueBgClass} space-y-2 border border-gray-300 rounded capitalize text-sm md:text-base lg:text-lg font-semibold text-gray-800`}
+            >
+              <h3>
+                {ue.ueNatureLcFr}: {ue.ueLibelleFr}
+              </h3>
+              <p>
+                <span>Average: </span>
+                <span className={`${ueAverageClass} font-bold`}>
+                  {ue.moyenne}
+                </span>
+              </p>
+              <div className="space-y-4">
+                {ue.bilanMcs.map((mc: any, mcIndex: number) => {
+                  const mcAverageClass =
+                    mc.moyenneGenerale >= 10.0
+                      ? "text-green-800"
+                      : "text-red-800"
 
-                    return (
-                      <div
-                        key={mcIndex}
-                        className="p-3 border border-gray-300 rounded"
-                      >
-                        <h4 className="font-semibold text-gray-800">
-                          Module:{" "}
-                          <span className={mcAverageClass}>
-                            {mc.mcLibelleFr}
-                          </span>
-                        </h4>
-                        <p className="text-gray-800">
-                          <span className="font-semibold">Average: </span>
-                          <span className={`${mcAverageClass} font-bold`}>
-                            {mc.moyenneGenerale}
-                          </span>
-                        </p>
-                      </div>
-                    )
-                  })}
-                </div>
+                  return (
+                    <div
+                      key={mcIndex}
+                      className="p-3 border border-gray-300 rounded"
+                    >
+                      <h4 className="font-semibold text-gray-800">
+                        Module:{" "}
+                        <span className={mcAverageClass}>{mc.mcLibelleFr}</span>
+                      </h4>
+                      <p className="text-gray-800">
+                        <span className="font-semibold">Average: </span>
+                        <span className={`${mcAverageClass} font-bold`}>
+                          {mc.moyenneGenerale}
+                        </span>
+                      </p>
+                    </div>
+                  )
+                })}
               </div>
-            )
-          })}
+            </div>
+          )
+        })}
       </div>
     </div>
   )
