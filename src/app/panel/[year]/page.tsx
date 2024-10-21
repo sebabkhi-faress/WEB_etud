@@ -173,10 +173,12 @@ const renderYearResultItem = (result: any) => {
         <span>Decision: </span>
         <span className={averageClass}>{typeDecisionLibelleFr}</span>
       </p>
-      <p>
-        <span>Credits: </span>
-        <span className={averageClass}>{creditAcquis}</span>
-      </p>
+      {creditAcquis > 0 && (
+        <p>
+          <span>Credits: </span>
+          <span className={averageClass}>{creditAcquis}</span>
+        </p>
+      )}
     </div>
   )
 }
@@ -196,10 +198,12 @@ const renderSemesterResultItem = (result: any) => {
           <span>Average: </span>
           <span className={moyenneClass}>{moyenne}</span>
         </p>
-        <p>
-          <span>Credits: </span>
-          <span className={moyenneClass}>{creditAcquis}</span>
-        </p>
+        {creditAcquis > 0 && (
+          <p>
+            <span>Credits: </span>
+            <span className={moyenneClass}>{creditAcquis}</span>
+          </p>
+        )}
       </div>
       <div className="space-y-4">
         {bilanUes?.map((ue: any, index: number) => {
