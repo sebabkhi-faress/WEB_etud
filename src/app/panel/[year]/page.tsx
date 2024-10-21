@@ -131,21 +131,21 @@ const SemesterTab = ({ normal, exam, result }: any) => {
       </TabList>
       <TabPanels className="w-full">
         <TabPanel>
-          {normal ? (
+          {normal && normal.length > 0 ? (
             <NormalNotes normal={normal} />
           ) : (
             <p className={pStyle}>Data Not Available!</p>
           )}
         </TabPanel>
         <TabPanel>
-          {exam ? (
+          {exam && exam.length > 0 ? (
             <ExamNotes item={exam} />
           ) : (
             <p className={pStyle}>Data Not Available!</p>
           )}
         </TabPanel>
         <TabPanel>
-          {result ? (
+          {result && result.length > 0 ? (
             renderSemesterResultItem(result)
           ) : (
             <p className={pStyle}>Data Not Available!</p>
