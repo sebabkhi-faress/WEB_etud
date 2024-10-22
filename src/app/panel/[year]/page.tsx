@@ -197,10 +197,12 @@ const renderSemesterResultItem = (result: any) => {
       } border border-gray-300 w-full p-5 space-y-4 rounded mb-2`}
     >
       <div className="md:text-lg lg:text-xl text-gray-700 font-bold">
-        <p>
-          <span>Average: </span>
-          <span className={moyenneClass}>{moyenne}</span>
-        </p>
+        {bilanUes?.length > 1 && (
+          <p>
+            <span>Average: </span>
+            <span className={moyenneClass}>{moyenne}</span>
+          </p>
+        )}
         {creditAcquis > 0 && (
           <p>
             <span>Credits: </span>
