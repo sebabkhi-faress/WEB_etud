@@ -43,7 +43,7 @@ function PanelButtons({ dias, currentYear }: any) {
                       className={`rounded p-1 border hover:border-green-400 bg-blue-50/80 hover:bg-gray-50 flex justify-between text-xs md:text-sm ${path[2] == dia.id && "bg-gray-50/90 border-green-500"}`}
                     >
                       <span
-                        className={`text-center m-1 p-1 border ${currentYear == dia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded-md`}
+                        className={`text-center m-1 p-1 border text-xs lg:text-sm ${currentYear == dia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded-md`}
                       >
                         {dia.anneeAcademiqueCode}
                       </span>
