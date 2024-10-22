@@ -26,7 +26,7 @@ export default async function PeriodTab({ params }: any) {
     process.env.DIA_SECURITY === "true"
   ) {
     const { user } = getCookieData()
-    logger.warn("Attempted Unauthorized Access", user, "Security")
+    logger.warn("Unauthorized Access Attempt", user, "Security")
     return "Not Allowed!"
   }
 
@@ -188,13 +188,12 @@ const renderYearResultItem = (result: any) => {
 
 const renderSemesterResultItem = (result: any) => {
   const { moyenne, creditAcquis, bilanUes } = result
+  const divBgClass = moyenne < 10 ? "bg-red-200/65" : "bg-green-200/65"
   const moyenneClass = moyenne >= 10.0 ? "text-green-800" : "text-red-800"
 
   return (
     <div
-      className={`${
-        moyenne < 10 ? "bg-red-200/65" : "bg-green-200/65"
-      } border border-gray-300 w-full p-5 space-y-4 rounded mb-2`}
+      className={`${divBgClass} border border-gray-300 w-full p-5 space-y-4 rounded mb-2`}
     >
       <div className="md:text-lg lg:text-xl text-gray-700 font-bold">
         {bilanUes?.length > 1 && (

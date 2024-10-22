@@ -1,7 +1,6 @@
 import PanelButtons from "@/components/PanelButtons"
 import PanelYearTitle from "@/components/PanelYearTitle"
 import { getDias } from "@/utils/api/panel"
-import Link from "next/link"
 
 export const metadata = {
   title: "WebEtu - Panel",

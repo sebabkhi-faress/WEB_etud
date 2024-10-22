@@ -124,6 +124,7 @@ function Enrollments({ dias, currentYear }: any) {
                   </span>
                 </div>
                 <Link
+                  prefetch={false}
                   href={`/panel/${dia.id}`}
                   className="flex items-center p-2 gap-2 bg-green-600 text-white rounded font-bold transition duration-300 ease-in-out transform hover:bg-green-700 hover:scale-103 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
                   aria-label="Check Grades"
