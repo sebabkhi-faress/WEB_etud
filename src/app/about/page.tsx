@@ -19,6 +19,7 @@ const AboutPage = () => {
       <header className="text-center mb-12">
         <div className="flex justify-center items-center mt-6 px-4">
           <Image
+            priority={true}
             src="/images/logo-black.svg"
             alt="OSCA Club Logo"
             width={150}
