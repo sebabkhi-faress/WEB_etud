@@ -22,8 +22,8 @@ export default async function PeriodTab({ params }: any) {
   const dias = await getDias()
 
   if (
-    !dias.find((dia: any) => dia.id == params.year) &&
-    process.env.DIA_SECURITY === "true"
+    process.env.DIA_SECURITY === "true" &&
+    !dias.find((dia: any) => dia.id == params.year)
   ) {
     const { user } = getCookieData()
     logger.warn("Unauthorized Access Attempt", user, "Security")
