@@ -70,7 +70,7 @@ export default function TimeTable({ schedule }: any) {
                       .map((seance: any) => (
                         <div
                           key={seance.id}
-                          className="text-sm flex flex-col justify-center items-center m-1 bg-white border border-gray-200 rounded-sm shadow-sm p-1"
+                          className="text-sm flex flex-col justify-center items-center m-1 bg-white border border-gray-200 rounded-sm shadow-sm p-1 hover:scale-103"
                         >
                           <strong className="text-xs text-gray-800">{seance.matiere}</strong>
                           <span className="text-xs text-teal-600">{seance.ap}</span>
