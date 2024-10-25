@@ -546,9 +546,7 @@ const schedule = [
   },
 ]
 
-export default function WeeklyTimetable({ semesterScheduale }: any) {
-  const schedule = semesterScheduale
-
+export default function WeeklyTimetable() {
   const groupByDay = (schedule: any) => {
     const days = [0, 1, 2, 3, 4, 5]
     const grouped = {} as any
