@@ -137,7 +137,7 @@ const SemesterTab = ({ normal, exam, result, timeTable }: any) => {
   return (
     <TabGroup className="flex flex-col justify-center items-center gap-4 px-2">
       <TabList className="flex w-full gap-2 overflow-x-auto">
-        <Tab className={SemesterTabStyle}>TimeTable</Tab>
+        <Tab className={SemesterTabStyle}>Timetable</Tab>
         <Tab className={SemesterTabStyle}>Notes</Tab>
         <Tab className={SemesterTabStyle}>Exams</Tab>
         <Tab className={SemesterTabStyle}>Total</Tab>
