@@ -96,7 +96,7 @@ export default async function PeriodTab({ params }: any) {
                 normal={firstSemNotes}
                 exam={firstSemExams}
                 result={firstSemResults}
-                timeTable={firstSemTimeTable}
+                timeTable={firstSemTimeTable?.schedule}
               />
             </TabPanel>
             <TabPanel>
@@ -104,7 +104,7 @@ export default async function PeriodTab({ params }: any) {
                 normal={secondSemNotes}
                 exam={secondSemExams}
                 result={secondSemResults}
-                timeTable={secondSemTimeTable}
+                timeTable={secondSemTimeTable?.schedule}
               />
             </TabPanel>
           </>
@@ -114,6 +114,7 @@ export default async function PeriodTab({ params }: any) {
               normal={firstSemNotes}
               exam={firstSemExams}
               result={firstSemResults}
+              timeTable={firstSemTimeTable?.schedule}
             />
           </TabPanel>
         )}
@@ -143,7 +144,11 @@ const SemesterTab = ({ normal, exam, result, timeTable }: any) => {
       </TabList>
       <TabPanels className="w-full">
         <TabPanel>
-          <TimeTable schedule={timeTable} />
+          {timeTable ? (
+            <TimeTable schedule={timeTable} />
+          ) : (
+            <p className={pStyle}>Data Not Available!</p>
+          )}
         </TabPanel>
         <TabPanel>
           {normal ? (
