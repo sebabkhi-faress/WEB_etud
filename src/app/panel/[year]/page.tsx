@@ -5,6 +5,7 @@ import {
   getGroup,
   getYearTranscript,
   getDias,
+  getTimeTable,
 } from "@/utils/api/panel"
 
 export const metadata = {
@@ -15,6 +16,7 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react"
 import NormalNotes from "@/components/NormalNotes"
 import UserGroup from "@/components/UserGroup"
 import ExamNotes from "@/components/ExamNotes"
+import TimeTable from "@/components/TimeTable"
 import logger from "@/utils/logger"
 import { getCookieData } from "@/utils/api/helpers"
 
@@ -36,26 +38,30 @@ export default async function PeriodTab({ params }: any) {
     semesterResultsPromise,
     yearResultsPromise,
     groupPromise,
+    timeTablePromise,
   ] = [
     getNormalNotes(params.year),
     getExamsNotes(params.year),
     getSemesterResults(params.year),
     getYearTranscript(params.year),
     getGroup(params.year),
+    getTimeTable(params.year),
   ]
 
-  const [normal, exams, semesterResults, yearResults, group] =
+  const [normal, exams, semesterResults, yearResults, group, timeTable] =
     await Promise.all([
       normalPromise,
       examsPromise,
       semesterResultsPromise,
       yearResultsPromise,
       groupPromise,
+      timeTablePromise,
     ])
 
   const { firstSemNotes, secondSemNotes } = normal as any
   const { firstSemExams, secondSemExams } = exams as any
   const { firstSemResults, secondSemResults } = semesterResults as any
+  const { firstSemTimeTable, secondSemTimeTable } = timeTable as any
 
   const TabStyle =
     "rounded px-1 py-3 text-xs md:text-base lg:text-lg font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white data-[disabled]:text-gray-400 data-[disabled]:cursor-not-allowed bg-gray-200 text-gray-800 data-[enabled]:hover:bg-green-200 data-[enabled]:hover:text-green-800 border border-gray-300 outline-none flex-1"
@@ -90,6 +96,7 @@ export default async function PeriodTab({ params }: any) {
                 normal={firstSemNotes}
                 exam={firstSemExams}
                 result={firstSemResults}
+                timeTable={firstSemTimeTable}
               />
             </TabPanel>
             <TabPanel>
@@ -97,6 +104,7 @@ export default async function PeriodTab({ params }: any) {
                 normal={secondSemNotes}
                 exam={secondSemExams}
                 result={secondSemResults}
+                timeTable={secondSemTimeTable}
               />
             </TabPanel>
           </>
@@ -120,7 +128,7 @@ export default async function PeriodTab({ params }: any) {
   )
 }
 
-const SemesterTab = ({ normal, exam, result }: any) => {
+const SemesterTab = ({ normal, exam, result, timeTable }: any) => {
   const SemesterTabStyle =
     "rounded p-2 text-xs md:text-sm lg:text-lg font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800 border border-gray-300 outline-none data-[selected]:flex-1 transition-all duration-300 ease-in-out"
   const pStyle = "text-center mb-3 text-red-700"
@@ -128,11 +136,15 @@ const SemesterTab = ({ normal, exam, result }: any) => {
   return (
     <TabGroup className="flex flex-col justify-center items-center gap-4 px-2">
       <TabList className="flex w-full gap-2 overflow-x-auto">
+        <Tab className={SemesterTabStyle}>TimeTable</Tab>
         <Tab className={SemesterTabStyle}>Notes</Tab>
         <Tab className={SemesterTabStyle}>Exams</Tab>
         <Tab className={SemesterTabStyle}>Total</Tab>
       </TabList>
       <TabPanels className="w-full">
+        <TabPanel>
+          <TimeTable schedule={timeTable} />
+        </TabPanel>
         <TabPanel>
           {normal ? (
             <NormalNotes normal={normal} />
