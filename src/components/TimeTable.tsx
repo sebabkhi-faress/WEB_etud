@@ -1,28 +1,28 @@
 export default function TimeTable({ schedule }: any) {
   const groupByDay = (schedule: any) => {
-    const days = [0, 1, 2, 3, 4, 5];
-    const grouped = {} as any;
+    const days = [0, 1, 2, 3, 4, 5]
+    const grouped = {} as any
 
     days.forEach((dayId: any) => {
-      grouped[dayId] = schedule.filter((seance: any) => seance.jourId === dayId);
-    });
+      grouped[dayId] = schedule.filter((seance: any) => seance.jourId === dayId)
+    })
 
-    return grouped;
-  };
+    return grouped
+  }
 
   const extractTimeSlots = (schedule: { plageHoraireLibelleFr: string }[]) => {
-    const timeSlots: string[] = [];
+    const timeSlots: string[] = []
     schedule.forEach((seance) => {
-      const timeSlot = seance.plageHoraireLibelleFr;
+      const timeSlot = seance.plageHoraireLibelleFr
       if (!timeSlots.includes(timeSlot)) {
-        timeSlots.push(timeSlot);
+        timeSlots.push(timeSlot)
       }
-    });
-    return timeSlots.sort();
-  };
+    })
+    return timeSlots.sort()
+  }
 
-  const groupedSchedule = groupByDay(schedule);
-  const timeSlots = extractTimeSlots(schedule);
+  const groupedSchedule = groupByDay(schedule)
+  const timeSlots = extractTimeSlots(schedule)
 
   const dayMap = {
     0: "Saturday",
@@ -31,10 +31,10 @@ export default function TimeTable({ schedule }: any) {
     3: "Tuesday",
     4: "Wednesday",
     5: "Thursday",
-  };
+  }
 
   return (
-    <div className="container mx-auto p-4 capitalize">
+    <div className="container mx-auto capitalize pb-2.5">
       <div className="overflow-x-auto">
         <table className="min-w-full table-auto border-collapse border border-gray-300 shadow-sm">
           <thead>
@@ -54,7 +54,10 @@ export default function TimeTable({ schedule }: any) {
           </thead>
           <tbody>
             {timeSlots.map((slot: any) => (
-              <tr key={slot} className="hover:bg-gray-100 transition duration-200">
+              <tr
+                key={slot}
+                className="hover:bg-gray-100 transition duration-200"
+              >
                 <td className="p-2 border border-gray-300 text-center text-xs font-medium whitespace-nowrap bg-gray-50">
                   {slot}
                 </td>
@@ -65,15 +68,19 @@ export default function TimeTable({ schedule }: any) {
                   >
                     {groupedSchedule[dayId]
                       .filter(
-                        (seance: any) => seance.plageHoraireLibelleFr === slot
+                        (seance: any) => seance.plageHoraireLibelleFr === slot,
                       )
                       .map((seance: any) => (
                         <div
                           key={seance.id}
                           className="text-sm flex flex-col justify-center items-center m-1 bg-white border border-gray-200 rounded-sm shadow-sm p-1 hover:scale-103"
                         >
-                          <strong className="text-xs text-gray-800">{seance.matiere}</strong>
-                          <span className="text-xs text-teal-600">{seance.ap}</span>
+                          <strong className="text-xs text-gray-800">
+                            {seance.matiere}
+                          </strong>
+                          <span className="text-xs text-teal-600">
+                            {seance.ap}
+                          </span>
                         </div>
                       ))}
                   </td>
@@ -84,5 +91,5 @@ export default function TimeTable({ schedule }: any) {
         </table>
       </div>
     </div>
-  );
+  )
 }
