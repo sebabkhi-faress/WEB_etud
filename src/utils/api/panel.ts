@@ -300,6 +300,11 @@ export const getTimeTable = async (id: number) => {
     let firstSemTimeTable = parsedData[0] || null
     let secondSemTimeTable = parsedData[1] || null
 
+    if (secondSemTimeTable === null) {
+      secondSemTimeTable = firstSemTimeTable
+      firstSemTimeTable = null
+    }
+
     return { firstSemTimeTable, secondSemTimeTable }
   }
 
