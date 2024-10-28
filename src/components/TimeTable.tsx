@@ -1,3 +1,5 @@
+const removeSpaces = (text: string) => text.replace(/\s+/g, "")
+
 export default function TimeTable({ schedule }: any) {
   const groupByDay = (schedule: any) => {
     const days = [0, 1, 2, 3, 4, 5]
@@ -34,18 +36,18 @@ export default function TimeTable({ schedule }: any) {
   }
 
   return (
-    <div className="container mx-auto capitalize pb-2.5">
-      <div className="overflow-x-auto">
+    <div className="container mx-auto pb-3 px-2 md:px-4 lg:px-8 capitalize">
+      <div className="overflow-x-auto md:overflow-hidden">
         <table className="min-w-full table-auto border-collapse border border-gray-300 shadow-sm">
           <thead>
             <tr className="bg-gradient-to-r from-green-600 to-teal-500 text-white font-bold">
-              <th className="p-2 border border-gray-200 text-center text-xs">
+              <th className="p-1 md:p-2 lg:p-3 border border-gray-200 text-center text-xs md:text-sm lg:text-base">
                 Time
               </th>
               {Object.entries(dayMap).map(([dayId, dayName]) => (
                 <th
                   key={dayId}
-                  className="p-2 border border-gray-200 text-center text-xs"
+                  className="p-1 md:p-2 lg:p-3 border border-gray-200 text-center text-xs md:text-sm lg:text-base"
                 >
                   {dayName}
                 </th>
@@ -58,13 +60,13 @@ export default function TimeTable({ schedule }: any) {
                 key={slot}
                 className="hover:bg-gray-100 transition duration-200"
               >
-                <td className="p-2 border border-gray-300 text-center text-xs font-medium whitespace-nowrap bg-gray-50">
-                  {slot}
+                <td className="p-2 lg:p-3 border border-gray-300 text-center text-xs md:text-sm font-medium whitespace-nowrap bg-gray-50">
+                  {removeSpaces(slot)}
                 </td>
                 {Object.keys(dayMap).map((dayId) => (
                   <td
                     key={dayId}
-                    className="p-1 border border-gray-300 text-center text-xs"
+                    className="p-1 md:p-2 border border-gray-300 text-center text-xs md:text-sm"
                   >
                     {groupedSchedule[dayId]
                       .filter(
@@ -73,12 +75,12 @@ export default function TimeTable({ schedule }: any) {
                       .map((seance: any) => (
                         <div
                           key={seance.id}
-                          className="text-sm flex flex-col justify-center items-center m-1 bg-white border border-gray-200 rounded-sm shadow-sm p-1 hover:scale-103"
+                          className="flex flex-col items-center m-1 bg-white border border-gray-200 rounded shadow-sm p-1 hover:scale-105 transition transform duration-200"
                         >
-                          <strong className="text-xs text-gray-800">
+                          <strong className="text-[10px] md:text-xs lg:text-sm text-gray-800">
                             {seance.matiere}
                           </strong>
-                          <span className="text-xs text-teal-600">
+                          <span className="text-[9px] md:text-xs lg:text-sm text-teal-600">
                             {seance.ap}
                           </span>
                         </div>
