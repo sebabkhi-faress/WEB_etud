@@ -1,6 +1,7 @@
 import logger from "@/utils/logger"
 import { longCache, shortCache } from "@/utils/cache"
 import { fetchData, getCookieData } from "./helpers"
+import PeriodTab from "@/app/panel/[year]/page"
 
 export const getDias = async () => {
   const { token, user, uuid, tokenHash } = getCookieData()
@@ -239,7 +240,11 @@ export const getGroup = async (id: number) => {
       const section =
         item.nomSection === "Section" ? "Section 1" : item.nomSection
 
-      semesterInfo[semester] = { group, section }
+      semesterInfo[semester] = {
+        group,
+        section,
+        PeriodId: item?.periodeId,
+      }
 
       return semesterInfo
     }, {})
@@ -259,6 +264,75 @@ export const getGroup = async (id: number) => {
     return data
   } catch (error) {
     logger.error("Error", user, "getGroup")
+    return null
+  }
+}
+
+export const getTimeTable = async (id: number) => {
+  const { token, user, tokenHash, uuid } = getCookieData()
+
+  const cacheKey = `timetable-${id}-${tokenHash}`
+  const cachedData = shortCache.get(cacheKey)
+
+  if (cachedData) {
+    logger.info("Cache", user, "getTimeTable")
+    return cachedData
+  }
+
+  const parseData = (data: any, currentYearId: number) => {
+    let parsedData = data.reduce((acc: any, item: any) => {
+      const existingPeriod = acc.find(
+        (period: any) => period.periodId === item.periodeId,
+      )
+
+      if (existingPeriod) {
+        existingPeriod.schedule.push(item)
+      } else {
+        acc.push({
+          periodId: item.periodeId,
+          schedule: [item],
+        })
+      }
+
+      return acc
+    }, [])
+
+    let firstSemTimeTable = parsedData[0] || null
+    let secondSemTimeTable = parsedData[1] || null
+
+    if (secondSemTimeTable === null && currentYearId !== id) {
+      secondSemTimeTable = firstSemTimeTable
+      firstSemTimeTable = null
+    }
+
+    return { firstSemTimeTable, secondSemTimeTable }
+  }
+
+  try {
+    const response = await fetchData(
+      `${process.env.PROGRES_API}/seanceEmploi/inscription/${id}`,
+      token,
+    )
+
+    const diaResponse = await fetchData(
+      `${process.env.PROGRES_API}/bac/${uuid}/anneeAcademique/${process.env.CURRENT_YEAR}/dia`,
+      token,
+    )
+
+    if (response.data === "") {
+      shortCache.set(cacheKey, {
+        firstSemTimeTable: null,
+        secondSemTimeTable: null,
+      })
+      return { firstSemTimeTable: null, secondSemTimeTable: null }
+    }
+    const data = parseData(response.data, diaResponse.data.id)
+
+    shortCache.set(cacheKey, data)
+    logger.info("Success", user, "getTimeTable")
+    return data
+  } catch (error) {
+    logger.error("Error", user, "getTimeTable")
     return null
   }
 }
