@@ -1,7 +1,6 @@
 import logger from "@/utils/logger"
 import { longCache, shortCache } from "@/utils/cache"
 import { fetchData, getCookieData } from "./helpers"
-import PeriodTab from "@/app/panel/[year]/page"
 
 export const getDias = async () => {
   const { token, user, uuid, tokenHash } = getCookieData()
@@ -314,10 +313,7 @@ export const getTimeTable = async (id: number) => {
       token,
     )
 
-    const diaResponse = await fetchData(
-      `${process.env.PROGRES_API}/bac/${uuid}/anneeAcademique/${process.env.CURRENT_YEAR}/dia`,
-      token,
-    )
+    const currentDia = (await getDias())[0]
 
     if (response.data === "") {
       shortCache.set(cacheKey, {
@@ -326,7 +322,8 @@ export const getTimeTable = async (id: number) => {
       })
       return { firstSemTimeTable: null, secondSemTimeTable: null }
     }
-    const data = parseData(response.data, diaResponse.data.id)
+
+    const data = parseData(response.data, currentDia.id)
 
     shortCache.set(cacheKey, data)
     logger.info("Success", user, "getTimeTable")
