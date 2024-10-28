@@ -6,6 +6,8 @@ import Link from "next/link"
 
 function Enrollments({ dias, currentYear }: any) {
   const [open, setOpen] = useState(currentYear)
+  const dataSpanStyle =
+    "bg-gray-200 p-4 rounded hover:scale-103 transition duration-300 ease-in-out"
 
   return (
     <>
@@ -51,34 +53,26 @@ function Enrollments({ dias, currentYear }: any) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 text-xs sm:text-sm">
               <div className="flex flex-col gap-2 text-left">
                 <label className="font-bold">Institution:</label>
-                <span className="bg-gray-200 p-4 rounded">
+                <span className={dataSpanStyle}>
                   {dia.llEtablissementLatin}
                 </span>
               </div>
               <div className="flex flex-col gap-2 text-left">
                 <label className="font-bold">Domain:</label>
-                <span className="bg-gray-200 p-4 rounded">
-                  {dia.ofLlDomaine}
-                </span>
+                <span className={dataSpanStyle}>{dia.ofLlDomaine}</span>
               </div>
               <div className="flex flex-col gap-2 text-left">
                 <label className="font-bold">Field:</label>
-                <span className="bg-gray-200 p-4 rounded">
-                  {dia.ofLlFiliere}
-                </span>
+                <span className={dataSpanStyle}>{dia.ofLlFiliere}</span>
               </div>
               <div className="flex flex-col gap-2 text-left">
                 <label className="font-bold">Level:</label>
-                <span className="bg-gray-200 p-4 rounded">
-                  {dia.niveauLibelleLongLt}
-                </span>
+                <span className={dataSpanStyle}>{dia.niveauLibelleLongLt}</span>
               </div>
               {dia.ofLlSpecialite && (
                 <div className="flex flex-col gap-2 text-left">
                   <label className="font-bold">Speciality:</label>
-                  <span className="bg-gray-200 p-4 rounded">
-                    {dia.ofLlSpecialite}
-                  </span>
+                  <span className={dataSpanStyle}>{dia.ofLlSpecialite}</span>
                 </div>
               )}
               <div className="flex justify-between items-center p-4 md:col-span-2">
@@ -130,6 +124,7 @@ function Enrollments({ dias, currentYear }: any) {
                   </span>
                 </div>
                 <Link
+                  prefetch={false}
                   href={`/panel/${dia.id}`}
                   className="flex items-center p-2 gap-2 bg-green-600 text-white rounded font-bold transition duration-300 ease-in-out transform hover:bg-green-700 hover:scale-103 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
                   aria-label="Check Grades"

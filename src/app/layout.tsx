@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: "WebEtu",
     images: [
       {
-        url: "/images/banner.png",
+        url: `${process.env.CURRENT_HOST}/images/banner.png`,
         alt: "WebEtu Logo",
         width: 800,
         height: 600,

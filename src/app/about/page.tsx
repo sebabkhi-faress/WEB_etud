@@ -5,9 +5,9 @@ export const metadata = {
 }
 
 const sectionStyle = "mb-10"
-const titleStyle = "text-2xl sm:text-3xl font-semibold sm:m-2"
+const titleStyle = "text-xl sm:text-2xl font-semibold sm:m-2"
 const contentStyle =
-  "text-lg sm:text-2xl leading-loose sm:leading-relaxed text-gray-700 sm:mr-4"
+  "text-md sm:text-xl leading-loose sm:leading-relaxed text-gray-700 sm:mr-4"
 const liStyle = "pr-4"
 
 const AboutPage = () => {
@@ -19,16 +19,17 @@ const AboutPage = () => {
       <header className="text-center mb-12">
         <div className="flex justify-center items-center mt-6 px-4">
           <Image
+            priority={true}
             src="/images/logo-black.svg"
             alt="OSCA Club Logo"
             width={150}
             height={150}
           />
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-4">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-4">
           مرحبًا بكم في WebEtu
         </h1>
-        <p className="text-lg sm:text-2xl text-gray-600 mt-2 font-semibold">
+        <p className="text-md sm:text-xl text-gray-600 mt-2 font-semibold">
           جامعة باجي مختار
         </p>
       </header>
@@ -98,7 +99,7 @@ const AboutPage = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fab fa-telegram-plane text-5xl"></i>{" "}
+          <i className="fab fa-telegram-plane text-4xl sm:text-5xl"></i>{" "}
         </a>
         <p className="text-gray-500 text-sm sm:text-md mt-4">
           © 2024 OSCA - All Rights Reserved

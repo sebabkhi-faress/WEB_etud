@@ -25,7 +25,7 @@ const ProfilePage = async () => {
     const profileData = getProfileResponse.data
 
     const formattedDate = new Date(
-      profileData.individuDateNaissance,
+      profileData.individuDateNaissance.substring(0, 10),
     ).toLocaleDateString("en-GB", {
       year: "numeric",
       month: "long",
@@ -80,12 +80,14 @@ const ProfilePage = async () => {
               {profileData.individuNomLatin}
             </span>
           </li>
-          <li className={liStyle}>
-            <span className={keySpanStyle}>Email:</span>
-            <span className={`${dataSpanStyle} uppercase`}>
-              {profileData.individuEmail}
-            </span>
-          </li>
+          {profileData.individuEmail && (
+            <li className={liStyle}>
+              <span className={keySpanStyle}>Email:</span>
+              <span className={`${dataSpanStyle} uppercase`}>
+                {profileData.individuEmail}
+              </span>
+            </li>
+          )}
           <li className={liStyle}>
             <span className={keySpanStyle}>Date of Birth:</span>
             <span className={dataSpanStyle}>{formattedDate}</span>

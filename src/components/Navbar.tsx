@@ -68,8 +68,9 @@ const Navbar = () => {
   return (
     <nav className="bg-green-700 text-white py-3 px-3 md:px-8 flex items-center justify-between relative z-50">
       <div className="flex items-center flex-shrink-0">
-        <Link href="/">
+        <Link prefetch={false} href="/">
           <Image
+            priority={true}
             src="/images/logo-white.png"
             alt="Logo"
             width={50}

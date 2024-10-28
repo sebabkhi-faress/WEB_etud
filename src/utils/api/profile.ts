@@ -1,5 +1,5 @@
 import logger from "@/utils/logger"
-import { shortCache, longCache } from "@/utils/cache"
+import { longCache } from "@/utils/cache"
 import { fetchData, getCookieData } from "./helpers"
 import { ApiResponseType, ProfileDataType } from "@/utils/types"
 
