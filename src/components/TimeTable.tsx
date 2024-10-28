@@ -80,7 +80,7 @@ export default function TimeTable({ schedule }: any) {
                           <strong className="text-[10px] md:text-xs lg:text-sm text-gray-800">
                             {seance.matiere}
                           </strong>
-                          <span className="text-[9px] md:text-xs lg:text-sm text-teal-600">
+                          <span className="text-[9px] md:text-xs lg:text-sm text-teal-600 font-semibold">
                             {seance.ap}
                           </span>
                         </div>
