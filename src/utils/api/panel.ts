@@ -269,7 +269,7 @@ export const getGroup = async (id: number) => {
 }
 
 export const getTimeTable = async (id: number) => {
-  const { token, user, tokenHash } = getCookieData()
+  const { token, user, tokenHash, uuid } = getCookieData()
 
   const cacheKey = `timetable-${id}-${tokenHash}`
   const cachedData = shortCache.get(cacheKey)
@@ -279,7 +279,7 @@ export const getTimeTable = async (id: number) => {
     return cachedData
   }
 
-  const parseData = (data: any) => {
+  const parseData = (data: any, currentYearId: number) => {
     let parsedData = data.reduce((acc: any, item: any) => {
       const existingPeriod = acc.find(
         (period: any) => period.periodId === item.periodeId,
@@ -300,7 +300,7 @@ export const getTimeTable = async (id: number) => {
     let firstSemTimeTable = parsedData[0] || null
     let secondSemTimeTable = parsedData[1] || null
 
-    if (secondSemTimeTable === null) {
+    if (secondSemTimeTable === null && currentYearId !== id) {
       secondSemTimeTable = firstSemTimeTable
       firstSemTimeTable = null
     }
@@ -314,6 +314,11 @@ export const getTimeTable = async (id: number) => {
       token,
     )
 
+    const diaResponse = await fetchData(
+      `${process.env.PROGRES_API}/bac/${uuid}/anneeAcademique/${process.env.CURRENT_YEAR}/dia`,
+      token,
+    )
+
     if (response.data === "") {
       shortCache.set(cacheKey, {
         firstSemTimeTable: null,
@@ -321,7 +326,7 @@ export const getTimeTable = async (id: number) => {
       })
       return { firstSemTimeTable: null, secondSemTimeTable: null }
     }
-    const data = parseData(response.data)
+    const data = parseData(response.data, diaResponse.data.id)
 
     shortCache.set(cacheKey, data)
     logger.info("Success", user, "getTimeTable")
