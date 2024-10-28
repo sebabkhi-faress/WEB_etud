@@ -37,7 +37,7 @@ export default function TimeTable({ schedule }: any) {
 
   return (
     <div className="container mx-auto pb-3 px-2 md:px-4 lg:px-8 capitalize">
-      <div className="overflow-x-auto md:overflow-hidden">
+      <div className="overflow-x-auto">
         <table className="min-w-full table-auto border-collapse border border-gray-300 shadow-sm">
           <thead>
             <tr className="bg-gradient-to-r from-green-600 to-teal-500 text-white font-bold">
