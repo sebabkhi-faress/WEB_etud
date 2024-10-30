@@ -7,7 +7,7 @@ export const metadata = {
 const contentStyle =
   "text-md sm:text-xl leading-loose sm:leading-relaxed text-gray-700 sm:mr-4"
 
-const Section = ({ title, children, titleColor }) => {
+const Section = ({ title, children, titleColor }: any) => {
   return (
     <section className="mb-10">
       <h2 className={`text-xl sm:text-2xl font-semibold sm:m-2 ${titleColor}`}>
@@ -18,10 +18,10 @@ const Section = ({ title, children, titleColor }) => {
   )
 }
 
-const List = ({ items }) => {
+const List = ({ items }: any) => {
   return (
     <ul className={`${contentStyle} list-disc list-inside space-y-2`}>
-      {items.map((item, index) => (
+      {items.map((item: any, index: any) => (
         <li key={index} className="pr-4">
           {item}
         </li>
