@@ -102,6 +102,9 @@ export default function TimeTable({ schedule }: any) {
                             <span className="text-[9px] md:text-xs lg:text-sm text-teal-600 font-semibold">
                               {seance.ap}
                             </span>
+                            <span className="text-[7px] md:text-[10px] text-purple-600 font-semibold">
+                              {seance.refLieuDesignation}
+                            </span>
                           </div>
                         ))}
                     </td>
