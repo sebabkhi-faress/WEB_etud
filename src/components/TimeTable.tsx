@@ -76,46 +76,45 @@ export default function TimeTable({ schedule }: any) {
           </thead>
           <tbody>
             {timeSlots.map((slot: any) => {
-              // Check if slot is null; if it is, return null (skip rendering)
-              if (slot === null) return null
-
               return (
-                <tr
-                  key={slot}
-                  className="hover:bg-gray-100 transition duration-200"
-                >
-                  <td className="p-2 lg:p-3 border border-gray-300 text-center text-xs md:text-sm font-medium whitespace-nowrap bg-gray-50">
-                    {betterSlotFormat(slot)}
-                  </td>
-                  {Object.keys(dayMap).map((dayId) => (
-                    <td
-                      key={dayId}
-                      className="p-1 md:p-2 border border-gray-300 text-center text-xs md:text-sm"
-                    >
-                      {groupedSchedule[dayId]
-                        .filter(
-                          (seance: any) =>
-                            seance.plageHoraireLibelleFr === slot,
-                        )
-                        .map((seance: any) => (
-                          <div
-                            key={seance.id}
-                            className="flex flex-col items-center m-1 bg-white border border-gray-200 rounded shadow-sm p-1 hover:scale-105 transition transform duration-200"
-                          >
-                            <strong className="text-[10px] md:text-xs lg:text-sm text-gray-800">
-                              {seance.matiere}
-                            </strong>
-                            <span className="text-[9px] md:text-xs lg:text-sm text-teal-600 font-semibold">
-                              {seance.ap}
-                            </span>
-                            <span className="text-[7px] md:text-[10px] text-purple-600 font-semibold">
-                              {seance.refLieuDesignation}
-                            </span>
-                          </div>
-                        ))}
+                slot && (
+                  <tr
+                    key={slot}
+                    className="hover:bg-gray-100 transition duration-200"
+                  >
+                    <td className="p-2 lg:p-3 border border-gray-300 text-center text-xs md:text-sm font-medium whitespace-nowrap bg-gray-50">
+                      {betterSlotFormat(slot)}
                     </td>
-                  ))}
-                </tr>
+                    {Object.keys(dayMap).map((dayId) => (
+                      <td
+                        key={dayId}
+                        className="p-1 md:p-2 border border-gray-300 text-center text-xs md:text-sm"
+                      >
+                        {groupedSchedule[dayId]
+                          .filter(
+                            (seance: any) =>
+                              seance.plageHoraireLibelleFr === slot,
+                          )
+                          .map((seance: any) => (
+                            <div
+                              key={seance.id}
+                              className="flex flex-col items-center m-1 bg-white border border-gray-200 rounded shadow-sm p-1 hover:scale-105 transition transform duration-200"
+                            >
+                              <strong className="text-[10px] md:text-xs lg:text-sm text-gray-800">
+                                {seance.matiere}
+                              </strong>
+                              <span className="text-[9px] md:text-xs lg:text-sm text-teal-600 font-semibold">
+                                {seance.ap}
+                              </span>
+                              <span className="text-[7px] md:text-[10px] text-purple-600 font-semibold">
+                                {seance.refLieuDesignation}
+                              </span>
+                            </div>
+                          ))}
+                      </td>
+                    ))}
+                  </tr>
+                )
               )
             })}
           </tbody>
@@ -124,49 +123,51 @@ export default function TimeTable({ schedule }: any) {
 
       {/* Small Screens View */}
       <div className="lg:hidden space-y-4 mb-2">
-        {Object.entries(groupedSchedule).map(([dayId, sessions]) => (
-          <div
-            key={dayId}
-            className="border rounded-sm shadow-sm p-6 bg-gradient-to-r from-green-100 to-teal-100"
-          >
-            <h3 className="text-lg font-bold text-black mb-3 text-center">
-              {dayMap[dayId]}
-            </h3>
-            {timeSlots.map((slot) => {
-              const associatedSessions = sessions.filter(
-                (seance: any) => seance.plageHoraireLibelleFr === slot,
-              )
+        {Object.entries(groupedSchedule).map(([dayId, sessions]) => {
+          return (
+            sessions.length > 0 && (
+              <div
+                key={dayId}
+                className="border rounded-sm shadow-sm p-6 bg-gradient-to-r from-green-100 to-teal-100"
+              >
+                <h3 className="text-lg font-bold text-black mb-3 text-center">
+                  {dayMap[dayId]}
+                </h3>
+                {timeSlots.map((slot) => {
+                  const associatedSessions = sessions.filter(
+                    (seance: any) => seance.plageHoraireLibelleFr === slot,
+                  )
 
-              if (associatedSessions.length > 0) {
-                return (
-                  <div key={slot} className="mb-2">
-                    <h4 className="text-sm font-semibold text-gray-700 mb-1 text-center">
-                      {betterSlotFormat(slot)}
-                    </h4>
-                    {associatedSessions.map((seance: any) => (
-                      <div
-                        key={seance.id}
-                        className="flex flex-col items-start bg-white border border-gray-300 rounded-sm shadow-sm p-3 mb-2 transition-transform transform hover:scale-103"
-                      >
-                        <strong className="text-xs text-gray-800 mb-1">
-                          {seance.matiere}
-                        </strong>
-                        <span className="text-xs text-teal-600 font-semibold">
-                          {seance.ap}
-                        </span>
-                        <span className="text-xs text-purple-600">
-                          {seance.refLieuDesignation}
-                        </span>
+                  return (
+                    associatedSessions.length > 0 && (
+                      <div key={slot} className="mb-2">
+                        <h4 className="text-sm font-semibold text-gray-700 mb-1 text-center">
+                          {betterSlotFormat(slot)}
+                        </h4>
+                        {associatedSessions.map((seance: any) => (
+                          <div
+                            key={seance.id}
+                            className="flex flex-col items-start bg-white border border-gray-300 rounded-sm shadow-sm p-3 mb-2 transition-transform transform hover:scale-103"
+                          >
+                            <strong className="text-xs text-gray-800 mb-1">
+                              {seance.matiere}
+                            </strong>
+                            <span className="text-xs text-teal-600 font-semibold">
+                              {seance.ap}
+                            </span>
+                            <span className="text-xs text-purple-600">
+                              {seance.refLieuDesignation}
+                            </span>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                )
-              }
-
-              return null
-            })}
-          </div>
-        ))}
+                    )
+                  )
+                })}
+              </div>
+            )
+          )
+        })}
       </div>
     </div>
   )
