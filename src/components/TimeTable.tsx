@@ -1,9 +1,3 @@
-const betterSlotFormat = (text: string) => {
-  return text
-    ?.replace(/\s+/g, "") // Remove all spaces
-    .replace(/-/g, " - ") // Add spaces around dashes
-}
-
 export default function TimeTable({ schedule }: any) {
   const groupByDay = (schedule: any) => {
     const days = [0, 1, 2, 3, 4, 5]
@@ -42,6 +36,12 @@ export default function TimeTable({ schedule }: any) {
     return timeSlots
   }
 
+  const betterSlotFormat = (text: string) => {
+    return text
+      ?.replace(/\s+/g, "") // Remove all spaces
+      .replace(/-/g, " - ") // Add spaces around dashes
+  }
+
   const groupedSchedule = groupByDay(schedule)
   const timeSlots = extractTimeSlots(schedule)
 
@@ -56,6 +56,7 @@ export default function TimeTable({ schedule }: any) {
 
   return (
     <div className="container mx-auto capitalize">
+      {/* Large Screens View */}
       <div className="overflow-x-auto hidden lg:block mb-2">
         <table className="min-w-full table-auto border-collapse border border-gray-300 shadow-sm">
           <thead>
@@ -121,6 +122,7 @@ export default function TimeTable({ schedule }: any) {
         </table>
       </div>
 
+      {/* Small Screens View */}
       <div className="lg:hidden space-y-4 mb-2">
         {Object.entries(groupedSchedule).map(([dayId, sessions]) => (
           <div
