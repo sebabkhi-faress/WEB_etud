@@ -14,12 +14,13 @@ export default function TimeTable({ schedule }: any) {
 
   const extractTimeSlots = (schedule: { plageHoraireLibelleFr: string }[]) => {
     const timeSlots: string[] = []
+
     schedule.forEach((seance) => {
       const timeSlot = seance.plageHoraireLibelleFr
-      if (!timeSlots.includes(timeSlot)) {
-        timeSlots.push(timeSlot)
-      }
+
+      if (!timeSlots.includes(timeSlot)) timeSlots.push(timeSlot)
     })
+
     return timeSlots.sort()
   }
 
