@@ -4,12 +4,33 @@ export const metadata = {
   title: "WebEtu - About",
 }
 
-const sectionStyle = "mb-10"
-const titleStyle = "text-xl sm:text-2xl font-semibold sm:m-2"
 const contentStyle =
   "text-md sm:text-xl leading-loose sm:leading-relaxed text-gray-700 sm:mr-4"
-const liStyle = "pr-4"
 
+const Section = ({ title, children, titleColor }) => {
+  return (
+    <section className="mb-10">
+      <h2 className={`text-xl sm:text-2xl font-semibold sm:m-2 ${titleColor}`}>
+        {title}
+      </h2>
+      {children}
+    </section>
+  )
+}
+
+const List = ({ items }) => {
+  return (
+    <ul className={`${contentStyle} list-disc list-inside space-y-2`}>
+      {items.map((item, index) => (
+        <li key={index} className="pr-4">
+          {item}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+// AboutPage Component
 const AboutPage = () => {
   return (
     <article
@@ -34,17 +55,15 @@ const AboutPage = () => {
         </p>
       </header>
 
-      <section className={sectionStyle}>
-        <h2 className={`${titleStyle} text-green-700`}>من نحن؟</h2>
+      <Section title="من نحن؟" titleColor="text-green-700">
         <p className={contentStyle}>
           نحن نادي علمي يتكون من مجموعة من طلاب الإعلام الآلي في جامعة باجي
           مختار بولاية عنابة، يطلق على نادينا إسم مجتمع البرمجيات مفتوحة المصدر،
-          حيث نسعى لتعزيز التعاون وتبادل المعرفة في مجال البرمجيات الحرة
+          حيث نسعى لتعزيز التعاون وتبادل المعرفة في مجال البرمجيات الحرة.
         </p>
-      </section>
+      </Section>
 
-      <section className={sectionStyle}>
-        <h2 className={`${titleStyle} text-green-700`}>ما هو هذا الموقع؟</h2>
+      <Section title="ما هو هذا الموقع؟" titleColor="text-green-700">
         <p className={contentStyle}>
           هذا الموقع هو نسخة ويب بديلة غير رسمية من تطبيق{" "}
           <a
@@ -56,41 +75,29 @@ const AboutPage = () => {
             WebEtu
           </a>
         </p>
-      </section>
+      </Section>
 
-      <section className={sectionStyle}>
-        <h2 className={`${titleStyle} text-green-700`}>
-          ما سبب تطوير هذا الموقع؟
-        </h2>
+      <Section title="ما سبب تطوير هذا الموقع؟" titleColor="text-green-700">
         <p className={contentStyle}>هناك سببان رئيسيان يتمثلان في:</p>
-        <ul className={`${contentStyle} list-disc list-inside space-y-2`}>
-          <li className={liStyle}>
-            دعم مختلف المنصات الإلكترونية سواء أجهزة حاسوب أو الهواتف أو أي جهاز
-            رقمي أخر به متصفح
-          </li>
-          <li className={liStyle}>
-            بعض المشاكل التقنية الموجودة في التطبيق الرسمي الخاص بوزارة التعليم
-            العالي والبحث العلمي
-          </li>
-        </ul>
-      </section>
+        <List
+          items={[
+            "دعم مختلف المنصات الإلكترونية سواء أجهزة حاسوب أو الهواتف أو أي جهاز رقمي أخر به متصفح",
+            "بعض المشاكل التقنية الموجودة في التطبيق الرسمي الخاص بوزارة التعليم العالي والبحث العلمي",
+          ]}
+        />
+      </Section>
 
-      <section className={sectionStyle}>
-        <h2 className={`${titleStyle} text-sky-700`}>الإبلاغ عن مشكلة</h2>
+      <Section title="الإبلاغ عن مشكلة" titleColor="text-sky-700">
         <p className={contentStyle}>
           في حال أردت التبليغ عن مشكلة أو تقديم إقتراح لتحسين الموقع، يُرجى
           الإنضمام إلى مجموعتنا في التيليجرام عبر الضغط على الأيقونة الموجودة
-          أسفل الصفحة
+          أسفل الصفحة.
         </p>
-      </section>
+      </Section>
 
-      <section className={sectionStyle}>
-        <h2 className={`${titleStyle} text-sky-700`}>فريق العمل</h2>
-        <ul className={`${contentStyle} list-disc list-inside space-y-2`}>
-          <li className={liStyle}>قصاص أحمد عبد النور</li>
-          <li className={liStyle}>شدادي خليل عبد الرحمان</li>
-        </ul>
-      </section>
+      <Section title="فريق العمل" titleColor="text-sky-700">
+        <List items={["قصاص أحمد عبد النور", "شدادي خليل عبد الرحمان"]} />
+      </Section>
 
       <footer className="text-center mt-12">
         <a
