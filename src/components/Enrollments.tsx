@@ -30,7 +30,7 @@ function Enrollments({ dias, currentYear }: any) {
                   currentYear == dia.anneeAcademiqueId
                     ? "text-green-500 border-green-500"
                     : "text-gray-500 border-gray-500"
-                } rounded-md`}
+                } rounded-sm`}
               >
                 {dia.anneeAcademiqueCode}
               </span>
@@ -39,7 +39,7 @@ function Enrollments({ dias, currentYear }: any) {
                   dia.cycleCode == "M"
                     ? "text-purple-500 border-purple-500"
                     : "text-blue-500 border-blue-500"
-                } rounded-md`}
+                } rounded-sm`}
               >
                 {dia.niveauCode}
               </span>

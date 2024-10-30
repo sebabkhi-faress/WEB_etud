@@ -52,7 +52,7 @@ export default function TimeTable({ schedule }: any) {
 
   return (
     <div className="container mx-auto pb-3 px-2 md:px-4 lg:px-8 capitalize">
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto hidden md:block">
         <table className="min-w-full table-auto border-collapse border border-gray-300 shadow-sm">
           <thead>
             <tr className="bg-gradient-to-r from-green-600 to-teal-500 text-white font-bold">
@@ -115,6 +115,51 @@ export default function TimeTable({ schedule }: any) {
             })}
           </tbody>
         </table>
+      </div>
+      <div className="md:hidden">
+        {Object.entries(groupedSchedule).map(([dayId, sessions]) => (
+          <div
+            key={dayId}
+            className="mb-6 border rounded-sm shadow-sm p-6 bg-gradient-to-r from-green-100 to-teal-100"
+          >
+            <h3 className="text-lg font-bold text-teal-800 mb-3 text-center">
+              {dayMap[dayId]}
+            </h3>
+            {timeSlots.map((slot) => {
+              const associatedSessions = sessions.filter(
+                (seance: any) => seance.plageHoraireLibelleFr === slot,
+              )
+
+              if (associatedSessions.length > 0) {
+                return (
+                  <div key={slot} className="mb-2">
+                    <h4 className="text-sm font-semibold text-teal-600 mb-1 text-center">
+                      {removeSpaces(slot)}
+                    </h4>
+                    {associatedSessions.map((seance: any) => (
+                      <div
+                        key={seance.id}
+                        className="flex flex-col items-start bg-white border border-gray-300 rounded-sm shadow-sm p-3 mb-2 transition-transform transform hover:scale-103"
+                      >
+                        <strong className="text-xs text-gray-800 mb-1">
+                          {seance.matiere}
+                        </strong>
+                        <span className="text-xs text-teal-600 font-semibold">
+                          {seance.ap}
+                        </span>
+                        <span className="text-xs text-teal-600">
+                          {seance.refLieuDesignation}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )
+              }
+
+              return null
+            })}
+          </div>
+        ))}
       </div>
     </div>
   )
