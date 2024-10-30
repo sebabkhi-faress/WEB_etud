@@ -1,4 +1,4 @@
-const removeSpaces = (text: string) => text.replace(/\s+/g, "")
+const removeSpaces = (text: string) => text?.replace(/\s+/g, "")
 
 export default function TimeTable({ schedule }: any) {
   const groupByDay = (schedule: any) => {
@@ -18,10 +18,21 @@ export default function TimeTable({ schedule }: any) {
     schedule.forEach((seance) => {
       const timeSlot = seance.plageHoraireLibelleFr
 
-      if (!timeSlots.includes(timeSlot)) timeSlots.push(timeSlot)
+      if (!timeSlots?.includes(timeSlot)) {
+        timeSlots.push(timeSlot)
+      }
     })
 
-    return timeSlots.sort()
+    // Sort the time slots correctly
+    timeSlots.sort((a, b) => {
+      const [startA] = a.split("-").map((time) => time.split(":").map(Number))
+      const [startB] = b.split("-").map((time) => time.split(":").map(Number))
+
+      // Compare hours first, then minutes
+      return startA[0] - startB[0] || startA[1] - startB[1]
+    })
+
+    return timeSlots
   }
 
   const groupedSchedule = groupByDay(schedule)
