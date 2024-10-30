@@ -45,7 +45,7 @@ export default async function PeriodTab({ params }: any) {
     getSemesterResults(params.year),
     getYearTranscript(params.year),
     getGroup(params.year),
-    getTimeTable(params.year),
+    getTimeTable(params.year, dias),
   ]
 
   const [normal, exams, semesterResults, yearResults, group, timeTable] =

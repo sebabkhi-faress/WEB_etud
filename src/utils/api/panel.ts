@@ -267,7 +267,7 @@ export const getGroup = async (id: number) => {
   }
 }
 
-export const getTimeTable = async (id: number) => {
+export const getTimeTable = async (id: number, dias: any) => {
   const { token, user, tokenHash, uuid } = getCookieData()
 
   const cacheKey = `timetable-${id}-${tokenHash}`
@@ -313,7 +313,7 @@ export const getTimeTable = async (id: number) => {
       token,
     )
 
-    const currentDia = (await getDias())[0]
+    const currentDia = dias[0]
 
     if (response.data === "") {
       shortCache.set(cacheKey, {
@@ -327,6 +327,7 @@ export const getTimeTable = async (id: number) => {
 
     shortCache.set(cacheKey, data)
     logger.info("Success", user, "getTimeTable")
+
     return data
   } catch (error) {
     logger.error("Error", user, "getTimeTable")
