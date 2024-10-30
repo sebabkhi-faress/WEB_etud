@@ -25,6 +25,8 @@ export default function TimeTable({ schedule }: any) {
 
     // Sort the time slots correctly
     timeSlots.sort((a, b) => {
+      if (!a || !b) return 0
+
       const [startA] = a.split("-").map((time) => time.split(":").map(Number))
       const [startB] = b.split("-").map((time) => time.split(":").map(Number))
 
@@ -67,40 +69,46 @@ export default function TimeTable({ schedule }: any) {
             </tr>
           </thead>
           <tbody>
-            {timeSlots.map((slot: any) => (
-              <tr
-                key={slot}
-                className="hover:bg-gray-100 transition duration-200"
-              >
-                <td className="p-2 lg:p-3 border border-gray-300 text-center text-xs md:text-sm font-medium whitespace-nowrap bg-gray-50">
-                  {removeSpaces(slot)}
-                </td>
-                {Object.keys(dayMap).map((dayId) => (
-                  <td
-                    key={dayId}
-                    className="p-1 md:p-2 border border-gray-300 text-center text-xs md:text-sm"
-                  >
-                    {groupedSchedule[dayId]
-                      .filter(
-                        (seance: any) => seance.plageHoraireLibelleFr === slot,
-                      )
-                      .map((seance: any) => (
-                        <div
-                          key={seance.id}
-                          className="flex flex-col items-center m-1 bg-white border border-gray-200 rounded shadow-sm p-1 hover:scale-105 transition transform duration-200"
-                        >
-                          <strong className="text-[10px] md:text-xs lg:text-sm text-gray-800">
-                            {seance.matiere}
-                          </strong>
-                          <span className="text-[9px] md:text-xs lg:text-sm text-teal-600 font-semibold">
-                            {seance.ap}
-                          </span>
-                        </div>
-                      ))}
+            {timeSlots.map((slot: any) => {
+              // Check if slot is null; if it is, return null (skip rendering)
+              if (slot === null) return null
+
+              return (
+                <tr
+                  key={slot}
+                  className="hover:bg-gray-100 transition duration-200"
+                >
+                  <td className="p-2 lg:p-3 border border-gray-300 text-center text-xs md:text-sm font-medium whitespace-nowrap bg-gray-50">
+                    {removeSpaces(slot)}
                   </td>
-                ))}
-              </tr>
-            ))}
+                  {Object.keys(dayMap).map((dayId) => (
+                    <td
+                      key={dayId}
+                      className="p-1 md:p-2 border border-gray-300 text-center text-xs md:text-sm"
+                    >
+                      {groupedSchedule[dayId]
+                        .filter(
+                          (seance: any) =>
+                            seance.plageHoraireLibelleFr === slot,
+                        )
+                        .map((seance: any) => (
+                          <div
+                            key={seance.id}
+                            className="flex flex-col items-center m-1 bg-white border border-gray-200 rounded shadow-sm p-1 hover:scale-105 transition transform duration-200"
+                          >
+                            <strong className="text-[10px] md:text-xs lg:text-sm text-gray-800">
+                              {seance.matiere}
+                            </strong>
+                            <span className="text-[9px] md:text-xs lg:text-sm text-teal-600 font-semibold">
+                              {seance.ap}
+                            </span>
+                          </div>
+                        ))}
+                    </td>
+                  ))}
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>
