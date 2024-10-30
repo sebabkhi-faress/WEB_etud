@@ -1,9 +1,13 @@
-const removeSpaces = (text: string) => text?.replace(/\s+/g, "")
+const betterSlotFormat = (text: string) => {
+  return text
+    ?.replace(/\s+/g, "") // Remove all spaces
+    .replace(/-/g, " - ") // Add spaces around dashes
+}
 
 export default function TimeTable({ schedule }: any) {
   const groupByDay = (schedule: any) => {
     const days = [0, 1, 2, 3, 4, 5]
-    const grouped = {} as any
+    const grouped: Record<any, any[]> = {}
 
     days.forEach((dayId: any) => {
       grouped[dayId] = schedule.filter((seance: any) => seance.jourId === dayId)
@@ -48,11 +52,11 @@ export default function TimeTable({ schedule }: any) {
     3: "Tuesday",
     4: "Wednesday",
     5: "Thursday",
-  }
+  } as Record<any, string>
 
   return (
-    <div className="container mx-auto pb-3 px-2 md:px-4 lg:px-8 capitalize">
-      <div className="overflow-x-auto hidden md:block">
+    <div className="container mx-auto capitalize">
+      <div className="overflow-x-auto hidden lg:block mb-2">
         <table className="min-w-full table-auto border-collapse border border-gray-300 shadow-sm">
           <thead>
             <tr className="bg-gradient-to-r from-green-600 to-teal-500 text-white font-bold">
@@ -80,7 +84,7 @@ export default function TimeTable({ schedule }: any) {
                   className="hover:bg-gray-100 transition duration-200"
                 >
                   <td className="p-2 lg:p-3 border border-gray-300 text-center text-xs md:text-sm font-medium whitespace-nowrap bg-gray-50">
-                    {removeSpaces(slot)}
+                    {betterSlotFormat(slot)}
                   </td>
                   {Object.keys(dayMap).map((dayId) => (
                     <td
@@ -116,13 +120,14 @@ export default function TimeTable({ schedule }: any) {
           </tbody>
         </table>
       </div>
-      <div className="md:hidden">
+
+      <div className="lg:hidden space-y-4 mb-2">
         {Object.entries(groupedSchedule).map(([dayId, sessions]) => (
           <div
             key={dayId}
-            className="mb-6 border rounded-sm shadow-sm p-6 bg-gradient-to-r from-green-100 to-teal-100"
+            className="border rounded-sm shadow-sm p-6 bg-gradient-to-r from-green-100 to-teal-100"
           >
-            <h3 className="text-lg font-bold text-teal-800 mb-3 text-center">
+            <h3 className="text-lg font-bold text-black mb-3 text-center">
               {dayMap[dayId]}
             </h3>
             {timeSlots.map((slot) => {
@@ -133,8 +138,8 @@ export default function TimeTable({ schedule }: any) {
               if (associatedSessions.length > 0) {
                 return (
                   <div key={slot} className="mb-2">
-                    <h4 className="text-sm font-semibold text-teal-600 mb-1 text-center">
-                      {removeSpaces(slot)}
+                    <h4 className="text-sm font-semibold text-gray-700 mb-1 text-center">
+                      {betterSlotFormat(slot)}
                     </h4>
                     {associatedSessions.map((seance: any) => (
                       <div
@@ -147,7 +152,7 @@ export default function TimeTable({ schedule }: any) {
                         <span className="text-xs text-teal-600 font-semibold">
                           {seance.ap}
                         </span>
-                        <span className="text-xs text-teal-600">
+                        <span className="text-xs text-purple-600">
                           {seance.refLieuDesignation}
                         </span>
                       </div>
