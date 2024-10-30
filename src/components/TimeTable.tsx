@@ -25,7 +25,8 @@ export default function TimeTable({ schedule }: any) {
 
     // Sort the time slots correctly
     timeSlots.sort((a, b) => {
-      if (!a || !b) return 0
+      if (!a) return 1 // Put nulls at the end
+      if (!b) return -1 // Put nulls at the end
 
       const [startA] = a.split("-").map((time) => time.split(":").map(Number))
       const [startB] = b.split("-").map((time) => time.split(":").map(Number))
