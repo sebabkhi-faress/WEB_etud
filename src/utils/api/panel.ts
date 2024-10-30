@@ -77,7 +77,7 @@ export const getNormalNotes = async (id: number) => {
 }
 
 export const getExamsNotes = async (id: number) => {
-  const { token, user, uuid, tokenHash } = getCookieData()
+  const { token, user, tokenHash } = getCookieData()
 
   const cacheKey = `exams-${id}-${tokenHash}`
   const cachedData = shortCache.get(cacheKey)
@@ -268,7 +268,7 @@ export const getGroup = async (id: number) => {
 }
 
 export const getTimeTable = async (id: number, dias: any) => {
-  const { token, user, tokenHash, uuid } = getCookieData()
+  const { token, user, tokenHash } = getCookieData()
 
   const cacheKey = `timetable-${id}-${tokenHash}`
   const cachedData = shortCache.get(cacheKey)
@@ -279,21 +279,21 @@ export const getTimeTable = async (id: number, dias: any) => {
   }
 
   const parseData = (data: any, currentYearId: number) => {
-    let parsedData = data.reduce((acc: any, item: any) => {
-      const existingPeriod = acc.find(
+    const parsedData = data.reduce((groupedPeriods: any, item: any) => {
+      const existingPeriod = groupedPeriods.find(
         (period: any) => period.periodId === item.periodeId,
       )
 
       if (existingPeriod) {
         existingPeriod.schedule.push(item)
       } else {
-        acc.push({
+        groupedPeriods.push({
           periodId: item.periodeId,
           schedule: [item],
         })
       }
 
-      return acc
+      return groupedPeriods
     }, [])
 
     let firstSemTimeTable = parsedData[0] || null
