@@ -1,3 +1,4 @@
+// Import necessary modules and components
 import {
   getNormalNotes,
   getExamsNotes,
@@ -8,10 +9,6 @@ import {
   getTimeTable,
 } from "@/utils/api/panel"
 
-export const metadata = {
-  title: "WebEtu - Panel",
-}
-
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react"
 import NormalNotes from "@/components/NormalNotes"
 import UserGroup from "@/components/UserGroup"
@@ -20,74 +17,99 @@ import TimeTable from "@/components/TimeTable"
 import logger from "@/utils/logger"
 import { getCookieData } from "@/utils/api/helpers"
 
+// Metadata for the panel
+export const metadata = {
+  title: "WebEtu - Panel",
+}
+
+// Main component for displaying the period tab
 export default async function PeriodTab({ params }: any) {
+  // Fetch necessary data for the panel
   const dias = await getDias()
 
+  // Security check for unauthorized access
   if (
     process.env.DIA_SECURITY === "true" &&
-    !dias.find((dia: any) => dia.id == params.year)
+    !dias.find((dia: any) => dia.id === params.year)
   ) {
     const { user } = getCookieData()
     logger.warn("Unauthorized Access Attempt", user, "Security")
     return "Not Allowed!"
   }
 
+  // Fetch data concurrently
   const [
-    normalPromise,
-    examsPromise,
-    semesterResultsPromise,
-    yearResultsPromise,
-    groupPromise,
-    timeTablePromise,
-  ] = [
+    normalNotes,
+    examNotes,
+    semesterResults,
+    yearResults,
+    groupData,
+    timeTableData,
+  ] = await Promise.all([
     getNormalNotes(params.year),
     getExamsNotes(params.year),
     getSemesterResults(params.year),
     getYearTranscript(params.year),
     getGroup(params.year),
     getTimeTable(params.year),
-  ]
+  ])
 
-  const [normal, exams, semesterResults, yearResults, group, timeTable] =
-    await Promise.all([
-      normalPromise,
-      examsPromise,
-      semesterResultsPromise,
-      yearResultsPromise,
-      groupPromise,
-      timeTablePromise,
-    ])
-
-  const { firstSemNotes, secondSemNotes } = normal as any
-  const { firstSemExams, secondSemExams } = exams as any
+  // Organize fetched data
+  const { firstSemNotes, secondSemNotes } = normalNotes as any
+  const { firstSemExams, secondSemExams } = examNotes as any
   const { firstSemResults, secondSemResults } = semesterResults as any
-  let { firstTable, secondTable } = timeTable as any
+  let { firstTable, secondTable } = timeTableData as any
 
-  if (firstTable?.periodId === group?.[1]?.PeriodId) {
+  // Adjust tables based on group data
+  if (firstTable?.periodId === groupData?.[1]?.PeriodId) {
     secondTable = firstTable
     firstTable = null
   }
 
-  const TabStyle =
-    "rounded px-1 py-3 text-xs md:text-base lg:text-lg font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white data-[disabled]:text-gray-400 data-[disabled]:cursor-not-allowed bg-gray-200 text-gray-800 data-[enabled]:hover:bg-green-200 data-[enabled]:hover:text-green-800 border border-gray-300 outline-none flex-1"
+  // Define tab styles
+  const TabStyle = `
+  rounded 
+  px-1 
+  py-3 
+  text-xs 
+  md:text-base 
+  lg:text-lg 
+  font-semibold 
+  transition 
+  data-[selected]:bg-green-600 
+  data-[selected]:text-white 
+  data-[disabled]:text-gray-400 
+  data-[disabled]:cursor-not-allowed 
+  bg-gray-200 
+  text-gray-800 
+  data-[enabled]:hover:bg-green-200 
+  data-[enabled]:hover:text-green-800 
+  border 
+  border-gray-300 
+  outline-none 
+  flex-1
+  `
 
+  // Render component UI
   return (
     <TabGroup className="flex flex-col justify-start items-center w-full py-4 px-2 md:p-4 gap-2 md:gap-4">
       <TabList className="flex gap-1 md:gap-2 overflow-x-auto w-full max-w-4xl border border-gray-300 p-2 rounded">
         {secondSemNotes?.length > 0 || secondSemExams?.normal?.length > 0 ? (
           <>
-            <Tab className={TabStyle}>{group?.[0]?.name}</Tab>
-            <Tab className={TabStyle}>{group?.[1]?.name}</Tab>
+            <Tab className={TabStyle}>{groupData?.[0]?.name}</Tab>
+            <Tab className={TabStyle}>{groupData?.[1]?.name}</Tab>
           </>
         ) : (
           <Tab className={TabStyle}>
-            {group?.[0]?.name.includes("Semestre") ? group[0].name : "All"}
+            {groupData?.[0]?.name.includes("Semestre")
+              ? groupData[0].name
+              : "All"}
           </Tab>
         )}
         <Tab disabled={!yearResults} className={TabStyle}>
           Yearly
         </Tab>
-        <Tab disabled={!group} className={TabStyle}>
+        <Tab disabled={!groupData} className={TabStyle}>
           Group
         </Tab>
       </TabList>
@@ -123,34 +145,61 @@ export default async function PeriodTab({ params }: any) {
         )}
         <TabPanel>{yearResults && renderYearResultItem(yearResults)}</TabPanel>
         <TabPanel>
-          {group && Object.keys(group).length > 0 && (
-            <UserGroup group={group} />
-          )}
+          {groupData && groupData.length > 0 && <UserGroup group={groupData} />}
         </TabPanel>
       </TabPanels>
     </TabGroup>
   )
 }
 
+// Component for displaying semester details
 const SemesterTab = ({ normal, exam, result, timeTable }: any) => {
-  const SemesterTabStyle =
-    "rounded p-2 text-xs md:text-sm lg:text-lg font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white bg-gray-200 text-gray-800 hover:bg-green-200 hover:text-green-800 border border-gray-300 outline-none data-[selected]:flex-1 transition-all duration-300 ease-in-out"
-  const pStyle = "text-center mb-3 text-red-700"
+  const SemesterTabStyle = `
+  rounded 
+  p-2 
+  text-xs 
+  md:text-sm 
+  lg:text-lg 
+  font-semibold 
+  transition 
+  data-[selected]:bg-green-600 
+  data-[selected]:text-white 
+  bg-gray-200 
+  text-gray-800 
+  data-[disabled]:hover:bg-gray-200  
+  hover:bg-green-200 
+  hover:text-green-800 
+  border 
+  border-gray-300 
+  outline-none 
+  data-[selected]:flex-1 
+  transition-all 
+  duration-300 
+  ease-in-out 
+  data-[disabled]:text-gray-400 
+  data-[disabled]:cursor-not-allowed
+  `
+
+  const pStyle = "text-center mb-3 text-red-700 text-sm sm:text-lg"
 
   return (
     <TabGroup className="flex flex-col justify-center items-center gap-4 px-2">
       <TabList className="flex w-full gap-2 overflow-x-auto">
-        {timeTable && <Tab className={SemesterTabStyle}>Time</Tab>}
+        <Tab disabled={!timeTable} className={SemesterTabStyle}>
+          Time
+        </Tab>
         <Tab className={SemesterTabStyle}>Notes</Tab>
         <Tab className={SemesterTabStyle}>Exams</Tab>
-        <Tab className={SemesterTabStyle}>Gpa</Tab>
+        <Tab className={SemesterTabStyle}>GPA</Tab>
       </TabList>
       <TabPanels className="w-full">
-        {timeTable && (
-          <TabPanel>
+        <TabPanel>
+          {timeTable ? (
             <TimeTable schedule={timeTable} />
-          </TabPanel>
-        )}
+          ) : (
+            <p className={pStyle}>Data Not Available!</p>
+          )}
+        </TabPanel>
         <TabPanel>
           {normal?.length > 0 ? (
             <NormalNotes normal={normal} />
@@ -177,6 +226,7 @@ const SemesterTab = ({ normal, exam, result, timeTable }: any) => {
   )
 }
 
+// Function to render year result item
 const renderYearResultItem = (result: any) => {
   const { moyenne, typeDecisionLibelleFr, creditAcquis } = result[0]
   const averageClass = moyenne >= 10.0 ? "text-green-800" : "text-red-800"
@@ -204,6 +254,7 @@ const renderYearResultItem = (result: any) => {
   )
 }
 
+// Function to render semester result item
 const renderSemesterResultItem = (result: any) => {
   const { moyenne, creditAcquis, bilanUes } = result
   const divBgClass = moyenne < 10 ? "bg-red-200/65" : "bg-green-200/65"
