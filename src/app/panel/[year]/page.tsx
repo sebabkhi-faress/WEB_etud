@@ -55,10 +55,13 @@ export default async function PeriodTab({ params }: any) {
   ])
 
   // Organize fetched data
-  const { firstSemNotes, secondSemNotes } = normalNotes as any
-  const { firstSemExams, secondSemExams } = examNotes as any
-  const { firstSemResults, secondSemResults } = semesterResults as any
-  let { firstTable, secondTable } = timeTableData as any
+  const { firstSemNotes = null, secondSemNotes = null } =
+    (normalNotes as any) || {}
+  const { firstSemExams = null, secondSemExams = null } =
+    (examNotes as any) || {}
+  const { firstSemResults = null, secondSemResults = null } =
+    (semesterResults as any) || {}
+  let { firstTable = null, secondTable = null } = (timeTableData as any) || {}
 
   // Adjust tables based on group data
   if (firstTable?.periodId === groupData?.[1]?.PeriodId) {
