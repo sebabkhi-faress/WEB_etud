@@ -231,7 +231,7 @@ export const getGroup = async (id: number) => {
   function parseData(data: any) {
     const sortedData = data.sort((a: any, b: any) => a.periodeId - b.periodeId)
 
-    return sortedData.reduce((semesterInfo: any, item: any) => {
+    return sortedData.reduce((semesterInfo: any[], item: any) => {
       if (!item.nomSection) return semesterInfo
 
       const semester = item.periodeLibelleLongLt
@@ -239,14 +239,15 @@ export const getGroup = async (id: number) => {
       const section =
         item.nomSection === "Section" ? "Section 1" : item.nomSection
 
-      semesterInfo[semester] = {
+      semesterInfo.push({
+        name: semester,
         group,
         section,
         PeriodId: item?.periodeId,
-      }
+      })
 
       return semesterInfo
-    }, {})
+    }, [])
   }
 
   try {
@@ -267,7 +268,7 @@ export const getGroup = async (id: number) => {
   }
 }
 
-export const getTimeTable = async (id: number, dias: any) => {
+export const getTimeTable = async (id: number) => {
   const { token, user, tokenHash } = getCookieData()
 
   const cacheKey = `timetable-${id}-${tokenHash}`
@@ -278,7 +279,7 @@ export const getTimeTable = async (id: number, dias: any) => {
     return cachedData
   }
 
-  const parseData = (data: any, currentYearId: number) => {
+  const parseData = (data: any) => {
     const parsedData = data.reduce((groupedPeriods: any, item: any) => {
       const existingPeriod = groupedPeriods.find(
         (period: any) => period.periodId === item.periodeId,
@@ -296,15 +297,10 @@ export const getTimeTable = async (id: number, dias: any) => {
       return groupedPeriods
     }, [])
 
-    let firstSemTimeTable = parsedData[0] || null
-    let secondSemTimeTable = parsedData[1] || null
+    let firstTable = parsedData[0] || null
+    let secondTable = parsedData[1] || null
 
-    if (secondSemTimeTable === null && currentYearId !== id) {
-      secondSemTimeTable = firstSemTimeTable
-      firstSemTimeTable = null
-    }
-
-    return { firstSemTimeTable, secondSemTimeTable }
+    return { firstTable, secondTable }
   }
 
   try {
@@ -313,17 +309,16 @@ export const getTimeTable = async (id: number, dias: any) => {
       token,
     )
 
-    const currentDia = dias[0]
-
     if (response.data === "") {
       shortCache.set(cacheKey, {
-        firstSemTimeTable: null,
-        secondSemTimeTable: null,
+        firstTable: null,
+        secondTable: null,
       })
-      return { firstSemTimeTable: null, secondSemTimeTable: null }
+
+      return { firstTable: null, secondTable: null }
     }
 
-    const data = parseData(response.data, currentDia.id)
+    const data = parseData(response.data)
 
     shortCache.set(cacheKey, data)
     logger.info("Success", user, "getTimeTable")

@@ -45,7 +45,7 @@ export default async function PeriodTab({ params }: any) {
     getSemesterResults(params.year),
     getYearTranscript(params.year),
     getGroup(params.year),
-    getTimeTable(params.year, dias),
+    getTimeTable(params.year),
   ]
 
   const [normal, exams, semesterResults, yearResults, group, timeTable] =
@@ -61,7 +61,12 @@ export default async function PeriodTab({ params }: any) {
   const { firstSemNotes, secondSemNotes } = normal as any
   const { firstSemExams, secondSemExams } = exams as any
   const { firstSemResults, secondSemResults } = semesterResults as any
-  const { firstSemTimeTable, secondSemTimeTable } = timeTable as any
+  let { firstTable, secondTable } = timeTable as any
+
+  if (firstTable?.periodId === group?.[1]?.PeriodId) {
+    secondTable = firstTable
+    firstTable = null
+  }
 
   const TabStyle =
     "rounded px-1 py-3 text-xs md:text-base lg:text-lg font-semibold transition data-[selected]:bg-green-600 data-[selected]:text-white data-[disabled]:text-gray-400 data-[disabled]:cursor-not-allowed bg-gray-200 text-gray-800 data-[enabled]:hover:bg-green-200 data-[enabled]:hover:text-green-800 border border-gray-300 outline-none flex-1"
@@ -71,14 +76,12 @@ export default async function PeriodTab({ params }: any) {
       <TabList className="flex gap-1 md:gap-2 overflow-x-auto w-full max-w-4xl border border-gray-300 p-2 rounded">
         {secondSemNotes?.length > 0 || secondSemExams?.normal?.length > 0 ? (
           <>
-            <Tab className={TabStyle}>{Object.keys(group)[0]}</Tab>
-            <Tab className={TabStyle}>{Object.keys(group)[1]}</Tab>
+            <Tab className={TabStyle}>{group?.[0]?.name}</Tab>
+            <Tab className={TabStyle}>{group?.[1]?.name}</Tab>
           </>
         ) : (
           <Tab className={TabStyle}>
-            {group && Object.keys(group)[0].includes("Semestre")
-              ? Object.keys(group)[0]
-              : "All"}
+            {group?.[0]?.name.includes("Semestre") ? group[0].name : "All"}
           </Tab>
         )}
         <Tab disabled={!yearResults} className={TabStyle}>
@@ -96,7 +99,7 @@ export default async function PeriodTab({ params }: any) {
                 normal={firstSemNotes}
                 exam={firstSemExams}
                 result={firstSemResults}
-                timeTable={firstSemTimeTable?.schedule}
+                timeTable={firstTable?.schedule}
               />
             </TabPanel>
             <TabPanel>
@@ -104,7 +107,7 @@ export default async function PeriodTab({ params }: any) {
                 normal={secondSemNotes}
                 exam={secondSemExams}
                 result={secondSemResults}
-                timeTable={secondSemTimeTable?.schedule}
+                timeTable={secondTable?.schedule}
               />
             </TabPanel>
           </>
@@ -114,7 +117,7 @@ export default async function PeriodTab({ params }: any) {
               normal={firstSemNotes}
               exam={firstSemExams}
               result={firstSemResults}
-              timeTable={firstSemTimeTable?.schedule}
+              timeTable={firstTable?.schedule}
             />
           </TabPanel>
         )}
