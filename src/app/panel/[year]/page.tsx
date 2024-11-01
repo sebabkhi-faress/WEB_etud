@@ -193,7 +193,9 @@ const SemesterTab = ({ normal, exam, result, timeTable }: any) => {
         </Tab>
         <Tab className={SemesterTabStyle}>Notes</Tab>
         <Tab className={SemesterTabStyle}>Exams</Tab>
-        <Tab className={SemesterTabStyle}>GPA</Tab>
+        <Tab disabled={!result} className={SemesterTabStyle}>
+          GPA
+        </Tab>
       </TabList>
       <TabPanels className="w-full">
         <TabPanel>

@@ -19,7 +19,7 @@ function getBgColorClass(noteValue: number | null): string {
 
 function NormalNotes({ normal }: NormalNotesProps) {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 lg:gap-4">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4 mb-2">
       {normal.map((note, index) => {
         const { rattachementMcMcLibelleFr, note: noteValue, apCode } = note
 

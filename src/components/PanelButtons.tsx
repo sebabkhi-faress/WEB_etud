@@ -18,12 +18,12 @@ function PanelButtons({ dias, currentYear }: any) {
             className={`rounded px-1 py-2 border hover:bg-gray-50/90 flex-1 md:flex-none max-h-fit flex items-center justify-between text-xs md:text-sm bg-gray-50/90 border-green-500`}
           >
             <span
-              className={`text-center m-2 p-1 lg:p-2 border ${currentYear == selectedDia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded-sm`}
+              className={`text-center m-2 p-1 lg:p-2 border ${currentYear == selectedDia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded`}
             >
               {selectedDia.anneeAcademiqueCode}
             </span>
             <span
-              className={`text-center m-1 p-1 lg:m-2 lg:p-2 border ${selectedDia.cycleCode == "M" ? "text-purple-500 border-purple-500" : "text-blue-500 border-blue-500"} rounded-sm`}
+              className={`text-center m-1 p-1 lg:m-2 lg:p-2 border ${selectedDia.cycleCode == "M" ? "text-purple-500 border-purple-500" : "text-blue-500 border-blue-500"} rounded`}
             >
               {selectedDia.niveauCode}
             </span>
@@ -43,12 +43,12 @@ function PanelButtons({ dias, currentYear }: any) {
                       className={`rounded p-1 border hover:border-green-400 bg-blue-50/80 hover:bg-gray-50 flex justify-between text-xs md:text-sm ${path[2] == dia.id && "bg-gray-50/90 border-green-500"}`}
                     >
                       <span
-                        className={`text-center m-1 p-1 border text-xs lg:text-sm ${currentYear == dia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded-sm`}
+                        className={`text-center m-1 p-1 border text-xs lg:text-sm ${currentYear == dia.anneeAcademiqueId ? "text-green-500 border-green-500" : "text-gray-500 border-gray-500"} rounded`}
                       >
                         {dia.anneeAcademiqueCode}
                       </span>
                       <span
-                        className={`text-center m-1 p-1 border ${dia.cycleCode == "M" ? "text-purple-500 border-purple-500" : "text-blue-500 border-blue-500"} rounded-sm`}
+                        className={`text-center m-1 p-1 border ${dia.cycleCode == "M" ? "text-purple-500 border-purple-500" : "text-blue-500 border-blue-500"} rounded`}
                       >
                         {dia.niveauCode}
                       </span>

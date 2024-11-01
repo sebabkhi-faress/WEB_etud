@@ -1,4 +1,10 @@
 export default function TimeTable({ schedule }: any) {
+  const betterSlotFormat = (text: string) => {
+    return text
+      ?.replace(/\s+/g, "") // Remove all spaces
+      .replace(/-/g, " - ") // Add spaces around dashes
+  }
+
   const groupByDay = (schedule: any) => {
     const days = [0, 1, 2, 3, 4, 5]
     const grouped: Record<any, any[]> = {}
@@ -34,12 +40,6 @@ export default function TimeTable({ schedule }: any) {
     })
 
     return timeSlots
-  }
-
-  const betterSlotFormat = (text: string) => {
-    return text
-      ?.replace(/\s+/g, "") // Remove all spaces
-      .replace(/-/g, " - ") // Add spaces around dashes
   }
 
   const groupedSchedule = groupByDay(schedule)
@@ -128,7 +128,7 @@ export default function TimeTable({ schedule }: any) {
             sessions.length > 0 && (
               <div
                 key={dayId}
-                className="border rounded-sm shadow-sm p-6 bg-gradient-to-r from-green-100 to-teal-100"
+                className="border rounded shadow-sm p-6 bg-gradient-to-r from-green-300/70 to-teal-200/70"
               >
                 <h3 className="text-lg font-bold text-black mb-3 text-center">
                   {dayMap[dayId]}
@@ -147,7 +147,7 @@ export default function TimeTable({ schedule }: any) {
                         {associatedSessions.map((seance: any) => (
                           <div
                             key={seance.id}
-                            className="flex flex-col items-start bg-white border border-gray-300 rounded-sm shadow-sm p-3 mb-2 transition-transform transform hover:scale-103"
+                            className="flex flex-col items-start bg-white border border-gray-300 rounded shadow-sm p-3 mb-2 transition-transform transform hover:scale-103"
                           >
                             <strong className="text-xs text-gray-800 mb-1">
                               {seance.matiere}
