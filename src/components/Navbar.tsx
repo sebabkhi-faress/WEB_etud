@@ -29,8 +29,6 @@ const Navbar = () => {
   const signOut = () => {
     Cookies.remove("token")
     Cookies.remove("uuid")
-    Cookies.remove("EtabId")
-    Cookies.remove("user")
     window.location.href = "/"
   }
 

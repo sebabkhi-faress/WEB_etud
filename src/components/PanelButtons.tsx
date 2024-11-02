@@ -1,8 +1,8 @@
 "use client"
 
-import { ArrowLeftIcon, ChevronDownIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { ArrowLeftIcon } from "@heroicons/react/24/outline"
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react"
 
 function PanelButtons({ dias, currentYear }: any) {

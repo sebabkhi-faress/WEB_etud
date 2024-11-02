@@ -128,7 +128,7 @@ export default function TimeTable({ schedule }: any) {
             sessions.length > 0 && (
               <div
                 key={dayId}
-                className="border rounded shadow-sm p-6 bg-gradient-to-r from-green-300/70 to-teal-200/70"
+                className="border rounded shadow-sm p-6 bg-gradient-to-r from-teal-100 to-green-100"
               >
                 <h3 className="text-lg font-bold text-black mb-3 text-center">
                   {dayMap[dayId]}
