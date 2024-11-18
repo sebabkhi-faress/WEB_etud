@@ -90,11 +90,18 @@ const AboutPage = () => {
       <Section title="الإبلاغ عن مشكلة" titleColor="text-sky-700">
         <p className={contentStyle}>
           في حال أردت التبليغ عن مشكلة أو تقديم إقتراح لتحسين الموقع، يُرجى
-          الإنضمام إلى مجموعتنا في التيليجرام عبر الضغط على الأيقونة الموجودة
-          أسفل الصفحة.
+          الإنضمام إلى مجموعتنا في{" "}
+          <a
+            href="https://t.me/OSCommunityChat"
+            className="font-bold underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            التيليجرام
+          </a>
+          .
         </p>
       </Section>
-
       <Section title="فريق العمل" titleColor="text-sky-700">
         <List items={["قصاص أحمد عبد النور", "شدادي خليل عبد الرحمان"]} />
       </Section>
