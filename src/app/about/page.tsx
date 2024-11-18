@@ -109,7 +109,7 @@ const AboutPage = () => {
           <i className="fab fa-telegram-plane text-4xl sm:text-5xl"></i>{" "}
         </a>
         <p className="text-gray-500 text-sm sm:text-md mt-4">
-          © 2024 OSCA - All Rights Reserved
+          🄯 2024 OSCA - All Lefts Unreserved
         </p>
       </footer>
     </article>
