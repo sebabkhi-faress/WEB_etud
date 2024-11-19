@@ -112,7 +112,7 @@ export default async function PeriodTab({ params }: any) {
         <Tab disabled={!yearResults} className={TabStyle}>
           Yearly
         </Tab>
-        <Tab disabled={!groupData} className={TabStyle}>
+        <Tab disabled={groupData.length < 1} className={TabStyle}>
           Group
         </Tab>
       </TabList>
