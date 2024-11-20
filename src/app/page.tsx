@@ -44,23 +44,23 @@ export default function LoginPage() {
 
       window.location.reload()
 
-      toast.success("Logged In Successfully", { id: toastId })
+      toast.success("Logged In", { id: toastId })
     } catch (err: any) {
       if (err.message.includes("timeout")) {
-        toast.error("Request Timed Out, Please Try Again", {
-          duration: 3000,
+        toast.error("Request Timed Out", {
+          duration: 2000,
           id: toastId,
         })
       } else if (err.response && err.response.status == 403) {
-        toast.error("Invalid Credentials", { duration: 3000, id: toastId })
+        toast.error("Invalid Credentials", { duration: 2000, id: toastId })
       } else if (err.message.includes("Network Error")) {
-        toast.error("Please Check Your Internet Connection", {
-          duration: 3000,
+        toast.error("Check Your Internet Connection", {
+          duration: 2000,
           id: toastId,
         })
       } else {
-        toast.error("Error From Progres Server", {
-          duration: 3000,
+        toast.error("Progres Server Error", {
+          duration: 2000,
           id: toastId,
         })
       }
@@ -133,7 +133,7 @@ export default function LoginPage() {
           disabled={
             loading || username.trim() === "" || password.trim().length < 8
           }
-          className="w-full p-2 sm:p-3 text-white bg-green-700 rounded hover:bg-green-700 transition-colors disabled:bg-gray-400"
+          className="w-full p-2 sm:p-3 text-white bg-green-700 rounded hover:bg-green-800/90 transition-colors disabled:bg-gray-400"
         >
           {loading ? "Loading.." : "Login"}
         </button>

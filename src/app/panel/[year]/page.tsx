@@ -71,26 +71,26 @@ export default async function PeriodTab({ params }: any) {
 
   // Define tab styles
   const TabStyle = `
-  rounded 
-  px-1 
-  py-3 
-  text-xs 
-  md:text-base 
-  lg:text-lg 
-  font-semibold 
-  transition 
-  data-[selected]:bg-green-600 
-  data-[selected]:text-white 
-  data-[disabled]:text-gray-400 
-  data-[disabled]:cursor-not-allowed 
-  bg-gray-200 
-  text-gray-800 
-  data-[enabled]:hover:bg-green-200 
-  data-[enabled]:hover:text-green-800 
-  border 
-  border-gray-300 
-  outline-none 
-  flex-1
+    rounded 
+    px-1 
+    py-3 
+    text-xs 
+    font-semibold 
+    transition 
+    bg-gray-200 
+    text-gray-800 
+    border 
+    border-gray-300 
+    outline-none 
+    flex-1
+    md:text-base 
+    lg:text-lg 
+    data-[selected]:bg-green-600 
+    data-[selected]:text-white 
+    data-[enabled]:hover:bg-green-200 
+    data-[enabled]:hover:text-green-800 
+    data-[disabled]:text-gray-400 
+    data-[disabled]:cursor-not-allowed 
   `
 
   // Render component UI
@@ -158,29 +158,29 @@ export default async function PeriodTab({ params }: any) {
 // Component for displaying semester details
 const SemesterTab = ({ normal, exam, result, timeTable }: any) => {
   const SemesterTabStyle = `
-  rounded 
-  p-2 
-  text-xs 
-  md:text-sm 
-  lg:text-lg 
-  font-semibold 
-  transition 
-  data-[selected]:bg-green-600 
-  data-[selected]:text-white 
-  bg-gray-200 
-  text-gray-800 
-  data-[disabled]:hover:bg-gray-200  
-  hover:bg-green-200 
-  hover:text-green-800 
-  border 
-  border-gray-300 
-  outline-none 
-  data-[selected]:flex-1 
-  transition-all 
-  duration-300 
-  ease-in-out 
-  data-[disabled]:text-gray-400 
-  data-[disabled]:cursor-not-allowed
+    rounded 
+    p-2 
+    text-xs 
+    font-semibold 
+    transition 
+    bg-gray-200 
+    text-gray-800  
+    border 
+    border-gray-300 
+    outline-none 
+    transition-all 
+    duration-300 
+    ease-in-out 
+    md:text-sm 
+    lg:text-lg 
+    hover:bg-green-200 
+    hover:text-green-800 
+    data-[disabled]:text-gray-400 
+    data-[disabled]:cursor-not-allowed
+    data-[selected]:bg-green-600 
+    data-[selected]:text-white 
+    data-[disabled]:hover:bg-gray-200 
+    data-[selected]:flex-1 
   `
 
   const pStyle = "text-center mb-3 text-red-700 text-sm sm:text-lg"

@@ -58,7 +58,7 @@ export default function TimeTable({ schedule }: any) {
     <div className="container mx-auto capitalize">
       {/* Large Screens View */}
       <div className="overflow-x-auto hidden lg:block mb-2">
-        <table className="min-w-full table-auto border-collapse border border-gray-300 shadow-sm">
+        <table className="min-w-full table-auto border-collapse border border-gray-300">
           <thead>
             <tr className="bg-gradient-to-r from-green-600 to-teal-500 text-white font-bold">
               <th className="p-1 md:p-2 lg:p-3 border border-gray-200 text-center text-xs md:text-sm lg:text-base">
@@ -98,7 +98,7 @@ export default function TimeTable({ schedule }: any) {
                           .map((seance: any) => (
                             <div
                               key={seance.id}
-                              className="flex flex-col items-center m-1 bg-white border border-gray-200 rounded shadow-sm p-1 hover:scale-105 transition transform duration-200"
+                              className="flex flex-col items-center m-1 bg-white border border-gray-200 rounded p-1 hover:scale-105 transition transform duration-200"
                             >
                               <strong className="text-[10px] md:text-xs lg:text-sm text-gray-800">
                                 {seance.matiere}
@@ -128,7 +128,7 @@ export default function TimeTable({ schedule }: any) {
             sessions.length > 0 && (
               <div
                 key={dayId}
-                className="border rounded shadow-sm p-6 bg-gradient-to-r from-teal-100 to-green-100"
+                className="border border-gray-300 rounded p-6 bg-green-200"
               >
                 <h3 className="text-lg font-bold text-black mb-3 text-center">
                   {dayMap[dayId]}
@@ -147,7 +147,7 @@ export default function TimeTable({ schedule }: any) {
                         {associatedSessions.map((seance: any) => (
                           <div
                             key={seance.id}
-                            className="flex flex-col items-start bg-white border border-gray-300 rounded shadow-sm p-3 mb-2 transition-transform transform hover:scale-103"
+                            className="flex flex-col items-start bg-white border border-gray-300 rounded p-3 mb-2 transition-transform transform hover:scale-103"
                           >
                             <strong className="text-xs text-gray-800 mb-1">
                               {seance.matiere}
