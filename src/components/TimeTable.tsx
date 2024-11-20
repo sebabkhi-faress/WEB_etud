@@ -147,7 +147,7 @@ export default function TimeTable({ schedule }: any) {
                         {associatedSessions.map((seance: any) => (
                           <div
                             key={seance.id}
-                            className="flex flex-col items-start bg-white border border-gray-300 rounded p-3 mb-2 transition-transform transform hover:scale-103"
+                            className="flex flex-col items-start bg-white border border-gray-400/70 rounded p-3 mb-2 transition-transform transform hover:scale-103"
                           >
                             <strong className="text-xs text-gray-800 mb-1">
                               {seance.matiere}
