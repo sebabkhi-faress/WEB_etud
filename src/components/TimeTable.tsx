@@ -61,13 +61,13 @@ export default function TimeTable({ schedule }: any) {
         <table className="min-w-full table-auto border-collapse border border-gray-300">
           <thead>
             <tr className="bg-gradient-to-r from-green-600 to-teal-500 text-white font-bold">
-              <th className="p-1 md:p-2 lg:p-3 border border-gray-200 text-center text-xs md:text-sm lg:text-base">
+              <th className="p-2 border border-gray-200 text-center text-xs text-base">
                 Time
               </th>
               {Object.entries(dayMap).map(([dayId, dayName]) => (
                 <th
                   key={dayId}
-                  className="p-1 md:p-2 lg:p-3 border border-gray-200 text-center text-xs md:text-sm lg:text-base"
+                  className="p-2 border border-gray-200 text-center text-xs text-base"
                 >
                   {dayName}
                 </th>
@@ -82,13 +82,13 @@ export default function TimeTable({ schedule }: any) {
                     key={slot}
                     className="hover:bg-gray-100 transition duration-200"
                   >
-                    <td className="p-2 lg:p-3 border border-gray-300 text-center text-xs md:text-sm font-medium whitespace-nowrap bg-gray-50">
+                    <td className="p-3 border border-gray-300 text-center text-xs font-medium whitespace-nowrap bg-gray-50">
                       {betterSlotFormat(slot)}
                     </td>
                     {Object.keys(dayMap).map((dayId) => (
                       <td
                         key={dayId}
-                        className="p-1 md:p-2 border border-gray-300 text-center text-xs md:text-sm"
+                        className="p-2 border border-gray-300 text-center text-xs"
                       >
                         {groupedSchedule[dayId]
                           .filter(
@@ -98,15 +98,15 @@ export default function TimeTable({ schedule }: any) {
                           .map((seance: any) => (
                             <div
                               key={seance.id}
-                              className="flex flex-col items-center m-1 bg-white border border-gray-200 rounded p-1 hover:scale-105 transition transform duration-200"
+                              className="flex flex-col items-center m-1 bg-white border border-gray-200 rounded p-1 hover:scale-103 transition transform duration-200"
                             >
-                              <strong className="text-[10px] md:text-xs lg:text-sm text-gray-800">
+                              <strong className="text-sm text-gray-800">
                                 {seance.matiere}
                               </strong>
-                              <span className="text-[9px] md:text-xs lg:text-sm text-teal-600 font-semibold">
+                              <span className="text-sm text-teal-600 font-semibold">
                                 {seance.ap}
                               </span>
-                              <span className="text-[7px] md:text-[10px] text-purple-600 font-semibold">
+                              <span className="text-[10px] text-purple-600 font-semibold">
                                 {seance.refLieuDesignation}
                               </span>
                             </div>
@@ -128,7 +128,7 @@ export default function TimeTable({ schedule }: any) {
             sessions.length > 0 && (
               <div
                 key={dayId}
-                className="border border-gray-300 rounded p-6 bg-green-200"
+                className="border border-gray-300 rounded p-6 bg-green-200/60"
               >
                 <h3 className="text-lg font-bold text-black mb-3 text-center">
                   {dayMap[dayId]}
