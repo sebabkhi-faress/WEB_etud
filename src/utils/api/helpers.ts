@@ -13,37 +13,27 @@ export function getCookieData() {
   const cookieStore = cookies()
   const token = cookieStore.get("token")?.value || ""
   const uuid = cookieStore.get("uuid")?.value as string
+  const tokenHash = createHash("md5").update(token).digest("hex")
 
-  if (token.length > 500) {
-    throw new Error("Token is too large!")
-  }
+  if (token.length > 500) throw new Error("Token is too large!")
 
-  if (!isValidUUID(uuid)) {
-    throw new Error("Invalid UUID!")
-  }
+  if (!isValidUUID(uuid)) throw new Error("Invalid UUID!")
 
   const tokenPayload = decode(token) as any
-
-  if (typeof tokenPayload !== "object" || tokenPayload == null)
+  if (!tokenPayload || typeof tokenPayload !== "object")
     throw new Error("Invalid JWT token!")
 
   const user = tokenPayload.userName as string
-
   if (
     typeof user !== "string" ||
     user.length > 20 ||
     Number.isNaN(Number(user))
-  ) {
+  )
     throw new Error("Invalid username!")
-  }
 
   const EtabId = tokenPayload.idEtablissement as number
-
-  if (Number.isNaN(Number(EtabId)) || EtabId.toString().length > 20) {
+  if (Number.isNaN(EtabId) || EtabId.toString().length > 20)
     throw new Error("Invalid EtabId!")
-  }
-
-  const tokenHash = createHash("md5").update(token).digest("hex")
 
   return { token, user, uuid, tokenHash, EtabId }
 }
