@@ -115,6 +115,14 @@ const AboutPage = () => {
         >
           <i className="fab fa-telegram-plane text-4xl sm:text-5xl"></i>{" "}
         </a>
+        <a
+          href="https://github.com/OSCAnnaba/WebEtu"
+          className="text-gray-800 hover:text-gray-600 transition duration-200 ml-4"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="fab fa-github text-4xl sm:text-5xl"></i>
+        </a>
         <p className="text-gray-500 text-sm sm:text-md mt-4">
           🄯 2024 OSCA - All Lefts Unreserved
         </p>
