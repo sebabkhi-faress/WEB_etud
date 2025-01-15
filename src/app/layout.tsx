@@ -3,9 +3,12 @@ import "./globals.css"
 import "@fortawesome/fontawesome-free/css/all.min.css"
 import { Toaster } from "react-hot-toast"
 import Navbar from "@/components/Navbar"
-import { Reddit_Mono } from "next/font/google"
+import localFont from "next/font/local"
 
-const font = Reddit_Mono({ subsets: ["latin"] })
+const redditMono = localFont({
+  src: "../assets/fonts/RedditMono.ttf",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: "WebEtu - Student Portal",
@@ -60,7 +63,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`flex flex-col bg-gray-100 min-h-screen ${font.className}`}
+        className={`flex flex-col bg-gray-100 min-h-screen ${redditMono.className}`}
       >
         <Navbar />
         <main className="flex items-center justify-center flex-1 relative">
