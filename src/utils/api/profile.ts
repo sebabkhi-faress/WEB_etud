@@ -4,7 +4,7 @@ import { fetchData, getCookieData } from "./helpers"
 import { ApiResponseType, ProfileDataType } from "@/utils/types"
 
 export async function getProfileData() {
-  const { token, user, uuid, tokenHash } = getCookieData()
+  const { token, user, uuid } = getCookieData()
 
   let response: ApiResponseType = {
     success: false,
@@ -12,7 +12,7 @@ export async function getProfileData() {
     error: undefined,
   }
 
-  const cacheKey = `profile-${tokenHash}`
+  const cacheKey = `profile-${user}`
   const cachedData = longCache.get(cacheKey) as ProfileDataType
 
   if (cachedData) {
@@ -61,9 +61,9 @@ export async function getProfileData() {
 }
 
 export const getImage = async () => {
-  const { token, user, uuid, tokenHash } = getCookieData()
+  const { token, user, uuid } = getCookieData()
 
-  const cacheKey = `image-${tokenHash}`
+  const cacheKey = `image-${user}`
   const cachedData = longCache.get(cacheKey)
 
   if (cachedData) {

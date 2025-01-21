@@ -13,7 +13,6 @@ export function getCookieData() {
   const cookieStore = cookies()
   const token = cookieStore.get("token")?.value || ""
   const uuid = cookieStore.get("uuid")?.value as string
-  const tokenHash = createHash("md5").update(token).digest("hex")
 
   if (token.length > 500) throw new Error("Token is too large!")
 
@@ -35,7 +34,7 @@ export function getCookieData() {
   if (Number.isNaN(EtabId) || EtabId.toString().length > 20)
     throw new Error("Invalid EtabId!")
 
-  return { token, user, uuid, tokenHash, EtabId }
+  return { token, user, uuid, EtabId }
 }
 
 export async function fetchData(link: string, token: string) {

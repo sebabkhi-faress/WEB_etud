@@ -3,9 +3,9 @@ import { longCache, shortCache } from "@/utils/cache"
 import { fetchData, getCookieData } from "./helpers"
 
 export const getDias = async () => {
-  const { token, user, uuid, tokenHash } = getCookieData()
+  const { token, user, uuid } = getCookieData()
 
-  const cacheKey = `dias-${tokenHash}`
+  const cacheKey = `dias-${user}`
   const cachedData = longCache.get(cacheKey)
 
   if (cachedData) {
@@ -29,9 +29,9 @@ export const getDias = async () => {
 }
 
 export const getNormalNotes = async (id: number) => {
-  const { token, user, tokenHash } = getCookieData()
+  const { token, user } = getCookieData()
 
-  const cacheKey = `notes-${id}-${tokenHash}`
+  const cacheKey = `notes-${id}-${user}`
   const cachedData = shortCache.get(cacheKey)
 
   if (cachedData) {
@@ -77,9 +77,9 @@ export const getNormalNotes = async (id: number) => {
 }
 
 export const getExamsNotes = async (id: number) => {
-  const { token, user, tokenHash } = getCookieData()
+  const { token, user } = getCookieData()
 
-  const cacheKey = `exams-${id}-${tokenHash}`
+  const cacheKey = `exams-${id}-${user}`
   const cachedData = shortCache.get(cacheKey)
 
   if (cachedData) {
@@ -137,9 +137,9 @@ export const getExamsNotes = async (id: number) => {
 }
 
 export const getSemesterResults = async (id: number) => {
-  const { token, user, uuid, tokenHash } = getCookieData()
+  const { token, user, uuid } = getCookieData()
 
-  const cacheKey = `semesters-transcripts-${id}-${tokenHash}`
+  const cacheKey = `semesters-transcripts-${id}-${user}`
   const cachedData = shortCache.get(cacheKey)
 
   if (cachedData) {
@@ -189,9 +189,9 @@ export const getSemesterResults = async (id: number) => {
 }
 
 export const getYearTranscript = async (id: number) => {
-  const { token, user, uuid, tokenHash } = getCookieData()
+  const { token, user, uuid } = getCookieData()
 
-  const cacheKey = `year-transcript-${id}-${tokenHash}`
+  const cacheKey = `year-transcript-${id}-${user}`
   const cachedData = shortCache.get(cacheKey)
 
   if (cachedData) {
@@ -218,9 +218,9 @@ export const getYearTranscript = async (id: number) => {
 }
 
 export const getGroup = async (id: number) => {
-  const { token, user, tokenHash } = getCookieData()
+  const { token, user } = getCookieData()
 
-  const cacheKey = `group-${id}-${tokenHash}`
+  const cacheKey = `group-${id}-${user}`
   const cachedData = shortCache.get(cacheKey)
 
   if (cachedData) {
@@ -269,9 +269,9 @@ export const getGroup = async (id: number) => {
 }
 
 export const getTimeTable = async (id: number) => {
-  const { token, user, tokenHash } = getCookieData()
+  const { token, user } = getCookieData()
 
-  const cacheKey = `timetable-${id}-${tokenHash}`
+  const cacheKey = `timetable-${id}-${user}`
   const cachedData = shortCache.get(cacheKey)
 
   if (cachedData) {
