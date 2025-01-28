@@ -99,8 +99,12 @@ export default async function PeriodTab({ params }: any) {
       <TabList className="flex gap-1 md:gap-2 overflow-x-auto w-full max-w-4xl border border-gray-300 p-2 rounded">
         {secondSemNotes?.length > 0 || secondSemExams?.normal?.length > 0 ? (
           <>
-            <Tab className={TabStyle}>{groupData?.[0]?.name}</Tab>
-            <Tab className={TabStyle}>{groupData?.[1]?.name}</Tab>
+            <Tab className={TabStyle}>
+              {groupData?.[0]?.name ? groupData[0].name : "Semester 1"}
+            </Tab>
+            <Tab className={TabStyle}>
+              {groupData?.[1]?.name ? groupData[1].name : "Semester 2"}
+            </Tab>
           </>
         ) : (
           <Tab className={TabStyle}>
