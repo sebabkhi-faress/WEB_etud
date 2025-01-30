@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { getProfileData, getLogo, getImage } from "@/utils/api/profile"
 import ErrorComponent from "@/components/ErrorComponent"
+import ProfileLoadingPage from "./loading"
 
 export const metadata = {
   title: "WebEtu - Profile",
@@ -21,6 +22,9 @@ const ProfilePage = async () => {
   const dataSpanStyle =
     "text-gray-800 p-3 sm:p-4 bg-white rounded w-full border border-green-700"
 
+  if (!getProfileResponse) {
+    return <ProfileLoadingPage />
+  }
   if (getProfileResponse.success) {
     const profileData = getProfileResponse.data
 
