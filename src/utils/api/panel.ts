@@ -104,7 +104,7 @@ export const getExamsNotes = async (id: number) => {
       const period = course.idPeriode
       const session = course.planningSessionIntitule
 
-      if (session === "session_1") {
+      if (!session.includes("rattrappage")) {
         period == firstSemId
           ? firstSemExams.normal.push(course)
           : secondSemExams.normal.push(course)
