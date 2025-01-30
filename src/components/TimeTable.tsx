@@ -54,6 +54,22 @@ export default function TimeTable({ schedule }: any) {
     5: "Thursday",
   } as Record<any, string>
 
+  // 'True' only if 'groupedSchedule' equals: { '0': [], '1': [], '2': [], '3': [], '4': [], '5': [] }
+  const daysEmpty = Object.values(groupedSchedule).every(
+    (array) => array.length === 0,
+  )
+
+  // 'True' only if 'timeSlots' equals: [ null ]
+  const hoursEmpty = timeSlots.length === 1 && timeSlots[0] === null
+
+  if (daysEmpty || hoursEmpty) {
+    return (
+      <p className="text-center mb-3 text-red-700 text-sm sm:text-lg">
+        Data Not Available!
+      </p>
+    )
+  }
+
   return (
     <div className="container mx-auto capitalize">
       {/* Large Screens View */}
