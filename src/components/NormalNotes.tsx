@@ -7,6 +7,7 @@ interface ModuleNote {
 interface NormalNotesProps {
   normal: ModuleNote[]
 }
+const formatNumber = (num: number) => (num % 1 === 0 ? num : num.toFixed(2))
 
 function getBgColorClass(noteValue: number | null): string {
   if (noteValue == null) {
@@ -33,7 +34,7 @@ function NormalNotes({ normal }: NormalNotesProps) {
             <p className="font-semibold mr-4">{rattachementMcMcLibelleFr}</p>
             <div className="flex gap-4 ml-2">
               <p className="font-bold text-gray-700">
-                {noteValue == null ? "N/A" : noteValue}
+                {noteValue == null ? "N/A" : formatNumber(noteValue)}
               </p>
               <p className="font-bold">{apCode}</p>
             </div>
