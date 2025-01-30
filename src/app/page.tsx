@@ -42,7 +42,7 @@ export default function LoginPage() {
       )
 
       const options = {
-        secure: true,
+        secure: process.env.NODE_ENV !== "development",
         expires: rememberMe ? 7 : undefined,
       }
 
