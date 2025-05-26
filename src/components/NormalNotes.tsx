@@ -8,34 +8,52 @@ interface NormalNotesProps {
   normal: ModuleNote[]
 }
 
-function getBgColorClass(noteValue: number | null): string {
+function getNoteClass(noteValue: number | null): string {
   if (noteValue == null) {
-    return "bg-gray-300/90"
+    return "bg-gray-100 text-gray-700 border-gray-200"
   }
   return noteValue >= 10
-    ? "bg-green-200 text-green-800"
-    : "bg-red-200 text-red-900"
+    ? "bg-green-50 border-green-200 text-green-800"
+    : "bg-red-50 border-red-200 text-red-800"
+}
+
+function getApCodeClass(apCode: string): string {
+  switch (apCode) {
+    case 'TD':
+      return 'bg-yellow-200 text-yellow-800';
+    case 'TP':
+      return 'bg-blue-200 text-blue-800';
+    default:
+      return 'bg-gray-200 text-gray-700';
+  }
 }
 
 function NormalNotes({ normal }: NormalNotesProps) {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4 mb-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
       {normal.map((note, index) => {
         const { rattachementMcMcLibelleFr, note: noteValue, apCode } = note
 
-        const bgColorClass = getBgColorClass(noteValue)
+        const noteClass = getNoteClass(noteValue)
+        const apCodeClass = getApCodeClass(apCode);
 
         return (
           <div
             key={index}
-            className={`border border-gray-300 text-gray-800 rounded p-4 lg:p-6 text-xs md:text-sm lg:text-lg flex justify-between items-center w-full transition duration-300 ease-in-out transform hover:scale-103 capitalize ${bgColorClass}`}
+            className={`rounded-lg p-5 shadow-sm border transition transform flex justify-between items-center w-full hover:shadow-md ${
+              noteClass
+            }`}
           >
-            <p className="font-semibold mr-4">{rattachementMcMcLibelleFr}</p>
-            <div className="flex gap-4 ml-2">
-              <p className="font-bold text-gray-700">
+            <h4 className="font-semibold text-base md:text-lg flex-1 pr-4 overflow-hidden text-ellipsis whitespace-nowrap">
+              {rattachementMcMcLibelleFr}
+            </h4>
+            <div className="flex items-center gap-4 ml-2 flex-shrink-0">
+              <p className="font-bold text-base md:text-lg text-gray-700">
                 {noteValue == null ? "N/A" : Math.floor(noteValue * 100) / 100}
               </p>
-              <p className="font-bold">{apCode}</p>
+              <span className={`text-xs font-semibold px-2 py-1 rounded-full ${apCodeClass}`}>
+                {apCode}
+              </span>
             </div>
           </div>
         )

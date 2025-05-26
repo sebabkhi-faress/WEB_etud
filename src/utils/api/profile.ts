@@ -1,11 +1,9 @@
 import logger from "@/utils/logger"
 import { longCache } from "@/utils/cache"
-import { fetchData, getCookieData } from "./helpers"
+import { fetchData } from "./helpers"
 import { ApiResponseType, ProfileDataType } from "@/utils/types"
 
-export async function getProfileData() {
-  const { token, user, uuid } = getCookieData()
-
+export async function getProfileData(token: string, user: string, uuid: string): Promise<ApiResponseType> {
   let response: ApiResponseType = {
     success: false,
     data: undefined,
@@ -60,9 +58,7 @@ export async function getProfileData() {
   }
 }
 
-export const getImage = async () => {
-  const { token, user, uuid } = getCookieData()
-
+export const getImage = async (token: string, user: string, uuid: string) => {
   const cacheKey = `image-${user}`
   const cachedData = longCache.get(cacheKey)
 
@@ -87,9 +83,7 @@ export const getImage = async () => {
   }
 }
 
-export const getLogo = async () => {
-  const { token, user, EtabId } = getCookieData()
-
+export const getLogo = async (token: string, user: string, EtabId: number) => {
   const cacheKey = `logo-${EtabId}`
   const cachedData = longCache.get(cacheKey)
 

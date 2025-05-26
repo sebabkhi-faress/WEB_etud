@@ -2,7 +2,8 @@ import type { Metadata, Viewport } from "next"
 import "./globals.css"
 import "@fortawesome/fontawesome-free/css/all.min.css"
 import { Toaster } from "react-hot-toast"
-import Navbar from "@/components/Navbar"
+import SidebarLayout from "@/components/layout/SidebarLayout"
+import { ThemeProvider } from "@/context/ThemeContext"
 import localFont from "next/font/local"
 
 const redditMono = localFont({
@@ -16,17 +17,17 @@ export const metadata: Metadata = {
     "WebEtu is a student portal designed for students to view their profiles, notes, and academic resources..",
   keywords:
     "student portal, view profiles, student notes, education, WebEtu, academic resources, progres, badji mokhtar, university",
-  authors: [{ name: "OSCA", url: process.env.CURRENT_HOST }],
-  metadataBase: new URL(process.env.CURRENT_HOST as string),
+  authors: [{ name: "OSCA", url: process.env.CURRENT_HOST || "http://localhost:3000" }],
+  metadataBase: new URL(process.env.CURRENT_HOST || "http://localhost:3000"),
   openGraph: {
     title: "WebEtu - Student Portal",
     description:
       "WebEtu provides students with easy access to their profiles, notes, and important academic resources..",
-    url: process.env.CURRENT_HOST,
+    url: process.env.CURRENT_HOST || "http://localhost:3000",
     siteName: "WebEtu",
     images: [
       {
-        url: `${process.env.CURRENT_HOST}/images/banner.png`,
+        url: `${process.env.CURRENT_HOST || "http://localhost:3000"}/images/banner.png`,
         alt: "WebEtu Logo",
         width: 800,
         height: 600,
@@ -61,15 +62,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`flex flex-col bg-gray-100 min-h-screen ${redditMono.className}`}
-      >
-        <Navbar />
-        <main className="flex items-center justify-center flex-1 relative">
-          {children}
-        </main>
-        <Toaster />
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${redditMono.className} antialiased`}>
+        <ThemeProvider>
+          <SidebarLayout>
+            {children}
+          </SidebarLayout>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   )
