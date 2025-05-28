@@ -7,7 +7,7 @@ import ExamNotes from "@/components/ExamNotes"
 import TimeTable from "@/components/TimeTable"
 
 // Component for displaying semester details
-const SemesterTab = ({ normal, exam, result, timeTable }: any) => {
+const SemesterTab = ({ normal, exam, result, timeTable, dia }: any) => {
   const SemesterTabStyle = `
     rounded 
     p-2 
@@ -53,7 +53,7 @@ const SemesterTab = ({ normal, exam, result, timeTable }: any) => {
       <TabPanels className="w-full">
         <TabPanel>
           {timeTable ? (
-            <TimeTable schedule={timeTable} />
+            <TimeTable schedule={timeTable} dia={dia} />
           ) : (
             <p className={pStyle}>Data Not Available!</p>
           )}
@@ -230,6 +230,9 @@ export default function PanelTabs({
     (semesterResults as any) || {}
   let { firstTable = null, secondTable = null } = (timeTableData as any) || {}
 
+  // Get the current dia
+  const currentDia = dias?.find((dia: any) => dia.id === params?.id)
+
   // Adjust tables based on group data (repeated from page.tsx)
   if (firstTable?.periodId === groupData?.[1]?.PeriodId) {
     secondTable = firstTable
@@ -295,6 +298,7 @@ export default function PanelTabs({
                 exam={firstSemExams}
                 result={firstSemResults}
                 timeTable={firstTable?.schedule}
+                dia={currentDia}
               />
             </TabPanel>
             <TabPanel>
@@ -303,6 +307,7 @@ export default function PanelTabs({
                 exam={secondSemExams}
                 result={secondSemResults}
                 timeTable={secondTable?.schedule}
+                dia={currentDia}
               />
             </TabPanel>
           </>
@@ -313,6 +318,7 @@ export default function PanelTabs({
               exam={firstSemExams}
               result={firstSemResults}
               timeTable={firstTable?.schedule}
+              dia={currentDia}
             />
           </TabPanel>
         )}
